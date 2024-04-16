@@ -91,7 +91,8 @@ content = textwrap.dedent(f"""
 			NAME = minishell
 
 			CC = gcc
-			CFLAGS = -Wall -Wextra -Werror -g -MMD -MP -lreadline
+			CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
+			LIBS = -lreadline
 
 			SOURCES = {sources}
 			OBJECTS = {objects}
@@ -102,7 +103,7 @@ content = textwrap.dedent(f"""
 			all: $(NAME)
 
 			$(NAME): $(OBJECTS)
-				$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) -o $(NAME)
+				$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) -o $(NAME) $(LIBS)
 
 			%.o: %.c
 				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
