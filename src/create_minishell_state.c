@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   create_minishell_state.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 14:26:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/12 14:29:37 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/14 10:23:26 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/04/14 11:07:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# define PROMPT "minishell> "
+t_minishell_state	create_minishell_state(void)
+{
+	t_minishell_state	minishell_state;
 
-typedef char	*t_cstring;
-
-#endif
+	minishell_state = allocate_minishell_state();
+	initialize_minishell_state(minishell_state);
+	return (minishell_state);
+}
