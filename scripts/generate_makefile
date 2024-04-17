@@ -31,10 +31,15 @@ def get_include_dir():
 def get_sources():
 	sources = ""
 	for root, dirs, files in os.walk(src_dir):
+		dirname = ""
+		while not root.endswith('src'):
+			dirname = os.path.join(os.path.basename(root), dirname)
+			root = os.path.dirname(root)
+		dirname = os.path.join('src', dirname)
 		for file in files:
 			if file.endswith('.c'):
 				basename = os.path.basename(file)
-				sources += f'\t\t\t\t\t\tsrc/{basename} \\\n'
+				sources += f'\t\t\t\t\t\t{os.path.join(dirname, basename)} \\\n'
 	sources = sources[5:]
 	sources = sources[:-3]
 	sources += '\n'
