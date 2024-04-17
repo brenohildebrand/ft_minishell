@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/16 16:43:21 by bhildebr          #+#    #+#              #
-#    Updated: 2024/04/16 16:43:21 by bhildebr         ###   ########.fr        #
+#    Created: 2024/04/17 19:36:04 by bhildebr          #+#    #+#              #
+#    Updated: 2024/04/17 19:36:04 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,33 +16,63 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 LIBS = -lreadline
 
-SOURCES = 	src/prompt_and_wait_for_input.c \
-			src/initialize_minishell_state.c \
-			src/create_minishell_state.c \
-			src/destroy_minishell_state.c \
-			src/main.c \
-			src/ft_bzero.c \
-			src/allocate_minishell_state.c
+SOURCES = 	src/memory_tree/create_memory_tree.c \
+			src/memory_tree/destroy_memory_tree.c \
+			src/memory_tree/get_memory_tree_height.c \
+			src/memory_tree/insert_in_memory_tree.c \
+			src/memory_tree/rebalance_memory_tree.c \
+			src/memory_tree/remove_from_memory_tree.c \
+			src/memory_tree/search_in_memory_tree.c \
+			src/memory_tree/update_memory_tree_height.c \
+			src/minishell/allocate_minishell_state.c \
+			src/minishell/create_minishell_state.c \
+			src/minishell/destroy_minishell_state.c \
+			src/minishell/ft_bzero.c \
+			src/minishell/initialize_minishell_state.c \
+			src/minishell/main.c \
+			src/minishell/minishell_allocate.c \
+			src/minishell/minishell_deallocate.c \
+			src/minishell/prompt_and_wait_for_input.c
 
-OBJECTS = 	src/prompt_and_wait_for_input.o \
-			src/initialize_minishell_state.o \
-			src/create_minishell_state.o \
-			src/destroy_minishell_state.o \
-			src/main.o \
-			src/ft_bzero.o \
-			src/allocate_minishell_state.o
+OBJECTS = 	src/memory_tree/create_memory_tree.o \
+			src/memory_tree/destroy_memory_tree.o \
+			src/memory_tree/get_memory_tree_height.o \
+			src/memory_tree/insert_in_memory_tree.o \
+			src/memory_tree/rebalance_memory_tree.o \
+			src/memory_tree/remove_from_memory_tree.o \
+			src/memory_tree/search_in_memory_tree.o \
+			src/memory_tree/update_memory_tree_height.o \
+			src/minishell/allocate_minishell_state.o \
+			src/minishell/create_minishell_state.o \
+			src/minishell/destroy_minishell_state.o \
+			src/minishell/ft_bzero.o \
+			src/minishell/initialize_minishell_state.o \
+			src/minishell/main.o \
+			src/minishell/minishell_allocate.o \
+			src/minishell/minishell_deallocate.o \
+			src/minishell/prompt_and_wait_for_input.o
 
-HEADERS = 	include/utils.h \
-			include/cstring.h \
-			include/minishell.h
+HEADERS = 	include/cstring.h \
+			include/minishell.h \
+			include/utils.h
 
-DEPENDS = 	src/prompt_and_wait_for_input.d \
-			src/initialize_minishell_state.d \
-			src/create_minishell_state.d \
-			src/destroy_minishell_state.d \
-			src/main.d \
-			src/ft_bzero.d \
-			src/allocate_minishell_state.d
+DEPENDS = 	src/memory_tree/create_memory_tree.d \
+			src/memory_tree/destroy_memory_tree.d \
+			src/memory_tree/get_memory_tree_height.d \
+			src/memory_tree/insert_in_memory_tree.d \
+			src/memory_tree/rebalance_memory_tree.d \
+			src/memory_tree/remove_from_memory_tree.d \
+			src/memory_tree/search_in_memory_tree.d \
+			src/memory_tree/update_memory_tree_height.d \
+			src/minishell/allocate_minishell_state.d \
+			src/minishell/create_minishell_state.d \
+			src/minishell/destroy_minishell_state.d \
+			src/minishell/ft_bzero.d \
+			src/minishell/initialize_minishell_state.d \
+			src/minishell/main.d \
+			src/minishell/minishell_allocate.d \
+			src/minishell/minishell_deallocate.d \
+			src/minishell/prompt_and_wait_for_input.d
 
 INCLUDES = 	-iquote include
 

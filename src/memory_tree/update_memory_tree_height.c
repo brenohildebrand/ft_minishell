@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   update_memory_tree_height.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 15:27:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/16 16:10:34 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/16 20:09:28 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/04/16 20:10:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "memory_tree.h"
 
-int	main(void)
+void	update_memory_tree_height(t_memory_tree memory_tree)
 {
-	t_minishell_state	minishell_state;
+	int	lheight;
+	int	rheight;
 
-	minishell_state = create_minishell_state();
-	while (42)
+	lheight = get_memory_tree_height(memory_tree->ltree);
+	rheight = get_memory_tree_height(memory_tree->rtree);
+	if (lheight > rheight)
 	{
-		prompt_and_wait_for_input(minishell_state);
+		memory_tree->height = 1 + lheight;
 	}
-	destroy_minishell_state(minishell_state);
-	return (0);
+	else
+	{
+		memory_tree->height = 1 + rheight;
+	}
 }

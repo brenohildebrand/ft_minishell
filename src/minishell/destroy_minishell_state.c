@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 19:03:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/16 16:15:18 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:18:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 */
 void	destroy_minishell_state(t_minishell_state minishell_state)
 {
-	// destroy_memory_tree(minishell_state->memory_tree);
+	destroy_memory_tree(minishell_state->memory_tree);
 	free(minishell_state);
 }
