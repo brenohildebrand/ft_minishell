@@ -5,8 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
+<<<<<<< HEAD
 #    Created: 2024/04/17 19:36:04 by bhildebr          #+#    #+#              #
 #    Updated: 2024/04/17 19:36:04 by bhildebr         ###   ########.fr        #
+=======
+#    Created: 2024/04/29 16:01:12 by bhildebr          #+#    #+#              #
+#    Updated: 2024/04/29 16:01:12 by bhildebr         ###   ########.fr        #
+>>>>>>> feat: creates a foundation for the minishell
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +21,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 LIBS = -lreadline
 
+<<<<<<< HEAD
 SOURCES = 	src/memory_tree/create_memory_tree.c \
 			src/memory_tree/destroy_memory_tree.c \
 			src/memory_tree/get_memory_tree_height.c \
@@ -73,6 +79,15 @@ DEPENDS = 	src/memory_tree/create_memory_tree.d \
 			src/minishell/minishell_allocate.d \
 			src/minishell/minishell_deallocate.d \
 			src/minishell/prompt_and_wait_for_input.d
+=======
+SOURCES = 	src/main.c
+
+OBJECTS = 	src/main.o
+
+HEADERS = 	include/minishell.h
+
+DEPENDS = 	src/main.d
+>>>>>>> feat: creates a foundation for the minishell
 
 INCLUDES = 	-iquote include
 
