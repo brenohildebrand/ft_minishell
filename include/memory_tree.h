@@ -6,15 +6,16 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:27:24 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/17 12:35:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:05:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MEMORY_TREE_H
 # define MEMORY_TREE_H
 
-# include "cstring.h"
 # include <stdlib.h>
+
+typedef char					*t_cstring;
 
 typedef struct s_type			*t_type;
 struct							s_type;
