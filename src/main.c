@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/29 17:59:19 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/04/29 16:02:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <readline/readline.h>
+int	main(void)
+{
+	t_cstring	line;
 
-# define PROMPT "minishell> "
-
-typedef int					t_i32;
-typedef char				*t_cstring;
-
-#endif
+	while (42)
+	{
+		line = NULL;
+		line = readline(PROMPT);
+	}
+	return (0);
+}
