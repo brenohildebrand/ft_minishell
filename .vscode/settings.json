@@ -2,6 +2,7 @@
 	"conventionalCommits.scopes": [
 		"git",
 		"scripts",
+		"git",
 		"vscode"
 	]
 }
