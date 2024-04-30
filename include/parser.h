@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list.h                                      :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 15:40:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:25:14 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/30 17:34:42 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/04/30 17:35:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINKED_LIST_H
-# define LINKED_LIST_H
+#ifndef PARSER_H
+# define PARSER_H
 
-# include "types.h"
+# include "token.h"
+# include "linked_list.h"
 
-typedef struct s_linked_list		*t_linked_list;
-typedef struct s_linked_list_node	*t_linked_list_node;
-
-struct s_linked_list {
-	t_linked_list_node	head;
-	t_linked_list_node	tail;
-};
-
-struct s_linked_list_node {
-	t_linked_list_node	previous;
-	t_linked_list_node	next;
-	t_any				value;
-};
+t_token	get_next_token(t_linked_list_node current_node);
+t_token	get_previous_token(t_linked_list_node current_node);
 
 #endif

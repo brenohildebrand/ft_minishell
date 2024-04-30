@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list.h                                      :+:      :+:    :+:   */
+/*   check_redirect_rule.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 15:40:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:25:14 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/30 17:16:14 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/04/30 17:30:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINKED_LIST_H
-# define LINKED_LIST_H
+#include "minishell.h"
+#include "linked_list.h"
+#include "types.h"
+#include "token.h"
 
-# include "types.h"
+t_i32	check_redirect_rule(t_linked_list_node current_node)
+{
+	t_token	next_token;
 
-typedef struct s_linked_list		*t_linked_list;
-typedef struct s_linked_list_node	*t_linked_list_node;
-
-struct s_linked_list {
-	t_linked_list_node	head;
-	t_linked_list_node	tail;
-};
-
-struct s_linked_list_node {
-	t_linked_list_node	previous;
-	t_linked_list_node	next;
-	t_any				value;
-};
-
-#endif
+	next_token = current_node->next;
+	if (next_token == NULL || next_token->type != WORD)
+		return (syntax_error(current_node->value));
+	return (SUCCESS);
+}
