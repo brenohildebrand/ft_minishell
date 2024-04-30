@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   binary_tree.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 16:18:49 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/30 15:46:07 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/04/30 15:58:03 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BINARY_TREE_H
+# define BINARY_TREE_H
 
 # include "types.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <readline/readline.h>
+typedef struct s_binary_tree		*t_binary_tree;
+typedef struct s_binary_tree_node	*t_binary_tree_node;
 
-# define PROMPT "minishell> "
-# define SUCCESS 0
-# define FAILURE 1
-# define SYNTAX_ERROR 2
+struct s_binary_tree {
+	t_binary_tree_node	root;	
+};
 
-enum					e_token_type
-{
-	AND = 1,
-	OR,
-	PIPE,
-	OPEN_PAREN,
-	CLOSE_PAREN,
-	REDIR_APPEND,
-	REDIR_HEREDOC,
-	REDIR_IN,
-	REDIR_OUT,
-	SPACES,
-	END,
-	WORD,
+struct s_binary_tree_node {
+	t_binary_tree	left;
+	t_binary_tree	right;
+	t_any			value;
 };
 
 #endif

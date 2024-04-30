@@ -4,5 +4,8 @@
 		"scripts",
 		"git",
 		"vscode"
-	]
+	],
+	"files.associations": {
+		"minishell.h": "c"
+	}
 }

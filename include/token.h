@@ -1,43 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 16:18:49 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/30 15:42:14 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/04/30 15:45:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef TOKEN_H
+# define TOKEN_H
 
 # include "types.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <readline/readline.h>
+typedef struct s_token	*t_token;
 
-# define PROMPT "minishell> "
-# define SUCCESS 0
-# define FAILURE 1
-# define SYNTAX_ERROR 2
-
-enum					e_token_type
-{
-	AND = 1,
-	OR,
-	PIPE,
-	OPEN_PAREN,
-	CLOSE_PAREN,
-	REDIR_APPEND,
-	REDIR_HEREDOC,
-	REDIR_IN,
-	REDIR_OUT,
-	SPACES,
-	END,
-	WORD,
+struct s_token {
+	t_i32		type;
+	t_cstring	value;
 };
 
 #endif
