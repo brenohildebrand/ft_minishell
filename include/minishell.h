@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 16:18:49 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:20:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,23 @@
 # include <unistd.h>
 # include <readline/readline.h>
 
+# include "memory_tree.h"
+# include "linked_list.h"
+# include "binary_tree.h"
+
 # define PROMPT "minishell> "
 # define SUCCESS 0
 # define FAILURE 1
 # define SYNTAX_ERROR 2
+
+typedef struct s_minishell	*t_minishell;
+
+struct s_minishell {
+	t_memory_tree	memtree;
+	t_cstring		line;
+	t_linked_list	list;
+	t_binary_tree	tree;
+};
 
 enum					e_token_type
 {

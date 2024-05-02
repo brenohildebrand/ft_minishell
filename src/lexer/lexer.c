@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:22:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/02 15:27:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:10:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_i32	lexer(t_cstring line, t_linked_list list)
 		{
 			length = get_token_length(line, type);
 			value = ft_substr(line, 0, length);
-			push_to_token_list(list, new_token(type, length, value));
+			push_to_token_list(list, new_token(type, value));
 			line += length;
 		}
 	}

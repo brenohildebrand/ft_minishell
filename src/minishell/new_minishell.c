@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   new_minishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/02 18:17:21 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/02 18:36:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+t_minishell	new_minishell(void)
 {
-	t_minishell	mini;
+	t_minishell		mini;
 
-	mini = new_minishell();
-	while (42)
+	mini = malloc(sizeof(struct s_minishell));
+	if (mini == NULL)
 	{
-		line = NULL;
-		line = readline(PROMPT);
+		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
+		exit(1);
 	}
-	return (0);
+	mini->memtree = NULL;
+	mini->line = NULL;
+	mini->list = NULL;
+	mini->tree = NULL;
+	return (mini);
 }
