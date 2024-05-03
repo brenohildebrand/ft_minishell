@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mini_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/03 15:32:34 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/02 18:32:41 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/03 16:00:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "memory_tree.h"
 
-int	main(void)
+void	mini_free(t_minishell mini, void *address)
 {
-	t_minishell	mini;
-
-	mini = new_minishell();
-	while (42)
-	{
-		mini->line = NULL;
-		mini->line = readline(PROMPT);
-		if (mini->line == NULL)
-			return (!write(STDOUT_FILENO, "exit\n", 5));
-		else if (mini->line[0] != '\0')
-		{
-			add_history(mini->line);
-			if (lexer(mini) == SUCCESS)
-			{
-				if (parser(mini) == SUCCESS)
-					set_exit_status(executor(mini));
-			}
-		}
-		reset_for_next_iteration(mini->line);
-	}
+	remove_from_memory_tree(mini->memtree, address);	
 }
