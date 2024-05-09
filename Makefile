@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/09 18:11:00 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/09 18:11:00 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/09 18:39:19 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/09 18:39:19 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,14 @@ LIBS = -lreadline
 SOURCES = 	src/main.c \
 			src/linked_list/new_linked_list.c \
 			src/token/new_token.c \
+			src/minishell/destroy_minishell.c \
 			src/minishell/mini_quit.c \
 			src/minishell/set_exit_status.c \
 			src/minishell/new_minishell.c \
 			src/minishell/mini_free.c \
 			src/minishell/mini_alloc.c \
 			src/minishell/syntax_error.c \
-			src/minishell/reset_for_next_iteration.c \
+			src/minishell/reset_minishell.c \
 			src/binary_tree/new_binary_tree.c \
 			src/executor/executor.c \
 			src/memory_tree/create_memory_tree.c \
@@ -40,13 +41,14 @@ SOURCES = 	src/main.c \
 OBJECTS = 	src/main.o \
 			src/linked_list/new_linked_list.o \
 			src/token/new_token.o \
+			src/minishell/destroy_minishell.o \
 			src/minishell/mini_quit.o \
 			src/minishell/set_exit_status.o \
 			src/minishell/new_minishell.o \
 			src/minishell/mini_free.o \
 			src/minishell/mini_alloc.o \
 			src/minishell/syntax_error.o \
-			src/minishell/reset_for_next_iteration.o \
+			src/minishell/reset_minishell.o \
 			src/binary_tree/new_binary_tree.o \
 			src/executor/executor.o \
 			src/memory_tree/create_memory_tree.o \
@@ -71,13 +73,14 @@ HEADERS = 	include/executor.h \
 DEPENDS = 	src/main.d \
 			src/linked_list/new_linked_list.d \
 			src/token/new_token.d \
+			src/minishell/destroy_minishell.d \
 			src/minishell/mini_quit.d \
 			src/minishell/set_exit_status.d \
 			src/minishell/new_minishell.d \
 			src/minishell/mini_free.d \
 			src/minishell/mini_alloc.d \
 			src/minishell/syntax_error.d \
-			src/minishell/reset_for_next_iteration.d \
+			src/minishell/reset_minishell.d \
 			src/binary_tree/new_binary_tree.d \
 			src/executor/executor.d \
 			src/memory_tree/create_memory_tree.d \

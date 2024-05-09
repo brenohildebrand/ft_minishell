@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 18:25:13 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:33:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,21 @@ int	main(void)
 		#ifdef DEBUG
 			printf("\033[94m(line) %s\033[0m\n", mini->line);
 		#endif
-		// if (mini->line == NULL)
-		// 	return (!write(STDOUT_FILENO, "exit\n", 5));
-		// else if (mini->line[0] != '\0')
-		// {
-		// 	add_history(mini->line);
-		// 	if (lexer(mini) == SUCCESS)
-		// 	{
-		// 		if (parser(mini) == SUCCESS)
-		// 			set_exit_status(executor(mini));
-		// 	}
-		// }
-		reset_for_next_iteration(mini);
+		if (mini->line == NULL)
+		{
+			write(STDOUT_FILENO, "exit\n", 5);
+			destroy_minishell(mini);
+			return (0);
+		}
+		else if (mini->line[0] != '\0')
+		{
+			add_history(mini->line);
+			// if (lexer(mini) == SUCCESS)
+			// {
+				// if (parser(mini) == SUCCESS)
+					// set_exit_status(executor(mini));
+			// }
+		}
+		reset_minishell(mini);
 	}
 }
