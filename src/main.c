@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:48:35 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:25:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	t_minishell	mini;
 
 	#ifdef DEBUG
-		printf("[MINISHELL]\n");
+		printf("\033[94mMinishell is running in DEBUG mode.\033[0m\n");
 	#endif
 	mini = new_minishell();
 	while (42)
@@ -31,7 +31,7 @@ int	main(void)
 		mini->line = NULL;
 		mini->line = readline(PROMPT);
 		#ifdef DEBUG
-			printf("read: %s\n", mini->line);
+			printf("\033[94m(line) %s\033[0m\n", mini->line);
 		#endif
 		// if (mini->line == NULL)
 		// 	return (!write(STDOUT_FILENO, "exit\n", 5));
