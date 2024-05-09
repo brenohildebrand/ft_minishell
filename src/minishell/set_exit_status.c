@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_free.c                                        :+:      :+:    :+:   */
+/*   set_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 18:32:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 17:01:14 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/09 18:11:04 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/09 18:12:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "memory_tree.h"
 
-void	mini_free(t_minishell mini, void *address)
+t_i32	set_exit_status(t_minishell mini, t_i32 status)
 {
-	remove_from_memory_tree(&(mini->memtree), address);
+	mini->exit_status = status;
+	return (mini->exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:36:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:14:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ enum					e_token_type
 
 void		*mini_alloc(t_minishell mini, t_u32 size);
 void		mini_free(t_minishell mini, void *address);
+void		mini_quit(t_minishell mini);
 t_minishell	new_minishell(void);
-t_i32		syntax_error(char *token);
+t_i32		syntax_error(t_minishell mini, char *token);
+void		reset_for_next_iteration(t_minishell mini);
+t_i32		set_exit_status(t_minishell mini, t_i32 status);
 
 #endif

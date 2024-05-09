@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:53:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 15:44:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:10:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	*mini_alloc(t_minishell mini, t_u32 size)
 		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
 		mini_quit(mini);
 	}
-	insert_in_memory_tree(mini->memtree, NULL, address);
+	insert_in_memory_tree(&(mini->memtree), NULL, address);
 	return (address);
 }

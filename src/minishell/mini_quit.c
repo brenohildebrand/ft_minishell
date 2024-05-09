@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_free.c                                        :+:      :+:    :+:   */
+/*   mini_quit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 18:32:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 17:01:14 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/09 17:01:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/09 18:09:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "memory_tree.h"
 
-void	mini_free(t_minishell mini, void *address)
+void	mini_quit(t_minishell mini)
 {
-	remove_from_memory_tree(&(mini->memtree), address);
+	if (mini->line)
+	{
+		free(mini->line);
+	}
+	destroy_memory_tree(mini->memtree);
+	exit(mini->exit_status);	
 }
