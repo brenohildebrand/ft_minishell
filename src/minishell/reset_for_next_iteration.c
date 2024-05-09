@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterator.h                                         :+:      :+:    :+:   */
+/*   reset_for_next_iteration.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 16:02:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 16:06:11 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/09 16:22:40 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/09 16:27:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_H
-# define ITERATOR_H
+#include "minishell.h"
+#include "binary_tree.h"
+#include "linked_list.h"
 
-# include "types.h"
-
-typedef struct s_iterator	*t_iterator;
-
-struct s_iterator {
-	t_any	reference;
-	void	(*advance)(t_any);
-	void	(*retreat)(t_any);
-	void	(*get_value)(t_any);
-};
-
-#endif
+void	reset_for_next_iteration(t_minishell mini)
+{
+	free(mini->line);
+	destroy_binary_tree(mini, mini->tree);
+	destroy_linked_list(mini, mini->list);
+	mini->tree = NULL;
+	mini->list = NULL;
+}

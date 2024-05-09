@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_alloc.c                                       :+:      :+:    :+:   */
+/*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 15:53:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 15:44:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/09 16:28:52 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/09 16:36:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "memory_tree.h"
 
-void	*mini_alloc(t_minishell mini, t_u32 size)
+t_i32	syntax_error(char *token)
 {
-	void	*address;
-
-	address = malloc(size);
-	if (address == NULL)
-	{
-		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
-		mini_quit(mini);
-	}
-	insert_in_memory_tree(mini->memtree, NULL, address);
-	return (address);
+	// write_to_stdout(2, "minishell: syntax error near unexpected token '%s'\n" + token);
+	return (set_exit_status(SYNTAX_ERROR));
 }

@@ -6,11 +6,12 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:05:20 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:09:12 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:40:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
 #include "types.h"
 #include "token.h"
 

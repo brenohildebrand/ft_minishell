@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:44:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/02 14:52:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:10:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_i32	check_open_syntax(t_cstring line)
 	t_i32	parenthesis;
 	t_i32	single_quote;
 	t_i32	double_quote;
-	
+
 	index = 0;
 	brackets = 0;
 	single_quote = 0;

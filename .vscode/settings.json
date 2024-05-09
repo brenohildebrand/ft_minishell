@@ -17,6 +17,8 @@
 		"type_traits": "c",
 		"utility": "c",
 		"token.h": "c",
-		"memory_tree.h": "c"
+		"memory_tree.h": "c",
+		"types.h": "c",
+		"linked_list.h": "c"
 	}
 }

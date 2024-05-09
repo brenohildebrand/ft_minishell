@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:39:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:41:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:21:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 #include "binary_tree.h"
 #include "token.h"
 
-t_i32	parser(t_linked_list tokens, t_binary_tree execution_tree)
+t_i32	parser(t_minishell mini)
 {
 	t_linked_list_node	current_node;
 	t_token				current_token;
 	t_token				next_token;
 
-	current_node = tokens->head;
+	current_node = mini->list->head;
 	while (current_node)
 	{
 		current_token = (t_token)current_node->value;
@@ -41,6 +41,6 @@ t_i32	parser(t_linked_list tokens, t_binary_tree execution_tree)
 			return (set_exit_status(SYNTAX_ERROR));
 		current_node = current_node->next;
 	}
-	execution_tree = build_execution_tree(tokens);
+	mini->tree = build_execution_tree(mini->list);
 	return (SUCCESS);
 }

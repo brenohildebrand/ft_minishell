@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:46:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 15:58:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:04:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ struct s_binary_tree_node {
 	t_binary_tree	right;
 	t_any			value;
 };
+
+t_binary_tree	new_binary_tree(t_binary_tree_node root);
 
 #endif
