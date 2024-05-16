@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:22:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:18:20 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:36:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,31 @@
 
 t_i32	lexer(t_minishell mini)
 {
+	t_cstring	line;
 	t_i32		type;
 	t_i32		length;
 	t_cstring	value;
 
-	if (mini->line == NULL || check_open_syntax(mini->line))
+	line = mini->line;
+	if (line == NULL || check_open_syntax(line))
 	{
 		return (set_exit_status(mini, SYNTAX_ERROR));
 	}
-	while (*(mini->line))
+	while (*(line))
 	{
 		length = 0;
-		type = get_token_type(mini->line);
+		type = get_token_type(line);
 		if (type == SPACES)
 		{
-			(mini->line)++;
+			(line)++;
 		}
 		else
 		{
-			length = get_token_length(mini->line, type);
-			// value = ft_substr(mini->line, 0, length);
-			value = get_subcstring(mini, mini->line, 0, length);
-			push_to_token_list(mini, mini->list, new_token(mini, type, value));
-			mini->line += length;
+			length = get_token_length(line, type);
+			// value = ft_substr(line, 0, length);
+			value = get_subcstring(mini, line, 0, length);
+			push_to_token_list(mini, new_token(mini, type, value));
+			line += length;
 		}
 	}
 	#ifdef DEBUG
@@ -59,6 +61,8 @@ t_i32	lexer(t_minishell mini)
 			while (current_node)
 			{
 				current_token = (t_token)current_node->value;				
+				if (current_node != mini->list->head)
+					printf(" ");
 				printf("%s", current_token->value);
 				current_node = current_node->next;
 			}

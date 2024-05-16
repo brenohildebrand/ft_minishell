@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:17:18 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:17:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:30:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	move_to_next_quote(
 );
 void	push_to_token_list(
 	t_minishell mini,
-	t_linked_list list,
 	t_token token
 );
 
