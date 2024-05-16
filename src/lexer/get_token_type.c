@@ -6,11 +6,12 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:28:57 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/02 14:34:51 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:09:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 #include "types.h"
 
 t_i32	get_token_type(t_cstring line)

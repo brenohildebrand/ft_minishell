@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:22:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 18:35:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:10:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@
 
 void	reset_minishell(t_minishell mini)
 {
-	free(mini->line);
+	if (mini->line)
+	{
+		free(mini->line);		
+	}
+	if (mini->list)
+	{
+		destroy_linked_list(mini, mini->list);
+		mini->list = NULL;
+	}
 	// destroy_binary_tree(mini, mini->tree);
-	// destroy_linked_list(mini, mini->list);
 	// mini->tree = NULL;
-	// mini->list = NULL;
 }

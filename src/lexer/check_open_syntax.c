@@ -6,18 +6,18 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:44:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:10:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:27:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 #include "types.h"
 
 t_i32	check_open_syntax(t_cstring line)
 {
 	t_i32	index;
 	t_i32	brackets;
-	t_i32	parenthesis;
 	t_i32	single_quote;
 	t_i32	double_quote;
 

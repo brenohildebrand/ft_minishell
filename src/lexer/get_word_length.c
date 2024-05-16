@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_token_length.c                                 :+:      :+:    :+:   */
+/*   get_word_length.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 14:40:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/02 14:42:55 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/02 14:35:15 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/16 14:10:03 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 #include "types.h"
 
-t_i32	get_token_length(t_cstring line, t_i32 type)
+t_i32	get_word_length(t_cstring line)
 {
-	if (type == OPEN_PAREN || type == CLOSE_PAREN || type == PIPE \
-		|| type == REDIR_IN || type == REDIR_OUT)
-		return (1);
-	else if (type == AND || type == OR || type == REDIR_APPEND \
-		|| type == REDIR_HEREDOC)
-		return (2);
-	else if (type == WORD)
-		return (get_word_length(line));
-	return (0);
+	t_i32	len;
+
+	len = 0;
+	while (get_token_type(line + len) == WORD)
+	{
+		if (line[len] == '\'')
+		{
+			len++;
+			while (line[len] != '\'')
+				len++;
+		}
+		if (line[len] == '\"')
+		{
+			len++;
+			while (line[len] != '\"')
+				len++;
+		}
+		len++;
+	}
+	return (len);
 }

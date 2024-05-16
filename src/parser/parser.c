@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_minishell.c                                    :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:15:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/16 18:50:04 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/16 18:51:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
 
-t_minishell	new_minishell(void)
+t_i32	parser(t_minishell mini)
 {
-	t_minishell		mini;
-
-	mini = malloc(sizeof(struct s_minishell));
-	if (mini == NULL)
-	{
-		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
-		exit(1);
-	}
-	mini->memtree = NULL;
-	mini->line = NULL;
-	mini->list = NULL;
-	mini->tree = NULL;
-	return (mini);
+	(void)mini;
+	return (SUCCESS);
 }

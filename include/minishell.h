@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 18:39:37 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 03:14:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # include "binary_tree.h"
 
 # define DEBUG
+
+# ifdef DEBUG
+#  include <stdio.h>
+# endif
 
 # define PROMPT "minishell> "
 # define SUCCESS 0

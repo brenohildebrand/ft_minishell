@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_word_length.c                                  :+:      :+:    :+:   */
+/*   destroy_linked_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 14:35:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/02 14:40:41 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/16 19:02:31 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/16 19:05:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "types.h"
+#include "linked_list.h"
 
-t_i32	get_word_length(t_cstring line)
+void	destroy_linked_list(t_minishell mini, t_linked_list list)
 {
-	t_i32	len;
+	t_linked_list_node	current;
+	t_linked_list_node	next;
 
-	len = 0;
-	while (get_token_type(line + len) == WORD)
+	current = list->head;
+	while (current != list->tail)
 	{
-		if (line[len] == '\'')
-		{
-			len++;
-			while (line[len] != '\'')
-				len++;
-		}
-		if (line[len] == '\"')
-		{
-			len++;
-			while (line[len] != '\"')
-				len++;
-		}
-		len++;
+		next = current->next;
+		destroy_linked_list_node(mini, current);
+		current = next;
 	}
-	return (len);
 }

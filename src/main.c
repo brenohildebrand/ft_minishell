@@ -6,25 +6,22 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 18:33:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:51:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
 #include "parser.h"
+#include "executor.h"
 
-#ifdef DEBUG
-# include <stdio.h>
-#endif
-
-int	main(void)
+t_i32	main(void)
 {
-	t_minishell	mini;
-
 	#ifdef DEBUG
 		printf("\033[94mMinishell is running in DEBUG mode.\033[0m\n");
 	#endif
+	t_minishell	mini;
+
 	mini = new_minishell();
 	while (42)
 	{
@@ -42,11 +39,11 @@ int	main(void)
 		else if (mini->line[0] != '\0')
 		{
 			add_history(mini->line);
-			// if (lexer(mini) == SUCCESS)
-			// {
-				// if (parser(mini) == SUCCESS)
-					// set_exit_status(executor(mini));
-			// }
+			if (lexer(mini) == SUCCESS)
+			{
+				if (parser(mini) == SUCCESS)
+					set_exit_status(mini, executor(mini));
+			}
 		}
 		reset_minishell(mini);
 	}

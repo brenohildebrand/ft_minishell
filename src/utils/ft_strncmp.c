@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_minishell.c                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:15:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/16 13:47:16 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/16 13:47:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdlib.h>
 
-t_minishell	new_minishell(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_minishell		mini;
+	int	i;
 
-	mini = malloc(sizeof(struct s_minishell));
-	if (mini == NULL)
+	i = 0;
+	while (n && (s1[i] || s2[i]))
 	{
-		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
-		exit(1);
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+		n--;
 	}
-	mini->memtree = NULL;
-	mini->line = NULL;
-	mini->list = NULL;
-	mini->tree = NULL;
-	return (mini);
+	return (0);
 }

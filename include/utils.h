@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_minishell.c                                    :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:15:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/16 12:58:18 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/16 19:00:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-t_minishell	new_minishell(void)
-{
-	t_minishell		mini;
+#include <stdlib.h>
 
-	mini = malloc(sizeof(struct s_minishell));
-	if (mini == NULL)
-	{
-		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
-		exit(1);
-	}
-	mini->memtree = NULL;
-	mini->line = NULL;
-	mini->list = NULL;
-	mini->tree = NULL;
-	return (mini);
-}
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+t_cstring	get_subcstring(
+	t_minishell mini, 
+	t_cstring line, 
+	t_i32 start, 
+	t_i32 length
+);
+
+#endif

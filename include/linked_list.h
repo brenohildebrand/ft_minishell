@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:40:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:59:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:06:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,15 @@ t_linked_list	new_linked_list(
 	t_linked_list_node head,
 	t_linked_list_node tail
 );
+
+t_linked_list_node	new_linked_list_node(
+	t_minishell mini,
+	t_linked_list_node previous,
+	t_linked_list_node next,
+	t_any value
+);
+
+void	destroy_linked_list(t_minishell mini, t_linked_list list);
+void	destroy_linked_list_node(t_minishell mini, t_linked_list_node node);
 
 #endif
