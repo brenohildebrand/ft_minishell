@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 03:14:20 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:28:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -69,5 +70,6 @@ void		destroy_minishell(t_minishell mini);
 t_i32		syntax_error(t_minishell mini, char *token);
 void		reset_minishell(t_minishell mini);
 t_i32		set_exit_status(t_minishell mini, t_i32 status);
+t_i32		get_exit_status(t_minishell mini);
 
 #endif

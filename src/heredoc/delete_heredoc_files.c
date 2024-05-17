@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   delete_heredoc_files.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:58:18 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 22:08:58 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/16 20:46:52 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/16 20:48:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "minishell.h"
 
-# include "minishell.h"
-# include <stdlib.h>
+t_i32	delete_heredoc_files(t_minishell mini)
+{
+	t_cstring	file_name;
+	t_i32		*counter;
 
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-t_cstring	get_subcstring(
-	t_minishell mini, 
-	t_cstring line, 
-	t_i32 start, 
-	t_i32 length
-);
-
-char		*mini_substr(char const *s, unsigned int start, size_t len);
-
-#endif
+	heredoc_counter = get_heredoc_counter();
+	while ((*heredoc_counter) >= 0)
+	{
+		file_name = mini_strjoin(mini, "/tmp/.heredoc", ft_itoa((*heredoc_counter)--));
+		unlink(file_name);
+	}
+	return (SUCCESS);
+}

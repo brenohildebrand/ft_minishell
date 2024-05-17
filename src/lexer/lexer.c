@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:22:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:36:36 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:42:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_i32	lexer(t_minishell mini)
 		else
 		{
 			length = get_token_length(line, type);
-			// value = ft_substr(line, 0, length);
 			value = get_subcstring(mini, line, 0, length);
 			push_to_token_list(mini, new_token(mini, type, value));
 			line += length;
