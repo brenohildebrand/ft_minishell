@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 18:50:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:44:43 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/30 15:39:42 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/17 10:38:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
+#include "linked_list.h"
+#include "binary_tree.h"
+#include "token.h"
 
 t_i32	parser(t_minishell mini)
 {
-	(void)mini;
-	return (SUCCESS);
-
 	t_linked_list_node	current_node;
 	t_token				current_token;
 	t_token				next_token;
@@ -36,9 +36,9 @@ t_i32	parser(t_minishell mini)
 		}
 		if (current_token->type == REDIR_HEREDOC && next_token && next_token->type == WORD)
 			if (create_heredoc_file(current_node->next) != SUCCESS)
-				return (*get_exit_status());
+				return (get_exit_status(mini));
 		if (check_syntax(current_node) != SUCCESS)
-			return (set_exit_status(SYNTAX_ERROR));
+			return (set_exit_status(mini, SYNTAX_ERROR));
 		current_node = current_node->next;
 	}
 	mini->tree = build_execution_tree(mini->list);

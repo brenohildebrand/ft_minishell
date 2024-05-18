@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/16 19:08:01 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/16 19:08:01 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/17 10:56:31 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/17 10:56:31 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,12 @@ LIBS = -lreadline
 
 SOURCES = 	src/main.c \
 			src/binary_tree/new_binary_tree.c \
+			src/builtins/echo.c \
 			src/executor/executor.c \
+			src/heredoc/create_heredoc_file.c \
+			src/heredoc/delete_heredoc_files.c \
+			src/heredoc/get_heredoc_counter.c \
+			src/heredoc/write_input_to_heredoc.c \
 			src/lexer/check_open_syntax.c \
 			src/lexer/get_subcstring.c \
 			src/lexer/get_token_length.c \
@@ -40,6 +45,7 @@ SOURCES = 	src/main.c \
 			src/memory_tree/search_in_memory_tree.c \
 			src/memory_tree/update_memory_tree_height.c \
 			src/minishell/destroy_minishell.c \
+			src/minishell/get_exit_status.c \
 			src/minishell/mini_alloc.c \
 			src/minishell/mini_free.c \
 			src/minishell/mini_quit.c \
@@ -47,14 +53,30 @@ SOURCES = 	src/main.c \
 			src/minishell/reset_minishell.c \
 			src/minishell/set_exit_status.c \
 			src/minishell/syntax_error.c \
+			src/parser/build_execution_tree.c \
+			src/parser/check_control_operator_rule.c \
+			src/parser/check_parenthesis_rule.c \
+			src/parser/check_redirect_rule.c \
+			src/parser/check_syntax.c \
+			src/parser/get_next_token.c \
+			src/parser/get_previous_token.c \
 			src/parser/parser.c \
+			src/parser/split_tokens_into_tree.c \
 			src/token/destroy_token.c \
 			src/token/new_token.c \
-			src/utils/ft_strncmp.c
+			src/utils/ft_putstr_fd.c \
+			src/utils/ft_strlen.c \
+			src/utils/ft_strncmp.c \
+			src/utils/mini_substr.c
 
 OBJECTS = 	src/main.o \
 			src/binary_tree/new_binary_tree.o \
+			src/builtins/echo.o \
 			src/executor/executor.o \
+			src/heredoc/create_heredoc_file.o \
+			src/heredoc/delete_heredoc_files.o \
+			src/heredoc/get_heredoc_counter.o \
+			src/heredoc/write_input_to_heredoc.o \
 			src/lexer/check_open_syntax.o \
 			src/lexer/get_subcstring.o \
 			src/lexer/get_token_length.o \
@@ -76,6 +98,7 @@ OBJECTS = 	src/main.o \
 			src/memory_tree/search_in_memory_tree.o \
 			src/memory_tree/update_memory_tree_height.o \
 			src/minishell/destroy_minishell.o \
+			src/minishell/get_exit_status.o \
 			src/minishell/mini_alloc.o \
 			src/minishell/mini_free.o \
 			src/minishell/mini_quit.o \
@@ -83,13 +106,26 @@ OBJECTS = 	src/main.o \
 			src/minishell/reset_minishell.o \
 			src/minishell/set_exit_status.o \
 			src/minishell/syntax_error.o \
+			src/parser/build_execution_tree.o \
+			src/parser/check_control_operator_rule.o \
+			src/parser/check_parenthesis_rule.o \
+			src/parser/check_redirect_rule.o \
+			src/parser/check_syntax.o \
+			src/parser/get_next_token.o \
+			src/parser/get_previous_token.o \
 			src/parser/parser.o \
+			src/parser/split_tokens_into_tree.o \
 			src/token/destroy_token.o \
 			src/token/new_token.o \
-			src/utils/ft_strncmp.o
+			src/utils/ft_putstr_fd.o \
+			src/utils/ft_strlen.o \
+			src/utils/ft_strncmp.o \
+			src/utils/mini_substr.o
 
 HEADERS = 	include/binary_tree.h \
+			include/builtins.h \
 			include/executor.h \
+			include/heredoc.h \
 			include/lexer.h \
 			include/linked_list.h \
 			include/memory_tree.h \
@@ -101,7 +137,12 @@ HEADERS = 	include/binary_tree.h \
 
 DEPENDS = 	src/main.d \
 			src/binary_tree/new_binary_tree.d \
+			src/builtins/echo.d \
 			src/executor/executor.d \
+			src/heredoc/create_heredoc_file.d \
+			src/heredoc/delete_heredoc_files.d \
+			src/heredoc/get_heredoc_counter.d \
+			src/heredoc/write_input_to_heredoc.d \
 			src/lexer/check_open_syntax.d \
 			src/lexer/get_subcstring.d \
 			src/lexer/get_token_length.d \
@@ -123,6 +164,7 @@ DEPENDS = 	src/main.d \
 			src/memory_tree/search_in_memory_tree.d \
 			src/memory_tree/update_memory_tree_height.d \
 			src/minishell/destroy_minishell.d \
+			src/minishell/get_exit_status.d \
 			src/minishell/mini_alloc.d \
 			src/minishell/mini_free.d \
 			src/minishell/mini_quit.d \
@@ -130,10 +172,21 @@ DEPENDS = 	src/main.d \
 			src/minishell/reset_minishell.d \
 			src/minishell/set_exit_status.d \
 			src/minishell/syntax_error.d \
+			src/parser/build_execution_tree.d \
+			src/parser/check_control_operator_rule.d \
+			src/parser/check_parenthesis_rule.d \
+			src/parser/check_redirect_rule.d \
+			src/parser/check_syntax.d \
+			src/parser/get_next_token.d \
+			src/parser/get_previous_token.d \
 			src/parser/parser.d \
+			src/parser/split_tokens_into_tree.d \
 			src/token/destroy_token.d \
 			src/token/new_token.d \
-			src/utils/ft_strncmp.d
+			src/utils/ft_putstr_fd.d \
+			src/utils/ft_strlen.d \
+			src/utils/ft_strncmp.d \
+			src/utils/mini_substr.d
 
 INCLUDES = 	-iquote include
 
