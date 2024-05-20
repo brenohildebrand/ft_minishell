@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   memtree_update_height.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 17:31:30 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/04/16 20:09:28 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/20 12:31:57 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "memtree.h"
 
-t_i32	main(void)
+void	memtree_update_height(t_memtree memtree)
 {
-	#ifdef DEBUG
-		printf("\033[94mMinishell is running in DEBUG mode.\033[0m\n");
-	#endif
-	t_mini	mini;
+	int	lheight;
+	int	rheight;
 
-	mini = mini_new();
-	while (42)
+	lheight = memtree_get_height(memtree->ltree);
+	rheight = memtree_get_height(memtree->rtree);
+	if (lheight > rheight)
 	{
-		mini_read(mini);
-		mini_evaluate(mini);
-		mini_print(mini);
+		memtree->height = 1 + lheight;
+	}
+	else
+	{
+		memtree->height = 1 + rheight;
 	}
 }

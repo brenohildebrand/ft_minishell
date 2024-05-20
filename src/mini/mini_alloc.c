@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mini_alloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 17:31:30 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/03 15:53:44 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/20 18:29:29 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_i32	main(void)
+t_mem	mini_alloc(t_mini mini, t_u32 size)
 {
-	#ifdef DEBUG
-		printf("\033[94mMinishell is running in DEBUG mode.\033[0m\n");
-	#endif
-	t_mini	mini;
+	t_mem	mem;
 
-	mini = mini_new();
-	while (42)
-	{
-		mini_read(mini);
-		mini_evaluate(mini);
-		mini_print(mini);
-	}
+	mem = malloc(size);
+	mini_assert(mini, mem != NULL, "Memory allocation error.\n");
+	memtree_insert(&(mini->memtree), NULL, mem);
+	return (mem);
 }

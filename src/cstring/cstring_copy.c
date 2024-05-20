@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cstring_copy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 17:31:30 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/20 18:05:43 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/20 18:36:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_i32	main(void)
+t_cstring	cstring_copy(t_mini mini, t_cstring original)
 {
-	#ifdef DEBUG
-		printf("\033[94mMinishell is running in DEBUG mode.\033[0m\n");
-	#endif
-	t_mini	mini;
+	const t_u32	original_length = cstring_get_length(original);
+	t_u32		i;
+	t_cstring	copy;
 
-	mini = mini_new();
-	while (42)
+	copy = mini_alloc(mini, original_length + 1);
+	i = 0;
+	while (i < original_length)
 	{
-		mini_read(mini);
-		mini_evaluate(mini);
-		mini_print(mini);
+		copy[i] = original[i];
+		i++;
 	}
+	copy[i] = '\0';
+	return (copy);
 }

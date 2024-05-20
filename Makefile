@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/17 10:56:31 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/17 10:56:31 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/20 18:50:33 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/20 18:50:33 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,196 +16,116 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 LIBS = -lreadline
 
-SOURCES = 	src/main.c \
-			src/binary_tree/new_binary_tree.c \
-			src/builtins/echo.c \
-			src/executor/executor.c \
-			src/heredoc/create_heredoc_file.c \
-			src/heredoc/delete_heredoc_files.c \
-			src/heredoc/get_heredoc_counter.c \
-			src/heredoc/write_input_to_heredoc.c \
-			src/lexer/check_open_syntax.c \
-			src/lexer/get_subcstring.c \
-			src/lexer/get_token_length.c \
-			src/lexer/get_token_type.c \
-			src/lexer/get_word_length.c \
-			src/lexer/lexer.c \
-			src/lexer/move_to_next_quote.c \
-			src/lexer/push_to_token_list.c \
-			src/linked_list/destroy_linked_list.c \
-			src/linked_list/destroy_linked_list_node.c \
-			src/linked_list/new_linked_list.c \
-			src/linked_list/new_linked_list_node.c \
-			src/memory_tree/create_memory_tree.c \
-			src/memory_tree/destroy_memory_tree.c \
-			src/memory_tree/get_memory_tree_height.c \
-			src/memory_tree/insert_in_memory_tree.c \
-			src/memory_tree/rebalance_memory_tree.c \
-			src/memory_tree/remove_from_memory_tree.c \
-			src/memory_tree/search_in_memory_tree.c \
-			src/memory_tree/update_memory_tree_height.c \
-			src/minishell/destroy_minishell.c \
-			src/minishell/get_exit_status.c \
-			src/minishell/mini_alloc.c \
-			src/minishell/mini_free.c \
-			src/minishell/mini_quit.c \
-			src/minishell/new_minishell.c \
-			src/minishell/reset_minishell.c \
-			src/minishell/set_exit_status.c \
-			src/minishell/syntax_error.c \
-			src/parser/build_execution_tree.c \
-			src/parser/check_control_operator_rule.c \
-			src/parser/check_parenthesis_rule.c \
-			src/parser/check_redirect_rule.c \
-			src/parser/check_syntax.c \
-			src/parser/get_next_token.c \
-			src/parser/get_previous_token.c \
-			src/parser/parser.c \
-			src/parser/split_tokens_into_tree.c \
-			src/token/destroy_token.c \
-			src/token/new_token.c \
-			src/utils/ft_putstr_fd.c \
-			src/utils/ft_strlen.c \
-			src/utils/ft_strncmp.c \
-			src/utils/mini_substr.c
+minishell_sources = 	src/main.c \
+		src/cstring/cstring_copy.c \
+		src/cstring/cstring_get_length.c \
+		src/cstring/cstring_join.c \
+		src/cstring/cstring_to_stderr.c \
+		src/memtree/memtree_create.c \
+		src/memtree/memtree_destroy.c \
+		src/memtree/memtree_get_height.c \
+		src/memtree/memtree_insert.c \
+		src/memtree/memtree_rebalance.c \
+		src/memtree/memtree_remove.c \
+		src/memtree/memtree_update_height.c \
+		src/mini/mini_alloc.c \
+		src/mini/mini_assert.c \
+		src/mini/mini_evaluate.c \
+		src/mini/mini_free.c \
+		src/mini/mini_get_prompt.c \
+		src/mini/mini_new.c \
+		src/mini/mini_print.c \
+		src/mini/mini_quit.c \
+		src/mini/mini_read.c
 
-OBJECTS = 	src/main.o \
-			src/binary_tree/new_binary_tree.o \
-			src/builtins/echo.o \
-			src/executor/executor.o \
-			src/heredoc/create_heredoc_file.o \
-			src/heredoc/delete_heredoc_files.o \
-			src/heredoc/get_heredoc_counter.o \
-			src/heredoc/write_input_to_heredoc.o \
-			src/lexer/check_open_syntax.o \
-			src/lexer/get_subcstring.o \
-			src/lexer/get_token_length.o \
-			src/lexer/get_token_type.o \
-			src/lexer/get_word_length.o \
-			src/lexer/lexer.o \
-			src/lexer/move_to_next_quote.o \
-			src/lexer/push_to_token_list.o \
-			src/linked_list/destroy_linked_list.o \
-			src/linked_list/destroy_linked_list_node.o \
-			src/linked_list/new_linked_list.o \
-			src/linked_list/new_linked_list_node.o \
-			src/memory_tree/create_memory_tree.o \
-			src/memory_tree/destroy_memory_tree.o \
-			src/memory_tree/get_memory_tree_height.o \
-			src/memory_tree/insert_in_memory_tree.o \
-			src/memory_tree/rebalance_memory_tree.o \
-			src/memory_tree/remove_from_memory_tree.o \
-			src/memory_tree/search_in_memory_tree.o \
-			src/memory_tree/update_memory_tree_height.o \
-			src/minishell/destroy_minishell.o \
-			src/minishell/get_exit_status.o \
-			src/minishell/mini_alloc.o \
-			src/minishell/mini_free.o \
-			src/minishell/mini_quit.o \
-			src/minishell/new_minishell.o \
-			src/minishell/reset_minishell.o \
-			src/minishell/set_exit_status.o \
-			src/minishell/syntax_error.o \
-			src/parser/build_execution_tree.o \
-			src/parser/check_control_operator_rule.o \
-			src/parser/check_parenthesis_rule.o \
-			src/parser/check_redirect_rule.o \
-			src/parser/check_syntax.o \
-			src/parser/get_next_token.o \
-			src/parser/get_previous_token.o \
-			src/parser/parser.o \
-			src/parser/split_tokens_into_tree.o \
-			src/token/destroy_token.o \
-			src/token/new_token.o \
-			src/utils/ft_putstr_fd.o \
-			src/utils/ft_strlen.o \
-			src/utils/ft_strncmp.o \
-			src/utils/mini_substr.o
+minishell_objects = 	src/main.o \
+		src/cstring/cstring_copy.o \
+		src/cstring/cstring_get_length.o \
+		src/cstring/cstring_join.o \
+		src/cstring/cstring_to_stderr.o \
+		src/memtree/memtree_create.o \
+		src/memtree/memtree_destroy.o \
+		src/memtree/memtree_get_height.o \
+		src/memtree/memtree_insert.o \
+		src/memtree/memtree_rebalance.o \
+		src/memtree/memtree_remove.o \
+		src/memtree/memtree_update_height.o \
+		src/mini/mini_alloc.o \
+		src/mini/mini_assert.o \
+		src/mini/mini_evaluate.o \
+		src/mini/mini_free.o \
+		src/mini/mini_get_prompt.o \
+		src/mini/mini_new.o \
+		src/mini/mini_print.o \
+		src/mini/mini_quit.o \
+		src/mini/mini_read.o
 
-HEADERS = 	include/binary_tree.h \
-			include/builtins.h \
-			include/executor.h \
-			include/heredoc.h \
-			include/lexer.h \
-			include/linked_list.h \
-			include/memory_tree.h \
-			include/minishell.h \
-			include/parser.h \
-			include/token.h \
-			include/types.h \
-			include/utils.h
+minishell_headers = 	include/assert.h \
+		include/bool.h \
+		include/cstring.h \
+		include/i32.h \
+		include/i64.h \
+		include/i8.h \
+		include/mem.h \
+		include/memtree.h \
+		include/minishell.h \
+		include/none.h \
+		include/u32.h
 
-DEPENDS = 	src/main.d \
-			src/binary_tree/new_binary_tree.d \
-			src/builtins/echo.d \
-			src/executor/executor.d \
-			src/heredoc/create_heredoc_file.d \
-			src/heredoc/delete_heredoc_files.d \
-			src/heredoc/get_heredoc_counter.d \
-			src/heredoc/write_input_to_heredoc.d \
-			src/lexer/check_open_syntax.d \
-			src/lexer/get_subcstring.d \
-			src/lexer/get_token_length.d \
-			src/lexer/get_token_type.d \
-			src/lexer/get_word_length.d \
-			src/lexer/lexer.d \
-			src/lexer/move_to_next_quote.d \
-			src/lexer/push_to_token_list.d \
-			src/linked_list/destroy_linked_list.d \
-			src/linked_list/destroy_linked_list_node.d \
-			src/linked_list/new_linked_list.d \
-			src/linked_list/new_linked_list_node.d \
-			src/memory_tree/create_memory_tree.d \
-			src/memory_tree/destroy_memory_tree.d \
-			src/memory_tree/get_memory_tree_height.d \
-			src/memory_tree/insert_in_memory_tree.d \
-			src/memory_tree/rebalance_memory_tree.d \
-			src/memory_tree/remove_from_memory_tree.d \
-			src/memory_tree/search_in_memory_tree.d \
-			src/memory_tree/update_memory_tree_height.d \
-			src/minishell/destroy_minishell.d \
-			src/minishell/get_exit_status.d \
-			src/minishell/mini_alloc.d \
-			src/minishell/mini_free.d \
-			src/minishell/mini_quit.d \
-			src/minishell/new_minishell.d \
-			src/minishell/reset_minishell.d \
-			src/minishell/set_exit_status.d \
-			src/minishell/syntax_error.d \
-			src/parser/build_execution_tree.d \
-			src/parser/check_control_operator_rule.d \
-			src/parser/check_parenthesis_rule.d \
-			src/parser/check_redirect_rule.d \
-			src/parser/check_syntax.d \
-			src/parser/get_next_token.d \
-			src/parser/get_previous_token.d \
-			src/parser/parser.d \
-			src/parser/split_tokens_into_tree.d \
-			src/token/destroy_token.d \
-			src/token/new_token.d \
-			src/utils/ft_putstr_fd.d \
-			src/utils/ft_strlen.d \
-			src/utils/ft_strncmp.d \
-			src/utils/mini_substr.d
+minishell_depends = 	src/main.d \
+		src/cstring/cstring_copy.d \
+		src/cstring/cstring_get_length.d \
+		src/cstring/cstring_join.d \
+		src/cstring/cstring_to_stderr.d \
+		src/memtree/memtree_create.d \
+		src/memtree/memtree_destroy.d \
+		src/memtree/memtree_get_height.d \
+		src/memtree/memtree_insert.d \
+		src/memtree/memtree_rebalance.d \
+		src/memtree/memtree_remove.d \
+		src/memtree/memtree_update_height.d \
+		src/mini/mini_alloc.d \
+		src/mini/mini_assert.d \
+		src/mini/mini_evaluate.d \
+		src/mini/mini_free.d \
+		src/mini/mini_get_prompt.d \
+		src/mini/mini_new.d \
+		src/mini/mini_print.d \
+		src/mini/mini_quit.d \
+		src/mini/mini_read.d
 
-INCLUDES = 	-iquote include
+minishell_includes = 	-iquote include
 
-all: $(NAME)
+all:
+	@./script/generate_makefile > /dev/null 2>&1
+	@$(MAKE) --no-print-directory $(NAME) 2>&1
 
-$(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) -o $(NAME) $(LIBS)
+$(NAME): $(minishell_objects)
+	$(CC) $(CFLAGS) $(minishell_objects) $(minishell_includes) -o $(NAME) $(LIBS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(minishell_includes) -c $< -o $@
 
 clean:
-	$(RM) $(OBJECTS) $(DEPENDS)
+	$(RM) $(minishell_objects) $(minishell_depends)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
--include $(DEPENDS)
+norm: 
+	@norminette -R CheckForbiddenSourceHeader
 
-.PHONY: all clean fclean re
+val:
+	valgrind --leak-check=full --trace-children=yes --show-leak-kinds=all --suppressions=readline.supp ./$(NAME)
+
+run: all
+	@./minishell
+
+make:
+	@./script/generate_makefile > /dev/null 2>&1
+
+-include $(minishell_depends)
+
+.PHONY: all clean fclean re norm val run make

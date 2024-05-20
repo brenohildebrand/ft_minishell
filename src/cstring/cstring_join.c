@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cstring_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 17:31:30 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/20 18:09:33 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/20 18:40:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_i32	main(void)
+t_cstring	cstring_join(t_mini mini, t_cstring a, t_cstring b)
 {
-	#ifdef DEBUG
-		printf("\033[94mMinishell is running in DEBUG mode.\033[0m\n");
-	#endif
-	t_mini	mini;
+	const t_u32	a_length = cstring_get_length(a);
+	const t_u32	b_length = cstring_get_length(b);
+	const t_u32	c_length = a_length + b_length;
+	t_cstring	c;
+	t_u32		i;
 
-	mini = mini_new();
-	while (42)
+	c = mini_alloc(mini, c_length + 1);
+	i = 0;
+	while (i < a_length)
 	{
-		mini_read(mini);
-		mini_evaluate(mini);
-		mini_print(mini);
+		c[i] = a[i];
+		i++;
 	}
+	i = 0;
+	while (i < b_length)
+	{
+		c[a_length + i] = b[i];
+		i++;
+	}
+	c[c_length] = '\0';
+	free(a);
+	free(b);
+	return (c);
 }
