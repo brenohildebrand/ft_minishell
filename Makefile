@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/20 18:50:33 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/20 18:50:33 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/20 19:58:59 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/20 19:58:59 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ minishell_sources = 	src/main.c \
 		src/mini/mini_new.c \
 		src/mini/mini_print.c \
 		src/mini/mini_quit.c \
-		src/mini/mini_read.c
+		src/mini/mini_read.c \
+		src/tokenizer/tokenize.c
 
 minishell_objects = 	src/main.o \
 		src/cstring/cstring_copy.o \
@@ -58,7 +59,8 @@ minishell_objects = 	src/main.o \
 		src/mini/mini_new.o \
 		src/mini/mini_print.o \
 		src/mini/mini_quit.o \
-		src/mini/mini_read.o
+		src/mini/mini_read.o \
+		src/tokenizer/tokenize.o
 
 minishell_headers = 	include/assert.h \
 		include/bool.h \
@@ -66,10 +68,12 @@ minishell_headers = 	include/assert.h \
 		include/i32.h \
 		include/i64.h \
 		include/i8.h \
+		include/list.h \
 		include/mem.h \
 		include/memtree.h \
 		include/minishell.h \
 		include/none.h \
+		include/tokenizer.h \
 		include/u32.h
 
 minishell_depends = 	src/main.d \
@@ -92,7 +96,8 @@ minishell_depends = 	src/main.d \
 		src/mini/mini_new.d \
 		src/mini/mini_print.d \
 		src/mini/mini_quit.d \
-		src/mini/mini_read.d
+		src/mini/mini_read.d \
+		src/tokenizer/tokenize.d
 
 minishell_includes = 	-iquote include
 

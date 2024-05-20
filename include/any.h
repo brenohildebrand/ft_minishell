@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_evaluate.c                                    :+:      :+:    :+:   */
+/*   any.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 15:12:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 20:19:58 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/20 20:16:25 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/20 20:16:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef ANY_H
+# define ANY_H
 
-t_none	mini_evaluate(t_mini mini)
-{
-	tokenizer(mini);
-	// parse
-	// execute
-	(void)mini;
-	return ;
-}
+typedef void	*t_any;
+
+#endif

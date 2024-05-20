@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 18:25:13 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:29:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@
 # include "u32.h"
 # include "i8.h"
 # include "mem.h"
+# include "any.h"
 # include "memtree.h"
 # include "cstring.h"
-// # include "linked_list.h"
+# include "list.h"
+# include "token.h"
+# include "tokenizer.h"
 // # include "binary_tree.h"
 
 # define DEBUG
@@ -43,7 +46,7 @@ typedef struct s_mini	*t_mini;
 struct s_mini {
 	t_memtree	memtree;
 	t_cstring	line;
-	// t_list		list;
+	t_list		list;
 	// t_btree		btree;
 	t_i32		exit_status;
 };
