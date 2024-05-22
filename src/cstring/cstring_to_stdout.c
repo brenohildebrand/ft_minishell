@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_evaluate.c                                    :+:      :+:    :+:   */
+/*   cstring_to_stdout.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 15:12:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 11:27:21 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/21 16:44:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/21 16:45:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_evaluate(t_mini mini)
+t_none	cstring_to_stdout(t_cstring message)
 {
-	(void)mini;
-	return ;
+	write(STDOUT_FILENO, message, cstring_get_length(message));
 }

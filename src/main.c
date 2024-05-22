@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 17:31:30 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:09:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_i32	main(void)
 {
 	#ifdef DEBUG
-		printf("\033[94mMinishell is running in DEBUG mode.\033[0m\n");
+		printf("Mini is running in \033[94mDEBUG\033[0m mode.\n");
 	#endif
 	t_mini	mini;
 
@@ -24,6 +24,5 @@ t_i32	main(void)
 	{
 		mini_read(mini);
 		mini_evaluate(mini);
-		mini_print(mini);
 	}
 }

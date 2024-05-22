@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_evaluate.c                                    :+:      :+:    :+:   */
+/*   btree.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 15:12:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 11:27:21 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/22 11:13:50 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/22 11:15:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef BTREE_H
+# define BTREE_H
 
-t_none	mini_evaluate(t_mini mini)
-{
-	(void)mini;
-	return ;
-}
+# include "minishell.h"
+
+typedef struct s_btree		*t_btree;
+typedef struct s_btree_node	*t_btree_node;
+
+struct s_btree {
+	t_btree_node	root;	
+};
+
+struct s_btree_node {
+	t_btree_node	left;
+	t_btree_node	right;
+	t_any			value;
+};
+
+#endif

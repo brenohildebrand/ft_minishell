@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:09:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 18:40:00 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:10:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_cstring	cstring_join(t_mini mini, t_cstring a, t_cstring b)
 		i++;
 	}
 	c[c_length] = '\0';
-	free(a);
-	free(b);
+	mini_free(mini, a);
+	mini_free(mini, b);
 	return (c);
 }

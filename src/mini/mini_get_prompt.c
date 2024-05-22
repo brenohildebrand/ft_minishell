@@ -6,48 +6,41 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 18:50:29 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:33:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static t_cstring	get_cwd(t_mini mini)
-// {
-// 	t_cstring		cwd;
-// 	t_u32			cwd_size;
-
-// 	cwd_size = 1024;
-// 	cwd = malloc(cwd_size);
-// 	mini_assert(mini, cwd != NULL, "Memory allocation error.\n");
-// 	while (getcwd(cwd, cwd_size) == NULL)
-// 	{
-// 		cwd_size *= 2;
-// 		cwd = malloc(cwd_size);
-// 		mini_assert(mini, cwd != NULL, "Memory allocation error.\n");
-// 	}
-// 	return (cwd);
-// }
-
-/**
- * The prompt will have the following format:
- * $(USER)@$(NAME):$(PWD)$
-*/
-t_cstring	mini_get_prompt(t_mini mini)
+static t_bool	multiline_flag_is_on(t_mini mini)
 {
-	t_cstring	prompt;
-	t_cstring	user;
-	t_cstring	name;
-	t_cstring	pwd;
+	return (mini->flags & MINI_FLAG_MULTILINE);
+}
 
-	pwd = cstring_copy(mini, getenv("PWD"));
-	user = cstring_copy(mini, getenv("USER"));
-	name = cstring_copy(mini, getenv("NAME"));
+#ifdef CUSTOM_PROMPT
+
+// The custom prompt has the following format: '$(USER)@$(NAME):$(PWD)$ '.
+static t_cstring	get_custom_prompt(t_mini mini)
+{
+	const t_cstring	user = cstring_copy(mini, getenv("USER"));
+	const t_cstring	name = cstring_copy(mini, getenv("NAME"));
+	const t_cstring	hostname = cstring_copy(mini, getenv("HOSTNAME"));
+	const t_cstring	pwd = cstring_copy(mini, getenv("PWD"));
+	t_cstring		prompt;
+
 	prompt = NULL;
 	prompt = cstring_join(mini, prompt, cstring_copy(mini, "\033[1;32m"));
 	prompt = cstring_join(mini, prompt, user);
-	prompt = cstring_join(mini, prompt, cstring_copy(mini, "@"));
-	prompt = cstring_join(mini, prompt, name);
+	if (name != NULL)
+	{
+		prompt = cstring_join(mini, prompt, cstring_copy(mini, "@"));
+		prompt = cstring_join(mini, prompt, name);
+	}
+	else if (hostname != NULL)
+	{
+		prompt = cstring_join(mini, prompt, cstring_copy(mini, "@"));
+		prompt = cstring_join(mini, prompt, hostname);
+	}
 	prompt = cstring_join(mini, prompt, cstring_copy(mini, "\033[0m"));
 	prompt = cstring_join(mini, prompt, cstring_copy(mini, ":"));
 	prompt = cstring_join(mini, prompt, cstring_copy(mini, "\033[1;34m"));
@@ -57,3 +50,37 @@ t_cstring	mini_get_prompt(t_mini mini)
 	prompt = cstring_join(mini, prompt, cstring_copy(mini, " "));
 	return (prompt);
 }
+
+t_cstring	mini_get_prompt(t_mini mini)
+{
+	t_cstring	prompt;
+
+	if (multiline_flag_is_on(mini))
+	{
+		prompt = MULTILINE_PROMPT;
+	}
+	else
+	{
+		prompt = get_custom_prompt(mini);
+	}
+	return (prompt);
+}
+
+#else
+
+t_cstring	mini_get_prompt(t_mini mini)
+{
+	t_cstring	prompt;
+
+	if (multiline_flag_is_on(mini))
+	{
+		prompt = MULTILINE_PROMPT;
+	}
+	else
+	{
+		prompt = PROMPT;
+	}
+	return (prompt);
+}
+
+#endif

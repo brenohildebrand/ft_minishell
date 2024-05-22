@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_evaluate.c                                    :+:      :+:    :+:   */
+/*   htable.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 15:12:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 11:27:21 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/22 11:15:59 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/22 11:20:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef HTABLE_H
+# define HTABLE_H
 
-t_none	mini_evaluate(t_mini mini)
-{
-	(void)mini;
-	return ;
-}
+# include "minishell.h"
+
+typedef struct s_htable			*t_htable;
+typedef struct s_htable_entry	*t_htable_entry;
+
+struct s_htable {
+	t_htable_entry	*entries;
+};
+
+struct s_htable_entry {
+	t_cstring	key;
+	t_any		value;
+};
+
+#endif

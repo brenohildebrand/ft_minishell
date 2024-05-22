@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_evaluate.c                                    :+:      :+:    :+:   */
+/*   cstring_is_not_empty.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 15:12:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 11:27:21 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/21 17:38:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/21 17:42:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_evaluate(t_mini mini)
+t_bool	cstring_is_not_empty(t_cstring cstring)
 {
-	(void)mini;
-	return ;
+	if (cstring == NULL || cstring[0] == '\0')
+	{
+		return (FALSE);
+	}
+	return (TRUE);
 }
