@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_parse.c                                       :+:      :+:    :+:   */
+/*   mini_tokenizer_eighth_rule.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 11:11:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 15:38:05 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/25 20:34:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/25 20:35:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_parse(t_mini mini)
+/**
+ * 8th rule:
+ * If the previous character was part of a word, the current character shall 
+ * be appended to that word.
+*/
+t_none	mini_tokenizer_eighth_rule(t_mini mini, t_tokenizer_context context)
 {
 	(void)mini;
-}
-
-t_none	mini_parse_expression()
-{
-	t_tree	tree;
-
-	if (next_token == '(')
-	{
-		new_plus();
-		'2 + 3'	
-	}
-	
-
-	// It's not necessarily a binary tree
-	return (tree);
+	(void)context;
 }

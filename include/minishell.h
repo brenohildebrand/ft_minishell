@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 14:38:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:38:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include "btree.h"
 # include "htable.h"
 # include "token.h"
-# include "tokenizer.h"
+# include "tokenizer_context.h"
 
 # define DEBUG
 
@@ -47,7 +47,7 @@
 # define PROMPT "mini> "
 # define MULTILINE_PROMPT "> "
 
-# define MINI_FLAG_MULTILINE			0
+# define MINI_FLAG_MULTILINE 0
 # define MINI_FLAG_STATEMENT_COMPLETED	2
 
 # define MINI_TRANSITION_TABLE_WORD 0
@@ -71,6 +71,9 @@ struct s_mini {
 	t_htable	table;
 };
 
+/**
+ * Minishell
+ */
 t_mem		mini_alloc(t_mini mini, unsigned int size);
 t_none		mini_assert(t_mini mini, t_bool condition, t_cstring message);
 t_none		mini_evaluate(t_mini mini);
@@ -85,5 +88,45 @@ t_none		mini_readline(t_mini mini);
 t_none		mini_tokenize(t_mini mini);
 t_bool		mini_check_flag(t_mini mini, t_i32 flag);
 t_i32		(*mini_get_transition_table(void))[8];
+
+/**
+ * Tokenizer
+ */ 
+void		mini_tokenizer_ordinary(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_first_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_second_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_third_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_fourth_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_fifth_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_sixth_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_seventh_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_eighth_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_ninth_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_tenth_rule(
+				t_mini mini,
+				t_tokenizer_context context);
+void		mini_tokenizer_cut(
+				t_mini mini,
+				t_tokenizer_context context);
 
 #endif
