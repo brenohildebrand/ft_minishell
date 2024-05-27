@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 11:26:10 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:14:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@
 # include "btree.h"
 # include "htable.h"
 # include "token.h"
+# include "lua.h"
 # include "mini_context.h"
 # include "lexer_context.h"
+# include "config_context.h"
 
 # define DEBUG
 
@@ -70,6 +72,7 @@ typedef struct s_mini			*t_mini;
 struct s_mini {
 	t_mini_context		mini_context;
 	t_lexer_context		lexer_context;
+	t_config_context	config_context;
 };
 
 /**
@@ -93,7 +96,7 @@ t_none		mini_readline(t_mini mini);
 t_none		mini_tokenize(t_mini mini);
 t_bool		mini_check_flag(t_mini mini, t_i32 flag);
 t_none		mini_setup(t_mini mini);
-
+t_none		mini_load_config(t_mini mini);
 
 /**
  * Lexer

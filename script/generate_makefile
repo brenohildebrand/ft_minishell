@@ -126,7 +126,7 @@ def generate_minishell_makefile():
 
 				CC = gcc
 				CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
-				LIBS = -lreadline
+				LIBS = -lreadline -llua5.4
 
 				minishell_sources = {minishell_sources}
 				minishell_objects = {minishell_objects}

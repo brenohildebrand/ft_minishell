@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/27 12:01:04 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/27 12:01:04 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/27 15:17:01 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/27 15:17:01 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,13 @@ NAME = minishell
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
-LIBS = -lreadline
+LIBS = -lreadline -llua5.4
 
 minishell_sources = 	src/main.c \
+		src/config_context/config_context_init.c \
+		src/config_context/config_context_new.c \
 		src/cstring/cstring_copy.c \
+		src/cstring/cstring_dirname.c \
 		src/cstring/cstring_get_length.c \
 		src/cstring/cstring_is_not_empty.c \
 		src/cstring/cstring_join.c \
@@ -26,6 +29,7 @@ minishell_sources = 	src/main.c \
 		src/lexer_context/lexer_context_new.c \
 		src/lexer_context/lexer_context_reset.c \
 		src/linked_list/linked_list_new.c \
+		src/lua/lua_loadfile.c \
 		src/memtree/memtree_create.c \
 		src/memtree/memtree_destroy.c \
 		src/memtree/memtree_get_height.c \
@@ -40,6 +44,7 @@ minishell_sources = 	src/main.c \
 		src/mini/mini_free.c \
 		src/mini/mini_get_cwd.c \
 		src/mini/mini_get_prompt.c \
+		src/mini/mini_load_config.c \
 		src/mini/mini_new.c \
 		src/mini/mini_parse.c \
 		src/mini/mini_quit.c \
@@ -61,10 +66,14 @@ minishell_sources = 	src/main.c \
 		src/mini/lexer/mini_lexer_sixth_rule.c \
 		src/mini/lexer/mini_lexer_tenth_rule.c \
 		src/mini/lexer/mini_lexer_third_rule.c \
+		src/mini_context/mini_context_init.c \
 		src/mini_context/mini_context_new.c
 
 minishell_objects = 	src/main.o \
+		src/config_context/config_context_init.o \
+		src/config_context/config_context_new.o \
 		src/cstring/cstring_copy.o \
+		src/cstring/cstring_dirname.o \
 		src/cstring/cstring_get_length.o \
 		src/cstring/cstring_is_not_empty.o \
 		src/cstring/cstring_join.o \
@@ -73,6 +82,7 @@ minishell_objects = 	src/main.o \
 		src/lexer_context/lexer_context_new.o \
 		src/lexer_context/lexer_context_reset.o \
 		src/linked_list/linked_list_new.o \
+		src/lua/lua_loadfile.o \
 		src/memtree/memtree_create.o \
 		src/memtree/memtree_destroy.o \
 		src/memtree/memtree_get_height.o \
@@ -87,6 +97,7 @@ minishell_objects = 	src/main.o \
 		src/mini/mini_free.o \
 		src/mini/mini_get_cwd.o \
 		src/mini/mini_get_prompt.o \
+		src/mini/mini_load_config.o \
 		src/mini/mini_new.o \
 		src/mini/mini_parse.o \
 		src/mini/mini_quit.o \
@@ -108,12 +119,14 @@ minishell_objects = 	src/main.o \
 		src/mini/lexer/mini_lexer_sixth_rule.o \
 		src/mini/lexer/mini_lexer_tenth_rule.o \
 		src/mini/lexer/mini_lexer_third_rule.o \
+		src/mini_context/mini_context_init.o \
 		src/mini_context/mini_context_new.o
 
 minishell_headers = 	include/any.h \
 		include/assert.h \
 		include/bool.h \
 		include/btree.h \
+		include/config_context.h \
 		include/cstring.h \
 		include/htable.h \
 		include/i32.h \
@@ -121,6 +134,7 @@ minishell_headers = 	include/any.h \
 		include/i8.h \
 		include/lexer_context.h \
 		include/linked_list.h \
+		include/lua.h \
 		include/mem.h \
 		include/memtree.h \
 		include/minishell.h \
@@ -130,7 +144,10 @@ minishell_headers = 	include/any.h \
 		include/u32.h
 
 minishell_depends = 	src/main.d \
+		src/config_context/config_context_init.d \
+		src/config_context/config_context_new.d \
 		src/cstring/cstring_copy.d \
+		src/cstring/cstring_dirname.d \
 		src/cstring/cstring_get_length.d \
 		src/cstring/cstring_is_not_empty.d \
 		src/cstring/cstring_join.d \
@@ -139,6 +156,7 @@ minishell_depends = 	src/main.d \
 		src/lexer_context/lexer_context_new.d \
 		src/lexer_context/lexer_context_reset.d \
 		src/linked_list/linked_list_new.d \
+		src/lua/lua_loadfile.d \
 		src/memtree/memtree_create.d \
 		src/memtree/memtree_destroy.d \
 		src/memtree/memtree_get_height.d \
@@ -153,6 +171,7 @@ minishell_depends = 	src/main.d \
 		src/mini/mini_free.d \
 		src/mini/mini_get_cwd.d \
 		src/mini/mini_get_prompt.d \
+		src/mini/mini_load_config.d \
 		src/mini/mini_new.d \
 		src/mini/mini_parse.d \
 		src/mini/mini_quit.d \
@@ -174,6 +193,7 @@ minishell_depends = 	src/main.d \
 		src/mini/lexer/mini_lexer_sixth_rule.d \
 		src/mini/lexer/mini_lexer_tenth_rule.d \
 		src/mini/lexer/mini_lexer_third_rule.d \
+		src/mini_context/mini_context_init.d \
 		src/mini_context/mini_context_new.d
 
 minishell_includes = 	-iquote include

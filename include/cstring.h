@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 12:17:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/21 17:42:19 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:16:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_cstring	cstring_copy(t_mini mini, t_cstring original);
 t_cstring	cstring_join(t_mini mini, t_cstring a, t_cstring b);
 t_none		cstring_to_stdout(t_cstring message);
 t_bool		cstring_is_not_empty(t_cstring cstring);
+t_cstring	cstring_dirname(t_mini mini, t_cstring path);
 
 #endif

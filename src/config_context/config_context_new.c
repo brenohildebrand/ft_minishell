@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_copy.c                                     :+:      :+:    :+:   */
+/*   config_context_new.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:05:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 15:16:23 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 15:04:01 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 15:05:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cstring	cstring_copy(t_mini mini, t_cstring original)
+t_config_context	config_context_new(t_mini mini)
 {
-	const t_u32	original_length = cstring_get_length(original);
-	t_u32		i;
-	t_cstring	copy;
+	t_config_context	config_context;
 
-	copy = mini_alloc(mini, original_length + 1);
-	i = 0;
-	while (i < original_length)
-	{
-		copy[i] = original[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
+	config_context = mini_alloc(mini, (sizeof(struct s_config_context)));
+	config_context->prompt = NULL;
+	return (config_context);
 }

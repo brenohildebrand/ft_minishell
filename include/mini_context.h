@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 09:49:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 10:06:09 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:58:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 typedef struct s_mini_context	*t_mini_context;
 
 struct s_mini_context {
+	t_i32		argc;
+	t_cstring	*argv;
 	t_memtree	memtree;
 	t_cstring	line;
 	t_i32		bitmask;
@@ -25,5 +27,6 @@ struct s_mini_context {
 };
 
 t_mini_context	mini_context_new(void);
+t_none			mini_context_init(t_mini mini, t_i32 argc, t_cstring *argv);
 
 #endif

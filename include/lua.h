@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_copy.c                                     :+:      :+:    :+:   */
+/*   lua.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:05:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 15:16:23 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 12:43:11 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 13:12:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LUA_H
+# define LUA_H
+
 #include "minishell.h"
 
-t_cstring	cstring_copy(t_mini mini, t_cstring original)
-{
-	const t_u32	original_length = cstring_get_length(original);
-	t_u32		i;
-	t_cstring	copy;
+typedef struct lua_State	*t_lua_state;
 
-	copy = mini_alloc(mini, original_length + 1);
-	i = 0;
-	while (i < original_length)
-	{
-		copy[i] = original[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
-}
+t_none	lua_loadfile(t_mini mini, t_lua_state lua_state, t_cstring path);
+
+#endif

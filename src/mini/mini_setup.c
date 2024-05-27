@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 22:23:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 22:24:10 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:34:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 // setup signals and stuff
 t_none	mini_setup(t_mini mini)
 {
-	(void)mini;
+	mini_load_config(mini);
 }

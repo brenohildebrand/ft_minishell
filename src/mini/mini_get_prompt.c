@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 12:01:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:16:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_cstring	get_custom_prompt(t_mini mini)
 {
 	(void)mini;
 	#ifdef LUA
-		return (PROMPT);	
+		return (mini->config_context->prompt);
 	#endif
 	return (PROMPT);
 }

@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_copy.c                                     :+:      :+:    :+:   */
+/*   mini_context_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:05:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 15:16:23 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 12:56:22 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 12:59:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cstring	cstring_copy(t_mini mini, t_cstring original)
+t_none	mini_context_init(t_mini mini, t_i32 argc, t_cstring *argv)
 {
-	const t_u32	original_length = cstring_get_length(original);
-	t_u32		i;
-	t_cstring	copy;
+	const t_mini_context	context = mini->mini_context;
 
-	copy = mini_alloc(mini, original_length + 1);
-	i = 0;
-	while (i < original_length)
-	{
-		copy[i] = original[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
+	context->argc = argc;
+	context->argv = argv;
 }
