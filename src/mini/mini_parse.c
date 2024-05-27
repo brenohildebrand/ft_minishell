@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:11:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 15:38:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:09:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ t_none	mini_parse(t_mini mini)
 	(void)mini;
 }
 
-t_none	mini_parse_expression()
-{
-	t_tree	tree;
+// t_none	mini_parse_expression()
+// {
+// 	t_tree	tree;
 
-	if (next_token == '(')
-	{
-		new_plus();
-		'2 + 3'	
-	}
+// 	if (next_token == '(')
+// 	{
+// 		new_plus();
+// 		'2 + 3'	
+// 	}
 	
 
-	// It's not necessarily a binary tree
-	return (tree);
-}
+// 	// It's not necessarily a binary tree
+// 	return (tree);
+// }

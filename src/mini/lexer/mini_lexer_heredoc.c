@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_tenth_rule.c                        :+:      :+:    :+:   */
+/*   mini_lexer_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 19:15:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:07:10 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 10:13:19 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 10:16:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * 10th rule:
- * The current character is used as the start of a new word.
-*/
-t_none	mini_tokenizer_tenth_rule(t_mini mini, t_tokenizer_context context)
+t_none	mini_lexer_heredoc(t_mini mini)
 {
-	context->delimiter_start = context->index;
-	context->is_word = TRUE;
+	(void)mini;
 }

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_eighth_rule.c                       :+:      :+:    :+:   */
+/*   mini_context.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:34:51 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:35:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 09:49:03 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 10:06:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINI_CONTEXT_H
+# define MINI_CONTEXT_H
 
-/**
- * 8th rule:
- * If the previous character was part of a word, the current character shall 
- * be appended to that word.
-*/
-t_none	mini_tokenizer_eighth_rule(t_mini mini, t_tokenizer_context context)
-{
-	(void)mini;
-	(void)context;
-}
+# include "minishell.h"
+
+typedef struct s_mini_context	*t_mini_context;
+
+struct s_mini_context {
+	t_memtree	memtree;
+	t_cstring	line;
+	t_i32		bitmask;
+	t_i32		exit_status;
+};
+
+t_mini_context	mini_context_new(void);
+
+#endif

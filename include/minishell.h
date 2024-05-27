@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:52:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:38:26 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:26:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@
 # include "any.h"
 # include "memtree.h"
 # include "cstring.h"
-# include "list.h"
+# include "linked_list.h"
 # include "btree.h"
 # include "htable.h"
 # include "token.h"
-# include "tokenizer_context.h"
+# include "mini_context.h"
+# include "lexer_context.h"
 
 # define DEBUG
 
@@ -40,7 +41,12 @@
 #  include <stdio.h>
 # endif
 
-# ifdef DEBUG
+# define LUA
+
+# ifdef LUA
+#  include <lua5.4/lua.h>
+#  include <lua5.4/lauxlib.h>
+#  include <lua5.4/lualib.h>
 # endif
 
 # define CUSTOM_PROMPT
@@ -59,21 +65,20 @@
 # define MINI_TRANSITION_TABLE_WSPACE 6
 # define MINI_TRANSITION_TABLE_NULL 7
 
-typedef struct s_mini	*t_mini;
+typedef struct s_mini			*t_mini;
 
 struct s_mini {
-	t_memtree	memtree;
-	t_list		list;
-	t_btree		btree;
-	t_cstring	line;
-	t_cstring	statement;
-	t_i32		flags;
-	t_htable	table;
+	t_mini_context		mini_context;
+	t_lexer_context		lexer_context;
 };
 
 /**
+ * Builtin
+*/
+
+/**
  * Minishell
- */
+*/
 t_mem		mini_alloc(t_mini mini, unsigned int size);
 t_none		mini_assert(t_mini mini, t_bool condition, t_cstring message);
 t_none		mini_evaluate(t_mini mini);
@@ -87,46 +92,33 @@ t_none		mini_read(t_mini mini);
 t_none		mini_readline(t_mini mini);
 t_none		mini_tokenize(t_mini mini);
 t_bool		mini_check_flag(t_mini mini, t_i32 flag);
-t_i32		(*mini_get_transition_table(void))[8];
+t_none		mini_setup(t_mini mini);
+
 
 /**
- * Tokenizer
- */ 
-void		mini_tokenizer_ordinary(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_first_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_second_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_third_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_fourth_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_fifth_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_sixth_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_seventh_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_eighth_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_ninth_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_tenth_rule(
-				t_mini mini,
-				t_tokenizer_context context);
-void		mini_tokenizer_cut(
-				t_mini mini,
-				t_tokenizer_context context);
+ * Lexer
+*/ 
+t_none		mini_lexer_ordinary(t_mini mini);
+t_none		mini_lexer_heredoc(t_mini mini);
+t_none		mini_lexer_first_rule(t_mini mini);
+t_none		mini_lexer_second_rule(t_mini mini);
+t_none		mini_lexer_third_rule(t_mini mini);
+t_none		mini_lexer_fourth_rule(t_mini mini);
+t_none		mini_lexer_fifth_rule(t_mini mini);
+t_none		mini_lexer_sixth_rule(t_mini mini);
+t_none		mini_lexer_seventh_rule(t_mini mini);
+t_none		mini_lexer_eighth_rule(t_mini mini);
+t_none		mini_lexer_ninth_rule(t_mini mini);
+t_none		mini_lexer_tenth_rule(t_mini mini);
+t_none		mini_lexer_cut(t_mini mini);
+
+
+/**
+ * Parser
+*/
+
+/**
+ * Signal
+*/
 
 #endif

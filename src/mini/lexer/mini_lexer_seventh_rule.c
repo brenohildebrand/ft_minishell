@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_second_rule.c                       :+:      :+:    :+:   */
+/*   mini_lexer_seventh_rule.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:04:31 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:08:16 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/25 20:33:55 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/25 20:34:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * 2nd rule:
- * If the previous character was used as part of an operator and the current 
- * character is not quoted and can be used with the previous characters to 
- * form an operator, it shall be used as part of that (operator) token.
+ * 7th rule:
+ * If the current character is an unquoted <blank>, any token containing the 
+ * previous character is delimited and the current character shall be 
+ * discarded.
 */
-t_none	mini_tokenizer_second_rule(t_mini mini, t_tokenizer_context context)
+t_none	mini_lexer_seventh_rule(t_mini mini)
 {
 	(void)mini;
-	(void)context;
 }

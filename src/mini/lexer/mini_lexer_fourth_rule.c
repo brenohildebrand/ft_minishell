@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_fourth_rule.c                       :+:      :+:    :+:   */
+/*   mini_lexer_fourth_rule.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,8 +24,7 @@
  * <quotation-mark> and the end of the quoted text. The token shall not be 
  * delimited by the end of the quoted field.
 */
-t_none	mini_tokenizer_fourth_rule(t_mini mini, t_tokenizer_context context)
+t_none	mini_lexer_fourth_rule(t_mini mini)
 {
 	(void)mini;
-	(void)context;
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_ordinary.c                          :+:      :+:    :+:   */
+/*   mini_lexer_ordinary.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,16 +17,16 @@
  * https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
  * See '2.3 Token Recognition'
 */
-void	mini_tokenizer_ordinary(t_mini mini, t_tokenizer_context context)
+void	mini_lexer_ordinary(t_mini mini)
 {
-	mini_tokenizer_first_rule(mini, context);
-	mini_tokenizer_second_rule(mini, context);
-	mini_tokenizer_third_rule(mini, context);
-	mini_tokenizer_fourth_rule(mini, context);
-	mini_tokenizer_fifth_rule(mini, context);
-	mini_tokenizer_sixth_rule(mini, context);
-	mini_tokenizer_seventh_rule(mini, context);
-	mini_tokenizer_eighth_rule(mini, context);
-	mini_tokenizer_ninth_rule(mini, context);
-	mini_tokenizer_tenth_rule(mini, context);
+	mini_lexer_first_rule(mini);
+	mini_lexer_second_rule(mini);
+	mini_lexer_third_rule(mini);
+	mini_lexer_fourth_rule(mini);
+	mini_lexer_fifth_rule(mini);
+	mini_lexer_sixth_rule(mini);
+	mini_lexer_seventh_rule(mini);
+	mini_lexer_eighth_rule(mini);
+	mini_lexer_ninth_rule(mini);
+	mini_lexer_tenth_rule(mini);
 }

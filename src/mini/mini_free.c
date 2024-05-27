@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:32:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 14:40:18 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:04:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 t_none	mini_free(t_mini mini, t_mem mem)
 {
-	memtree_remove(&(mini->memtree), mem);
+	memtree_remove(&(mini->mini_context->memtree), mem);
 }

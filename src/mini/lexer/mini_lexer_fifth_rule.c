@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_fifth_rule.c                        :+:      :+:    :+:   */
+/*   mini_lexer_fifth_rule.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -28,8 +28,7 @@
  * recursion necessary to recognize embedded constructs, shall be included 
  * unmodified in the result token, including any embedded or enclosing substitution operators or quotes. The token shall not be delimited by the end of the substitution.
 */
-t_none	mini_tokenizer_fifth_rule(t_mini mini, t_tokenizer_context context)
+t_none	mini_lexer_fifth_rule(t_mini mini)
 {
 	(void)mini;
-	(void)context;
 }

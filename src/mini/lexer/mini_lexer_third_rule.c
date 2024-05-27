@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_third_rule.c                        :+:      :+:    :+:   */
+/*   mini_lexer_third_rule.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,8 +18,7 @@
  * character cannot be used with the previous characters to form an operator, 
  * the operator containing the previous character shall be delimited.
 */
-t_none	mini_tokenizer_third_rule(t_mini mini, t_tokenizer_context context)
+t_none	mini_lexer_third_rule(t_mini mini)
 {
 	(void)mini;
-	(void)context;
 }

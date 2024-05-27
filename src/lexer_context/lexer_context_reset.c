@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_alloc.c                                       :+:      :+:    :+:   */
+/*   lexer_context_reset.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 15:53:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 10:04:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 10:25:26 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 11:35:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_mem	mini_alloc(t_mini mini, t_u32 size)
+t_none	lexer_context_reset(t_mini mini)
 {
-	t_mem	mem;
+	const t_lexer_context	context = mini->lexer_context;
 
-	mem = malloc(size);
-	mini_assert(mini, mem != NULL, "Memory allocation error.\n");
-	memtree_insert(&(mini->mini_context->memtree), NULL, mem);
-	return (mem);
+	context->tokens = linked_list_new(mini);
+	context->delimiter_end = 0;
+	context->delimiter_start = 0;
+	context->mode = LEXER_MODE_ORDINARY;
+	context->has_finished = TRUE;
 }

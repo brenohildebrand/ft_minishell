@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:01:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 14:40:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:05:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_none	mini_quit(t_mini mini)
 {
-	const t_i32	exit_status = mini->exit_status;
+	const t_i32	exit_status = mini->mini_context->exit_status;
 
-	memtree_destroy(mini->memtree);
+	memtree_destroy(mini->mini_context->memtree);
+	free(mini->mini_context);
 	free(mini);
 	exit(exit_status);
 }

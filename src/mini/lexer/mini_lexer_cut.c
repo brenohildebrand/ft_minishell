@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_tokenizer_seventh_rule.c                      :+:      :+:    :+:   */
+/*   mini_lexer_cut.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:33:55 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:34:28 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/25 18:48:13 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/25 21:46:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * 7th rule:
- * If the current character is an unquoted <blank>, any token containing the 
- * previous character is delimited and the current character shall be 
- * discarded.
+ * See '2.10.1 Shell Grammar Lexical Conventions' 
 */
-t_none	mini_tokenizer_seventh_rule(t_mini mini, t_tokenizer_context context)
+void	mini_lexer_cut(t_mini mini)
 {
 	(void)mini;
-	(void)context;
 }

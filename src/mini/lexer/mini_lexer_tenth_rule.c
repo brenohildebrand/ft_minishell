@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_alloc.c                                       :+:      :+:    :+:   */
+/*   mini_lexer_tenth_rule.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 15:53:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 10:04:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/25 19:15:27 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/25 20:07:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_mem	mini_alloc(t_mini mini, t_u32 size)
+/**
+ * 10th rule:
+ * The current character is used as the start of a new word.
+*/
+t_none	mini_lexer_tenth_rule(t_mini mini)
 {
-	t_mem	mem;
-
-	mem = malloc(size);
-	mini_assert(mini, mem != NULL, "Memory allocation error.\n");
-	memtree_insert(&(mini->mini_context->memtree), NULL, mem);
-	return (mem);
+	(void)mini;
+	// context->delimiter_start = context->index;
+	// context->is_word = TRUE;
 }

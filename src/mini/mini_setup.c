@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_context_new.c                            :+:      :+:    :+:   */
+/*   mini_setup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 18:13:38 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 18:23:18 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/25 22:23:48 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/25 22:24:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tokenizer_context	tokenizer_context_new(t_mini mini, t_cstring cursor)
+// setup signals and stuff
+t_none	mini_setup(t_mini mini)
 {
-	t_tokenizer_context	context;
-
-	context = mini_alloc(mini, sizeof(struct s_tokenizer_context));
-	context->start = 0;
-	context->end = 0;
-	context->cursor = cursor;
-	context->mode = TOKENIZER_MODE_ORDINARY;
-	context->completed = FALSE;
-	return (context);
+	(void)mini;
 }

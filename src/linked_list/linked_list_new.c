@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_alloc.c                                       :+:      :+:    :+:   */
+/*   linked_list_new.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 15:53:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 10:04:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 11:03:05 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 11:05:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_mem	mini_alloc(t_mini mini, t_u32 size)
+t_linked_list	linked_list_new(t_mini mini)
 {
-	t_mem	mem;
+	t_linked_list	linked_list;
 
-	mem = malloc(size);
-	mini_assert(mini, mem != NULL, "Memory allocation error.\n");
-	memtree_insert(&(mini->mini_context->memtree), NULL, mem);
-	return (mem);
+	linked_list = mini_alloc(mini, sizeof(struct s_linked_list));
+	linked_list->head = NULL;
+	linked_list->tail = NULL;
+	return (linked_list);
 }
