@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:09:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:38:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "parser.h"
 #include "types.h"
 #include "token.h"
-#include "linked_list.h"
+#include "llist.h"
 
-t_i32	check_control_operator_rule(t_linked_list_node current_node)
+t_i32	check_control_operator_rule(t_llist_node current_node)
 {
 	t_token	previous_token;
 	t_token	next_token;

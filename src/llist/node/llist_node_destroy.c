@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_token.c                                   :+:      :+:    :+:   */
+/*   llist_node_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 17:31:14 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/28 11:27:52 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/28 11:30:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "llist.h"
-#include "token.h"
 
-t_token	get_next_token(t_llist_node current_node)
+// This function assumes the value is going to be a token.
+t_none	llist_node_destroy(t_mini mini, t_llist_node node)
 {
-	t_llist_node	next_node;
+	t_token	token;
 
-	next_node = current_node->next;
-	if (next_node)
+	if (node->value)
 	{
-		return (next_node->value);		
+		token = (t_token)node->value;
+		mini_free(mini, token->value);
+		mini_free(mini, token);
 	}
-	return (NULL);
+	mini_free(mini, node);
 }

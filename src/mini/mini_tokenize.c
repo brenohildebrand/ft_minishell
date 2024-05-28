@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 11:06:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:32:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@ t_none	mini_tokenize(t_mini mini)
 		}
 	}
 	#ifdef DEBUG
-		t_linked_list_node	node;
-		t_token		token;
-
-		if (context->tokens->head)
+		t_llist_node	node;
+		t_token			token;
+		
+		node = context->tokens->head;
+		if (node)
 		{
-			node = context->tokens->head;
-			while (node->next)
-			{
-				token = (t_token)node->value;
-				printf("{length: %u, type: %d, value: %s}\n", token->length, token->type, token->value);
-				node = node->next;
-			}
+			printf("\033[94m[%s:%d] (tokens)\033[0m\n", __func__, __LINE__);
+		}
+		while (node)
+		{
+			token = (t_token)node->value;
+			printf("{\n\tlength: %u,\n\ttype: %d,\n\tvalue: %s\n}\n", token->length, token->type, token->value);
+			node = node->next;
 		}
 	#endif
 }

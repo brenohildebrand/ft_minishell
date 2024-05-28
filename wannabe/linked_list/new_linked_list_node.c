@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_linked_list_node.c                             :+:      :+:    :+:   */
+/*   new_llist_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "linked_list.h"
+#include "llist.h"
 
-t_linked_list_node	new_linked_list_node(
+t_llist_node	new_llist_node(
 	t_minishell mini,
-	t_linked_list_node previous,
-	t_linked_list_node next,
+	t_llist_node previous,
+	t_llist_node next,
 	t_any value
 ){
-	t_linked_list_node	instance;
+	t_llist_node	instance;
 	
-	instance = mini_alloc(mini, sizeof(struct s_linked_list_node));
+	instance = mini_alloc(mini, sizeof(struct s_llist_node));
 	instance->previous = previous;
 	instance->next = next;
 	instance->value = value;

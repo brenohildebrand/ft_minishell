@@ -29,4 +29,6 @@ void	mini_lexer_ordinary(t_mini mini)
 	mini_lexer_eighth_rule(mini);
 	mini_lexer_ninth_rule(mini);
 	mini_lexer_tenth_rule(mini);
+	if (mini->lexer_context->has_applied_rule == FALSE)
+		(mini->lexer_context->cursor)++;
 }

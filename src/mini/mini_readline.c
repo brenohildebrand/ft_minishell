@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:23:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 10:09:31 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:33:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_none	mini_readline(t_mini mini)
 	if (context->line)
 		memtree_insert(&(context->memtree), NULL, context->line);
 	#ifdef DEBUG
-		printf("\033[94m[%s:%d]\033[0m %s\n", __func__, __LINE__, context->line);
+		printf("\033[94m[%s:%d] (line)\n\033[0m%s\n", __func__, __LINE__, context->line);
 	#endif
 	if (context->line == NULL)
 	{

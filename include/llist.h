@@ -5,18 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 15:40:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:06:44 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/20 19:52:48 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 11:05:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef llist_H
-# define llist_H
+#ifndef LLIST_H
+# define LLIST_H
 
-# include "types.h"
 # include "minishell.h"
-
-typedef struct s_minishell	*t_minishell;
 
 typedef struct s_llist		*t_llist;
 typedef struct s_llist_node	*t_llist_node;
@@ -27,25 +24,22 @@ struct s_llist {
 };
 
 struct s_llist_node {
-	t_llist_node	previous;
 	t_llist_node	next;
+	t_llist_node	previous;	
 	t_any				value;
 };
 
-t_llist	new_llist(
-	t_minishell mini,
-	t_llist_node head,
-	t_llist_node tail
-);
+/**
+ * Linked List
+*/
+t_llist			llist_new(t_mini mini);
+t_none			llist_destroy(t_mini mini, t_llist llist);
+t_none			llist_append(t_mini mini, t_llist llist, t_any value);
 
-t_llist_node	new_llist_node(
-	t_minishell mini,
-	t_llist_node previous,
-	t_llist_node next,
-	t_any value
-);
-
-void	destroy_llist(t_minishell mini, t_llist list);
-void	destroy_llist_node(t_minishell mini, t_llist_node node);
+/**
+ * Node
+*/
+t_llist_node	llist_node_new(t_mini mini);
+t_none			llist_node_destroy(t_mini mini, t_llist_node node);
 
 #endif

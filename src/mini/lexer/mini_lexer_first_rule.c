@@ -19,10 +19,13 @@
 */
 t_none	mini_lexer_first_rule(t_mini mini)
 {
-	// if (context->line[context->index] == '\0')
-	// {
-	// 	mini_lexer_cut(mini, context);
-	// 	context->was_rule_applied = TRUE;
-	// }
-	(void)mini;
+	const t_lexer_context	context = mini->lexer_context;
+
+	if ((*context->cursor) == '\0')
+	{
+		context->delimiter_end = context->cursor - 1;
+		mini_lexer_cut(mini);
+		context->has_applied_rule = TRUE;
+		context->has_finished = TRUE;
+	}
 }

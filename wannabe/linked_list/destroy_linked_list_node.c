@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_linked_list_node.c                         :+:      :+:    :+:   */
+/*   destroy_llist_node.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "linked_list.h"
+#include "llist.h"
 #include "token.h"
 
-void	destroy_linked_list_node(t_minishell mini, t_linked_list_node node)
+void	destroy_llist_node(t_minishell mini, t_llist_node node)
 {
 	destroy_token(mini, node->value);
 	mini_free(mini, node);

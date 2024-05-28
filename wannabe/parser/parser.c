@@ -6,19 +6,19 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:39:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/17 10:38:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-#include "linked_list.h"
+#include "llist.h"
 #include "binary_tree.h"
 #include "token.h"
 
 t_i32	parser(t_minishell mini)
 {
-	t_linked_list_node	current_node;
+	t_llist_node	current_node;
 	t_token				current_token;
 	t_token				next_token;
 

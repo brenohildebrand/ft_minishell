@@ -6,17 +6,17 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:33:45 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:34:35 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "linked_list.h"
+#include "llist.h"
 #include "token.h"
 
-t_token	get_previous_token(t_linked_list_node current_node)
+t_token	get_previous_token(t_llist_node current_node)
 {
-	t_linked_list_node	previous_node;
+	t_llist_node	previous_node;
 
 	previous_node = current_node->previous;
 	if (previous_node)

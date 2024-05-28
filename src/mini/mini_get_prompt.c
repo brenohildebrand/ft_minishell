@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 15:16:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:40:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #ifdef CUSTOM_PROMPT
 
-// The custom prompt has the following format: '$(USER)@$(NAME):$(PWD)$ '.
 static t_cstring	get_custom_prompt(t_mini mini)
 {
 	(void)mini;

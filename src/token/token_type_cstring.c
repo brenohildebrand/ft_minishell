@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_token.c                                   :+:      :+:    :+:   */
+/*   token_type_cstring.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 17:31:14 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/28 10:55:29 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/28 10:56:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "llist.h"
-#include "token.h"
 
-t_token	get_next_token(t_llist_node current_node)
+t_i32	token_type_cstring(t_cstring str)
 {
-	t_llist_node	next_node;
-
-	next_node = current_node->next;
-	if (next_node)
-	{
-		return (next_node->value);		
-	}
-	return (NULL);
+	(void)str;
+	return (0);
 }

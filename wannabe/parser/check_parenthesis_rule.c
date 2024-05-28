@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:19:53 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:39:19 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "parser.h"
 #include "types.h"
 #include "token.h"
-#include "linked_list.h"
+#include "llist.h"
 
-t_i32	check_parenthesis_rule(t_linked_list_node current_node)
+t_i32	check_parenthesis_rule(t_llist_node current_node)
 {
 	t_token	current_token;
 	t_token	next_token;

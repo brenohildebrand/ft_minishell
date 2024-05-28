@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_linked_list.c                              :+:      :+:    :+:   */
+/*   destroy_llist.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "linked_list.h"
+#include "llist.h"
 
-void	destroy_linked_list(t_minishell mini, t_linked_list list)
+void	destroy_llist(t_minishell mini, t_llist list)
 {
-	t_linked_list_node	current;
-	t_linked_list_node	next;
+	t_llist_node	current;
+	t_llist_node	next;
 
 	current = list->head;
 	while (current != list->tail)
 	{
 		next = current->next;
-		destroy_linked_list_node(mini, current);
+		destroy_llist_node(mini, current);
 		current = next;
 	}
 }

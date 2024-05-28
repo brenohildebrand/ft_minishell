@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_linked_list.c                                  :+:      :+:    :+:   */
+/*   new_llist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,16 +11,16 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "linked_list.h"
+#include "llist.h"
 
-t_linked_list	new_linked_list(
+t_llist	new_llist(
 	t_minishell mini,
-	t_linked_list_node head,
-	t_linked_list_node tail
+	t_llist_node head,
+	t_llist_node tail
 ){
-	t_linked_list	instance;
+	t_llist	instance;
 
-	instance = mini_alloc(mini, sizeof(struct s_linked_list));
+	instance = mini_alloc(mini, sizeof(struct s_llist));
 	instance->head = head;
 	instance->tail = tail;
 	return (instance);

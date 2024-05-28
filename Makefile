@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/27 15:28:33 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/27 15:28:33 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/28 11:33:04 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/28 11:33:04 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ minishell_sources = 	src/main.c \
 		src/cstring/cstring_to_stdout.c \
 		src/lexer_context/lexer_context_new.c \
 		src/lexer_context/lexer_context_reset.c \
-		src/linked_list/linked_list_new.c \
+		src/llist/llist_append.c \
+		src/llist/llist_destroy.c \
+		src/llist/llist_new.c \
+		src/llist/node/llist_node_destroy.c \
+		src/llist/node/llist_node_new.c \
 		src/lua/lua_loadfile.c \
 		src/memtree/memtree_create.c \
 		src/memtree/memtree_destroy.c \
@@ -67,7 +71,9 @@ minishell_sources = 	src/main.c \
 		src/mini/lexer/mini_lexer_tenth_rule.c \
 		src/mini/lexer/mini_lexer_third_rule.c \
 		src/mini_context/mini_context_init.c \
-		src/mini_context/mini_context_new.c
+		src/mini_context/mini_context_new.c \
+		src/token/token_new.c \
+		src/token/token_type_cstring.c
 
 minishell_objects = 	src/main.o \
 		src/config_context/config_context_init.o \
@@ -81,7 +87,11 @@ minishell_objects = 	src/main.o \
 		src/cstring/cstring_to_stdout.o \
 		src/lexer_context/lexer_context_new.o \
 		src/lexer_context/lexer_context_reset.o \
-		src/linked_list/linked_list_new.o \
+		src/llist/llist_append.o \
+		src/llist/llist_destroy.o \
+		src/llist/llist_new.o \
+		src/llist/node/llist_node_destroy.o \
+		src/llist/node/llist_node_new.o \
 		src/lua/lua_loadfile.o \
 		src/memtree/memtree_create.o \
 		src/memtree/memtree_destroy.o \
@@ -120,7 +130,9 @@ minishell_objects = 	src/main.o \
 		src/mini/lexer/mini_lexer_tenth_rule.o \
 		src/mini/lexer/mini_lexer_third_rule.o \
 		src/mini_context/mini_context_init.o \
-		src/mini_context/mini_context_new.o
+		src/mini_context/mini_context_new.o \
+		src/token/token_new.o \
+		src/token/token_type_cstring.o
 
 minishell_headers = 	include/any.h \
 		include/assert.h \
@@ -133,7 +145,7 @@ minishell_headers = 	include/any.h \
 		include/i64.h \
 		include/i8.h \
 		include/lexer_context.h \
-		include/linked_list.h \
+		include/llist.h \
 		include/lua.h \
 		include/mem.h \
 		include/memtree.h \
@@ -155,7 +167,11 @@ minishell_depends = 	src/main.d \
 		src/cstring/cstring_to_stdout.d \
 		src/lexer_context/lexer_context_new.d \
 		src/lexer_context/lexer_context_reset.d \
-		src/linked_list/linked_list_new.d \
+		src/llist/llist_append.d \
+		src/llist/llist_destroy.d \
+		src/llist/llist_new.d \
+		src/llist/node/llist_node_destroy.d \
+		src/llist/node/llist_node_new.d \
 		src/lua/lua_loadfile.d \
 		src/memtree/memtree_create.d \
 		src/memtree/memtree_destroy.d \
@@ -194,7 +210,9 @@ minishell_depends = 	src/main.d \
 		src/mini/lexer/mini_lexer_tenth_rule.d \
 		src/mini/lexer/mini_lexer_third_rule.d \
 		src/mini_context/mini_context_init.d \
-		src/mini_context/mini_context_new.d
+		src/mini_context/mini_context_new.d \
+		src/token/token_new.d \
+		src/token/token_type_cstring.d
 
 minishell_includes = 	-iquote include
 

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 20:29:23 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 20:33:13 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:58:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ enum e_token_type {
 	END,
 	WORD,
 };
+
+t_token	token_new(t_mini mini);
+t_i32	token_type_cstring(t_cstring str);
 
 #endif

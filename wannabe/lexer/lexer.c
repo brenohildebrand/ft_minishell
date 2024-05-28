@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:22:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:42:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
-#include "linked_list.h"
+#include "llist.h"
 #include "token.h"
 #include "utils.h"
 
@@ -45,7 +45,7 @@ t_i32	lexer(t_minishell mini)
 		}
 	}
 	#ifdef DEBUG
-		t_linked_list_node	current_node;
+		t_llist_node	current_node;
 		t_token				current_token;
 
 		if (mini->list == NULL)

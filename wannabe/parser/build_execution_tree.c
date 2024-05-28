@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:40:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/17 10:40:19 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-#include "linked_list.h"
+#include "llist.h"
 #include "binary_tree.h"
 
 t_binary_tree	build_execution_tree(t_minishell mini)

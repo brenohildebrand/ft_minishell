@@ -15,7 +15,23 @@
 /**
  * See '2.10.1 Shell Grammar Lexical Conventions' 
 */
-void	mini_lexer_cut(t_mini mini)
+t_none	mini_lexer_cut(t_mini mini)
 {
-	(void)mini;
+	const t_lexer_context	context = mini->lexer_context;
+	t_token					token;
+	t_u32					index;
+
+	token = token_new(mini);
+	token->length = context->delimiter_end - context->delimiter_start + 1;
+	token->value = mini_alloc(mini, token->length + 1);
+	token->value[token->length] = '\0';
+	index = 0;
+	while (index < token->length)
+	{
+		token->value[index] = context->delimiter_start[index];
+		index++;
+	}
+	context->delimiter_start = context->delimiter_end + 1;
+	token->type = token_type_cstring(token->value);
+	llist_append(mini, context->tokens, token);
 }

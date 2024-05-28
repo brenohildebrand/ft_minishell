@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_token.c                                   :+:      :+:    :+:   */
+/*   llist_new.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 17:31:14 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 11:03:05 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/27 11:05:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "llist.h"
-#include "token.h"
 
-t_token	get_next_token(t_llist_node current_node)
+t_llist	llist_new(t_mini mini)
 {
-	t_llist_node	next_node;
+	t_llist	llist;
 
-	next_node = current_node->next;
-	if (next_node)
-	{
-		return (next_node->value);		
-	}
-	return (NULL);
+	llist = mini_alloc(mini, sizeof(struct s_llist));
+	llist->head = NULL;
+	llist->tail = NULL;
+	return (llist);
 }

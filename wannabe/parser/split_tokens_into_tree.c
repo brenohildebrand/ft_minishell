@@ -6,16 +6,16 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:52:49 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "binary_tree.h"
-#include "linked_list.h"
+#include "llist.h"
 #include "token.h"
 
-void	split_tokens_into_tree(t_minishell mini, t_binary_tree tree_node, t_linked_list token_list)
+void	split_tokens_into_tree(t_minishell mini, t_binary_tree tree_node, t_llist token_list)
 {
 	(void)mini;
 	(void)tree_node;
