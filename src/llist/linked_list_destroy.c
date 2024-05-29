@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   llist_destroy.c                                    :+:      :+:    :+:   */
+/*   linked_list_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,25 +12,25 @@
 
 #include "minishell.h"
 
-t_none	llist_destroy(t_mini mini, t_llist llist)
+t_none	linked_list_destroy(t_mini mini, t_linked_list linked_list)
 {
-	t_llist_node	current_node;
-	t_llist_node	next_node;
+	t_linked_list_node	current_node;
+	t_linked_list_node	next_node;
 
-	if (llist == NULL)
+	if (linked_list == NULL)
 	{
 		return ;
 	}
 	else
 	{
-		current_node = llist->head;
+		current_node = linked_list->head;
 
 		while (current_node)
 		{
 			next_node = current_node->next;	
-			llist_node_destroy(mini, current_node);
+			linked_list_node_destroy(mini, current_node);
 			current_node = next_node;
 		}
-		mini_free(mini, llist);
+		mini_free(mini, linked_list);
 	}
 }

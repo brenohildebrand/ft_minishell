@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   llist_node_destroy.c                               :+:      :+:    :+:   */
+/*   linked_list_node_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 // This function assumes the value is going to be a token.
-t_none	llist_node_destroy(t_mini mini, t_llist_node node)
+t_none	linked_list_node_destroy(t_mini mini, t_linked_list_node node)
 {
 	t_token	token;
 

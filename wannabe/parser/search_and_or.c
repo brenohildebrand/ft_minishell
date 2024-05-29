@@ -6,16 +6,16 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:44:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 10:47:00 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:44:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 
-t_token	search_and_or(t_llist list)
+t_token	search_and_or(t_linked_list list)
 {
-	t_llist_node	current_node;
+	t_linked_list_node	current_node;
 	t_token				current_token;
 	t_i32				parenthesis;
 

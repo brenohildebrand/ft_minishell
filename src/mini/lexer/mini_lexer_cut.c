@@ -38,5 +38,5 @@ t_none	mini_lexer_cut(t_mini mini)
 	}
 	context->delimiter_start = context->delimiter_end + 1;
 	token->type = token_type_cstring(token->value);
-	llist_append(mini, context->tokens, token);
+	linked_list_append(mini, context->tokens, token);
 }

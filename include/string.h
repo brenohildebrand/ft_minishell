@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   llist_new.c                                  :+:      :+:    :+:   */
+/*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 11:03:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 11:05:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/29 15:19:22 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/29 15:42:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef STRING_H
+# define STRING_H
 
-t_llist	llist_new(t_mini mini)
-{
-	t_llist	llist;
+# include "minishell.h"
 
-	llist = mini_alloc(mini, sizeof(struct s_llist));
-	llist->head = NULL;
-	llist->tail = NULL;
-	return (llist);
-}
+typedef struct s_string	*t_string;
+
+struct s_string {
+	t_cstring	content;
+	t_u32		length;
+};
+
+t_string	string_new();
+t_string	string_delete();
+
+#endif

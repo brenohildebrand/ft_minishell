@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_context_reset.c                              :+:      :+:    :+:   */
+/*   llist_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 10:25:26 by bhildebr          #+#    #+#             */
+/*   Created: 2024/05/28 10:42:42 by bhildebr          #+#    #+#             */
 /*   Updated: 2024/05/29 14:44:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	lexer_context_reset(t_mini mini)
+t_none	linked_list_append(t_mini mini, t_linked_list linked_list, t_any value)
 {
-	const t_lexer_context	context = mini->lexer_context;
+	t_linked_list_node	node;
 
-	if (context->tokens == NULL)
+	if (linked_list == NULL)
 	{
-		context->tokens = linked_list_new(mini);
+		return ;
 	}
 	else
 	{
-		linked_list_destroy(mini, context->tokens);
-		context->tokens = linked_list_new(mini);
+		node = linked_list_node_new(mini);
+		node->value = value;
+	
+		if (linked_list->head == NULL)
+		{
+			linked_list->head = node;
+			linked_list->tail = node;	
+		}
+		else
+		{
+			linked_list->tail->next = node;
+			node->previous = linked_list->tail;
+			linked_list->tail = node;
+		}
 	}
-	context->cursor = mini->mini_context->line;
-	context->delimiter_end = context->cursor;
-	context->delimiter_start = context->cursor;
-	context->mode = LEXER_MODE_ORDINARY;
-	context->has_applied_rule = FALSE;
-	context->has_finished = FALSE;
 }

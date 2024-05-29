@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 11:32:39 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:44:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_none	mini_tokenize(t_mini mini)
 		}
 	}
 	#ifdef DEBUG
-		t_llist_node	node;
+		t_linked_list_node	node;
 		t_token			token;
 		
 		node = context->tokens->head;

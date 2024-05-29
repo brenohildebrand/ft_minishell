@@ -15,15 +15,22 @@
 
 # include "minishell.h"
 
-# define LEXER_MODE_ORDINARY 1
-# define LEXER_MODE_HEREDOC 2
+# define LEXER_CONTEXT_MODE_ORDINARY 1
+# define LEXER_CONTEXT_MODE_HEREDOC 2
+
+# define LEXER_CONTEXT_FLAG_IS_OPERATOR
+# define LEXER_CONTEXT_FLAG_IS_WORD
+# define LEXER_CONTEXT_FLAG_IS_QUOTED
+# define LEXER_CONTEXT_FLAG_HAS_APPLIED_RULE
 
 typedef struct s_lexer_context	*t_lexer_context;
 
 struct s_lexer_context {
 	t_cstring		line;
+	t_cstring		cursor;
 	t_cstring		buffer;
 	t_linked_list	tokens;
+	t_i32			flags;
 };
 
 t_lexer_context	lexer_context_new(t_mini mini);

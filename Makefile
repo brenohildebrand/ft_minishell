@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/29 11:59:51 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/29 11:59:51 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/29 14:50:27 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/29 14:50:27 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ minishell_sources = 	src/main.c \
 		src/cstring/cstring_to_stdout.c \
 		src/lexer_context/lexer_context_new.c \
 		src/lexer_context/lexer_context_reset.c \
-		src/llist/llist_append.c \
-		src/llist/llist_destroy.c \
-		src/llist/llist_new.c \
-		src/llist/node/llist_node_destroy.c \
-		src/llist/node/llist_node_new.c \
+		src/llist/linked_list_append.c \
+		src/llist/linked_list_destroy.c \
+		src/llist/linked_list_new.c \
+		src/llist/node/linked_list_node_destroy.c \
+		src/llist/node/linked_list_node_new.c \
 		src/lua/lua_loadfile.c \
 		src/memtree/memtree_create.c \
 		src/memtree/memtree_destroy.c \
@@ -87,11 +87,11 @@ minishell_objects = 	src/main.o \
 		src/cstring/cstring_to_stdout.o \
 		src/lexer_context/lexer_context_new.o \
 		src/lexer_context/lexer_context_reset.o \
-		src/llist/llist_append.o \
-		src/llist/llist_destroy.o \
-		src/llist/llist_new.o \
-		src/llist/node/llist_node_destroy.o \
-		src/llist/node/llist_node_new.o \
+		src/llist/linked_list_append.o \
+		src/llist/linked_list_destroy.o \
+		src/llist/linked_list_new.o \
+		src/llist/node/linked_list_node_destroy.o \
+		src/llist/node/linked_list_node_new.o \
 		src/lua/lua_loadfile.o \
 		src/memtree/memtree_create.o \
 		src/memtree/memtree_destroy.o \
@@ -145,7 +145,7 @@ minishell_headers = 	include/any.h \
 		include/i64.h \
 		include/i8.h \
 		include/lexer_context.h \
-		include/llist.h \
+		include/linked_list.h \
 		include/lua.h \
 		include/mem.h \
 		include/memtree.h \
@@ -167,11 +167,11 @@ minishell_depends = 	src/main.d \
 		src/cstring/cstring_to_stdout.d \
 		src/lexer_context/lexer_context_new.d \
 		src/lexer_context/lexer_context_reset.d \
-		src/llist/llist_append.d \
-		src/llist/llist_destroy.d \
-		src/llist/llist_new.d \
-		src/llist/node/llist_node_destroy.d \
-		src/llist/node/llist_node_new.d \
+		src/llist/linked_list_append.d \
+		src/llist/linked_list_destroy.d \
+		src/llist/linked_list_new.d \
+		src/llist/node/linked_list_node_destroy.d \
+		src/llist/node/linked_list_node_new.d \
 		src/lua/lua_loadfile.d \
 		src/memtree/memtree_create.d \
 		src/memtree/memtree_destroy.d \
