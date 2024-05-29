@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef lexer_CONTEXT_H
-# define lexer_CONTEXT_H
+#ifndef LEXER_CONTEXT_H
+# define LEXER_CONTEXT_H
 
 # include "minishell.h"
 
@@ -21,18 +21,9 @@
 typedef struct s_lexer_context	*t_lexer_context;
 
 struct s_lexer_context {
-	t_cstring	cursor;
-	t_cstring	delimiter_start;
-	t_cstring	delimiter_end;
-	t_llist		tokens;
-	t_i32		mode;
-	t_bool		has_finished;
-	t_bool		is_single_quoted;
-	t_bool		is_double_quoted;
-	t_bool		is_word;
-	t_bool		is_operator;
-	t_bool		is_empty;
-	t_bool		has_applied_rule;
+	t_cstring		line;
+	t_cstring		buffer;
+	t_linked_list	tokens;
 };
 
 t_lexer_context	lexer_context_new(t_mini mini);

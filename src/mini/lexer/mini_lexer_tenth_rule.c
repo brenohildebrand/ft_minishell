@@ -18,10 +18,11 @@
 */
 t_none	mini_lexer_tenth_rule(t_mini mini)
 {
-	// const t_lexer_context	context = mini->lexer_context;
+	const t_lexer_context	context = mini->lexer_context;
 
-	// context->delimiter_start = context->cursor;
-	// context->is_word = TRUE;
-	// (context->cursor)++;
-	(void)mini;
+	if (context->has_applied_rule)
+		return ;
+	context->delimiter_start = context->cursor;
+	context->is_word = TRUE;
+	(context->cursor)++;
 }

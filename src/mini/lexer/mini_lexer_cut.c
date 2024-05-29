@@ -21,6 +21,11 @@ t_none	mini_lexer_cut(t_mini mini)
 	t_token					token;
 	t_u32					index;
 
+	if (context->delimiter_start > context->delimiter_end)
+	{
+		(context->cursor)++;
+		return ;
+	}
 	token = token_new(mini);
 	token->length = context->delimiter_end - context->delimiter_start + 1;
 	token->value = mini_alloc(mini, token->length + 1);

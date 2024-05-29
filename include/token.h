@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 20:29:23 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 10:58:26 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:36:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define TOKEN
 
 # include "minishell.h"
+
+# define TOKEN_AND_IF "&&"
+# define TOKEN_CATEGORY_AND_IF "&&"
+# define TOKEN_CATEGORY_OR_IF "||"
+# define TOKEN_CATEGORY_DLESS ""
+# define TOKEN_CATEGORY_DGREAT
 
 typedef struct s_token	*t_token;
 
