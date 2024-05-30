@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:17:18 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 19:30:37 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include "minishell.h"
+#include "contexts/mini.h"
 #include "token.h"
 
 t_i32	check_open_syntax(t_cstring line);

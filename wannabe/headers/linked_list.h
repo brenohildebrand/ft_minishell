@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:40:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/29 14:44:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define linked_list_H
 
 # include "types.h"
-# include "minishell.h"
+# include "contexts/mini.h"
 
 typedef struct s_minishell	*t_minishell;
 

@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 22:07:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/16 22:29:50 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 #include <stdlib.h>
 
 char	*mini_substr(

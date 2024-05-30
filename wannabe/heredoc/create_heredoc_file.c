@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 20:37:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 12:05:27 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 #include "token.h"
 
 t_i32	create_heredoc_file(t_minishell mini, t_token token)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 
 /**
  * See '2.10.1 Shell Grammar Lexical Conventions' 

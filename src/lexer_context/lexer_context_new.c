@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 
 t_lexer_context	lexer_context_new(t_mini mini)
 {

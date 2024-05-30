@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 
 t_none	linked_list_destroy(t_mini mini, t_linked_list linked_list)
 {

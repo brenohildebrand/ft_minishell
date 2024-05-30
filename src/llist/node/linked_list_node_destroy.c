@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 
 // This function assumes the value is going to be a token.
 t_none	linked_list_node_destroy(t_mini mini, t_linked_list_node node)

@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:43:11 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 13:12:39 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LUA_H
 # define LUA_H
 
-#include "minishell.h"
+#include "contexts/mini.h"
 
 typedef struct lua_State	*t_lua_state;
 

@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:46:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/09 18:15:30 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 #include "binary_tree.h"
 
 t_binary_tree	new_binary_tree(t_minishell mini, t_binary_tree_node root)

@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 12:47:46 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 12:49:07 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 12:47:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 12:48:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BOOL_H
 # define BOOL_H
 
-# define FALSE 0
 # define TRUE 1
+# define FALSE 0
 
 typedef int	t_bool;
 

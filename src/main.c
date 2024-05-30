@@ -6,15 +6,15 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 14:34:07 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:44:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 
 t_i32	main(t_i32 argc, t_cstring *argv)
 {
-	#ifdef DEBUG
+	#ifdef ENABLE_DEBUGGER
 		printf("Mini is running in \033[94mDEBUG\033[0m mode.\n");
 	#endif
 	t_mini	mini;

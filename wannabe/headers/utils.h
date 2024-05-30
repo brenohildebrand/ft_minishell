@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:58:18 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/17 10:57:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "minishell.h"
+# include "contexts/mini.h"
 # include <stdlib.h>
 
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

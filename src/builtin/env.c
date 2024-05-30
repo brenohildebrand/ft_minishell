@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   htable.h                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 11:15:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/22 11:20:33 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/29 16:26:06 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HTABLE_H
-# define HTABLE_H
+#include "contexts/mini.h"
 
-# include "minishell.h"
+int	execute_env(t_token *cmd)
+{
+	int	i;
 
-typedef struct s_htable			*t_htable;
-typedef struct s_htable_entry	*t_htable_entry;
-
-struct s_htable {
-	t_htable_entry	*entries;
-};
-
-struct s_htable_entry {
-	t_cstring	key;
-	t_any		value;
-};
-
-#endif
+	if (cmd->next)
+		return (!!write(STDERR_FILENO, "env: too many arguments", 24));
+	i = 0;
+	while (__environ[i])
+	{
+		if (ft_strchr(__environ[i], '='))
+			ft_fprintf(STDOUT_FILENO, "%s\n", __environ[i]);
+		i++;
+	}
+	return (SUCCESS);
+}

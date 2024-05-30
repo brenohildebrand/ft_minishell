@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem.h                                              :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 12:43:53 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/20 12:44:30 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/29 16:32:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEM_H
-# define MEM_H
+#include "contexts/mini.h"
 
-typedef void	*t_mem;
+int	execute_pwd(void)
+{
+	char	*path;
 
-#endif
+	path = getcwd(NULL, 0);
+	if (path)
+	{
+		ft_collect_mem(path);
+		printf("%s\n", path);
+		return (SUCCESS);
+	}
+	else
+	{
+		return (handle_error("pwd"));
+	}
+}

@@ -6,24 +6,24 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/27 15:03:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:59:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "contexts/mini.h"
 
 t_mini	mini_new(void)
 {
 	t_mini	mini;
 
-	mini = malloc(sizeof(struct s_mini));
+	mini = malloc(sizeof(struct s_mini_context));
 	if (mini == NULL)
 	{
 		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
 		exit(1);
 	}
-	mini->mini_context = mini_context_new();
-	mini->lexer_context = lexer_context_new(mini);
-	mini->config_context = config_context_new(mini);
+	mini->
+	mini->lexer = lexer_new();
+	mini->parser = parser_new();
 	return (mini);
 }

@@ -6,7 +6,7 @@
 		"vscode"
 	],
 	"files.associations": {
-		"minishell.h": "c",
+		"contexts/mini.h": "c",
 		"optional": "c",
 		"istream": "c",
 		"ostream": "c",

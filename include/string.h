@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:19:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/29 15:42:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRING_H
 # define STRING_H
 
-# include "minishell.h"
+# include "contexts/mini.h"
 
 typedef struct s_string	*t_string;
 
