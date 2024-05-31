@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:04:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:18:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:49:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "contexts/mini.h"
 
-# define MEMORY_STACK_SIZE		1024	
+# define MEMORY_STACK_SIZE		1024
 
 typedef struct s_memory_stack	*t_memory_stack;
 typedef t_memory_stack			t_memstack;
