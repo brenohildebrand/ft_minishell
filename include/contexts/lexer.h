@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:20:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:04:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:11:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ enum e_token_type {
 	WORD,
 };
 
-t_lexer	lexer_create(t_mini mini);
+t_none	lexer_create(t_mini mini);
 t_none	lexer_reset(t_mini mini);
 
 t_token	token_new(t_mini mini);

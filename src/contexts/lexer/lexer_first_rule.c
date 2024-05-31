@@ -19,13 +19,14 @@
 */
 t_none	mini_lexer_first_rule(t_mini mini)
 {
-	const t_lexer	context = mini->lexer;
+	// const t_lexer	context = mini->lexer;
 
-	if ((*context->cursor) == '\0')
-	{
-		context->delimiter_end = context->cursor - 1;
-		mini_lexer_cut(mini);
-		context->has_applied_rule = TRUE;
-		context->has_finished = TRUE;
-	}
+	// if ((*context->cursor) == '\0')
+	// {
+	// 	context->delimiter_end = context->cursor - 1;
+	// 	mini_lexer_cut(mini);
+	// 	context->has_applied_rule = TRUE;
+	// 	context->has_finished = TRUE;
+	// }
+	(void)mini;
 }

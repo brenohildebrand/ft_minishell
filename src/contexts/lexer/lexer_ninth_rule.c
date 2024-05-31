@@ -20,13 +20,14 @@
 */
 t_none	mini_lexer_ninth_rule(t_mini mini)
 {
-	const t_lexer	context = mini->lexer;
+	// const t_lexer	context = mini->lexer;
 
-	if (*(context->cursor) == '#')
-	{
-		while (*(context->cursor) != '\n' && *(context->cursor) != '\0')
-		{
-			(context->cursor)++;
-		}
-	}
+	// if (*(context->cursor) == '#')
+	// {
+	// 	while (*(context->cursor) != '\n' && *(context->cursor) != '\0')
+	// 	{
+	// 		(context->cursor)++;
+	// 	}
+	// }
+	(void)mini;
 }

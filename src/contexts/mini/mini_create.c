@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:09:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:14:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_mini	mini_create(t_i32 argc, t_cstring_array argv)
 	}
 	mini->argc = argc;
 	mini->argv = argv;
+	mini->memtree = NULL;
 	config_create(mini);
 	input_create(mini);
 	lexer_create(mini);

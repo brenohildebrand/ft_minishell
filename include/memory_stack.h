@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:04:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 18:31:31 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:18:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_none	memstack_load_u32(t_mini mini, t_u32 value);
 t_none	memstack_load_i32(t_mini mini, t_i32 value);
 t_none	memstack_load_u64(t_mini mini, t_u64 value);
 t_none	memstack_load_i64(t_mini mini, t_i64 value);
-t_none	memstack_load_any(t_mini mini, t_i64 value);
+t_none	memstack_load_any(t_mini mini, t_any value);
 t_u8	memstack_unload_u8(t_mini mini);
 t_i8	memstack_unload_i8(t_mini mini);
 t_u32	memstack_unload_u32(t_mini mini);

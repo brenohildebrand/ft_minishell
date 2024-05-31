@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "memory_tree.h"
 
 void	memtree_update_height(t_memtree memtree)
 {

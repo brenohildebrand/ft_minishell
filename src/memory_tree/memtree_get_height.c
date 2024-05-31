@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "memory_tree.h"
 
 int	memtree_get_height(t_memtree memtree)
 {

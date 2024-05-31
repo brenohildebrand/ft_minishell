@@ -20,15 +20,16 @@
 */
 t_none	mini_lexer_second_rule(t_mini mini)
 {
-	const t_lexer	context = mini->lexer;
+	// const t_lexer	context = mini->lexer;
 
-	if (context->has_applied_rule)
-		return ;
-	if (context->is_operator && context->is_quoted)
-	{
-		// compare to ">"
-		// compare to ">>"
-		// compare to "<<"
-		// compare to ""
-	}
+	// if (context->has_applied_rule)
+	// 	return ;
+	// if (context->is_operator && context->is_quoted)
+	// {
+	// 	// compare to ">"
+	// 	// compare to ">>"
+	// 	// compare to "<<"
+	// 	// compare to ""
+	// }
+	(void)mini;
 }

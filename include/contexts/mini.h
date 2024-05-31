@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:14:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:08:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:15:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,5 @@ t_cstring	mini_get_cwd(t_mini mini);
 t_cstring	mini_get_prompt(t_mini mini);
 t_none		mini_quit(t_mini mini);
 t_bool		mini_check_flag(t_mini mini, t_i32 flag);
-
-t_none		mini_load_i8(t_mini mini, t_i8 value);
-t_none		mini_load_u8(t_mini mini, t_u8 value);
-t_none		mini_load_i32(t_mini mini, t_i32 value);
-t_none		mini_load_u32(t_mini mini, t_u32 value);
-t_none		mini_load_i64(t_mini mini, t_i64 value);
-t_none		mini_load_u64(t_mini mini, t_u64 value);
-t_none		mini_load_any(t_mini mini, t_any value);
-t_none		mini_load_bool(t_mini mini, t_bool value);
-t_none		mini_load_cstring(t_mini mini, t_cstring value);
 
 #endif

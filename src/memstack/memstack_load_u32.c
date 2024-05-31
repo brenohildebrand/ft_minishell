@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:24:56 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 21:25:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:19:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_none	memstack_load_u32(t_mini mini, t_u32 value)
 {
 	t_u8	byte;
-	t_i32	counter;
+	t_u32	counter;
 
 	counter = 0;
 	while (counter < sizeof(t_u32))
