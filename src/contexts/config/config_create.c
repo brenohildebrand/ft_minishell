@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   config_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:56 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/27 15:04:01 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 15:56:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUT_H
-# define INPUT_H
+#include "contexts/mini.h"
 
-# include "contexts/mini.h"
-
-typedef struct s_input_context	*t_input_context;
-typedef t_input_context			t_input;
-
-struct s_input_context {
-	t_string	prompt;
-};
-
-t_none	input_create(t_mini mini);
-
-#endif
+t_none	config_new(t_mini mini)
+{
+	mini->config = mini_alloc(mini, (sizeof(struct s_config_context)));
+	config_get_path(mini);
+	config_create_lua_state(mini);
+	config_get_prompt(mini);
+	config_destroy_lua_state(mini);
+}

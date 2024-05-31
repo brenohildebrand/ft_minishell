@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   memstack_destroy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:26:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 17:26:14 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 17:27:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-int	execute_env(t_token *cmd)
+t_none	memstack_destroy(t_mini mini)
 {
-	int	i;
-
-	if (cmd->next)
-		return (!!write(STDERR_FILENO, "env: too many arguments", 24));
-	i = 0;
-	while (__environ[i])
-	{
-		if (ft_strchr(__environ[i], '='))
-			ft_fprintf(STDOUT_FILENO, "%s\n", __environ[i]);
-		i++;
-	}
-	return (SUCCESS);
+	mini_free(mini, mini->memstack->bottom);
+	mini->memstack->bottom = NULL;
+	mini->memstack->top = NULL;
+	mini_free(mini, mini->memstack);
+	mini->memstack = NULL;
 }

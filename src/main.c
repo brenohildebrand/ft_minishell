@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:44:55 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:12:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ t_i32	main(t_i32 argc, t_cstring *argv)
 	#endif
 	t_mini	mini;
 
-	mini = mini_new();
-	mini_context_init(mini, argc, argv);
-	mini_setup(mini);
+	mini = mini_create(argc, argv);
 	while (42)
 	{
 		mini_read(mini);

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config_context_new.c                               :+:      :+:    :+:   */
+/*   memstack_unload_i32.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 15:04:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 21:15:48 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 21:23:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-t_config_context	config_context_new(t_mini mini)
+t_i32	memstack_unload_i32(t_mini mini)
 {
-	t_config_context	config_context;
+	t_i32	value;
 
-	config_context = mini_alloc(mini, (sizeof(struct s_config_context)));
-	config_context->prompt = NULL;
-	return (config_context);
+	mini->memstack->top -= sizeof(t_i32);
+	value = *((t_i32 *)(mini->memstack->top));
+	return (value);
 }

@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fn_call.c                                          :+:      :+:    :+:   */
+/*   memstack_load.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 21:23:10 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 17:27:55 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 17:37:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-t_none	fn_call(t_mini mini)
+t_none	memstack_load(t_mini mini, t_u8 value)
 {
-	
+	*(mini->memstack->top) = value;
+	if (mini->memstack->top + 1 > mini->memstack->bottom + MEMORY_STACK_SIZE)
+	{
+		write(STDERR_FILENO, "Memstack overflow!\n", 20);
+		mini_quit(mini);
+	}
+	else
+	{
+		(mini->memstack->top)++;
+	}
 }
-
-// 

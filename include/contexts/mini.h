@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:14:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 15:01:16 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:16:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 # include "any.h"
 # include "none.h"
 # include "bool.h"
+# include "memory.h"
 # include "cstring.h"
 # include "string.h"
 # include "memory_tree.h"
+# include "memory_stack.h"
 # include "linked_list.h"
 # include "binary_tree.h"
 # include "hash_table.h"
@@ -71,12 +73,14 @@ typedef struct s_mini_context	*t_mini_context;
 typedef t_mini_context			t_mini;
 
 struct s_mini_context {
+	t_memtree			memtree;
+	t_memstack			memstack;
 	t_i32				argc;
 	t_cstring_array		argv;
-	t_stack				stack;
 	t_i32				i;
 	t_i32				j;
 	t_i32				k;
+	t_cstring			str;
 	t_config_context	config;
 	t_input_context		input;
 	t_lexer_context		lexer;
@@ -98,5 +102,15 @@ t_none		mini_tokenize(t_mini mini);
 t_bool		mini_check_flag(t_mini mini, t_i32 flag);
 t_none		mini_setup(t_mini mini);
 t_none		mini_load_config(t_mini mini);
+
+t_none		mini_load_i8(t_mini mini, t_i8 value);
+t_none		mini_load_u8(t_mini mini, t_u8 value);
+t_none		mini_load_i32(t_mini mini, t_i32 value);
+t_none		mini_load_u32(t_mini mini, t_u32 value);
+t_none		mini_load_i64(t_mini mini, t_i64 value);
+t_none		mini_load_u64(t_mini mini, t_u64 value);
+t_none		mini_load_any(t_mini mini, t_any value);
+t_none		mini_load_bool(t_mini mini, t_bool value);
+t_none		mini_load_cstring(t_mini mini, t_cstring value);
 
 #endif

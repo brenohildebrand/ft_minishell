@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   memstack_create.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:56 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 17:19:59 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 17:26:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUT_H
-# define INPUT_H
+#include "contexts/mini.h"
 
-# include "contexts/mini.h"
-
-typedef struct s_input_context	*t_input_context;
-typedef t_input_context			t_input;
-
-struct s_input_context {
-	t_string	prompt;
-};
-
-t_none	input_create(t_mini mini);
-
-#endif
+t_none	memstack_create(t_mini mini)
+{
+	mini->memstack = mini_alloc(mini, sizeof(struct s_memory_stack));
+	mini->memstack->bottom = mini_alloc(mini, MEMORY_STACK_SIZE);
+	mini->memstack->top = mini->memstack->bottom;
+}

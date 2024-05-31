@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_new.c                                         :+:      :+:    :+:   */
+/*   memory.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:59:12 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 17:06:43 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 17:13:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#ifndef MEMORY_H
+# define MEMORY_H
 
-t_mini	mini_new(void)
-{
-	t_mini	mini;
+typedef void			*t_memory;
+typedef t_memory		t_mem;
 
-	mini = malloc(sizeof(struct s_mini_context));
-	if (mini == NULL)
-	{
-		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
-		exit(1);
-	}
-	mini->
-	mini->lexer = lexer_new();
-	mini->parser = parser_new();
-	return (mini);
-}
+#endif

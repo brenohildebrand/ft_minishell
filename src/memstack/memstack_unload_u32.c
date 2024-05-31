@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   memstack_unload_u32.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:56 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 21:24:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 21:26:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUT_H
-# define INPUT_H
+#include "contexts/mini.h"
 
-# include "contexts/mini.h"
+t_u32	memstack_unload_u32(t_mini mini)
+{
+	t_u32	value;
 
-typedef struct s_input_context	*t_input_context;
-typedef t_input_context			t_input;
-
-struct s_input_context {
-	t_string	prompt;
-};
-
-t_none	input_create(t_mini mini);
-
-#endif
+	mini->memstack->top -= sizeof(t_u32);
+	value = *((t_u32 *)(mini->memstack->top));
+	return (value);
+}

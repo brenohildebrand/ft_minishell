@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   config_destroy_lua_state.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:56 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 15:47:46 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 15:48:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUT_H
-# define INPUT_H
+#include "contexts/mini.h"
 
-# include "contexts/mini.h"
-
-typedef struct s_input_context	*t_input_context;
-typedef t_input_context			t_input;
-
-struct s_input_context {
-	t_string	prompt;
-};
-
-t_none	input_create(t_mini mini);
-
-#endif
+t_none	config_destroy_lua_state(t_mini mini)
+{
+	lua_close(mini->config->lua_state);
+	mini->config->lua_state = NULL;
+}

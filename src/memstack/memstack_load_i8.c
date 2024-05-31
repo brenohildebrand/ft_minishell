@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   memstack_load_i8.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:32:51 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 18:09:17 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 18:10:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-int	execute_pwd(void)
+t_none	memstack_load_i8(t_mini mini, t_i8 value)
 {
-	char	*path;
-
-	path = getcwd(NULL, 0);
-	if (path)
-	{
-		ft_collect_mem(path);
-		printf("%s\n", path);
-		return (SUCCESS);
-	}
-	else
-	{
-		return (handle_error("pwd"));
-	}
+	memstack_load(mini, (t_u8)value);
 }
