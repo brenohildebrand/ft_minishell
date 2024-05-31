@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_check_flag.c                                  :+:      :+:    :+:   */
+/*   input_get_prompt.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 12:24:11 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:34:14 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/20 17:47:04 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/31 18:39:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-t_bool	mini_check_flag(t_mini mini, t_i32 flag)
+#ifdef ENABLE_LUA
+
+t_none	input_get_prompt(t_mini mini)
 {
-	// return (mini->mini_context->bitmask && flag);
-	(void)mini;
-	(void)flag;
-	return (TRUE);
+	if (mini->is_multiline)
+	{
+		mini->input->prompt = MULTILINE_PROMPT;
+	}
+	else
+	{
+		mini->input->prompt = mini->config->prompt;
+	}
 }
+
+#else
+
+t_none	input_get_prompt(t_mini mini)
+{
+	if (mini->is_multiline)
+	{
+		mini->input->prompt = MULTILINE_PROMPT;
+	}
+	else
+	{
+		mini->input->prompt = PROMPT;
+	}
+}
+
+#endif

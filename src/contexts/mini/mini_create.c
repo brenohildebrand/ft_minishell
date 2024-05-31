@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:34:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:38:41 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_mini	mini_create(t_i32 argc, t_cstring_array argv)
 	mini->argc = argc;
 	mini->argv = argv;
 	mini->memtree = NULL;
+	mini->is_multiline = FALSE;
+	mini->is_statement_complete = FALSE;
 	memstack_create(mini);
 	config_create(mini);
 	input_create(mini);

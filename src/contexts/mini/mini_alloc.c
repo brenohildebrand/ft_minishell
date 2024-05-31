@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:53:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:13:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:35:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ t_mem	mini_alloc(t_mini mini, t_u32 size)
 	t_mem	mem;
 
 	mem = malloc(size);
-	mini_assert(mini, mem != NULL, "Memory allocation error.\n");
+	if (mem == NULL)
+	{
+		cstring_to_stderr("Memory allocation failed.\n");
+		mini->exit_status = 1;
+		mini_quit(mini);
+	}
 	memtree_insert(&(mini->memtree), NULL, mem);
 	return (mem);
 }

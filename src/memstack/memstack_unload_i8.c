@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:33:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 18:35:33 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:20:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ t_i8	memstack_unload_i8(t_mini mini)
 {
 	t_i8	value;
 
-	value = *((t_i8 *)(--(mini->memstack->top)));
+	mini->memstack->top -= sizeof(t_i8);
+	if (mini->memstack->top < mini->memstack->bottom)
+	{
+		write(STDERR_FILENO, "Memstack underflow!\n", 20);
+		mini_quit(mini);
+	}
+	value = *((t_i8 *)(mini->memstack->top));
 	return (value);
 }

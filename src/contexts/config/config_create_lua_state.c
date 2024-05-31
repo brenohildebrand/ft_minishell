@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:34:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 21:56:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:33:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ t_none	config_create_lua_state(t_mini mini)
 	const t_config	config = mini->config;
 
 	config->lua_state = luaL_newstate();
-	mini_assert(mini, config->lua_state != NULL, "Failed to create Lua state\n");
+	if (config->lua_state == NULL)
+	{
+		cstring_to_stderr("Lua state creation failed.\n");
+		mini->exit_status = 1;
+		mini_quit(mini);	
+	}
 	luaL_openlibs(config->lua_state);
 	if (luaL_loadfile(config->lua_state, config->path) || lua_pcall(config->lua_state, 0, 0, 0))
 	{

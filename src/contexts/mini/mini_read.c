@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:11:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:28:36 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:39:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_none	mini_read(t_mini mini)
 {
-	while (!mini_check_flag(mini, MINI_FLAG_STATEMENT_COMPLETED))
+	while (!mini->is_statement_complete)
 	{
 		mini_readline(mini);
 		mini_tokenize(mini);

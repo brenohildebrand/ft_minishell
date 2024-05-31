@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/30 22:50:00 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/30 22:50:00 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/31 18:40:37 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/31 18:40:37 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ minishell_sources = 	src/main.c \
 		src/contexts/config/config_get_path.c \
 		src/contexts/config/config_get_prompt.c \
 		src/contexts/input/input_create.c \
+		src/contexts/input/input_get_prompt.c \
 		src/contexts/lexer/lexer_create.c \
 		src/contexts/lexer/lexer_cut.c \
 		src/contexts/lexer/lexer_eighth_rule.c \
@@ -42,12 +43,10 @@ minishell_sources = 	src/main.c \
 		src/contexts/lexer/token_type_cstring.c \
 		src/contexts/mini/mini_alloc.c \
 		src/contexts/mini/mini_assert.c \
-		src/contexts/mini/mini_check_flag.c \
 		src/contexts/mini/mini_create.c \
 		src/contexts/mini/mini_evaluate.c \
 		src/contexts/mini/mini_free.c \
 		src/contexts/mini/mini_get_cwd.c \
-		src/contexts/mini/mini_get_prompt.c \
 		src/contexts/mini/mini_parse.c \
 		src/contexts/mini/mini_quit.c \
 		src/contexts/mini/mini_read.c \
@@ -99,6 +98,7 @@ minishell_objects = 	src/main.o \
 		src/contexts/config/config_get_path.o \
 		src/contexts/config/config_get_prompt.o \
 		src/contexts/input/input_create.o \
+		src/contexts/input/input_get_prompt.o \
 		src/contexts/lexer/lexer_create.o \
 		src/contexts/lexer/lexer_cut.o \
 		src/contexts/lexer/lexer_eighth_rule.o \
@@ -118,12 +118,10 @@ minishell_objects = 	src/main.o \
 		src/contexts/lexer/token_type_cstring.o \
 		src/contexts/mini/mini_alloc.o \
 		src/contexts/mini/mini_assert.o \
-		src/contexts/mini/mini_check_flag.o \
 		src/contexts/mini/mini_create.o \
 		src/contexts/mini/mini_evaluate.o \
 		src/contexts/mini/mini_free.o \
 		src/contexts/mini/mini_get_cwd.o \
-		src/contexts/mini/mini_get_prompt.o \
 		src/contexts/mini/mini_parse.o \
 		src/contexts/mini/mini_quit.o \
 		src/contexts/mini/mini_read.o \
@@ -202,6 +200,7 @@ minishell_depends = 	src/main.d \
 		src/contexts/config/config_get_path.d \
 		src/contexts/config/config_get_prompt.d \
 		src/contexts/input/input_create.d \
+		src/contexts/input/input_get_prompt.d \
 		src/contexts/lexer/lexer_create.d \
 		src/contexts/lexer/lexer_cut.d \
 		src/contexts/lexer/lexer_eighth_rule.d \
@@ -221,12 +220,10 @@ minishell_depends = 	src/main.d \
 		src/contexts/lexer/token_type_cstring.d \
 		src/contexts/mini/mini_alloc.d \
 		src/contexts/mini/mini_assert.d \
-		src/contexts/mini/mini_check_flag.d \
 		src/contexts/mini/mini_create.d \
 		src/contexts/mini/mini_evaluate.d \
 		src/contexts/mini/mini_free.d \
 		src/contexts/mini/mini_get_cwd.d \
-		src/contexts/mini/mini_get_prompt.d \
 		src/contexts/mini/mini_parse.d \
 		src/contexts/mini/mini_quit.d \
 		src/contexts/mini/mini_read.d \
