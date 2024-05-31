@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_context_new.c                            :+:      :+:    :+:   */
+/*   mini_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 18:13:38 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 18:23:18 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 22:09:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-t_lexer_context	lexer_context_new(t_mini mini)
+t_mini	mini_create(t_i32 argc, t_cstring_array argv)
 {
-	t_lexer_context	context;
+	t_mini	mini;
 
-	context = mini_alloc(mini, sizeof(struct s_lexer_context));
-	return (context);
+	mini = malloc(sizeof(struct s_mini_context));
+	if (mini == NULL)
+	{
+		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
+		exit(1);
+	}
+	mini->argc = argc;
+	mini->argv = argv;
+	config_create(mini);
+	input_create(mini);
+	lexer_create(mini);
+	parser_create(mini);
+	return (mini);
 }

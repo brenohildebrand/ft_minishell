@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:14:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 17:16:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:08:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,25 +83,30 @@ struct s_mini_context {
 	t_cstring			str;
 	t_config_context	config;
 	t_input_context		input;
-	t_lexer_context		lexer;
+	t_lexer		lexer;
 	t_parser_context	parser;
 };
 
-t_mini		mini_new(void);
-t_mem		mini_alloc(t_mini mini, unsigned int size);
-t_none		mini_assert(t_mini mini, t_bool condition, t_cstring message);
-t_none		mini_evaluate(t_mini mini);
+t_mini		mini_create(t_i32 argc, t_cstring_array argv);
+t_mem		mini_alloc(t_mini mini, t_u32 size);
 t_none		mini_free(t_mini mini, t_mem mem);
-t_cstring	mini_get_cwd(t_mini mini);
-t_cstring	mini_get_prompt(t_mini mini);
-t_none		mini_parse(t_mini mini);
-t_none		mini_quit(t_mini mini);
 t_none		mini_read(t_mini mini);
+t_none		mini_evaluate(t_mini mini);
 t_none		mini_readline(t_mini mini);
 t_none		mini_tokenize(t_mini mini);
+t_none		mini_parse(t_mini mini);
+
+
+
+
+
+
+
+t_none		mini_assert(t_mini mini, t_bool condition, t_cstring message);
+t_cstring	mini_get_cwd(t_mini mini);
+t_cstring	mini_get_prompt(t_mini mini);
+t_none		mini_quit(t_mini mini);
 t_bool		mini_check_flag(t_mini mini, t_i32 flag);
-t_none		mini_setup(t_mini mini);
-t_none		mini_load_config(t_mini mini);
 
 t_none		mini_load_i8(t_mini mini, t_i8 value);
 t_none		mini_load_u8(t_mini mini, t_u8 value);

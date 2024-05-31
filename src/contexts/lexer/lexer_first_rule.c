@@ -19,7 +19,7 @@
 */
 t_none	mini_lexer_first_rule(t_mini mini)
 {
-	const t_lexer_context	context = mini->lexer_context;
+	const t_lexer	context = mini->lexer;
 
 	if ((*context->cursor) == '\0')
 	{

@@ -36,7 +36,7 @@ void	mini_lexer_ordinary(t_mini mini)
 	index = 0;
 	while (index < 10)
 	{
-		if (lexer_context_check_flag(LEXER_CONTEXT_FLAG_HAS_APPLIED_RULE))
+		if (lexer_check_flag(LEXER_CONTEXT_FLAG_HAS_APPLIED_RULE))
 			break;
 		rules[index](mini);
 		index++;

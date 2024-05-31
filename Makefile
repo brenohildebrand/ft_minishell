@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/29 14:50:27 by bhildebr          #+#    #+#              #
-#    Updated: 2024/05/29 14:50:27 by bhildebr         ###   ########.fr        #
+#    Created: 2024/05/30 21:57:48 by bhildebr          #+#    #+#              #
+#    Updated: 2024/05/30 21:59:22 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,45 @@ CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 LIBS = -lreadline -llua5.4
 
 minishell_sources = 	src/main.c \
-		src/config_context/config_context_init.c \
-		src/config_context/config_context_new.c \
+		src/contexts/config/config_create.c \
+		src/contexts/config/config_create_lua_state.c \
+		src/contexts/config/config_destroy_lua_state.c \
+		src/contexts/config/config_get_path.c \
+		src/contexts/config/config_get_prompt.c \
+		src/contexts/input/input_new.c \
+		src/contexts/lexer/lexer_new.c \
+		src/contexts/lexer/lexer_reset.c \
+		src/contexts/lexer/lexer_cut.c \
+		src/contexts/lexer/lexer_eighth_rule.c \
+		src/contexts/lexer/lexer_fifth_rule.c \
+		src/contexts/lexer/lexer_first_rule.c \
+		src/contexts/lexer/lexer_fourth_rule.c \
+		src/contexts/lexer/lexer_heredoc.c \
+		src/contexts/lexer/lexer_ninth_rule.c \
+		src/contexts/lexer/lexer_ordinary.c \
+		src/contexts/lexer/lexer_second_rule.c \
+		src/contexts/lexer/lexer_seventh_rule.c \
+		src/contexts/lexer/lexer_sixth_rule.c \
+		src/contexts/lexer/lexer_tenth_rule.c \
+		src/contexts/lexer/lexer_third_rule.c \
+		src/contexts/lexer/token_new.c \
+		src/contexts/lexer/token_type_cstring.c \
+		src/contexts/mini/mini_alloc.c \
+		src/contexts/mini/mini_assert.c \
+		src/contexts/mini/mini_check_flag.c \
+		src/contexts/mini/mini_context_init.c \
+		src/contexts/mini/mini_context_new.c \
+		src/contexts/mini/mini_create.c \
+		src/contexts/mini/mini_evaluate.c \
+		src/contexts/mini/mini_free.c \
+		src/contexts/mini/mini_get_cwd.c \
+		src/contexts/mini/mini_get_prompt.c \
+		src/contexts/mini/mini_load_u8.c \
+		src/contexts/mini/mini_parse.c \
+		src/contexts/mini/mini_quit.c \
+		src/contexts/mini/mini_read.c \
+		src/contexts/mini/mini_readline.c \
+		src/contexts/mini/mini_tokenize.c \
 		src/cstring/cstring_copy.c \
 		src/cstring/cstring_dirname.c \
 		src/cstring/cstring_get_length.c \
@@ -26,58 +63,77 @@ minishell_sources = 	src/main.c \
 		src/cstring/cstring_join.c \
 		src/cstring/cstring_to_stderr.c \
 		src/cstring/cstring_to_stdout.c \
-		src/lexer_context/lexer_context_new.c \
-		src/lexer_context/lexer_context_reset.c \
-		src/llist/linked_list_append.c \
-		src/llist/linked_list_destroy.c \
-		src/llist/linked_list_new.c \
-		src/llist/node/linked_list_node_destroy.c \
-		src/llist/node/linked_list_node_new.c \
+		src/linked_list/linked_list_append.c \
+		src/linked_list/linked_list_destroy.c \
+		src/linked_list/linked_list_new.c \
+		src/linked_list/linked_list_node_destroy.c \
+		src/linked_list/linked_list_node_new.c \
 		src/lua/lua_loadfile.c \
-		src/memtree/memtree_create.c \
-		src/memtree/memtree_destroy.c \
-		src/memtree/memtree_get_height.c \
-		src/memtree/memtree_insert.c \
-		src/memtree/memtree_rebalance.c \
-		src/memtree/memtree_remove.c \
-		src/memtree/memtree_update_height.c \
-		src/mini/mini_alloc.c \
-		src/mini/mini_assert.c \
-		src/mini/mini_check_flag.c \
-		src/mini/mini_evaluate.c \
-		src/mini/mini_free.c \
-		src/mini/mini_get_cwd.c \
-		src/mini/mini_get_prompt.c \
-		src/mini/mini_load_config.c \
-		src/mini/mini_new.c \
-		src/mini/mini_parse.c \
-		src/mini/mini_quit.c \
-		src/mini/mini_read.c \
-		src/mini/mini_readline.c \
-		src/mini/mini_setup.c \
-		src/mini/mini_tokenize.c \
-		src/mini/builtin/echo.c \
-		src/mini/lexer/mini_lexer_cut.c \
-		src/mini/lexer/mini_lexer_eighth_rule.c \
-		src/mini/lexer/mini_lexer_fifth_rule.c \
-		src/mini/lexer/mini_lexer_first_rule.c \
-		src/mini/lexer/mini_lexer_fourth_rule.c \
-		src/mini/lexer/mini_lexer_heredoc.c \
-		src/mini/lexer/mini_lexer_ninth_rule.c \
-		src/mini/lexer/mini_lexer_ordinary.c \
-		src/mini/lexer/mini_lexer_second_rule.c \
-		src/mini/lexer/mini_lexer_seventh_rule.c \
-		src/mini/lexer/mini_lexer_sixth_rule.c \
-		src/mini/lexer/mini_lexer_tenth_rule.c \
-		src/mini/lexer/mini_lexer_third_rule.c \
-		src/mini_context/mini_context_init.c \
-		src/mini_context/mini_context_new.c \
-		src/token/token_new.c \
-		src/token/token_type_cstring.c
+		src/memory_tree/memtree_create.c \
+		src/memory_tree/memtree_destroy.c \
+		src/memory_tree/memtree_get_height.c \
+		src/memory_tree/memtree_insert.c \
+		src/memory_tree/memtree_rebalance.c \
+		src/memory_tree/memtree_remove.c \
+		src/memory_tree/memtree_update_height.c \
+		src/memstack/memstack_create.c \
+		src/memstack/memstack_destroy.c \
+		src/memstack/memstack_load.c \
+		src/memstack/memstack_load_any.c \
+		src/memstack/memstack_load_i32.c \
+		src/memstack/memstack_load_i64.c \
+		src/memstack/memstack_load_i8.c \
+		src/memstack/memstack_load_u32.c \
+		src/memstack/memstack_load_u64.c \
+		src/memstack/memstack_load_u8.c \
+		src/memstack/memstack_unload_any.c \
+		src/memstack/memstack_unload_i32.c \
+		src/memstack/memstack_unload_i64.c \
+		src/memstack/memstack_unload_i8.c \
+		src/memstack/memstack_unload_u32.c \
+		src/memstack/memstack_unload_u64.c \
+		src/memstack/memstack_unload_u8.c
 
 minishell_objects = 	src/main.o \
-		src/config_context/config_context_init.o \
-		src/config_context/config_context_new.o \
+		src/contexts/config/config_create.o \
+		src/contexts/config/config_create_lua_state.o \
+		src/contexts/config/config_destroy_lua_state.o \
+		src/contexts/config/config_get_path.o \
+		src/contexts/config/config_get_prompt.o \
+		src/contexts/input/input_new.o \
+		src/contexts/lexer/lexer_new.o \
+		src/contexts/lexer/lexer_reset.o \
+		src/contexts/lexer/lexer_cut.o \
+		src/contexts/lexer/lexer_eighth_rule.o \
+		src/contexts/lexer/lexer_fifth_rule.o \
+		src/contexts/lexer/lexer_first_rule.o \
+		src/contexts/lexer/lexer_fourth_rule.o \
+		src/contexts/lexer/lexer_heredoc.o \
+		src/contexts/lexer/lexer_ninth_rule.o \
+		src/contexts/lexer/lexer_ordinary.o \
+		src/contexts/lexer/lexer_second_rule.o \
+		src/contexts/lexer/lexer_seventh_rule.o \
+		src/contexts/lexer/lexer_sixth_rule.o \
+		src/contexts/lexer/lexer_tenth_rule.o \
+		src/contexts/lexer/lexer_third_rule.o \
+		src/contexts/lexer/token_new.o \
+		src/contexts/lexer/token_type_cstring.o \
+		src/contexts/mini/mini_alloc.o \
+		src/contexts/mini/mini_assert.o \
+		src/contexts/mini/mini_check_flag.o \
+		src/contexts/mini/mini_context_init.o \
+		src/contexts/mini/mini_context_new.o \
+		src/contexts/mini/mini_create.o \
+		src/contexts/mini/mini_evaluate.o \
+		src/contexts/mini/mini_free.o \
+		src/contexts/mini/mini_get_cwd.o \
+		src/contexts/mini/mini_get_prompt.o \
+		src/contexts/mini/mini_load_u8.o \
+		src/contexts/mini/mini_parse.o \
+		src/contexts/mini/mini_quit.o \
+		src/contexts/mini/mini_read.o \
+		src/contexts/mini/mini_readline.o \
+		src/contexts/mini/mini_tokenize.o \
 		src/cstring/cstring_copy.o \
 		src/cstring/cstring_dirname.o \
 		src/cstring/cstring_get_length.o \
@@ -85,79 +141,104 @@ minishell_objects = 	src/main.o \
 		src/cstring/cstring_join.o \
 		src/cstring/cstring_to_stderr.o \
 		src/cstring/cstring_to_stdout.o \
-		src/lexer_context/lexer_context_new.o \
-		src/lexer_context/lexer_context_reset.o \
-		src/llist/linked_list_append.o \
-		src/llist/linked_list_destroy.o \
-		src/llist/linked_list_new.o \
-		src/llist/node/linked_list_node_destroy.o \
-		src/llist/node/linked_list_node_new.o \
+		src/linked_list/linked_list_append.o \
+		src/linked_list/linked_list_destroy.o \
+		src/linked_list/linked_list_new.o \
+		src/linked_list/linked_list_node_destroy.o \
+		src/linked_list/linked_list_node_new.o \
 		src/lua/lua_loadfile.o \
-		src/memtree/memtree_create.o \
-		src/memtree/memtree_destroy.o \
-		src/memtree/memtree_get_height.o \
-		src/memtree/memtree_insert.o \
-		src/memtree/memtree_rebalance.o \
-		src/memtree/memtree_remove.o \
-		src/memtree/memtree_update_height.o \
-		src/mini/mini_alloc.o \
-		src/mini/mini_assert.o \
-		src/mini/mini_check_flag.o \
-		src/mini/mini_evaluate.o \
-		src/mini/mini_free.o \
-		src/mini/mini_get_cwd.o \
-		src/mini/mini_get_prompt.o \
-		src/mini/mini_load_config.o \
-		src/mini/mini_new.o \
-		src/mini/mini_parse.o \
-		src/mini/mini_quit.o \
-		src/mini/mini_read.o \
-		src/mini/mini_readline.o \
-		src/mini/mini_setup.o \
-		src/mini/mini_tokenize.o \
-		src/mini/builtin/echo.o \
-		src/mini/lexer/mini_lexer_cut.o \
-		src/mini/lexer/mini_lexer_eighth_rule.o \
-		src/mini/lexer/mini_lexer_fifth_rule.o \
-		src/mini/lexer/mini_lexer_first_rule.o \
-		src/mini/lexer/mini_lexer_fourth_rule.o \
-		src/mini/lexer/mini_lexer_heredoc.o \
-		src/mini/lexer/mini_lexer_ninth_rule.o \
-		src/mini/lexer/mini_lexer_ordinary.o \
-		src/mini/lexer/mini_lexer_second_rule.o \
-		src/mini/lexer/mini_lexer_seventh_rule.o \
-		src/mini/lexer/mini_lexer_sixth_rule.o \
-		src/mini/lexer/mini_lexer_tenth_rule.o \
-		src/mini/lexer/mini_lexer_third_rule.o \
-		src/mini_context/mini_context_init.o \
-		src/mini_context/mini_context_new.o \
-		src/token/token_new.o \
-		src/token/token_type_cstring.o
+		src/memory_tree/memtree_create.o \
+		src/memory_tree/memtree_destroy.o \
+		src/memory_tree/memtree_get_height.o \
+		src/memory_tree/memtree_insert.o \
+		src/memory_tree/memtree_rebalance.o \
+		src/memory_tree/memtree_remove.o \
+		src/memory_tree/memtree_update_height.o \
+		src/memstack/memstack_create.o \
+		src/memstack/memstack_destroy.o \
+		src/memstack/memstack_load.o \
+		src/memstack/memstack_load_any.o \
+		src/memstack/memstack_load_i32.o \
+		src/memstack/memstack_load_i64.o \
+		src/memstack/memstack_load_i8.o \
+		src/memstack/memstack_load_u32.o \
+		src/memstack/memstack_load_u64.o \
+		src/memstack/memstack_load_u8.o \
+		src/memstack/memstack_unload_any.o \
+		src/memstack/memstack_unload_i32.o \
+		src/memstack/memstack_unload_i64.o \
+		src/memstack/memstack_unload_i8.o \
+		src/memstack/memstack_unload_u32.o \
+		src/memstack/memstack_unload_u64.o \
+		src/memstack/memstack_unload_u8.o
 
 minishell_headers = 	include/any.h \
-		include/assert.h \
+		include/binary_tree.h \
 		include/bool.h \
-		include/btree.h \
-		include/config_context.h \
 		include/cstring.h \
-		include/htable.h \
+		include/function.h \
+		include/hash_table.h \
 		include/i32.h \
 		include/i64.h \
 		include/i8.h \
-		include/lexer_context.h \
 		include/linked_list.h \
 		include/lua.h \
-		include/mem.h \
-		include/memtree.h \
-		include/minishell.h \
-		include/mini_context.h \
+		include/memory.h \
+		include/memory_stack.h \
+		include/memory_tree.h \
 		include/none.h \
-		include/token.h \
-		include/u32.h
+		include/stack.h \
+		include/string.h \
+		include/u32.h \
+		include/u64.h \
+		include/u8.h \
+		include/config.h \
+		include/input.h \
+		include/lab.h \
+		include/lexer.h \
+		include/mini.h \
+		include/parser.h
 
 minishell_depends = 	src/main.d \
-		src/config_context/config_context_init.d \
-		src/config_context/config_context_new.d \
+		src/contexts/config/config_create.d \
+		src/contexts/config/config_create_lua_state.d \
+		src/contexts/config/config_destroy_lua_state.d \
+		src/contexts/config/config_get_path.d \
+		src/contexts/config/config_get_prompt.d \
+		src/contexts/input/input_new.d \
+		src/contexts/lexer/lexer_new.d \
+		src/contexts/lexer/lexer_reset.d \
+		src/contexts/lexer/lexer_cut.d \
+		src/contexts/lexer/lexer_eighth_rule.d \
+		src/contexts/lexer/lexer_fifth_rule.d \
+		src/contexts/lexer/lexer_first_rule.d \
+		src/contexts/lexer/lexer_fourth_rule.d \
+		src/contexts/lexer/lexer_heredoc.d \
+		src/contexts/lexer/lexer_ninth_rule.d \
+		src/contexts/lexer/lexer_ordinary.d \
+		src/contexts/lexer/lexer_second_rule.d \
+		src/contexts/lexer/lexer_seventh_rule.d \
+		src/contexts/lexer/lexer_sixth_rule.d \
+		src/contexts/lexer/lexer_tenth_rule.d \
+		src/contexts/lexer/lexer_third_rule.d \
+		src/contexts/lexer/token_new.d \
+		src/contexts/lexer/token_type_cstring.d \
+		src/contexts/mini/mini_alloc.d \
+		src/contexts/mini/mini_assert.d \
+		src/contexts/mini/mini_check_flag.d \
+		src/contexts/mini/mini_context_init.d \
+		src/contexts/mini/mini_context_new.d \
+		src/contexts/mini/mini_create.d \
+		src/contexts/mini/mini_evaluate.d \
+		src/contexts/mini/mini_free.d \
+		src/contexts/mini/mini_get_cwd.d \
+		src/contexts/mini/mini_get_prompt.d \
+		src/contexts/mini/mini_load_u8.d \
+		src/contexts/mini/mini_parse.d \
+		src/contexts/mini/mini_quit.d \
+		src/contexts/mini/mini_read.d \
+		src/contexts/mini/mini_readline.d \
+		src/contexts/mini/mini_tokenize.d \
 		src/cstring/cstring_copy.d \
 		src/cstring/cstring_dirname.d \
 		src/cstring/cstring_get_length.d \
@@ -165,54 +246,36 @@ minishell_depends = 	src/main.d \
 		src/cstring/cstring_join.d \
 		src/cstring/cstring_to_stderr.d \
 		src/cstring/cstring_to_stdout.d \
-		src/lexer_context/lexer_context_new.d \
-		src/lexer_context/lexer_context_reset.d \
-		src/llist/linked_list_append.d \
-		src/llist/linked_list_destroy.d \
-		src/llist/linked_list_new.d \
-		src/llist/node/linked_list_node_destroy.d \
-		src/llist/node/linked_list_node_new.d \
+		src/linked_list/linked_list_append.d \
+		src/linked_list/linked_list_destroy.d \
+		src/linked_list/linked_list_new.d \
+		src/linked_list/linked_list_node_destroy.d \
+		src/linked_list/linked_list_node_new.d \
 		src/lua/lua_loadfile.d \
-		src/memtree/memtree_create.d \
-		src/memtree/memtree_destroy.d \
-		src/memtree/memtree_get_height.d \
-		src/memtree/memtree_insert.d \
-		src/memtree/memtree_rebalance.d \
-		src/memtree/memtree_remove.d \
-		src/memtree/memtree_update_height.d \
-		src/mini/mini_alloc.d \
-		src/mini/mini_assert.d \
-		src/mini/mini_check_flag.d \
-		src/mini/mini_evaluate.d \
-		src/mini/mini_free.d \
-		src/mini/mini_get_cwd.d \
-		src/mini/mini_get_prompt.d \
-		src/mini/mini_load_config.d \
-		src/mini/mini_new.d \
-		src/mini/mini_parse.d \
-		src/mini/mini_quit.d \
-		src/mini/mini_read.d \
-		src/mini/mini_readline.d \
-		src/mini/mini_setup.d \
-		src/mini/mini_tokenize.d \
-		src/mini/builtin/echo.d \
-		src/mini/lexer/mini_lexer_cut.d \
-		src/mini/lexer/mini_lexer_eighth_rule.d \
-		src/mini/lexer/mini_lexer_fifth_rule.d \
-		src/mini/lexer/mini_lexer_first_rule.d \
-		src/mini/lexer/mini_lexer_fourth_rule.d \
-		src/mini/lexer/mini_lexer_heredoc.d \
-		src/mini/lexer/mini_lexer_ninth_rule.d \
-		src/mini/lexer/mini_lexer_ordinary.d \
-		src/mini/lexer/mini_lexer_second_rule.d \
-		src/mini/lexer/mini_lexer_seventh_rule.d \
-		src/mini/lexer/mini_lexer_sixth_rule.d \
-		src/mini/lexer/mini_lexer_tenth_rule.d \
-		src/mini/lexer/mini_lexer_third_rule.d \
-		src/mini_context/mini_context_init.d \
-		src/mini_context/mini_context_new.d \
-		src/token/token_new.d \
-		src/token/token_type_cstring.d
+		src/memory_tree/memtree_create.d \
+		src/memory_tree/memtree_destroy.d \
+		src/memory_tree/memtree_get_height.d \
+		src/memory_tree/memtree_insert.d \
+		src/memory_tree/memtree_rebalance.d \
+		src/memory_tree/memtree_remove.d \
+		src/memory_tree/memtree_update_height.d \
+		src/memstack/memstack_create.d \
+		src/memstack/memstack_destroy.d \
+		src/memstack/memstack_load.d \
+		src/memstack/memstack_load_any.d \
+		src/memstack/memstack_load_i32.d \
+		src/memstack/memstack_load_i64.d \
+		src/memstack/memstack_load_i8.d \
+		src/memstack/memstack_load_u32.d \
+		src/memstack/memstack_load_u64.d \
+		src/memstack/memstack_load_u8.d \
+		src/memstack/memstack_unload_any.d \
+		src/memstack/memstack_unload_i32.d \
+		src/memstack/memstack_unload_i64.d \
+		src/memstack/memstack_unload_i8.d \
+		src/memstack/memstack_unload_u32.d \
+		src/memstack/memstack_unload_u64.d \
+		src/memstack/memstack_unload_u8.d
 
 minishell_includes = 	-iquote include
 

@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_setup.c                                       :+:      :+:    :+:   */
+/*   memstack_load_any.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 22:23:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 21:30:43 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/05/30 21:31:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-// setup signals and stuff
-t_none	mini_setup(t_mini mini)
+t_none	memstack_load_any(t_mini mini, t_any value)
 {
-	mini_load_config(mini);
+	t_u8	byte;
+	t_i32	counter;
+
+	counter = 0;
+	while (counter < sizeof(t_any))
+	{
+		byte = ((t_u8 *)(&value))[counter];
+		memstack_load(mini, byte);
+		counter++;
+	}
 }

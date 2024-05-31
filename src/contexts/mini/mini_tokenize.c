@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:59:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_none	mini_tokenize(t_mini mini)
 {
-	const t_lexer_context	context = mini->lexer_context;
+	const t_lexer	context = mini->lexer;
 
-	lexer_context_reset(mini);
+	lexer_reset(mini);
 	while (context->has_finished == FALSE)
 	{
 		if (context->mode == LEXER_MODE_ORDINARY)

@@ -17,7 +17,7 @@
 */
 t_none	mini_lexer_cut(t_mini mini)
 {
-	const t_lexer_context	context = mini->lexer_context;
+	const t_lexer	context = mini->lexer;
 	t_token					token;
 	t_u32					index;
 

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:24:38 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 15:56:29 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:52:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_none	config_create(t_mini mini);
 t_none	config_destroy(t_mini mini);
 
 t_none	config_create_lua_state(t_mini mini);
+t_none	config_destroy_lua_state(t_mini mini);
+t_none	config_get_path(t_mini mini);
 t_none	config_get_prompt(t_mini mini);
 
 #endif
