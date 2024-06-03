@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:14:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 17:00:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:47:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@
 # define PROMPT "mini> "
 # define MULTILINE_PROMPT "> "
 
+# define MINI_TOKEN_WORD 0
+# define MINI_TOKEN_GT 1
+# define MINI_TOKEN_DGT 2
+# define MINI_TOKEN_LT 3
+# define MINI_TOKEN_DLT 4
+# define MINI_TOKEN_PIPE 5
+# define MINI_TOKEN_DQUOTES 6
+# define MINI_TOKEN_SQUOTES 7
+
 typedef struct s_mini_context	*t_mini_context;
 typedef t_mini_context			t_mini;
 
@@ -85,7 +94,7 @@ typedef struct s_mini_token		*t_mini_token;
 
 struct s_mini_token {
 	t_cstring	value;
-	t_u32		length;
+	t_i32		length;
 	t_i32		type;	
 };
 

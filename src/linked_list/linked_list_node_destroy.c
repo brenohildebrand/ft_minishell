@@ -15,11 +15,11 @@
 // This function assumes the value is going to be a token.
 t_none	linked_list_node_destroy(t_mini mini, t_linked_list_node node)
 {
-	t_token	token;
+	t_mini_token	token;
 
 	if (node->value)
 	{
-		token = (t_token)node->value;
+		token = (t_mini_token)node->value;
 		mini_free(mini, token->value);
 		mini_free(mini, token);
 	}

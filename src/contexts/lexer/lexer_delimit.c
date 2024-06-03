@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 21:20:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 17:49:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:34:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,30 @@
 
 t_none	lexer_delimit(t_mini mini)
 {
+	static t_i32	start_index = 0;
 	const t_lexer	lexer = mini->lexer;
 	t_mini_token	mini_token;
-	
-	
+
+	if (lexer->state == 108)
+		return ;
+	if (lexer->state == 200)
+	{
+		mini->input->is_complete = FALSE;
+		return ;
+	}
+	mini_token = mini_alloc(mini, sizeof(struct s_mini_token));
+	mini_token->length = lexer->index - start_index + 1;
+	start_index = lexer->index + 1;
+	mini_token->value = mini_alloc(mini, mini_token->length + 1);
+	mini_token->value[mini_token->length] = '\0';
+	mini->i = 0;
+	while (mini->i < mini_token->length)
+	{
+		mini_token->value[mini->i] = lexer->cursor[start_index + mini->i];
+		mini->i++;
+	}
+	mini_token->type = lexer_classify(mini);
+	linked_list_append(mini, lexer->tokens, mini_token);
 }
 
 

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/03 14:59:40 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/03 14:59:40 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/03 18:53:28 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/03 18:53:28 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,26 +25,16 @@ minishell_sources = 	src/main.c \
 		src/contexts/input/input_create.c \
 		src/contexts/input/input_get_prompt.c \
 		src/contexts/lexer/lexer_add_character.c \
+		src/contexts/lexer/lexer_automaton.c \
+		src/contexts/lexer/lexer_classify.c \
 		src/contexts/lexer/lexer_create.c \
 		src/contexts/lexer/lexer_delimit.c \
 		src/contexts/lexer/lexer_discard_character.c \
-		src/contexts/lexer/lexer_eighth_rule.c \
-		src/contexts/lexer/lexer_fifth_rule.c \
-		src/contexts/lexer/lexer_first_rule.c \
-		src/contexts/lexer/lexer_fourth_rule.c \
 		src/contexts/lexer/lexer_heredoc.c \
-		src/contexts/lexer/lexer_ninth_rule.c \
+		src/contexts/lexer/lexer_init_table.c \
+		src/contexts/lexer/lexer_is_final_state.c \
+		src/contexts/lexer/lexer_next_state.c \
 		src/contexts/lexer/lexer_ordinary.c \
-		src/contexts/lexer/lexer_reset.c \
-		src/contexts/lexer/lexer_second_rule.c \
-		src/contexts/lexer/lexer_seventh_rule.c \
-		src/contexts/lexer/lexer_sixth_rule.c \
-		src/contexts/lexer/lexer_tenth_rule.c \
-		src/contexts/lexer/lexer_third_rule.c \
-		src/contexts/lexer/lexer_token_get_type.c \
-		src/contexts/lexer/lexer_token_new.c \
-		src/contexts/lexer/lexer_try.c \
-		src/contexts/lexer/lexer_try_operator.c \
 		src/contexts/mini/mini_alloc.c \
 		src/contexts/mini/mini_assert.c \
 		src/contexts/mini/mini_create.c \
@@ -106,26 +96,16 @@ minishell_objects = 	src/main.o \
 		src/contexts/input/input_create.o \
 		src/contexts/input/input_get_prompt.o \
 		src/contexts/lexer/lexer_add_character.o \
+		src/contexts/lexer/lexer_automaton.o \
+		src/contexts/lexer/lexer_classify.o \
 		src/contexts/lexer/lexer_create.o \
 		src/contexts/lexer/lexer_delimit.o \
 		src/contexts/lexer/lexer_discard_character.o \
-		src/contexts/lexer/lexer_eighth_rule.o \
-		src/contexts/lexer/lexer_fifth_rule.o \
-		src/contexts/lexer/lexer_first_rule.o \
-		src/contexts/lexer/lexer_fourth_rule.o \
 		src/contexts/lexer/lexer_heredoc.o \
-		src/contexts/lexer/lexer_ninth_rule.o \
+		src/contexts/lexer/lexer_init_table.o \
+		src/contexts/lexer/lexer_is_final_state.o \
+		src/contexts/lexer/lexer_next_state.o \
 		src/contexts/lexer/lexer_ordinary.o \
-		src/contexts/lexer/lexer_reset.o \
-		src/contexts/lexer/lexer_second_rule.o \
-		src/contexts/lexer/lexer_seventh_rule.o \
-		src/contexts/lexer/lexer_sixth_rule.o \
-		src/contexts/lexer/lexer_tenth_rule.o \
-		src/contexts/lexer/lexer_third_rule.o \
-		src/contexts/lexer/lexer_token_get_type.o \
-		src/contexts/lexer/lexer_token_new.o \
-		src/contexts/lexer/lexer_try.o \
-		src/contexts/lexer/lexer_try_operator.o \
 		src/contexts/mini/mini_alloc.o \
 		src/contexts/mini/mini_assert.o \
 		src/contexts/mini/mini_create.o \
@@ -214,26 +194,16 @@ minishell_depends = 	src/main.d \
 		src/contexts/input/input_create.d \
 		src/contexts/input/input_get_prompt.d \
 		src/contexts/lexer/lexer_add_character.d \
+		src/contexts/lexer/lexer_automaton.d \
+		src/contexts/lexer/lexer_classify.d \
 		src/contexts/lexer/lexer_create.d \
 		src/contexts/lexer/lexer_delimit.d \
 		src/contexts/lexer/lexer_discard_character.d \
-		src/contexts/lexer/lexer_eighth_rule.d \
-		src/contexts/lexer/lexer_fifth_rule.d \
-		src/contexts/lexer/lexer_first_rule.d \
-		src/contexts/lexer/lexer_fourth_rule.d \
 		src/contexts/lexer/lexer_heredoc.d \
-		src/contexts/lexer/lexer_ninth_rule.d \
+		src/contexts/lexer/lexer_init_table.d \
+		src/contexts/lexer/lexer_is_final_state.d \
+		src/contexts/lexer/lexer_next_state.d \
 		src/contexts/lexer/lexer_ordinary.d \
-		src/contexts/lexer/lexer_reset.d \
-		src/contexts/lexer/lexer_second_rule.d \
-		src/contexts/lexer/lexer_seventh_rule.d \
-		src/contexts/lexer/lexer_sixth_rule.d \
-		src/contexts/lexer/lexer_tenth_rule.d \
-		src/contexts/lexer/lexer_third_rule.d \
-		src/contexts/lexer/lexer_token_get_type.d \
-		src/contexts/lexer/lexer_token_new.d \
-		src/contexts/lexer/lexer_try.d \
-		src/contexts/lexer/lexer_try_operator.d \
 		src/contexts/mini/mini_alloc.d \
 		src/contexts/mini/mini_assert.d \
 		src/contexts/mini/mini_create.d \

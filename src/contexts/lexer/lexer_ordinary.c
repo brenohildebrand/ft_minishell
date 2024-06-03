@@ -14,8 +14,6 @@
 
 t_none	lexer_ordinary(t_mini mini)
 {
-	const t_lexer	lexer = mini->lexer;
-
 	lexer_automaton(mini);
 }
 
