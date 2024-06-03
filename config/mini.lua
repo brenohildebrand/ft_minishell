@@ -7,20 +7,16 @@ local SECONDARY_COLOR = {r = 94, g = 129, b = 172}
 
 -- Utilities
 local function string_to_primary_color(string)
-	return string.format("\x1b[38;2;%d;%d;%dm%s\x1b[0m", PRIMARY_COLOR.r, PRIMARY_COLOR.g, PRIMARY_COLOR.b, string)
+	return string.format("\001\x1b[38;2;%d;%d;%dm\002%s\001\x1b[0m\002", PRIMARY_COLOR.r, PRIMARY_COLOR.g, PRIMARY_COLOR.b, string)
 end
 
 local function string_to_secondary_color(string)
-	return string.format("\x1b[38;2;%d;%d;%dm%s\x1b[0m", SECONDARY_COLOR.r, SECONDARY_COLOR.g, SECONDARY_COLOR.b, string)
+	return string.format("\001\x1b[38;2;%d;%d;%dm\002%s\001\x1b[0m\002", SECONDARY_COLOR.r, SECONDARY_COLOR.g, SECONDARY_COLOR.b, string)
 end
 
 local function string_to_bold(string)
-	return string.format("\x1b[1m%s\x1b[0m", string);
+	return string.format("\001\x1b[1m\002%s\001\x1b[0m\002", string);
 end
-
--- Custom message for minishell initialization
-local custom_message = "\027[91mLua is enabled.\027[0m\n"
-print(custom_message);
 
 -- Prompt
 user = string_to_bold(string_to_primary_color(os.getenv("USER")))
