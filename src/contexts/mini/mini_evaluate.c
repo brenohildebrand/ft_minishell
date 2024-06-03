@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:12:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 22:06:52 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:50:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 t_none	mini_evaluate(t_mini mini)
 {
-	(void)mini;
+	mini_tokenize(mini);
+	mini_parse(mini);
+	mini_execute(mini);
 }

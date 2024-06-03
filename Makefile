@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/03 11:24:39 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/03 11:24:39 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/03 14:57:56 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/03 14:57:56 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,14 @@ minishell_sources = 	src/main.c \
 		src/contexts/mini/mini_assert.c \
 		src/contexts/mini/mini_create.c \
 		src/contexts/mini/mini_evaluate.c \
+		src/contexts/mini/mini_execute.c \
+		src/contexts/mini/mini_expand.c \
 		src/contexts/mini/mini_free.c \
 		src/contexts/mini/mini_get_cwd.c \
+		src/contexts/mini/mini_is_statement_complete.c \
 		src/contexts/mini/mini_parse.c \
 		src/contexts/mini/mini_quit.c \
 		src/contexts/mini/mini_read.c \
-		src/contexts/mini/mini_readline.c \
 		src/contexts/mini/mini_tokenize.c \
 		src/contexts/parser/parser_create.c \
 		src/cstring/cstring_copy.c \
@@ -128,12 +130,14 @@ minishell_objects = 	src/main.o \
 		src/contexts/mini/mini_assert.o \
 		src/contexts/mini/mini_create.o \
 		src/contexts/mini/mini_evaluate.o \
+		src/contexts/mini/mini_execute.o \
+		src/contexts/mini/mini_expand.o \
 		src/contexts/mini/mini_free.o \
 		src/contexts/mini/mini_get_cwd.o \
+		src/contexts/mini/mini_is_statement_complete.o \
 		src/contexts/mini/mini_parse.o \
 		src/contexts/mini/mini_quit.o \
 		src/contexts/mini/mini_read.o \
-		src/contexts/mini/mini_readline.o \
 		src/contexts/mini/mini_tokenize.o \
 		src/contexts/parser/parser_create.o \
 		src/cstring/cstring_copy.o \
@@ -234,12 +238,14 @@ minishell_depends = 	src/main.d \
 		src/contexts/mini/mini_assert.d \
 		src/contexts/mini/mini_create.d \
 		src/contexts/mini/mini_evaluate.d \
+		src/contexts/mini/mini_execute.d \
+		src/contexts/mini/mini_expand.d \
 		src/contexts/mini/mini_free.d \
 		src/contexts/mini/mini_get_cwd.d \
+		src/contexts/mini/mini_is_statement_complete.d \
 		src/contexts/mini/mini_parse.d \
 		src/contexts/mini/mini_quit.d \
 		src/contexts/mini/mini_read.d \
-		src/contexts/mini/mini_readline.d \
 		src/contexts/mini/mini_tokenize.d \
 		src/contexts/parser/parser_create.d \
 		src/cstring/cstring_copy.d \

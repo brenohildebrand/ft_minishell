@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:14:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/31 21:28:49 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:56:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,20 @@ struct s_mini_context {
 	t_i32				exit_status;
 };
 
+// mini_token is better than token
+// put it here
+
 t_mini	mini_create(t_i32 argc, t_cstring_array argv);
 t_mem	mini_alloc(t_mini mini, t_u32 size);
 t_none	mini_free(t_mini mini, t_mem mem);
 t_none	mini_read(t_mini mini);
-t_none	mini_evaluate(t_mini mini);
-t_none	mini_readline(t_mini mini);
+t_none	mini_expand(t_mini mini);
 t_none	mini_tokenize(t_mini mini);
 t_none	mini_parse(t_mini mini);
+t_none	mini_execute(t_mini mini);
 t_none	mini_quit(t_mini mini);
 t_none	mini_assert(t_mini mini);
 t_none	mini_get_cwd(t_mini mini);
+t_bool	mini_is_statement_complete(t_mini mini);
 
 #endif
