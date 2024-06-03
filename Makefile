@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/03 14:57:56 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/03 14:57:56 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/03 14:59:40 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/03 14:59:40 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,30 +72,30 @@ minishell_sources = 	src/main.c \
 		src/linked_list/linked_list_node_destroy.c \
 		src/linked_list/linked_list_node_new.c \
 		src/lua/lua_loadfile.c \
+		src/memory_stack/memstack_create.c \
+		src/memory_stack/memstack_destroy.c \
+		src/memory_stack/memstack_load.c \
+		src/memory_stack/memstack_load_any.c \
+		src/memory_stack/memstack_load_i32.c \
+		src/memory_stack/memstack_load_i64.c \
+		src/memory_stack/memstack_load_i8.c \
+		src/memory_stack/memstack_load_u32.c \
+		src/memory_stack/memstack_load_u64.c \
+		src/memory_stack/memstack_load_u8.c \
+		src/memory_stack/memstack_unload_any.c \
+		src/memory_stack/memstack_unload_i32.c \
+		src/memory_stack/memstack_unload_i64.c \
+		src/memory_stack/memstack_unload_i8.c \
+		src/memory_stack/memstack_unload_u32.c \
+		src/memory_stack/memstack_unload_u64.c \
+		src/memory_stack/memstack_unload_u8.c \
 		src/memory_tree/memtree_create.c \
 		src/memory_tree/memtree_destroy.c \
 		src/memory_tree/memtree_get_height.c \
 		src/memory_tree/memtree_insert.c \
 		src/memory_tree/memtree_rebalance.c \
 		src/memory_tree/memtree_remove.c \
-		src/memory_tree/memtree_update_height.c \
-		src/memstack/memstack_create.c \
-		src/memstack/memstack_destroy.c \
-		src/memstack/memstack_load.c \
-		src/memstack/memstack_load_any.c \
-		src/memstack/memstack_load_i32.c \
-		src/memstack/memstack_load_i64.c \
-		src/memstack/memstack_load_i8.c \
-		src/memstack/memstack_load_u32.c \
-		src/memstack/memstack_load_u64.c \
-		src/memstack/memstack_load_u8.c \
-		src/memstack/memstack_unload_any.c \
-		src/memstack/memstack_unload_i32.c \
-		src/memstack/memstack_unload_i64.c \
-		src/memstack/memstack_unload_i8.c \
-		src/memstack/memstack_unload_u32.c \
-		src/memstack/memstack_unload_u64.c \
-		src/memstack/memstack_unload_u8.c
+		src/memory_tree/memtree_update_height.c
 
 minishell_objects = 	src/main.o \
 		src/contexts/config/config_create.o \
@@ -153,30 +153,30 @@ minishell_objects = 	src/main.o \
 		src/linked_list/linked_list_node_destroy.o \
 		src/linked_list/linked_list_node_new.o \
 		src/lua/lua_loadfile.o \
+		src/memory_stack/memstack_create.o \
+		src/memory_stack/memstack_destroy.o \
+		src/memory_stack/memstack_load.o \
+		src/memory_stack/memstack_load_any.o \
+		src/memory_stack/memstack_load_i32.o \
+		src/memory_stack/memstack_load_i64.o \
+		src/memory_stack/memstack_load_i8.o \
+		src/memory_stack/memstack_load_u32.o \
+		src/memory_stack/memstack_load_u64.o \
+		src/memory_stack/memstack_load_u8.o \
+		src/memory_stack/memstack_unload_any.o \
+		src/memory_stack/memstack_unload_i32.o \
+		src/memory_stack/memstack_unload_i64.o \
+		src/memory_stack/memstack_unload_i8.o \
+		src/memory_stack/memstack_unload_u32.o \
+		src/memory_stack/memstack_unload_u64.o \
+		src/memory_stack/memstack_unload_u8.o \
 		src/memory_tree/memtree_create.o \
 		src/memory_tree/memtree_destroy.o \
 		src/memory_tree/memtree_get_height.o \
 		src/memory_tree/memtree_insert.o \
 		src/memory_tree/memtree_rebalance.o \
 		src/memory_tree/memtree_remove.o \
-		src/memory_tree/memtree_update_height.o \
-		src/memstack/memstack_create.o \
-		src/memstack/memstack_destroy.o \
-		src/memstack/memstack_load.o \
-		src/memstack/memstack_load_any.o \
-		src/memstack/memstack_load_i32.o \
-		src/memstack/memstack_load_i64.o \
-		src/memstack/memstack_load_i8.o \
-		src/memstack/memstack_load_u32.o \
-		src/memstack/memstack_load_u64.o \
-		src/memstack/memstack_load_u8.o \
-		src/memstack/memstack_unload_any.o \
-		src/memstack/memstack_unload_i32.o \
-		src/memstack/memstack_unload_i64.o \
-		src/memstack/memstack_unload_i8.o \
-		src/memstack/memstack_unload_u32.o \
-		src/memstack/memstack_unload_u64.o \
-		src/memstack/memstack_unload_u8.o
+		src/memory_tree/memtree_update_height.o
 
 minishell_headers = 	include/any.h \
 		include/binary_tree.h \
@@ -261,30 +261,30 @@ minishell_depends = 	src/main.d \
 		src/linked_list/linked_list_node_destroy.d \
 		src/linked_list/linked_list_node_new.d \
 		src/lua/lua_loadfile.d \
+		src/memory_stack/memstack_create.d \
+		src/memory_stack/memstack_destroy.d \
+		src/memory_stack/memstack_load.d \
+		src/memory_stack/memstack_load_any.d \
+		src/memory_stack/memstack_load_i32.d \
+		src/memory_stack/memstack_load_i64.d \
+		src/memory_stack/memstack_load_i8.d \
+		src/memory_stack/memstack_load_u32.d \
+		src/memory_stack/memstack_load_u64.d \
+		src/memory_stack/memstack_load_u8.d \
+		src/memory_stack/memstack_unload_any.d \
+		src/memory_stack/memstack_unload_i32.d \
+		src/memory_stack/memstack_unload_i64.d \
+		src/memory_stack/memstack_unload_i8.d \
+		src/memory_stack/memstack_unload_u32.d \
+		src/memory_stack/memstack_unload_u64.d \
+		src/memory_stack/memstack_unload_u8.d \
 		src/memory_tree/memtree_create.d \
 		src/memory_tree/memtree_destroy.d \
 		src/memory_tree/memtree_get_height.d \
 		src/memory_tree/memtree_insert.d \
 		src/memory_tree/memtree_rebalance.d \
 		src/memory_tree/memtree_remove.d \
-		src/memory_tree/memtree_update_height.d \
-		src/memstack/memstack_create.d \
-		src/memstack/memstack_destroy.d \
-		src/memstack/memstack_load.d \
-		src/memstack/memstack_load_any.d \
-		src/memstack/memstack_load_i32.d \
-		src/memstack/memstack_load_i64.d \
-		src/memstack/memstack_load_i8.d \
-		src/memstack/memstack_load_u32.d \
-		src/memstack/memstack_load_u64.d \
-		src/memstack/memstack_load_u8.d \
-		src/memstack/memstack_unload_any.d \
-		src/memstack/memstack_unload_i32.d \
-		src/memstack/memstack_unload_i64.d \
-		src/memstack/memstack_unload_i8.d \
-		src/memstack/memstack_unload_u32.d \
-		src/memstack/memstack_unload_u64.d \
-		src/memstack/memstack_unload_u8.d
+		src/memory_tree/memtree_update_height.d
 
 minishell_includes = 	-iquote include
 
