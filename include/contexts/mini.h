@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:14:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 14:56:45 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:00:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@ struct s_mini_context {
 
 // mini_token is better than token
 // put it here
+// ask for help to build the grammar
+typedef struct s_mini_token		*t_mini_token;
+
+struct s_mini_token {
+	t_cstring	value;
+	t_u32		length;
+	t_i32		type;	
+};
 
 t_mini	mini_create(t_i32 argc, t_cstring_array argv);
 t_mem	mini_alloc(t_mini mini, t_u32 size);

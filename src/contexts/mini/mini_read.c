@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:23:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 14:54:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:09:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_none	mini_read(t_mini mini)
 {
 	const t_input	input = mini->input;
 	
+	mini->input->is_complete = TRUE;
 	input_get_prompt(mini);
 	if (input->line)
 	{

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 14:56:26 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:03:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,18 @@
 
 t_none	mini_tokenize(t_mini mini)
 {
-	(void)mini;
+	const t_lexer	lexer = mini->lexer;
+
+	if (lexer->mode == LEXER_MODE_ORDINARY)
+	{
+		lexer_ordinary(mini);
+	}
+	else if (lexer->mode == LEXER_MODE_HEREDOC)
+	{
+		lexer_heredoc(mini);
+	}
+	// print tokens
+	// (tokens) "dsajf", "kadlfjsasd", "kdlasfjl", ..., "aksdfjlsad"
 }
 
 #else
