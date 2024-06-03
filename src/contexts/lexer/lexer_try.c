@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_token_length.c                                 :+:      :+:    :+:   */
+/*   lexer_try.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 14:40:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/01 16:46:46 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/01 18:36:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
-#include "lexer.h"
-#include "types.h"
 
-t_i32	get_token_length(t_cstring line, t_i32 type)
+t_bool	lexer_try(t_mini mini, t_cstring operator)
 {
-	if (type == OPEN_PAREN || type == CLOSE_PAREN || type == PIPE \
-		|| type == REDIR_IN || type == REDIR_OUT)
-		return (1);
-	else if (type == AND || type == OR || type == REDIR_APPEND \
-		|| type == REDIR_HEREDOC)
-		return (2);
-	else if (type == WORD)
-		return (get_word_length(line));
-	return (0);
+	const t_lexer	lexer = mini->lexer;
+
+	mini->i = 0;
+	while (mini->i < lexer->buffer_length)
+	{
+		if (operator[mini->i] == '\0')
+			return (FALSE);
+		if (lexer->buffer[mini->i] != operator[mini->i])
+			return (FALSE);
+		mini->i++;
+	}
+	if (lexer->cursor[0] != operator[mini->i])
+		return (FALSE);
+	return (TRUE);	
 }

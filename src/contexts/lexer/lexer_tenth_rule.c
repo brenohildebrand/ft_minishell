@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_lexer_tenth_rule.c                        :+:      :+:    :+:   */
+/*   lexer_tenth_rule.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 19:15:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:07:10 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/31 21:19:36 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/01 23:32:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
  * 10th rule:
  * The current character is used as the start of a new word.
 */
-t_none	mini_lexer_tenth_rule(t_mini mini)
+t_none	lexer_tenth_rule(t_mini mini)
 {
-	// const t_lexer	context = mini->lexer;
+	const t_lexer	lexer = mini->lexer;
 
-	// if (context->has_applied_rule)
-	// 	return ;
-	// context->delimiter_start = context->cursor;
-	// context->is_word = TRUE;
-	// (context->cursor)++;
-	(void)mini;
+	lexer_add_character(mini);
+	lexer->is_operator = FALSE;
+	lexer->has_applied_rule = TRUE;
+	printf("10th rule applied.\n");
 }

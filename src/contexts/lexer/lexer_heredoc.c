@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_lexer_heredoc.c                               :+:      :+:    :+:   */
+/*   lexer_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:13:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:41:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-t_none	mini_lexer_heredoc(t_mini mini)
+t_none	lexer_heredoc(t_mini mini)
 {
 	(void)mini;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_lexer_ninth_rule.c                        :+:      :+:    :+:   */
+/*   lexer_ninth_rule.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:35:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:36:36 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/31 21:19:26 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/01 23:32:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@
  * but excluding, the next <newline> shall be discarded as a comment. The
  * <newline> that ends the line is not considered part of the comment.
 */
-t_none	mini_lexer_ninth_rule(t_mini mini)
+t_none	lexer_ninth_rule(t_mini mini)
 {
-	// const t_lexer	context = mini->lexer;
+	const t_lexer	lexer = mini->lexer;
 
-	// if (*(context->cursor) == '#')
-	// {
-	// 	while (*(context->cursor) != '\n' && *(context->cursor) != '\0')
-	// 	{
-	// 		(context->cursor)++;
-	// 	}
-	// }
-	(void)mini;
+	if (lexer->cursor[0] == '#')
+	{
+		while (lexer->cursor[0] != '\n' && lexer->cursor[0] != '\0')
+		{
+			lexer_discard_character(mini);
+			lexer->has_applied_rule = TRUE;
+			printf("9th rule applied.\n");
+		}
+	}
 }

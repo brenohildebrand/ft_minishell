@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_lexer_fifth_rule.c                        :+:      :+:    :+:   */
+/*   lexer_fifth_rule.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:13:08 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:26:02 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/31 21:18:44 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/01 23:31:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,23 @@
  * them in the manner specified for the construct that is found. The characters
  * found from the beginning of the substitution to its end, allowing for any 
  * recursion necessary to recognize embedded constructs, shall be included 
- * unmodified in the result token, including any embedded or enclosing substitution operators or quotes. The token shall not be delimited by the end of the substitution.
+ * unmodified in the result token, including any embedded or enclosing 
+ * substitution operators or quotes. The token shall not be delimited by the 
+ * end of the substitution.
 */
-t_none	mini_lexer_fifth_rule(t_mini mini)
+t_none	lexer_fifth_rule(t_mini mini)
 {
-	(void)mini;
+	const t_lexer	lexer = mini->lexer;
+	
+	if (!lexer->is_quoted && lexer->cursor[0] == '$' && lexer->cursor[1] == '{')
+	{
+		lexer_delimit(mini);
+		lexer_add_character(mini);
+		while (lexer->cursor[0] != '}')
+			lexer_add_character(mini);
+		lexer_add_character(mini);
+		lexer_delimit(mini);
+		lexer->has_applied_rule = TRUE;
+		printf("5h rule applied.\n");
+	}
 }

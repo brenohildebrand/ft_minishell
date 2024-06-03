@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   lexer_try_operator.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 10:43:53 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/17 10:44:20 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/01 15:36:57 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/01 16:50:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "contexts/mini.h"
 
-size_t	ft_strlen(const char *s)
+t_bool	lexer_try_operator(t_mini mini)
 {
-	size_t	i;
+	t_bool	found;
 
-	i = 0;
-	if (s == NULL)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+	found = FALSE;
+	found = found || lexer_try(mini, "<<");
+	found = found || lexer_try(mini, ">>");
+	found = found || lexer_try(mini, "<");
+	found = found || lexer_try(mini, ">");
+	found = found || lexer_try(mini, "|");
+	found = found || lexer_try(mini, "||");
+	found = found || lexer_try(mini, "&&");
+	return (found);
 }

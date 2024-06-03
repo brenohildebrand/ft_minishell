@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_lexer_fourth_rule.c                       :+:      :+:    :+:   */
+/*   lexer_fourth_rule.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:10:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:11:37 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/31 21:18:35 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/01 23:31:40 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@
  * <quotation-mark> and the end of the quoted text. The token shall not be 
  * delimited by the end of the quoted field.
 */
-t_none	mini_lexer_fourth_rule(t_mini mini)
+t_none	lexer_fourth_rule(t_mini mini)
 {
-	(void)mini;
+	const t_lexer	lexer = mini->lexer;
+
+	if ((lexer->cursor[0] == '\\' || lexer->cursor[0] == '\'' || lexer->cursor[0] == '"') && !lexer->is_quoted)
+	{
+		lexer->is_quoted = TRUE;	
+		lexer->has_applied_rule = TRUE;
+		printf("4h rule applied.\n");
+	}
 }

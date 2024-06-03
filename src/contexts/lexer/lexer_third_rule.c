@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_lexer_third_rule.c                        :+:      :+:    :+:   */
+/*   lexer_third_rule.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:07:24 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/25 20:08:44 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/31 21:17:59 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/01 23:31:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@
  * character cannot be used with the previous characters to form an operator, 
  * the operator containing the previous character shall be delimited.
 */
-t_none	mini_lexer_third_rule(t_mini mini)
+t_none	lexer_third_rule(t_mini mini)
 {
-	(void)mini;
+	const t_lexer	lexer = mini->lexer;
+
+	if (lexer->is_operator)
+	{
+		if (!lexer_try_operator(mini))
+		{
+			lexer_delimit(mini);
+			lexer->has_applied_rule = TRUE;
+			printf("3rd rule applied.\n");
+		}
+	}
 }
