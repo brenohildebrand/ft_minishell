@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/04 10:24:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:37:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 #ifdef ENABLE_DEBUGGER
 
-static t_none	print_tokens(t_mini mini)
+t_none	mini_tokenize(t_mini mini)
 {
 	const t_lexer	lexer = mini->lexer;
 	t_list_node		node;
 	t_mini_token	token;
-		
+
+	if (lexer->mode == LEXER_MODE_ORDINARY)
+	{
+		lexer_ordinary(mini);
+	}
+	else if (lexer->mode == LEXER_MODE_HEREDOC)
+	{
+		lexer_heredoc(mini);
+	}
 	node = lexer->tokens->head;
 	printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
 	while (node)
@@ -31,21 +39,6 @@ static t_none	print_tokens(t_mini mini)
 		node = node->next;
 	}
 	printf("\n");
-}
-
-t_none	mini_tokenize(t_mini mini)
-{
-	const t_lexer	lexer = mini->lexer;
-
-	if (lexer->mode == LEXER_MODE_ORDINARY)
-	{
-		lexer_ordinary(mini);
-	}
-	else if (lexer->mode == LEXER_MODE_HEREDOC)
-	{
-		lexer_heredoc(mini);
-	}
-	print_tokens(mini);
 }
 
 #else

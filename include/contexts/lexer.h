@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:20:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/04 09:58:19 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:08:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ t_i32	lexer_classify(t_mini mini);
 t_none	lexer_init_table(t_mini mini);
 
 t_none	lexer_automaton(t_mini mini);
+t_none	lexer_expand_word(t_mini mini, t_list_node node);
+
+t_none	lexer_expand_word(t_mini mini);
 
 #endif
