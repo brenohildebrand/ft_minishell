@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:50:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 16:10:31 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 09:53:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 t_none	mini_execute(t_mini mini)
 {
 	(void)mini;
+	mini->input->is_complete = FALSE;
 	// for each node in the tree call the children and executes itself
 }

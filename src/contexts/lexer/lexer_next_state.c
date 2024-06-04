@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:46:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 18:50:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 09:59:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_none	lexer_next_state(t_mini mini)
 	const t_lexer	lexer = mini->lexer;
 	t_i8			character;
 
-	character = lexer->cursor[lexer->index];
+	character = lexer->cursor[lexer->end];
 	if (character == '>')
 		lexer->state = lexer->table[lexer->state][1];
 	else if (character == '<')

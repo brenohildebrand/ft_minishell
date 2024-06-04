@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:11:11 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 18:51:31 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:28:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ t_none	lexer_automaton(t_mini mini)
 	const t_lexer	lexer = mini->lexer;
 
 	lexer->state = 0;
-	lexer->index = 0;
-	linked_list_destroy(mini, lexer->tokens);
+	lexer->start = 0;
+	lexer->end = 0;
+	lexer->cursor = mini->input->line;
+	if (lexer->tokens)
+		linked_list_destroy(mini, lexer->tokens);
 	lexer->tokens = linked_list_new(mini);
 	while (42)
 	{
@@ -26,9 +29,14 @@ t_none	lexer_automaton(t_mini mini)
 		if (lexer_is_final_state(mini))
 		{
 			lexer_delimit(mini);
-			if (lexer->cursor[lexer->index] == '\0')
-				break ;	
+			if (lexer->cursor[lexer->start] == '\0')
+				break ;
 		}
-		lexer->index++;
+		else
+		{
+			lexer->end++;
+			if (lexer->state == 0)
+				lexer->start++;
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:20:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 18:52:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 09:58:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef t_lexer_context			t_lexer;
 struct s_lexer_context {
 	t_i32			mode;
 	t_cstring		cursor;
-	t_i32			index;
+	t_i32			start;
+	t_i32			end;
 	t_i32			state;
 	t_i32			table[7][8];
 	t_list			tokens;
