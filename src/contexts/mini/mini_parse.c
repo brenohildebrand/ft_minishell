@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:11:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:24:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,22 @@
 t_none	mini_parse(t_mini mini)
 {
 	(void)mini;
+	// mini->parser->tree = simple_command(mini);
+	// simple command tries to build a tree for its grammar and that follows
+	// if an error occur during the process print the error and abort the 
+	// current statement and line, just reset everything
 }
+
+// t_tree	parser_simple_command(t_mini mini)
+// {
+// 	t_tree	tree;
+
+// 	tree = try_command();
+// 	if (tree)
+// 		return (tree);
+// 	tree = try_command();	
+// 	return (tree);	
+// }
 
 // t_none	mini_parse_expression()
 // {

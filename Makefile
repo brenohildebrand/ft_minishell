@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/04 10:37:31 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/04 10:37:31 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/04 21:08:39 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/04 21:08:39 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ minishell_sources = 	src/main.c \
 		src/contexts/lexer/lexer_create.c \
 		src/contexts/lexer/lexer_delimit.c \
 		src/contexts/lexer/lexer_discard_character.c \
+		src/contexts/lexer/lexer_expand.c \
+		src/contexts/lexer/lexer_expand_dquotes.c \
+		src/contexts/lexer/lexer_expand_word.c \
 		src/contexts/lexer/lexer_heredoc.c \
 		src/contexts/lexer/lexer_init_table.c \
 		src/contexts/lexer/lexer_is_final_state.c \
@@ -52,10 +55,13 @@ minishell_sources = 	src/main.c \
 		src/cstring/cstring_copy.c \
 		src/cstring/cstring_dirname.c \
 		src/cstring/cstring_get_length.c \
+		src/cstring/cstring_get_subcstring.c \
 		src/cstring/cstring_is_not_empty.c \
 		src/cstring/cstring_join.c \
 		src/cstring/cstring_to_stderr.c \
 		src/cstring/cstring_to_stdout.c \
+		src/i32/i32_to_cstring.c \
+		src/i8/i8_is_whitespace.c \
 		src/linked_list/linked_list_append.c \
 		src/linked_list/linked_list_destroy.c \
 		src/linked_list/linked_list_new.c \
@@ -101,6 +107,9 @@ minishell_objects = 	src/main.o \
 		src/contexts/lexer/lexer_create.o \
 		src/contexts/lexer/lexer_delimit.o \
 		src/contexts/lexer/lexer_discard_character.o \
+		src/contexts/lexer/lexer_expand.o \
+		src/contexts/lexer/lexer_expand_dquotes.o \
+		src/contexts/lexer/lexer_expand_word.o \
 		src/contexts/lexer/lexer_heredoc.o \
 		src/contexts/lexer/lexer_init_table.o \
 		src/contexts/lexer/lexer_is_final_state.o \
@@ -123,10 +132,13 @@ minishell_objects = 	src/main.o \
 		src/cstring/cstring_copy.o \
 		src/cstring/cstring_dirname.o \
 		src/cstring/cstring_get_length.o \
+		src/cstring/cstring_get_subcstring.o \
 		src/cstring/cstring_is_not_empty.o \
 		src/cstring/cstring_join.o \
 		src/cstring/cstring_to_stderr.o \
 		src/cstring/cstring_to_stdout.o \
+		src/i32/i32_to_cstring.o \
+		src/i8/i8_is_whitespace.o \
 		src/linked_list/linked_list_append.o \
 		src/linked_list/linked_list_destroy.o \
 		src/linked_list/linked_list_new.o \
@@ -199,6 +211,9 @@ minishell_depends = 	src/main.d \
 		src/contexts/lexer/lexer_create.d \
 		src/contexts/lexer/lexer_delimit.d \
 		src/contexts/lexer/lexer_discard_character.d \
+		src/contexts/lexer/lexer_expand.d \
+		src/contexts/lexer/lexer_expand_dquotes.d \
+		src/contexts/lexer/lexer_expand_word.d \
 		src/contexts/lexer/lexer_heredoc.d \
 		src/contexts/lexer/lexer_init_table.d \
 		src/contexts/lexer/lexer_is_final_state.d \
@@ -221,10 +236,13 @@ minishell_depends = 	src/main.d \
 		src/cstring/cstring_copy.d \
 		src/cstring/cstring_dirname.d \
 		src/cstring/cstring_get_length.d \
+		src/cstring/cstring_get_subcstring.d \
 		src/cstring/cstring_is_not_empty.d \
 		src/cstring/cstring_join.d \
 		src/cstring/cstring_to_stderr.d \
 		src/cstring/cstring_to_stdout.d \
+		src/i32/i32_to_cstring.d \
+		src/i8/i8_is_whitespace.d \
 		src/linked_list/linked_list_append.d \
 		src/linked_list/linked_list_destroy.d \
 		src/linked_list/linked_list_new.d \

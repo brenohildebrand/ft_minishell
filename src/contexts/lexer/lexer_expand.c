@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   i8.h                                               :+:      :+:    :+:   */
+/*   lexer_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 12:42:45 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/04 19:36:52 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/04 19:30:22 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/04 21:05:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef I8_H
-# define I8_H
+#include "contexts/mini.h"
 
-# include "bool.h"
+t_cstring	lexer_expand(t_mini mini, t_cstring str)
+{
+	t_cstring	new_str;
+	t_i32		length;
 
-typedef char	t_i8;
-
-t_bool	i8_is_whitespace(t_i8 character);
-
-#endif
+	length = cstring_get_length(str);
+	if (length == 1)
+	{
+		if (str[0] == '?')
+		{
+			new_str = cstring_copy(mini, i32_to_cstring(mini, mini->exit_status));
+		}
+	}
+	else
+	{
+		new_str = getenv(str);
+	}
+	return (new_str);
+}

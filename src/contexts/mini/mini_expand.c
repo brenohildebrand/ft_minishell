@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:57:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/04 11:48:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:06:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_none	mini_expand(t_mini mini)
 {
-	const t_lexer	lexer = lexer;
+	const t_lexer	lexer = mini->lexer;
 	t_mini_token	token;
 	t_list_node		node;
 
@@ -30,7 +30,7 @@ t_none	mini_expand(t_mini mini)
 		{
 			lexer_expand_word(mini, node);
 		}
-		else if (token->value[0] == "\"")
+		else if (token->value[0] == '"')
 		{
 			lexer_expand_dquotes(mini, node);	
 		}
