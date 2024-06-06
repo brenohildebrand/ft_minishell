@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:12:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 13:50:33 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
 t_none	mini_evaluate(t_mini mini)
 {

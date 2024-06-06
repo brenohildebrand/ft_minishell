@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_to_stdout.c                                :+:      :+:    :+:   */
+/*   mini_config_create.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 16:44:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 10:04:21 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 11:08:40 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
-t_none	cstring_to_stdout(t_cstring message)
+t_none	mini_config_create(t_mini mini)
 {
-	write(STDOUT_FILENO, message, cstring_get_length(message));
+	mini->config = mini_alloc(mini, sizeof(struct s_config_context));
+	mini_config_create_lua_state(t_mini mini);
+	mini_config_create_path(t_mini mini);
+	mini_config_create_prompt(t_mini mini);
+	mini_config_destroy_lua_state(t_mini mini);
 }

@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_to_stderr.c                                :+:      :+:    :+:   */
+/*   cstring_is_not_empty.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 12:52:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/21 17:38:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
-t_none	cstring_to_stderr(t_cstring message)
+t_bool	cstring_is_not_empty(t_cstring cstring)
 {
-	write(STDERR_FILENO, message, cstring_get_length(message));
+	if (cstring == NULL || cstring[0] == '\0')
+	{
+		return (FALSE);
+	}
+	return (TRUE);
 }

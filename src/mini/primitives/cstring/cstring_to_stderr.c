@@ -1,43 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader_get_prompt.c                                :+:      :+:    :+:   */
+/*   cstring_to_stderr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 17:47:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/05 21:30:22 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/20 12:52:42 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
-#ifdef ENABLE_LUA
-
-t_none	reader_get_prompt(t_mini mini)
+t_none	cstring_to_stderr(t_cstring message)
 {
-	if (mini->reader->is_multiline)
-	{
-		mini->reader->prompt = MULTILINE_PROMPT;
-	}
-	else
-	{
-		mini->reader->prompt = mini->config->prompt;
-	}
+	write(STDERR_FILENO, message, cstring_get_length(message));
 }
-
-#else
-
-t_none	input_get_prompt(t_mini mini)
-{
-	if (mini->is_multiline)
-	{
-		mini->input->prompt = MULTILINE_PROMPT;
-	}
-	else
-	{
-		mini->input->prompt = PROMPT;
-	}
-}
-
-#endif

@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:27:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/31 17:19:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
 t_i64	memstack_unload_i64(t_mini mini)
 {

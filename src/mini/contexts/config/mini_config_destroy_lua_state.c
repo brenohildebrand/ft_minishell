@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_create.c                                    :+:      :+:    :+:   */
+/*   mini_config_destroy_lua_state.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 22:05:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 11:09:02 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 11:09:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	parser_create(t_mini mini)
+t_none	mini_config_destroy_lua_state(t_mini mini)
 {
-	mini->parser = mini_alloc(mini, sizeof(struct s_parser_context));
-	mini->parser->tree = NULL;
+	lua_close(mini->config->lua_state);
+	mini->config->lua_state = NULL;	
 }

@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_get_length.c                               :+:      :+:    :+:   */
+/*   mini_config_create_prompt.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 13:03:51 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 10:31:15 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 13:03:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
-t_i32	cstring_get_length(t_cstring message)
+t_none	mini_config_create_prompt(t_mini mini)
 {
-	t_i32	length;
+	t_cstring	lua_prompt;
 
-	if (message == NULL)
+	lua_getglobal(mini->config->lua_state, "prompt");
+	if (!lua_isstring(mini->config->lua_state, -1))
 	{
-		return (0);
+		lua_prompt = PROMPT;
 	}
-	length = 0;
-	while (message[length])
+	else
 	{
-		length += 1;
+		lua_prompt = (char *)lua_tolstring(config->lua_state, -1, NULL);
 	}
-	return (length);
+	mini->config->prompt = mini_cstring_copy(mini, lua_prompt);
+	lua_pop(mini->config->lua_state, 1);
 }

@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_get_subcstring.c                           :+:      :+:    :+:   */
+/*   mini_reader_create_prompt.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 11:53:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/04 11:56:53 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 09:50:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 12:56:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
-t_cstring	cstring_get_subcstring(
-	t_mini mini,
-	t_cstring cstring,
-	t_i32 start,
-	t_i32 end
-){
-	t_cstring	subcstring;
-	t_i32		length;
-	t_i32		i;
+#ifdef ENABLE_LUA
 
-	length = end - start + 1;
-	subcstring = mini_alloc(mini, length + 1);
-	subcstring[length] = '\0';
-	i = 0;
-	while (i < length)
-	{
-		subcstring[i] = cstring[start + i];
-		i++;
-	}
-	return (subcstring);
+t_none	mini_reader_create_prompt(t_mini mini)
+{
+	mini->reader->prompt = mini->config->prompt;
+	mini->reader->multiline_prompt = mini->config->multiline_prompt;
 }
+
+#else
+
+t_none	mini_reader_create_prompt(t_mini mini)
+{
+	mini->reader->prompt = PROMPT;
+	mini->reader->multiline_prompt = MULTILINE_PROMPT;
+}
+
+#endif

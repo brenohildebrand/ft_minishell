@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:46:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/04 09:59:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
 t_none	lexer_next_state(t_mini mini)
 {

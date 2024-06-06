@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_create.c                                    :+:      :+:    :+:   */
+/*   cstring_get_length.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 22:05:27 by bhildebr          #+#    #+#             */
+/*   Created: 2024/05/20 13:03:51 by bhildebr          #+#    #+#             */
 /*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	parser_create(t_mini mini)
+t_i32	cstring_get_length(t_cstring message)
 {
-	mini->parser = mini_alloc(mini, sizeof(struct s_parser_context));
-	mini->parser->tree = NULL;
+	t_i32	length;
+
+	if (message == NULL)
+	{
+		return (0);
+	}
+	length = 0;
+	while (message[length])
+	{
+		length += 1;
+	}
+	return (length);
 }

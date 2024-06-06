@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list_destroy.c                                    :+:      :+:    :+:   */
+/*   mini_config_create_multiline_prompt.c              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 11:24:14 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 11:30:23 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 12:57:24 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 13:04:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	linked_list_destroy(t_mini mini, t_linked_list linked_list)
+t_none	mini_config_create_multiline_prompt(t_mini mini)
 {
-	t_linked_list_node	current_node;
-	t_linked_list_node	next_node;
-
-	if (linked_list == NULL)
+	t_cstring	lua_multiline_prompt;
+	
+	lua_getglobal(mini->config->lua_state, "multiline_prompt");
+	if (!lua_isstring(mini->config->lua_state, -1))
 	{
-		return ;
+		lua_multiline_prompt = MULTILINE_PROMPT;
 	}
 	else
 	{
-		current_node = linked_list->head;
-
-		while (current_node)
-		{
-			next_node = current_node->next;	
-			linked_list_node_destroy(mini, current_node);
-			current_node = next_node;
-		}
-		mini_free(mini, linked_list);
+		lua_multiline_prompt = (char *)lua_tolstring(config->lua_state, -1, NULL);
 	}
+	mini->config->multiline_prompt = mini_cstring_copy(mini, lua_multiline_prompt);
+	lua_pop(mini->config->lua_state, 1);
 }

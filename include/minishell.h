@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 00:11:42 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:04:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include "mini/processes/parser.h"
 # include "mini/processes/eval.h"
 # include "mini/contexts/shared.h"
+# include "mini/contexts/config.h"
 
 # define ENABLE_DEBUGGER
 # ifdef ENABLE_DEBUGGER
@@ -56,10 +57,12 @@
 # define MULTILINE_PROMPT "> "
 
 # define MEMORY_ALLOCATION_ERROR 1
+# define LUA_ERROR 2
 
 typedef struct s_mini	*t_mini;
 
 struct s_mini {
+	t_config	config;
 	t_shared	shared;
 	t_reader	reader;
 	t_lexer		lexer;

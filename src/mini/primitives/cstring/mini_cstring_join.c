@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:09:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:09:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
-t_cstring	cstring_join(t_mini mini, t_cstring a, t_cstring b)
+t_cstring	mini_cstring_join(t_mini mini, t_cstring a, t_cstring b)
 {
 	const t_u32	a_length = cstring_get_length(a);
 	const t_u32	b_length = cstring_get_length(b);

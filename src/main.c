@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 00:34:10 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 09:42:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_i32	main(void)
 	mini = mini_create();
 	while (42)
 	{
-		while (!mini->reader->is_complete)
+		while (!mini->shared->is_statement_complete)
 		{
-			mini_reader(mini);
-			mini_lexer(mini);
-			mini_expansion(mini);
-			mini_parser(mini);
+			mini_read(mini);
+			mini_tokenize(mini);
+			mini_expand(mini);
+			mini_parse(mini);
 		}
 		mini_eval(mini);
 	}

@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_copy.c                                     :+:      :+:    :+:   */
+/*   cstring_to_stdout.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:05:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/21 16:44:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
-t_cstring	cstring_copy(t_mini mini, t_cstring original)
+t_none	cstring_to_stdout(t_cstring message)
 {
-	const t_u32	original_length = cstring_get_length(original);
-	t_u32		i;
-	t_cstring	copy;
-
-	copy = mini_alloc(mini, original_length + 1);
-	i = 0;
-	while (i < original_length)
-	{
-		copy[i] = original[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
+	write(STDOUT_FILENO, message, cstring_get_length(message));
 }
