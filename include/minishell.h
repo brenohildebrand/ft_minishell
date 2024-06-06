@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/05 22:35:36 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/05 22:51:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include "mini/i8.h"
-# include "mini/u8.h"
-# include "mini/i32.h"
-# include "mini/u32.h"
-# include "mini/i64.h"
-# include "mini/u64.h"
-# include "mini/any.h"
-# include "mini/bool.h"
-# include "mini/none.h"
-# include "mini/memory.h"
-# include "mini/cstring.h"
+# include "mini/primitives/i8.h"
+# include "mini/primitives/u8.h"
+# include "mini/primitives/i32.h"
+# include "mini/primitives/u32.h"
+# include "mini/primitives/i64.h"
+# include "mini/primitives/u64.h"
+# include "mini/primitives/any.h"
+# include "mini/primitives/bool.h"
+# include "mini/primitives/none.h"
+# include "mini/primitives/memory.h"
+# include "mini/primitives/cstring.h"
+# include "mini/compounds/mini_list.h"
+# include "mini/compounds/mini_tree.h"
 # include "mini/systems/memtree.h"
 # include "mini/systems/memstack.h"
 # include "mini/processes/reader.h"
@@ -57,6 +59,13 @@ typedef struct s_mini	*t_mini;
 struct s_mini {
 	t_i32		argc;
 	t_i8		*argv;
+	t_memtree	memtree;
+	t_memstack	memstack;
+	t_reader	reader;
+	t_lexer		lexer;
+	t_expansion	expansion;
+	t_parser	parser;
+	t_eval		eval;
 };
 
 #endif
