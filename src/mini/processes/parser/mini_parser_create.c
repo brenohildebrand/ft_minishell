@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   mini_parser_create.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 15:19:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/31 21:22:59 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 00:28:15 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 00:29:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#include "minishell.h"
 
-# include "contexts/mini.h"
-
-typedef struct s_string	*t_string;
-
-struct s_string {
-	t_cstring	content;
-	t_u32		length;
-};
-
-t_string	string_new();
-t_string	string_delete();
-
-#endif
+t_none	mini_parser_create(t_mini mini)
+{
+	mini->parser = mini_alloc(mini, sizeof(struct s_parser_process));
+	mini->parser->tree = NULL;
+}

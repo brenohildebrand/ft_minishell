@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.h                                        :+:      :+:    :+:   */
+/*   mini_shared_create.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 16:31:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/05 16:33:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 00:13:28 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 00:15:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANSION_H
-# define EXPANSION_H
+#include "minishell.h"
 
-# include "contexts/mini.h"
-
-typedef struct s_expansion_context	*t_expansion_context;
-typedef t_expansion_context			t_expansion;
-
-struct s_expansion_context {
-	t_mini_list	tokens;
-};
-
-t_none	expansion_create(t_mini mini);
-
-#endif
+t_none	mini_shared_create(t_mini mini)
+{
+	mini->shared = mini_alloc(mini, sizeof(struct s_shared_context));
+	mini->shared->memtree = NULL;
+	mini->shared->memstack = NULL;
+	mini->shared->exit_code = 0;
+	mini->shared->is_statement_complete = FALSE;
+}

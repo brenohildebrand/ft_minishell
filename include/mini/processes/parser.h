@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_assert.c                                      :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:48:52 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/31 18:12:49 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/30 12:51:54 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 00:29:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-t_none	mini_assert(t_mini mini)
-{
-	t_bool		condition;
-	t_cstring	message;
+# include "minishell.h"
 
-	message = memstack_unload_any(mini);
-	condition = memstack_unload_i32(mini);
-	if (condition == FALSE)
-	{
-		cstring_to_stderr(message);
-		mini_quit(mini);
-	}
-}
+typedef struct s_parser_process	*t_parser_process;
+typedef t_parser_process		t_parser;
+
+struct s_parser_process {
+	t_mini_tree	tree;
+};
+
+t_none	mini_parser_create(t_mini mini);
+
+#endif

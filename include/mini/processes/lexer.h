@@ -6,32 +6,32 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:20:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/05 14:45:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 00:27:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "contexts/mini.h"
+# include "minishell.h"
 
 # define LEXER_MODE_ORDINARY 1
 # define LEXER_MODE_HEREDOC 2
 
-typedef struct s_lexer_context	*t_lexer_context;
-typedef t_lexer_context			t_lexer;
+typedef struct s_lexer_process	*t_lexer_process;
+typedef t_lexer_process			t_lexer;
 
-struct s_lexer_context {
+struct s_lexer_process {
 	t_i32			mode;
+	t_mini_list		tokens;
 	t_cstring		cursor;
 	t_i32			start;
 	t_i32			end;
 	t_i32			state;
 	t_i32			table[7][8];
-	t_list			tokens;
 };
 
-t_none		lexer_create(t_mini mini);
+t_none		mini_lexer_create(t_mini mini);
 
 t_none		lexer_ordinary(t_mini mini);
 t_none		lexer_heredoc(t_mini mini);

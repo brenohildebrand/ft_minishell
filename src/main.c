@@ -6,50 +6,50 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/05 16:30:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 00:34:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#include "minishell.h"
 
 #ifdef ENABLE_DEBUGGER
 
-t_i32	main(t_i32 argc, t_cstring_array argv)
+t_i32	main(void)
 {
 	t_mini	mini;
 
 	printf("Mini is running in \033[94mDEBUG\033[0m mode.\n");
-	mini = mini_create(argc, argv);
+	mini = mini_create();
 	while (42)
 	{
-		while (!mini->input->is_complete)
+		while (!mini->reader->is_complete)
 		{
-			mini_read(mini);
-			mini_tokenize(mini);
-			mini_expand(mini);
-			mini_parse(mini);
+			mini_reader(mini);
+			mini_lexer(mini);
+			mini_expansion(mini);
+			mini_parser(mini);
 		}
-		mini_execute(mini);
+		mini_eval(mini);
 	}
 }
 
 #else
 
-t_i32	main(t_i32 argc, t_cstring_array argv)
+t_i32	main(void)
 {
 	t_mini	mini;
 
-	mini = mini_create(argc, argv);
+	mini = mini_create();
 	while (42)
 	{
-		while (!mini->input->is_complete)
+		while (!mini->reader->is_complete)
 		{
-			mini_read(mini);
-			mini_tokenize(mini);
-			mini_expand(mini);
-			mini_parse(mini);
+			mini_reader(mini);
+			mini_lexer(mini);
+			mini_expansion(mini);
+			mini_parser(mini);
 		}
-		mini_execute(mini);
+		mini_eval(mini);
 	}
 }
 

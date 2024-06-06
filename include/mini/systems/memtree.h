@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lua.h                                              :+:      :+:    :+:   */
+/*   memtree.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 12:43:11 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/30 14:41:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/05 23:35:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/05 23:36:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LUA_H
-# define LUA_H
+#ifndef MEMTREE_H
+# define MEMTREE_H
 
-#include "contexts/mini.h"
+typedef struct s_memtree	*t_memtree;
 
-typedef struct lua_State	*t_lua_state;
+struct s_memtree {
 
-t_none	lua_loadfile(t_mini mini, t_lua_state lua_state, t_cstring path);
+};
 
 #endif
