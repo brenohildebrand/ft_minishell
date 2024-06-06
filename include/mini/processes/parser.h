@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:51:54 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 00:29:44 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:42:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef t_parser_process		t_parser;
 
 struct s_parser_process {
 	t_mini_tree	tree;
+	t_mini_list	cursor;
 };
 
 t_none	mini_parser_create(t_mini mini);

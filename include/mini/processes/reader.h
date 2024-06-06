@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 15:42:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:14:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READER_H
 # define READER_H
 
-# include "contexts/mini.h"
+# include "minishell.h"
 
 typedef struct s_reader_process	*t_reader_process;
 typedef t_reader_process		t_reader;

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 11:04:44 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:14:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,13 @@ struct s_mini {
 t_mini	mini_create(void);
 t_mini	mini_assert(t_mini mini, t_bool condition, t_u8 code);
 t_mini	mini_quit(t_mini mini, t_u8 code);
+t_mem	mini_alloc(t_mini mini, t_u32 size);
+t_none	mini_free(t_mini mini, t_mem mem);
+t_none	mini_read(t_mini mini);
+t_none	mini_tokenize(t_mini mini);
+t_none	mini_expand(t_mini mini);
+t_none	mini_parse(t_mini mini);
+t_none	mini_eval(t_mini mini);
+t_none	mini_quit(t_mini mini);
 
 #endif
