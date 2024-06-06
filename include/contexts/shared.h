@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_create.c                                     :+:      :+:    :+:   */
+/*   shared.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 15:22:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 14:51:30 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/05 16:54:11 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/05 18:37:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#ifndef SHARED_H
+# define SHARED_H
 
-t_none	input_create(t_mini mini)
-{
-	mini->input = mini_alloc(mini, sizeof(struct s_input_context));
-	mini->input->line = NULL;
-	mini->input->prompt = NULL;
-	mini->input->is_complete = FALSE;
-}
+# include "contexts/mini.h"
+
+typedef struct s_shared_context	*t_shared_context;
+typedef t_shared_context		t_shared;
+
+struct s_shared_context {
+	t_memtree	memtree;
+	t_memstack	memstack;
+	t_bool		is_statement_complete;
+	t_i32		exit_status;
+};
+
+#endif

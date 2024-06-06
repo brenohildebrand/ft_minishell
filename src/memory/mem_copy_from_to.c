@@ -1,43 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_get_prompt.c                                 :+:      :+:    :+:   */
+/*   mem_copy_from_to.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 17:47:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 14:55:28 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/05 18:24:43 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/05 21:49:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contexts/mini.h"
 
-#ifdef ENABLE_LUA
-
-t_none	input_get_prompt(t_mini mini)
+void	mem_copy_from_to(t_mem from, t_mem to, t_i32 size)
 {
-	if (mini->is_multiline)
+	t_i32	i;
+	
+	i = 0;
+	while (i < size)
 	{
-		mini->input->prompt = MULTILINE_PROMPT;
-	}
-	else
-	{
-		mini->input->prompt = mini->config->prompt;
+		((t_u8 *)to)[i] = ((t_u8 *)from)[i];
+		i++;
 	}
 }
-
-#else
-
-t_none	input_get_prompt(t_mini mini)
-{
-	if (mini->is_multiline)
-	{
-		mini->input->prompt = MULTILINE_PROMPT;
-	}
-	else
-	{
-		mini->input->prompt = PROMPT;
-	}
-}
-
-#endif

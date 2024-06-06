@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:14:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/03 18:47:54 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/05 21:56:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,27 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include "i8.h"
-# include "u8.h"
-# include "i32.h"
-# include "u32.h"
-# include "i64.h"
-# include "u64.h"
-# include "any.h"
-# include "none.h"
-# include "bool.h"
-# include "memory.h"
-# include "cstring.h"
-# include "string.h"
-# include "memory_tree.h"
-# include "memory_stack.h"
-# include "linked_list.h"
-# include "binary_tree.h"
-# include "hash_table.h"
-# include "stack.h"
-# include "lua.h"
-# include "contexts/lexer.h"
-# include "contexts/parser.h"
-# include "contexts/input.h"
-# include "contexts/config.h"
+// # include "i8.h"
+// # include "u8.h"
+// # include "i32.h"
+// # include "u32.h"
+// # include "i64.h"
+// # include "u64.h"
+// # include "any.h"
+// # include "none.h"
+// # include "bool.h"
+// # include "memory.h"
+
+// # include "types.h"
+// # include "memory_tree.h"
+// # include "memory_stack.h"
+// # include "contexts/shared.h"
+// # include "contexts/config.h"
+// # include "contexts/reader.h"
+// # include "contexts/lexer.h"
+// # include "contexts/expansion.h"
+// # include "contexts/parser.h"
+// # include "contexts/eval.h"
 
 # define ENABLE_DEBUGGER
 # ifdef ENABLE_DEBUGGER
@@ -52,53 +50,65 @@
 #  include <lua5.4/lua.h>
 #  include <lua5.4/lauxlib.h>
 #  include <lua5.4/lualib.h>
+#  include "lua.h"
 # endif
 
 # define PROMPT "mini> "
 # define MULTILINE_PROMPT "> "
 
-# define MINI_TOKEN_WORD 0
-# define MINI_TOKEN_GT 1
-# define MINI_TOKEN_DGT 2
-# define MINI_TOKEN_LT 3
-# define MINI_TOKEN_DLT 4
-# define MINI_TOKEN_PIPE 5
-# define MINI_TOKEN_DQUOTES 6
-# define MINI_TOKEN_SQUOTES 7
-
 typedef struct s_mini_context	*t_mini_context;
 typedef t_mini_context			t_mini;
 
 struct s_mini_context {
-	t_memtree			memtree;
-	t_memstack			memstack;
-	t_i32				argc;
-	t_cstring_array		argv;
-	t_i32				i;
-	t_i32				j;
-	t_i32				k;
-	t_cstring			str;
-	t_bool				is_multiline;
-	t_bool				is_statement_complete;
-	t_config_context	config;
-	t_input_context		input;
-	t_lexer				lexer;
-	t_parser_context	parser;
-	t_i32				exit_status;
+	t_i32		argc;
+	t_i8		*argv;
+	t_shared	shared;
+	t_config	config;
+	t_reader	reader;
+	t_lexer		lexer;
+	t_expansion	expansion;
+	t_parser	parser;
+	t_eval		eval;
 };
 
-// mini_token is better than token
-// put it here
-// ask for help to build the grammar
 typedef struct s_mini_token		*t_mini_token;
 
 struct s_mini_token {
 	t_cstring	value;
 	t_i32		length;
-	t_i32		type;	
+	t_i32		type;
 };
 
-t_mini	mini_create(t_i32 argc, t_cstring_array argv);
+enum e_mini_token_type {
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_HEREDOC,
+	REDIR_APPEND,
+	PIPE,
+	DOUBLE_QUOTES,
+	SINGLE_QUOTES,
+	WORD,
+};
+
+typedef struct s_mini_list		*t_mini_list;
+
+struct s_mini_list {
+	t_mini_list		next;
+	t_mini_list		previous;
+	t_mini_token	token;
+};
+
+typedef t_none					(*t_mini_function)(t_mini mini);
+typedef	t_mini_function			t_mini_fn; 
+
+typedef struct s_mini_tree		*t_mini_tree;
+
+struct s_mini_tree {
+	t_mini_tree		*children;
+	t_mini_fn		evaluate;
+};
+
+t_mini	mini_create(t_i32 argc, t_i8 *argv);
 t_mem	mini_alloc(t_mini mini, t_u32 size);
 t_none	mini_free(t_mini mini, t_mem mem);
 t_none	mini_read(t_mini mini);

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:11:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/04 21:24:50 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:35:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ t_none	mini_parse(t_mini mini)
 	// current statement and line, just reset everything
 }
 
-// t_tree	parser_simple_command(t_mini mini)
+// t_mini_tree	parser_simple_command(t_mini mini)
 // {
-// 	t_tree	tree;
+// 	t_mini_tree	tree;
+
+// 	if (parser_simple_command())
 
 // 	tree = try_command();
 // 	if (tree)
 // 		return (tree);
 // 	tree = try_command();	
-// 	return (tree);	
+// 	return (tree);
 // }
 
 // t_none	mini_parse_expression()

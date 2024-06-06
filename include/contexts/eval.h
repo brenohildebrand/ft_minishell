@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_create.c                                    :+:      :+:    :+:   */
+/*   eval.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 22:05:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/05 21:32:17 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/05 16:33:59 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/05 21:35:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contexts/mini.h"
+#ifndef EVAL_H
+# define EVAL_H
 
-t_none	parser_create(t_mini mini)
-{
-	mini->parser = mini_alloc(mini, sizeof(struct s_parser_context));
-	mini->parser->tree = NULL;
-}
+typedef struct s_eval_context	*t_eval_context;
+typedef t_eval_context			t_eval;
+
+struct s_eval_context {
+	t_mini_tree	tree;
+};
+
+#endif
