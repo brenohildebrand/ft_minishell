@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_heredoc.c                                    :+:      :+:    :+:   */
+/*   mini_lexer_automaton_is_whitespace.c               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 10:13:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 15:57:09 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 15:57:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	lexer_heredoc(t_mini mini)
+t_none	mini_lexer_automaton_is_whitespace(t_mini mini)
 {
-	(void)mini;
+	if (mini->lexer->state == 0)
+		return (TRUE);
+	return (FALSE);
 }

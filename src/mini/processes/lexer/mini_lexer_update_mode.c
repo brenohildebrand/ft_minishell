@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader_create.c                                    :+:      :+:    :+:   */
+/*   mini_lexer_update_mode.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 15:22:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 14:16:54 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 14:20:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	reader_create(t_mini mini)
+t_none	mini_lexer_update_mode(t_mini mini)
 {
-	mini->reader = mini_alloc(mini, sizeof(struct s_reader_context));
-	mini->reader->line = NULL;
-	mini->reader->prompt = NULL;
-	mini->reader->is_complete = FALSE;
+	if (mini->shared->is_statement_complete)
+	{
+		if (!mini->shared->is_heredoc_complete)
+		{
+			mini->lexer->mode = LEXER_MODE_HEREDOC;
+		}
+	}
 }

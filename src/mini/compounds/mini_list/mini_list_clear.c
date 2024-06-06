@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config_get_prompt.c                                :+:      :+:    :+:   */
+/*   mini_list_clear.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 15:29:25 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 15:21:40 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 15:24:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	config_get_prompt(t_mini mini)
+t_none	mini_list_clear(t_mini mini, t_mini_list *list)
 {
-	const t_config		config = mini->config;
+	t_mini_list	node;
+	t_mini_list	next;
 
-	lua_getglobal(config->lua_state, "prompt");
-	config->prompt = cstring_copy(mini, (char *)lua_tolstring(config->lua_state, -1, NULL));
-	lua_pop(config->lua_state, 1);
+	node = (*list);
+	while (node)
+	{
+		next = node->next;
+		node->next = NULL;
+		node->previous = NULL;
+		mini_free(mini, node->token);
+		mini_free(node);
+		node = next;
+	}
+	(*list) = NULL;
 }

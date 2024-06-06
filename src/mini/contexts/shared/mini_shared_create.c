@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:13:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 12:55:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:21:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ t_none	mini_shared_create(t_mini mini)
 	mini->shared->memstack = NULL;
 	mini->shared->exit_code = 0;
 	mini->shared->is_statement_complete = TRUE;
+	mini->shared->is_heredoc_complete = TRUE;
 }

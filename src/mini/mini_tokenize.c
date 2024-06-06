@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:16:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,22 @@
 t_none	mini_tokenize(t_mini mini)
 {
 	const t_lexer	lexer = mini->lexer;
-	t_list_node		node;
-	t_mini_token	token;
+	t_mini_list		list;
 
+	mini_lexer_update_mode(mini);
 	if (lexer->mode == LEXER_MODE_ORDINARY)
 	{
-		lexer_ordinary(mini);
+		mini_lexer_ordinary(mini);
 	}
 	else if (lexer->mode == LEXER_MODE_HEREDOC)
 	{
-		lexer_heredoc(mini);
+		mini_lexer_heredoc(mini);
 	}
-	node = lexer->tokens->head;
+	list = mini->lexer->tokens;
 	printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
-	while (node)
+	while (list)
 	{
-		token = (t_mini_token)node->value;
-		printf("%s", token->value);
+		printf("%s", list->token);
 		if (node->next)
 			printf(", ");
 		node = node->next;

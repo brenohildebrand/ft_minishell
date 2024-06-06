@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 16:31:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 00:29:56 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:08:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@ struct s_expansion_process {
 };
 
 t_none	mini_expansion_create(t_mini mini);
+
+t_none	mini_expansion_expand_word(t_mini mini, t_mini_list node);
+t_none	mini_expansion_expand_dquotes(t_mini mini, t_mini_list node);
 
 #endif

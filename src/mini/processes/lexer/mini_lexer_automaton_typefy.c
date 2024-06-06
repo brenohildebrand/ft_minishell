@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_classify.c                                   :+:      :+:    :+:   */
+/*   mini_lexer_automaton_typefy.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/03 18:28:20 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 15:58:08 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 15:59:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_i32	lexer_classify(t_mini mini)
+t_i32	mini_lexer_automaton_typefy(t_mini mini)
 {
-	const t_lexer	lexer = mini->lexer;
-
-	if (lexer->state == 100)
+	if (mini->lexer->state == 100)
 		return (MINI_TOKEN_WORD);
-	else if (lexer->state == 101)
+	else if (mini->lexer->state == 101)
 		return (MINI_TOKEN_GT);
-	else if (lexer->state == 102)
+	else if (mini->lexer->state == 102)
 		return (MINI_TOKEN_DGT);
-	else if (lexer->state == 103)
+	else if (mini->lexer->state == 103)
 		return (MINI_TOKEN_LT);
-	else if (lexer->state == 104)
+	else if (mini->lexer->state == 104)
 		return (MINI_TOKEN_DLT);
-	else if (lexer->state == 105)
+	else if (mini->lexer->state == 105)
 		return (MINI_TOKEN_PIPE);
-	else if (lexer->state == 106)
+	else if (mini->lexer->state == 106)
 		return (MINI_TOKEN_DQUOTES);
-	else if (lexer->state == 107)
+	else if (mini->lexer->state == 107)
 		return (MINI_TOKEN_SQUOTES);
 	else
 	{

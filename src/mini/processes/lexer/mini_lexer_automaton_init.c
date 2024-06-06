@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lua_loadfile.c                                     :+:      :+:    :+:   */
+/*   mini_lexer_automaton_init.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 13:09:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 15:41:01 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 15:42:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	lua_loadfile(t_mini mini, t_lua_state lua_state, t_cstring path)
+t_none	mini_lexer_automaton_init(t_mini mini)
 {
-	if (luaL_loadfile(lua_state, path))
+	mini->lexer->state = 0;
+	mini->lexer->start = 0;
+	mini->lexer->end = 0;
+	mini->lexer->cursor = mini->reader->statement;
+	if (mini->lexer->tokens)
 	{
-		cstring_to_stderr("Oops!" 
-						  "An error ocurred while loading the config file.\n");
-		mini_quit(mini);
+		mini_list_clear(mini, &mini->lexer->tokens);
 	}
 }

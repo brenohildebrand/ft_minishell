@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config_get_path.c                                  :+:      :+:    :+:   */
+/*   mini_lexer_automaton.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 15:56:31 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 14:30:27 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 14:45:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	config_get_path(t_mini mini)
+t_none	mini_lexer_automaton(t_mini mini)
 {
-	t_cstring	root;
-	
-	root = cstring_dirname(mini, mini->argv[0]);
-	mini->config->path = cstring_join(mini, root, cstring_copy(mini, "/config/mini.lua"));
+	mini_lexer_automaton_init(mini);
+	while (42)
+	{
+		mini_lexer_automaton_next_state(mini);
+		if (mini_lexer_automaton_is_final_state(mini))
+		{
+			mini_lexer_automaton_delimit(mini);
+			if (mini_lexer_automaton_is_end_of_statement(mini))
+				break ;
+		}
+		else
+		{
+			mini->lexer->end++;
+			if (mini_lexer_automaton_is_whitespace(mini))
+				lexer->start++;
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 12:55:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:42:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef t_reader_process		t_reader;
 
 struct s_reader_process {
 	t_cstring	line;
+	t_cstring	statement;
 	t_cstring	prompt;
 	t_cstring	multiline_prompt;
 	t_bool		is_complete;

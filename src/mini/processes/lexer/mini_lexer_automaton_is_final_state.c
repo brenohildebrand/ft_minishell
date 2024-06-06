@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list_node_new.c                                   :+:      :+:    :+:   */
+/*   mini_lexer_automaton_is_final_state.c              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 10:52:11 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/05/28 10:57:42 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/06 15:43:15 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/06 15:44:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_linked_list_node	linked_list_node_new(t_mini mini)
+t_bool	mini_lexer_automaton_is_final_state(t_mini mini)
 {
-	t_linked_list_node	node;
-
-	node = mini_alloc(mini, sizeof(struct s_linked_list_node));
-	node->next = NULL;
-	node->previous = NULL;
-	node->value = NULL;
-	return (node);
+	if (mini->lexer->state >= 100)
+	{
+		return (TRUE);
+	}
+	else
+	{
+		return (FALSE);
+	}
 }

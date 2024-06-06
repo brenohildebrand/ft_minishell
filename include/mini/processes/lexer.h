@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:20:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 00:27:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:00:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,17 @@ struct s_lexer_process {
 	t_i32			table[7][8];
 };
 
-t_none		mini_lexer_create(t_mini mini);
+t_none	mini_lexer_create(t_mini mini);
 
-t_none		lexer_ordinary(t_mini mini);
-t_none		lexer_heredoc(t_mini mini);
-t_none		lexer_delimit(t_mini mini);
+t_none	mini_lexer_update_mode(t_mini mini);
+t_none	mini_lexer_ordinary(t_mini mini);
+t_none	mini_lexer_heredoc(t_mini mini);
 
-t_none		lexer_add_character(t_mini mini);
-t_none		lexer_discard_character(t_mini mini);
-
-t_none		lexer_next_state(t_mini mini);
-t_bool		lexer_is_final_state(t_mini mini);
-
-t_i32		lexer_classify(t_mini mini);
-t_none		lexer_init_table(t_mini mini);
-
-t_none		lexer_automaton(t_mini mini);
-t_none		lexer_expand_word(t_mini mini, t_list_node node);
-
-t_none		lexer_expand_dquotes(t_mini mini, t_list_node node);
-t_cstring	lexer_expand(t_mini mini, t_cstring str);
+t_none	mini_lexer_automaton_init(t_mini mini);
+t_bool	mini_lexer_automaton_is_final_state(t_mini mini);
+t_none	mini_lexer_automaton_delimit(t_mini mini);
+t_i32	mini_lexer_automaton_typefy(t_mini mini);
+t_bool	mini_lexer_automaton_is_end_of_statement(t_mini mini);
+t_none	mini_lexer_automaton_is_whitespace(t_mini mini);
 
 #endif
