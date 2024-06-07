@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 15:24:33 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:05:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_none	mini_list_clear(t_mini mini, t_mini_list *list)
 		node->next = NULL;
 		node->previous = NULL;
 		mini_free(mini, node->token);
-		mini_free(node);
+		mini_free(mini, node);
 		node = next;
 	}
 	(*list) = NULL;

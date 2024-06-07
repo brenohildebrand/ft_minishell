@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory_tree.h"
+#include "mini/systems/memtree.h"
 
 static int	helper(
 	t_memtree *memtree,

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory_tree.h"
+#include "mini/systems/memtree.h"
 
 void	memtree_destroy(t_memtree memtree)
 {

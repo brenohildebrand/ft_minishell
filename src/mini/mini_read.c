@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:23:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 12:55:35 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:04:41 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,29 @@
 
 t_none	mini_read(t_mini mini)
 {
-	const t_reader	reader = mini->reader;
-	
-	if (reader->line)
+	if (mini->reader->line)
 	{
-		mini_free(mini, reader->line);
+		mini_free(mini, mini->reader->line);
 	}
 	if (mini->shared->is_statement_complete)
 	{
-		reader->line = readline(mini->reader->prompt);
+		mini->reader->line = readline(mini->reader->prompt);
 	}
 	else
 	{
-		reader->line = readline(mini->reader->multiline_prompt);
+		mini->reader->line = readline(mini->reader->multiline_prompt);
 	}
-	if (reader->line)
+	if (mini->reader->line)
 	{
-		memtree_insert(&(mini->shared->memtree), NULL, reader->line);
+		memtree_insert(&(mini->shared->memtree), NULL, mini->reader->line);
 	}
 	else
 	{
 		cstring_to_stdout("\033[33mAn empty line with only EOF was entered. I'm quitting.\033[0m\n");
-		mini->exit_status = 1;
-		mini_quit(mini);
+		mini_quit(mini, 42);
 	}
 	mini->shared->is_statement_complete = TRUE;
-	printf("\033[94m[%s:%d]\n(line)\033[0m %s\n", __func__, __LINE__, input->line);
+	printf("\033[94m[%s:%d]\n(line)\033[0m %s\n", __func__, __LINE__, mini->reader->line);
 }
 
 #else

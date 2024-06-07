@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:45:00 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 15:54:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:18:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_none	delimit_with_last_character(t_mini mini)
 	t_i32			len;
 	t_i32			i;
 
-	len = lexer->end - lexer->start + 1;
+	len = mini->lexer->end - mini->lexer->start + 1;
 	token = mini_alloc(mini, len + 1);
 	token[len] = '\0';
 	i = 0;
@@ -42,7 +42,7 @@ static t_none	delimit_with_last_character(t_mini mini)
 		i++;
 	}
 	mini->lexer->end += 1;
-	mini->lexer->start = lexer->end;
+	mini->lexer->start = mini->lexer->end;
 	type = mini_lexer_automaton_typefy(mini);
 	mini_list_append(mini, &(mini->lexer->tokens), token, type);
 	mini->lexer->state = 0;

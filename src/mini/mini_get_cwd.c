@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:55:08 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:02:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ t_none	mini_get_cwd(t_mini mini)
 	if (cwd == NULL)
 	{
 		cstring_to_stderr("Memory allocation failed.\n");
-		mini->exit_status = 1;
-		mini_quit(mini);
+		mini_quit(mini, MEMORY_ALLOCATION_ERROR);
 	}
 	while (getcwd(cwd, cwd_size) == NULL)
 	{
@@ -32,8 +31,7 @@ t_none	mini_get_cwd(t_mini mini)
 		if (cwd == NULL)
 		{
 			cstring_to_stderr("Memory allocation failed.\n");
-			mini->exit_status = 1;
-			mini_quit(mini);
+			mini_quit(mini, MEMORY_ALLOCATION_ERROR);
 		}
 	}
 	// mini->cwd = cwd;

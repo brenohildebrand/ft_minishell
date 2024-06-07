@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:31:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:03:30 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:11:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_none	mini_config_create_prompt(t_mini mini)
 	}
 	else
 	{
-		lua_prompt = (char *)lua_tolstring(config->lua_state, -1, NULL);
+		lua_prompt = (char *)lua_tolstring(mini->config->lua_state, -1, NULL);
 	}
 	mini->config->prompt = mini_cstring_copy(mini, lua_prompt);
 	lua_pop(mini->config->lua_state, 1);

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:32:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 11:04:54 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:06:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ t_none	mini_config_create_lua_state(t_mini mini)
 	if (mini_lua_load_file(mini))
 	{
 		lua_close(mini->config->lua_state);
-		mini_assert(mini, false, LUA_ERROR);
+		mini_assert(mini, FALSE, LUA_ERROR);
 	}
 }

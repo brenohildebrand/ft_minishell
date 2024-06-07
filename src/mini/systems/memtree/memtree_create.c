@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory_tree.h"
+#include "mini/systems/memtree.h"
 
 t_memtree	memtree_create(t_type type, void *address)
 {
 	t_memtree	memtree;
 
-	memtree = malloc(sizeof(struct s_memory_tree));
+	memtree = malloc(sizeof(struct s_memtree));
 	if (memtree == NULL)
 	{
 		return (NULL);

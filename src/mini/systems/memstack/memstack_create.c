@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:19:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:22:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_none	memstack_create(t_mini mini)
 {
-	mini->memstack = mini_alloc(mini, sizeof(struct s_memory_stack));
-	mini->memstack->bottom = mini_alloc(mini, MEMORY_STACK_SIZE);
-	mini->memstack->top = mini->memstack->bottom;
+	mini->shared->memstack = mini_alloc(mini, sizeof(struct s_memstack));
+	mini->shared->memstack->bottom = mini_alloc(mini, MEMSTACK_SIZE);
+	mini->shared->memstack->top = mini->shared->memstack->bottom;
 }

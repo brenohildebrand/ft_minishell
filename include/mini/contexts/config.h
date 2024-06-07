@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:58:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 12:57:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 21:59:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 
 # include "minishell.h"
 
+# define ENABLE_LUA
 # ifdef ENABLE_LUA 
+
+#  include <lua5.4/lua.h>
+#  include <lua5.4/lauxlib.h>
+#  include <lua5.4/lualib.h>
 
 typedef struct s_config_context	*t_config_context;
 typedef t_config_context		t_config;
 
 struct s_config_context {
-	lua_State	lua_state;
+	lua_State	*lua_state;
 	t_cstring	path;
 	t_cstring	prompt;
 	t_cstring	multiline_prompt;

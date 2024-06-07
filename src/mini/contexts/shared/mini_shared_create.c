@@ -6,15 +6,17 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:13:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 14:21:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:09:40 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_shared_create(t_mini mini)
+t_none	mini_shared_create(t_mini mini, t_i32 argc, t_i8 **argv)
 {
 	mini->shared = mini_alloc(mini, sizeof(struct s_shared_context));
+	mini->shared->argc = argc;
+	mini->shared->argv = argv;
 	mini->shared->memtree = NULL;
 	mini->shared->memstack = NULL;
 	mini->shared->exit_code = 0;

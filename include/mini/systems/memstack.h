@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 23:36:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 16:15:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:32:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-# define MEMSTACK_SIZE
+# define MEMSTACK_SIZE 1024
 
 typedef struct s_memstack	*t_memstack;
 

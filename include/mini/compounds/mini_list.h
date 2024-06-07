@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:00:54 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 15:25:33 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:19:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ struct s_mini_list {
 	t_mini_list	previous;
 	t_cstring	token;
 	t_i32		type;
+};
+
+enum e_mini_token_type {
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_HEREDOC,
+	REDIR_APPEND,
+	PIPE,
+	DOUBLE_QUOTES,
+	SINGLE_QUOTES,
+	WORD,
 };
 
 t_none	mini_list_append(

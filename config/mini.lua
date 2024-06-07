@@ -22,4 +22,4 @@ end
 user = string_to_bold(string_to_primary_color(os.getenv("USER")))
 name = string_to_bold(string_to_primary_color(os.getenv("NAME") or os.getenv("HOSTNAME")))
 pwd = string_to_bold(string_to_secondary_color(os.getenv("PWD"):match("[\\/]?([^\\/]+)$")))
-prompt = user .. string_to_bold(string_to_primary_color("@")) .. name .. ":" .. pwd .. "$ " 
+prompt = user .. string_to_bold(string_to_primary_color("@")) .. name .. ":" .. pwd .. "$ "

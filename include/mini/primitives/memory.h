@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:06:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/05 21:49:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:12:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MEMORY_H
 # define MEMORY_H
 
-# include "i32.h"
+# include "minishell.h"
 
 typedef void		*t_memory;
 typedef t_memory	t_mem;

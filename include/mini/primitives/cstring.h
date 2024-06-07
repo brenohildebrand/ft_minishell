@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 12:17:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:06:19 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 21:55:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 
 # include "minishell.h"
 
-typedef char					*t_cstring;
-typedef char					**t_cstring_array;
+typedef char				*t_cstring;
+typedef char				**t_cstring_array;
 
-typedef struct s_mini_context	*t_mini_context;
-struct							s_mini_context;
-typedef t_mini_context			t_mini;
+typedef struct s_mini		*t_mini;
 
-typedef struct s_string			*t_string;
-struct							s_string;
+typedef struct s_string		*t_string;
+struct						s_string;
 
 t_none		cstring_to_stderr(t_cstring message);
 t_i32		cstring_get_length(t_cstring message);

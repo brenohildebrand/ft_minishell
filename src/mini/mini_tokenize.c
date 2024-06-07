@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 14:16:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:05:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_none	mini_tokenize(t_mini mini)
 	while (list)
 	{
 		printf("%s", list->token);
-		if (node->next)
+		if (list->next)
 			printf(", ");
-		node = node->next;
+		list = list->next;
 	}
 	printf("\n");
 }
