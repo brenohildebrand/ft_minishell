@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:38:26 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/07 00:11:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ struct s_reader_process {
 	t_cstring	statement;
 	t_cstring	prompt;
 	t_cstring	multiline_prompt;
-	t_bool		is_complete;
-	t_bool		is_multiline;
 };
 
 t_none	mini_reader_create(t_mini mini);
