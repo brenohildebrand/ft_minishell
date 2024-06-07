@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/06 22:28:30 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/06 22:28:30 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/06 22:40:45 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/06 22:40:45 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ minishell_sources = 	src/main.c \
 		src/mini/processes/parser/mini_parser_create.c \
 		src/mini/processes/parser/mini_parse_pipe_sequence.c \
 		src/mini/processes/reader/mini_reader_create.c \
+		src/mini/processes/reader/mini_reader_create_multiline_prompt.c \
 		src/mini/processes/reader/mini_reader_create_prompt.c \
 		src/mini/systems/memstack/memstack_create.c \
 		src/mini/systems/memstack/memstack_destroy.c \
@@ -148,6 +149,7 @@ minishell_objects = 	src/main.o \
 		src/mini/processes/parser/mini_parser_create.o \
 		src/mini/processes/parser/mini_parse_pipe_sequence.o \
 		src/mini/processes/reader/mini_reader_create.o \
+		src/mini/processes/reader/mini_reader_create_multiline_prompt.o \
 		src/mini/processes/reader/mini_reader_create_prompt.o \
 		src/mini/systems/memstack/memstack_create.o \
 		src/mini/systems/memstack/memstack_destroy.o \
@@ -251,6 +253,7 @@ minishell_depends = 	src/main.d \
 		src/mini/processes/parser/mini_parser_create.d \
 		src/mini/processes/parser/mini_parse_pipe_sequence.d \
 		src/mini/processes/reader/mini_reader_create.d \
+		src/mini/processes/reader/mini_reader_create_multiline_prompt.d \
 		src/mini/processes/reader/mini_reader_create_prompt.d \
 		src/mini/systems/memstack/memstack_create.d \
 		src/mini/systems/memstack/memstack_destroy.d \
