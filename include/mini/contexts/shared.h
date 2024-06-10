@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:05:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:09:44 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:58:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ struct s_shared_context {
 	t_memstack	memstack;
 	t_u8		exit_code;
 	t_bool		is_statement_complete;
+	t_bool		is_grammar_wrong;
 	t_bool		is_heredoc_complete;
 };
 

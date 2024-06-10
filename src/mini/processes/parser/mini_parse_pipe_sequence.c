@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:38:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:21:41 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:09:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,39 @@
 
 t_mini_tree	mini_parse_pipe_sequence(t_mini mini)
 {
-	(void)mini;
-	return (NULL);
-	// t_mini_tree	tree;
-	// t_mini_tree	children[2];
+	t_mini_tree	tree;
+	t_mini_tree	child;
 
-	// children[0] = mini_parse_command_sequence(mini);
-	// if (children[0] == NULL)
-	// {
-	// 	mini_parse_syntax_error();
-	// }
-	// if (mini->parser->cursor->type == PIPE)
-	// {
-	// 	children[1] = mini_parse_pipe_sequence(mini);
-	// 	if (children[1] == NULL)
-	// 	{
-	// 		return children[0];
-	// 	}
-	// 	tree = mini_alloc(mini, sizeof(struct s_mini_tree));
-	// 	// tree->size = 2;
-	// 	tree->children = mini_alloc(mini, sizeof(struct s_mini_tree) * 2);
-	// 	tree->children[0] = children[0];
-	// 	tree->children[1] = children[1];
-	// 	tree->evaluate = mini_eval_pipe;
-	// 	return (tree);
-	// }
-	// else
-	// {
-	// 	return (children[0]);
-	// }
-	// return (NULL);
+	child = mini_parse_command(mini);
+	if (child == NULL)
+	{
+		return (NULL);
+	}
+	else
+	{
+		tree = mini_tree_create(mini);
+		mini_tree_add_child(mini, tree, child);
+		while (mini_parser_get_token(mini) == PIPE)
+		{
+			mini_parser_next_token(mini);
+			if (mini_parser_get_token(mini) == END)
+			{
+				mini->parser->could_be_completed = TRUE;
+				mini_tree_destroy(tree);
+				return (NULL);
+			}
+			child = mini_parse_command(mini);
+			if (child == NULL)
+				break ;
+			else
+				mini_tree_add_child(mini, tree, child);
+		}
+		if (mini_parse_get_token(mini) != END)
+		{
+			mini_parser_set_syntax_error(mini);
+			mini_tree_destroy(mini, tree);
+			return (NULL);
+		}
+		return (tree);
+	}
 }

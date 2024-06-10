@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:26:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:43:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ t_none	mini_assert(t_mini mini, t_bool condition, t_u8 code);
 t_none	mini_quit(t_mini mini, t_u8 code);
 t_mem	mini_alloc(t_mini mini, t_u32 size);
 t_none	mini_free(t_mini mini, t_mem mem);
+t_bool	mini_is_complete(t_mini mini);
 t_none	mini_read(t_mini mini);
 t_none	mini_tokenize(t_mini mini);
 t_none	mini_expand(t_mini mini);
 t_none	mini_parse(t_mini mini);
 t_none	mini_eval(t_mini mini);
+t_none	mini_reset(t_mini mini);
 
 #endif

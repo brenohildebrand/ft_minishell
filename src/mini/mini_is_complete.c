@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_lexer_update_mode.c                           :+:      :+:    :+:   */
+/*   mini_is_complete.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 14:16:54 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 14:20:19 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/09 21:27:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/10 12:07:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_lexer_update_mode(t_mini mini)
+t_bool	mini_is_complete(t_mini mini)
 {
-	if (mini->shared->is_statement_complete)
-	{
-		if (!mini->shared->is_heredoc_complete)
-		{
-			mini->lexer->mode = LEXER_MODE_HEREDOC;
-		}
-	}
+	const t_shared	shared = mini->shared;
+
+	return (!shared->is_statement_complete);
 }
