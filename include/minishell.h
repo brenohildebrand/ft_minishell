@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/12 14:26:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:30:20 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include  <errno.h>
 
 # include "mini/primitives/i8.h"
 # include "mini/primitives/u8.h"
