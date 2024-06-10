@@ -6,47 +6,50 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:38:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 15:09:50 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:17:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_mini_tree	mini_parse_pipe_sequence(t_mini mini)
+t_mini_pipe_tree	mini_parse_pipe_sequence(t_mini mini)
 {
-	t_mini_tree	tree;
-	t_mini_tree	child;
-
-	child = mini_parse_command(mini);
-	if (child == NULL)
+	t_mini_pipe_tree	tree;
+	t_mini_cmd_tree		command;
+	
+	tree = mini_pipe_tree_create(mini);
+	command = mini_parse_command(mini);
+	if (command == NULL)
 	{
+		mini_pipe_tree_destroy(mini, tree);
 		return (NULL);
 	}
 	else
 	{
-		tree = mini_tree_create(mini);
-		mini_tree_add_child(mini, tree, child);
-		while (mini_parser_get_token(mini) == PIPE)
+		mini_pipe_tree_append_command(mini, tree, command);
+		while (mini_parser_is_pipe(mini))
 		{
-			mini_parser_next_token(mini);
-			if (mini_parser_get_token(mini) == END)
+			mini_parser_next(mini);
+			if (mini_parser_is_end(mini))
 			{
 				mini->parser->could_be_completed = TRUE;
-				mini_tree_destroy(tree);
+				mini_pipe_tree_destroy(mini, tree);
 				return (NULL);
 			}
-			child = mini_parse_command(mini);
-			if (child == NULL)
+			command = mini_parse_command(mini);
+			if (command == NULL)
+			{
 				break ;
+			}
 			else
-				mini_tree_add_child(mini, tree, child);
+			{
+				mini_pipe_sequence_tree_add_command(mini, tree, command);
+			}
 		}
-		if (mini_parse_get_token(mini) != END)
-		{
-			mini_parser_set_syntax_error(mini);
-			mini_tree_destroy(mini, tree);
-			return (NULL);
-		}
-		return (tree);
+		if (mini_parser_is_end(mini))
+			return (tree);
+		mini_parser_set_syntax_error(mini);
+		mini_pipe_tree_destroy(mini, tree);
+		return (NULL);
 	}
 }

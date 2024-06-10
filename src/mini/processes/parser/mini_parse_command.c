@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:39:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 15:14:16 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:26:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_mini_tree	mini_parse_command(t_mini mini)
 
 	t_mini_tree	tree;
 	
+	// leave it in the list format
+
 	// create tree from words and redirs + words
 	// start with the redirs in order putting the filename as the second child
 	// and the next redir as the first child

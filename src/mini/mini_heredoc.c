@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:28:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 14:29:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:51:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 t_none	mini_heredoc(t_mini mini)
 {
 	(void)mini;
-	printf("TODO: implement mini_heredoc. Aborting.\n");
-	mini_quit(mini, 0);
+	if (!mini->shared->is_heredoc_complete)
+	{
+		printf("TODO: implement mini_heredoc. Aborting.\n");
+		mini_quit(mini, 0);
+	}
 }
