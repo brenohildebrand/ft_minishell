@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:38:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 18:17:45 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:19:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_mini_pipe_tree	mini_parse_pipe_sequence(t_mini mini)
 			}
 			else
 			{
-				mini_pipe_sequence_tree_add_command(mini, tree, command);
+				mini_pipe_tree_append_command(mini, tree, command);
 			}
 		}
 		if (mini_parser_is_end(mini))

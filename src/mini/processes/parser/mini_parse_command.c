@@ -6,42 +6,39 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:39:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 16:26:45 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:26:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_mini_tree	mini_parse_command(t_mini mini)
+t_mini_cmd_tree	mini_parse_command(t_mini mini)
 {
-	t_mini_list	words;
-	t_mini_list	redirs;
-	t_mini_list	copy;
+	t_mini_cmd_tree	tree;
+	t_mini_list		list_copy;	
 
-	words = NULL;
-	redirs = NULL;
+	tree = mini_cmd_tree_create(mini);
 	while (42)
 	{
-		if (mini_parser_get_token(mini) == WORD)
+		if (mini_parser_is_word(mini))
 		{
-			copy = mini_list_copy(mini, mini->parser->cursor);
-			mini_list_append(mini, words, copy);
+			list_copy = mini_list_copy(mini, mini->parser->cursor);
+			mini_cmd_tree_append_word(mini, tree, list_copy);
 		}
-		else if (mini_parser_get_token(mini) == REDIR)
+		else if (mini_parser_is_redir(mini))
 		{
-			mini_parse_next_token(mini);
-			if (mini_parse_get_token(mini) == WORD)
+			mini_parser_next(mini);
+			if (mini_parser_is_word(mini))
 			{
-				copy = mini_list_copy(mini, mini->parser->cursor - 1);
-				mini_list_append(mini, redirs, copy);
-				copy = mini_list_copy(mini, mini->parser->cursor);
-				mini_list_append(mini, redirs, copy);
+				list_copy = mini_list_copy(mini, mini->parser->cursor - 1);
+				mini_cmd_tree_append_redir(mini, tree, list_copy);
+				list_copy = mini_list_copy(mini, mini->parser->cursor);
+				mini_cmd_tree_append_word(mini, tree, list_copy);
 			}
 			else
 			{
-				mini_set_syntax_error(mini);
-				mini_list_clear(mini, words);
-				mini_list_clear(mini, redirs);
+				mini_parser_set_syntax_error(mini);
+				mini_cmd_tree_destroy(mini, tree);
 				return (NULL);
 			}
 		}
@@ -51,17 +48,5 @@ t_mini_tree	mini_parse_command(t_mini mini)
 		}
 		mini_parser_next_token(mini);
 	}
-
-	t_mini_tree	tree;
-	
-	// leave it in the list format
-
-	// create tree from words and redirs + words
-	// start with the redirs in order putting the filename as the second child
-	// and the next redir as the first child
-	// if there's no next redir put the command as the first child.
-	// if there's no command put nothing.
-
-	// go through redirs
-	// 	create a node with that redir type 
+	return (tree);
 }
