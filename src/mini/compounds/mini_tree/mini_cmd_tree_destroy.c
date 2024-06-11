@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:10:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 18:13:13 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:44:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_none	mini_cmd_tree_destroy(t_mini mini, t_mini_cmd_tree tree)
 {
-	mini_list_destroy(mini, tree->words);
-	mini_list_destroy(mini, tree->redirs);
-	mini_free(tree);
+	mini_list_destroy(mini, &(tree->words));
+	mini_list_destroy(mini, &(tree->redirs));
+	mini_free(mini, tree);
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:38:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 18:19:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:42:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ t_mini_pipe_tree	mini_parse_pipe_sequence(t_mini mini)
 	}
 	else
 	{
-		mini_pipe_tree_append_command(mini, tree, command);
+		mini_cmd_tree_list_append(mini, tree->command_list, command);
 		while (mini_parser_is_pipe(mini))
 		{
-			mini_parser_next(mini);
+			mini_parser_next_token(mini);
 			if (mini_parser_is_end(mini))
 			{
 				mini->parser->could_be_completed = TRUE;
@@ -43,7 +43,7 @@ t_mini_pipe_tree	mini_parse_pipe_sequence(t_mini mini)
 			}
 			else
 			{
-				mini_pipe_tree_append_command(mini, tree, command);
+				mini_cmd_tree_list_append(mini, tree->command_list, command);
 			}
 		}
 		if (mini_parser_is_end(mini))

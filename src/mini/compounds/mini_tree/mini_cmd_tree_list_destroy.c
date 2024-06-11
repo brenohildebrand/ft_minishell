@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_parser_is_pipe_sequence.c                     :+:      :+:    :+:   */
+/*   mini_cmd_tree_list_destroy.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 23:56:56 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/08 00:57:41 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/10 21:37:01 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/10 21:38:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	mini_parser_is_pipe_sequence(t_mini mini)
-{
-	if (mini_parser_is_command(mini))
-	{
-		if (mini_parse_is_pipe(mini))
-		{
+t_none	mini_cmd_tree_list_destroy(
+	t_mini mini,
+	t_mini_cmd_tree_list list
+){
+	t_i32	i;
 
-		}
-		else
-		{
-			
-		}
-	}
-	else
+	i = 0;
+	while (i < list->length)
 	{
-		return (FALSE);
+		mini_cmd_tree_destroy(mini, list->elements[i]);
+		i++;
 	}
+	mini_free(mini, list->elements);
 }

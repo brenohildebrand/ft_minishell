@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:20:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 00:25:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:36:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static t_none	next0(t_mini mini)
 t_none	mini_lexer_create(t_mini mini)
 {
 	mini->lexer = mini_alloc(mini, sizeof(struct s_lexer_process));
-	mini->lexer->mode = LEXER_MODE_ORDINARY;
 	mini->lexer->tokens = NULL;
 	mini->lexer->cursor = NULL;
 	mini->lexer->start = 0;

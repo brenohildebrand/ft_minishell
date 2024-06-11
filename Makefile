@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/07 01:19:53 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/07 01:19:53 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/10 22:44:27 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/10 22:44:27 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,25 @@ minishell_sources = 	src/main.c \
 		src/mini/mini_expand.c \
 		src/mini/mini_free.c \
 		src/mini/mini_get_cwd.c \
+		src/mini/mini_heredoc.c \
+		src/mini/mini_is_complete.c \
 		src/mini/mini_is_statement_complete.c \
 		src/mini/mini_parse.c \
 		src/mini/mini_quit.c \
 		src/mini/mini_read.c \
+		src/mini/mini_reset.c \
 		src/mini/mini_tokenize.c \
 		src/mini/compounds/mini_list/mini_list_append.c \
 		src/mini/compounds/mini_list/mini_list_clear.c \
+		src/mini/compounds/mini_list/mini_list_destroy.c \
+		src/mini/compounds/mini_tree/mini_cmd_tree_create.c \
+		src/mini/compounds/mini_tree/mini_cmd_tree_destroy.c \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_append.c \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_create.c \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_destroy.c \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_realloc.c \
+		src/mini/compounds/mini_tree/mini_pipe_tree_create.c \
+		src/mini/compounds/mini_tree/mini_pipe_tree_destroy.c \
 		src/mini/contexts/config/mini_config_create.c \
 		src/mini/contexts/config/mini_config_create_lua_state.c \
 		src/mini/contexts/config/mini_config_create_multiline_prompt.c \
@@ -63,10 +75,17 @@ minishell_sources = 	src/main.c \
 		src/mini/processes/lexer/mini_lexer_automaton_next_state.c \
 		src/mini/processes/lexer/mini_lexer_automaton_typefy.c \
 		src/mini/processes/lexer/mini_lexer_create.c \
-		src/mini/processes/lexer/mini_lexer_heredoc.c \
-		src/mini/processes/lexer/mini_lexer_ordinary.c \
-		src/mini/processes/lexer/mini_lexer_update_mode.c \
 		src/mini/processes/parser/mini_parser_create.c \
+		src/mini/processes/parser/mini_parser_get_token.c \
+		src/mini/processes/parser/mini_parser_is_end.c \
+		src/mini/processes/parser/mini_parser_is_pipe.c \
+		src/mini/processes/parser/mini_parser_is_redir.c \
+		src/mini/processes/parser/mini_parser_is_word.c \
+		src/mini/processes/parser/mini_parser_next_token.c \
+		src/mini/processes/parser/mini_parser_print_syntax_error.c \
+		src/mini/processes/parser/mini_parser_reset.c \
+		src/mini/processes/parser/mini_parser_set_syntax_error.c \
+		src/mini/processes/parser/mini_parse_command.c \
 		src/mini/processes/parser/mini_parse_pipe_sequence.c \
 		src/mini/processes/reader/mini_reader_create.c \
 		src/mini/processes/reader/mini_reader_create_multiline_prompt.c \
@@ -104,13 +123,25 @@ minishell_objects = 	src/main.o \
 		src/mini/mini_expand.o \
 		src/mini/mini_free.o \
 		src/mini/mini_get_cwd.o \
+		src/mini/mini_heredoc.o \
+		src/mini/mini_is_complete.o \
 		src/mini/mini_is_statement_complete.o \
 		src/mini/mini_parse.o \
 		src/mini/mini_quit.o \
 		src/mini/mini_read.o \
+		src/mini/mini_reset.o \
 		src/mini/mini_tokenize.o \
 		src/mini/compounds/mini_list/mini_list_append.o \
 		src/mini/compounds/mini_list/mini_list_clear.o \
+		src/mini/compounds/mini_list/mini_list_destroy.o \
+		src/mini/compounds/mini_tree/mini_cmd_tree_create.o \
+		src/mini/compounds/mini_tree/mini_cmd_tree_destroy.o \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_append.o \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_create.o \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_destroy.o \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_realloc.o \
+		src/mini/compounds/mini_tree/mini_pipe_tree_create.o \
+		src/mini/compounds/mini_tree/mini_pipe_tree_destroy.o \
 		src/mini/contexts/config/mini_config_create.o \
 		src/mini/contexts/config/mini_config_create_lua_state.o \
 		src/mini/contexts/config/mini_config_create_multiline_prompt.o \
@@ -143,10 +174,17 @@ minishell_objects = 	src/main.o \
 		src/mini/processes/lexer/mini_lexer_automaton_next_state.o \
 		src/mini/processes/lexer/mini_lexer_automaton_typefy.o \
 		src/mini/processes/lexer/mini_lexer_create.o \
-		src/mini/processes/lexer/mini_lexer_heredoc.o \
-		src/mini/processes/lexer/mini_lexer_ordinary.o \
-		src/mini/processes/lexer/mini_lexer_update_mode.o \
 		src/mini/processes/parser/mini_parser_create.o \
+		src/mini/processes/parser/mini_parser_get_token.o \
+		src/mini/processes/parser/mini_parser_is_end.o \
+		src/mini/processes/parser/mini_parser_is_pipe.o \
+		src/mini/processes/parser/mini_parser_is_redir.o \
+		src/mini/processes/parser/mini_parser_is_word.o \
+		src/mini/processes/parser/mini_parser_next_token.o \
+		src/mini/processes/parser/mini_parser_print_syntax_error.o \
+		src/mini/processes/parser/mini_parser_reset.o \
+		src/mini/processes/parser/mini_parser_set_syntax_error.o \
+		src/mini/processes/parser/mini_parse_command.o \
 		src/mini/processes/parser/mini_parse_pipe_sequence.o \
 		src/mini/processes/reader/mini_reader_create.o \
 		src/mini/processes/reader/mini_reader_create_multiline_prompt.o \
@@ -181,6 +219,7 @@ minishell_headers = 	include/minishell.h \
 		include/mini_tree.h \
 		include/config.h \
 		include/shared.h \
+		include/signals.h \
 		include/any.h \
 		include/bool.h \
 		include/cstring.h \
@@ -208,13 +247,25 @@ minishell_depends = 	src/main.d \
 		src/mini/mini_expand.d \
 		src/mini/mini_free.d \
 		src/mini/mini_get_cwd.d \
+		src/mini/mini_heredoc.d \
+		src/mini/mini_is_complete.d \
 		src/mini/mini_is_statement_complete.d \
 		src/mini/mini_parse.d \
 		src/mini/mini_quit.d \
 		src/mini/mini_read.d \
+		src/mini/mini_reset.d \
 		src/mini/mini_tokenize.d \
 		src/mini/compounds/mini_list/mini_list_append.d \
 		src/mini/compounds/mini_list/mini_list_clear.d \
+		src/mini/compounds/mini_list/mini_list_destroy.d \
+		src/mini/compounds/mini_tree/mini_cmd_tree_create.d \
+		src/mini/compounds/mini_tree/mini_cmd_tree_destroy.d \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_append.d \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_create.d \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_destroy.d \
+		src/mini/compounds/mini_tree/mini_cmd_tree_list_realloc.d \
+		src/mini/compounds/mini_tree/mini_pipe_tree_create.d \
+		src/mini/compounds/mini_tree/mini_pipe_tree_destroy.d \
 		src/mini/contexts/config/mini_config_create.d \
 		src/mini/contexts/config/mini_config_create_lua_state.d \
 		src/mini/contexts/config/mini_config_create_multiline_prompt.d \
@@ -247,10 +298,17 @@ minishell_depends = 	src/main.d \
 		src/mini/processes/lexer/mini_lexer_automaton_next_state.d \
 		src/mini/processes/lexer/mini_lexer_automaton_typefy.d \
 		src/mini/processes/lexer/mini_lexer_create.d \
-		src/mini/processes/lexer/mini_lexer_heredoc.d \
-		src/mini/processes/lexer/mini_lexer_ordinary.d \
-		src/mini/processes/lexer/mini_lexer_update_mode.d \
 		src/mini/processes/parser/mini_parser_create.d \
+		src/mini/processes/parser/mini_parser_get_token.d \
+		src/mini/processes/parser/mini_parser_is_end.d \
+		src/mini/processes/parser/mini_parser_is_pipe.d \
+		src/mini/processes/parser/mini_parser_is_redir.d \
+		src/mini/processes/parser/mini_parser_is_word.d \
+		src/mini/processes/parser/mini_parser_next_token.d \
+		src/mini/processes/parser/mini_parser_print_syntax_error.d \
+		src/mini/processes/parser/mini_parser_reset.d \
+		src/mini/processes/parser/mini_parser_set_syntax_error.d \
+		src/mini/processes/parser/mini_parse_command.d \
 		src/mini/processes/parser/mini_parse_pipe_sequence.d \
 		src/mini/processes/reader/mini_reader_create.d \
 		src/mini/processes/reader/mini_reader_create_multiline_prompt.d \

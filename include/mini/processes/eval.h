@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 16:33:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:12:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:33:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_eval_process	*t_eval_process;
 typedef t_eval_process			t_eval;
 
 struct s_eval_process {
-	t_mini_tree	tree;
+	t_i32	whatever;
 };
 
 t_none	mini_eval_create(t_mini mini);

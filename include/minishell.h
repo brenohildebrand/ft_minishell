@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 16:55:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:33:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # include "mini/processes/parser.h"
 # include "mini/processes/eval.h"
 # include "mini/contexts/shared.h"
+# include "mini/contexts/signals.h"
 # include "mini/contexts/config.h"
 
 # ifdef ENABLE_DEBUGGER
@@ -79,3 +80,6 @@ t_none	mini_expand(t_mini mini);
 t_none	mini_parse(t_mini mini);
 t_none	mini_eval(t_mini mini);
 t_none	mini_reset(t_mini mini);
+t_none	mini_heredoc(t_mini mini);
+
+#endif

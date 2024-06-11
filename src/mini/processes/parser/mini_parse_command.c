@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:39:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 18:26:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:39:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 
 t_mini_cmd_tree	mini_parse_command(t_mini mini)
 {
+	
 	t_mini_cmd_tree	tree;
-	t_mini_list		list_copy;	
-
+	
 	tree = mini_cmd_tree_create(mini);
 	while (42)
 	{
 		if (mini_parser_is_word(mini))
 		{
-			list_copy = mini_list_copy(mini, mini->parser->cursor);
-			mini_cmd_tree_append_word(mini, tree, list_copy);
+			mini_list_append(mini, &(tree->words), mini->parser->cursor->token, mini->parser->cursor->type);
 		}
 		else if (mini_parser_is_redir(mini))
 		{
-			mini_parser_next(mini);
+			mini_parser_next_token(mini);
 			if (mini_parser_is_word(mini))
 			{
-				list_copy = mini_list_copy(mini, mini->parser->cursor - 1);
-				mini_cmd_tree_append_redir(mini, tree, list_copy);
-				list_copy = mini_list_copy(mini, mini->parser->cursor);
-				mini_cmd_tree_append_word(mini, tree, list_copy);
+				mini_list_append(mini, &(tree->redirs), (mini->parser->cursor - 1)->token, (mini->parser->cursor - 1)->type);
+				mini_list_append(mini, &(tree->words), mini->parser->cursor->token, mini->parser->cursor->type);
 			}
 			else
 			{
