@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:57:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 17:34:30 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:45:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ t_none	mini_expand(t_mini mini)
 			i = 0;
 			while (node->token[i])
 			{
-				printf("node->token[i]: %c\n", node->token[i]);
 				if (node->token[i] == '$')
 				{
 					start = i;
