@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:30:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:17:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:51:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ t_none	mini_lexer_automaton(t_mini mini)
 				mini->lexer->start++;
 		}
 	}
+	mini_list_append(mini, &(mini->lexer->tokens), NULL, END);
 }
