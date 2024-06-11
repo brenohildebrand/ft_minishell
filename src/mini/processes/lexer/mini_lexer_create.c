@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:20:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 22:36:20 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/11 00:49:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_none	next1(t_mini mini)
 	mini->lexer->table[4][0] = 4;
 	mini->lexer->table[4][1] = 4;
 	mini->lexer->table[4][2] = 4;
-	mini->lexer->table[4][3] = 106;
+	mini->lexer->table[4][3] = 1;
 	mini->lexer->table[4][4] = 4;
 	mini->lexer->table[4][5] = 4;
 	mini->lexer->table[4][6] = 4;
@@ -46,7 +46,7 @@ static t_none	next1(t_mini mini)
 	mini->lexer->table[5][1] = 5;
 	mini->lexer->table[5][2] = 5;
 	mini->lexer->table[5][3] = 5;
-	mini->lexer->table[5][4] = 107;
+	mini->lexer->table[5][4] = 1;
 	mini->lexer->table[5][5] = 5;
 	mini->lexer->table[5][6] = 5;
 	mini->lexer->table[5][7] = 200;
@@ -66,8 +66,8 @@ static t_none	next0(t_mini mini)
 	mini->lexer->table[1][0] = 1;
 	mini->lexer->table[1][1] = 100;
 	mini->lexer->table[1][2] = 100;
-	mini->lexer->table[1][3] = 100;
-	mini->lexer->table[1][4] = 100;
+	mini->lexer->table[1][3] = 4;
+	mini->lexer->table[1][4] = 5;
 	mini->lexer->table[1][5] = 100;
 	mini->lexer->table[1][6] = 100;
 	mini->lexer->table[1][7] = 100;
