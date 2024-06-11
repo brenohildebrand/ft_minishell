@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 12:17:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 21:55:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/11 15:30:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,15 @@ t_cstring	mini_cstring_get_subcstring(
 				t_cstring cstring,
 				t_i32 start,
 				t_i32 end);
+t_none		mini_cstring_remove(
+				t_mini mini,
+				t_cstring *to_cstring,
+				t_i32 start,
+				t_i32 end);
+t_none		mini_cstring_add(
+				t_mini mini,
+				t_cstring *to_cstring,
+				t_i32 start,
+				t_cstring value);
 
 #endif

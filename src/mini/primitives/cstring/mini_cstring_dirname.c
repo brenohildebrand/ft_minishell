@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_dirname.c                                  :+:      :+:    :+:   */
+/*   mini_cstring_dirname.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:25:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:12:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cstring	mini_cstring_dirname(t_mini mini, t_cstring path)
 	dirname_length = path_length - counter;
 	if (dirname_length > 0)
 	{
-		dirname = mini_alloc(mini, dirname_length);
+		dirname = mini_alloc(mini, dirname_length + 1);
 		dirname[dirname_length] = '\0';
 		while (dirname_length--)
 			dirname[dirname_length] = path[dirname_length];

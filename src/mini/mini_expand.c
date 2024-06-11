@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:57:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 13:08:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:34:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #ifdef ENABLE_DEBUGGER
 
 static t_i32	where_is_end(
-	t_mini mini,
 	t_cstring token,
 	t_i32 start
 ){
@@ -44,27 +43,31 @@ static t_i32	where_is_end(
 	return (i - 1);
 }
 
-static t_none	expand(t_mini mini, t_cstring token, t_i32 start, t_i32 end)
+static t_i32	expand(t_mini mini, t_mini_list node, t_i32 start, t_i32 end)
 {
 	t_cstring	key;
 	t_cstring	value;
-	
+	t_i32		value_length;
+
 	if (start == end)
 	{
-		return ;
+		return (start);
 	}
-	else if (start == end - 1 && token[end] == '?')
+	else if (start == end - 1 && node->token[end] == '?')
 	{
-		value = u8_to_cstring(mini->shared->exit_code);
+		value = mini_u8_to_cstring(mini, mini->shared->exit_code);
 	}
 	else
 	{
-		key = mini_cstring_get_subcstring(mini, token, start + 1, end);
+		key = mini_cstring_get_subcstring(mini, node->token, start + 1, end);
 		value = mini_cstring_copy(mini, getenv(key));
 	}
-	mini_cstring_substitute(mini, start, end, value);
+	value_length = cstring_get_length(value);
+	mini_cstring_remove(mini, &node->token, start, end);
+	mini_cstring_add(mini, &node->token, start, value);
 	mini_free(mini, key);
 	mini_free(mini, value);
+	return (start + value_length);
 }
 
 t_none	mini_expand(t_mini mini)
@@ -82,11 +85,12 @@ t_none	mini_expand(t_mini mini)
 			i = 0;
 			while (node->token[i])
 			{
+				printf("node->token[i]: %c\n", node->token[i]);
 				if (node->token[i] == '$')
 				{
 					start = i;
-					end = where_is_end(mini, node->token, i);
-					expand(mini, node->token, start, end);
+					end = where_is_end(node->token, i);
+					i = expand(mini, node, start, end);
 				}
 				else if (node->token[i] == '"')
 				{
@@ -94,41 +98,20 @@ t_none	mini_expand(t_mini mini)
 				}
 				i++;
 			}
-			// look for $ and see if it's inside double quotes
-			// if found
-			//	start is at $
-			//  end is at until it's a word or until before the closing double quotes
-			// then start looking again from the next character
 		}
 		node = node->next;
 	}
+	node = mini->lexer->tokens;
+	printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
+	while (node)
+	{
+		printf("%s", node->token);
+		if (node->next)
+			printf(", ");
+		node = node->next;
+	}
+	printf("\n");
 }
-
-// t_mini_list	node;
-
-// node = mini->lexer->tokens;
-// while (node)
-// {
-// 	if (node->token[0] == '$')
-// 	{
-// 		mini_expansion_expand_word(mini, node);
-// 	}
-// 	else if (node->token[0] == '"')
-// 	{
-// 		mini_expansion_expand_dquotes(mini, node);	
-// 	}
-// 	node = node->next;
-// }
-// node = mini->lexer->tokens;
-// printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
-// while (node)
-// {
-// 	printf("%s", node->token);
-// 	if (node->next)
-// 		printf(", ");
-// 	node = node->next;
-// }
-// printf("\n");
 
 #else
 

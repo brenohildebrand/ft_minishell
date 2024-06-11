@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/11 00:49:32 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/11 00:49:32 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/11 17:50:22 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/11 17:50:22 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,14 +54,17 @@ minishell_sources = 	src/main.c \
 		src/mini/primitives/cstring/cstring_is_not_empty.c \
 		src/mini/primitives/cstring/cstring_to_stderr.c \
 		src/mini/primitives/cstring/cstring_to_stdout.c \
+		src/mini/primitives/cstring/mini_cstring_add.c \
 		src/mini/primitives/cstring/mini_cstring_copy.c \
 		src/mini/primitives/cstring/mini_cstring_dirname.c \
 		src/mini/primitives/cstring/mini_cstring_get_subcstring.c \
 		src/mini/primitives/cstring/mini_cstring_join.c \
+		src/mini/primitives/cstring/mini_cstring_remove.c \
 		src/mini/primitives/i32/i32_to_cstring.c \
 		src/mini/primitives/i8/i8_is_whitespace.c \
 		src/mini/primitives/memory/mem_copy_from_to.c \
 		src/mini/primitives/memory/mini_mem_sub.c \
+		src/mini/primitives/u8/mini_u8_to_cstring.c \
 		src/mini/processes/eval/mini_eval_create.c \
 		src/mini/processes/expansion/mini_expansion_create.c \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.c \
@@ -153,14 +156,17 @@ minishell_objects = 	src/main.o \
 		src/mini/primitives/cstring/cstring_is_not_empty.o \
 		src/mini/primitives/cstring/cstring_to_stderr.o \
 		src/mini/primitives/cstring/cstring_to_stdout.o \
+		src/mini/primitives/cstring/mini_cstring_add.o \
 		src/mini/primitives/cstring/mini_cstring_copy.o \
 		src/mini/primitives/cstring/mini_cstring_dirname.o \
 		src/mini/primitives/cstring/mini_cstring_get_subcstring.o \
 		src/mini/primitives/cstring/mini_cstring_join.o \
+		src/mini/primitives/cstring/mini_cstring_remove.o \
 		src/mini/primitives/i32/i32_to_cstring.o \
 		src/mini/primitives/i8/i8_is_whitespace.o \
 		src/mini/primitives/memory/mem_copy_from_to.o \
 		src/mini/primitives/memory/mini_mem_sub.o \
+		src/mini/primitives/u8/mini_u8_to_cstring.o \
 		src/mini/processes/eval/mini_eval_create.o \
 		src/mini/processes/expansion/mini_expansion_create.o \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.o \
@@ -277,14 +283,17 @@ minishell_depends = 	src/main.d \
 		src/mini/primitives/cstring/cstring_is_not_empty.d \
 		src/mini/primitives/cstring/cstring_to_stderr.d \
 		src/mini/primitives/cstring/cstring_to_stdout.d \
+		src/mini/primitives/cstring/mini_cstring_add.d \
 		src/mini/primitives/cstring/mini_cstring_copy.d \
 		src/mini/primitives/cstring/mini_cstring_dirname.d \
 		src/mini/primitives/cstring/mini_cstring_get_subcstring.d \
 		src/mini/primitives/cstring/mini_cstring_join.d \
+		src/mini/primitives/cstring/mini_cstring_remove.d \
 		src/mini/primitives/i32/i32_to_cstring.d \
 		src/mini/primitives/i8/i8_is_whitespace.d \
 		src/mini/primitives/memory/mem_copy_from_to.d \
 		src/mini/primitives/memory/mini_mem_sub.d \
+		src/mini/primitives/u8/mini_u8_to_cstring.d \
 		src/mini/processes/eval/mini_eval_create.d \
 		src/mini/processes/expansion/mini_expansion_create.d \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.d \
