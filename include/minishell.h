@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/13 18:30:20 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/13 18:34:07 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,8 @@ t_none	mini_parse(t_mini mini);
 t_none	mini_eval(t_mini mini);
 t_none	mini_reset(t_mini mini);
 t_none	mini_heredoc(t_mini mini);
+
+t_i32	ft_strlen(t_cstring str);
+t_cstring	ft_strdup(const t_cstring str);
 
 #endif
