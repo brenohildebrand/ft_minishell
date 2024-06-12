@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 12:17:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 15:30:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:53:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ t_none		mini_cstring_add(
 				t_cstring *to_cstring,
 				t_i32 start,
 				t_cstring value);
+t_i32		cstring_compare(t_cstring a, t_cstring b);
 
 #endif

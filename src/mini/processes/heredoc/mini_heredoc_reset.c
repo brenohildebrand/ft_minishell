@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_create.c                                      :+:      :+:    :+:   */
+/*   mini_heredoc_reset.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 18:20:50 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/12 14:01:12 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/11 22:55:00 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/12 13:23:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_mini	mini_create(t_i32 argc, t_i8 **argv)
+t_none	mini_heredoc_reset(t_mini mini)
 {
-	t_mini	mini;
+	t_cstring	filename;
+	t_cstring	filepath;
 
-	mini = malloc(sizeof(struct s_mini));
-	mini_assert(mini, mini != NULL, MEMORY_ALLOCATION_ERROR);
-	mini_shared_create(mini, argc, argv);
-	mini_config_create(mini);
-	mini_signals_create(mini);
-	mini_reader_create(mini);
-	mini_lexer_create(mini);
-	mini_expansion_create(mini);
-	mini_parser_create(mini);
-	mini_heredoc_create(mini);
-	mini_eval_create(mini);
-	return (mini);
+	while (mini->heredoc->counter--)
+	{
+		filename = mini_cstring_join(mini, mini_cstring_copy(mini, "mini.heredoc."), mini_u8_to_cstring(mini, mini->heredoc->counter++));
+		filepath = mini_cstring_join(mini, mini_cstring_copy(mini, "/tmp/"), filename);
+		mini_assert(mini, unlink(filepath) != 0, HEREDOC_FILE_ERROR);
+	}
 }

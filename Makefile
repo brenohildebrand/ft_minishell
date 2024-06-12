@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/11 19:45:58 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/11 19:45:58 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/12 13:56:33 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/12 13:56:33 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ minishell_sources = 	src/main.c \
 		src/mini/contexts/config/mini_config_create_prompt.c \
 		src/mini/contexts/config/mini_config_destroy_lua_state.c \
 		src/mini/contexts/shared/mini_shared_create.c \
+		src/mini/primitives/cstring/cstring_compare.c \
 		src/mini/primitives/cstring/cstring_get_length.c \
 		src/mini/primitives/cstring/cstring_is_not_empty.c \
 		src/mini/primitives/cstring/cstring_to_stderr.c \
@@ -69,6 +70,11 @@ minishell_sources = 	src/main.c \
 		src/mini/processes/expansion/mini_expansion_create.c \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.c \
 		src/mini/processes/expansion/mini_expansion_expand_word.c \
+		src/mini/processes/heredoc/mini_heredoc_create.c \
+		src/mini/processes/heredoc/mini_heredoc_read.c \
+		src/mini/processes/heredoc/mini_heredoc_reset.c \
+		src/mini/processes/heredoc/mini_heredoc_update_tree.c \
+		src/mini/processes/heredoc/mini_heredoc_write.c \
 		src/mini/processes/lexer/mini_lexer_automaton.c \
 		src/mini/processes/lexer/mini_lexer_automaton_delimit.c \
 		src/mini/processes/lexer/mini_lexer_automaton_init.c \
@@ -152,6 +158,7 @@ minishell_objects = 	src/main.o \
 		src/mini/contexts/config/mini_config_create_prompt.o \
 		src/mini/contexts/config/mini_config_destroy_lua_state.o \
 		src/mini/contexts/shared/mini_shared_create.o \
+		src/mini/primitives/cstring/cstring_compare.o \
 		src/mini/primitives/cstring/cstring_get_length.o \
 		src/mini/primitives/cstring/cstring_is_not_empty.o \
 		src/mini/primitives/cstring/cstring_to_stderr.o \
@@ -171,6 +178,11 @@ minishell_objects = 	src/main.o \
 		src/mini/processes/expansion/mini_expansion_create.o \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.o \
 		src/mini/processes/expansion/mini_expansion_expand_word.o \
+		src/mini/processes/heredoc/mini_heredoc_create.o \
+		src/mini/processes/heredoc/mini_heredoc_read.o \
+		src/mini/processes/heredoc/mini_heredoc_reset.o \
+		src/mini/processes/heredoc/mini_heredoc_update_tree.o \
+		src/mini/processes/heredoc/mini_heredoc_write.o \
 		src/mini/processes/lexer/mini_lexer_automaton.o \
 		src/mini/processes/lexer/mini_lexer_automaton_delimit.o \
 		src/mini/processes/lexer/mini_lexer_automaton_init.o \
@@ -239,6 +251,7 @@ minishell_headers = 	include/minishell.h \
 		include/u8.h \
 		include/eval.h \
 		include/expansion.h \
+		include/heredoc.h \
 		include/lexer.h \
 		include/parser.h \
 		include/reader.h \
@@ -279,6 +292,7 @@ minishell_depends = 	src/main.d \
 		src/mini/contexts/config/mini_config_create_prompt.d \
 		src/mini/contexts/config/mini_config_destroy_lua_state.d \
 		src/mini/contexts/shared/mini_shared_create.d \
+		src/mini/primitives/cstring/cstring_compare.d \
 		src/mini/primitives/cstring/cstring_get_length.d \
 		src/mini/primitives/cstring/cstring_is_not_empty.d \
 		src/mini/primitives/cstring/cstring_to_stderr.d \
@@ -298,6 +312,11 @@ minishell_depends = 	src/main.d \
 		src/mini/processes/expansion/mini_expansion_create.d \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.d \
 		src/mini/processes/expansion/mini_expansion_expand_word.d \
+		src/mini/processes/heredoc/mini_heredoc_create.d \
+		src/mini/processes/heredoc/mini_heredoc_read.d \
+		src/mini/processes/heredoc/mini_heredoc_reset.d \
+		src/mini/processes/heredoc/mini_heredoc_update_tree.d \
+		src/mini/processes/heredoc/mini_heredoc_write.d \
 		src/mini/processes/lexer/mini_lexer_automaton.d \
 		src/mini/processes/lexer/mini_lexer_automaton_delimit.d \
 		src/mini/processes/lexer/mini_lexer_automaton_init.d \

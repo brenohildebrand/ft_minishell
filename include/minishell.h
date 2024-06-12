@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 22:33:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:06:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define ENABLE_DEBUGGER
 # define ENABLE_LUA
 
+# include <fcntl.h>
+# include <signal.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <readline/readline.h>
@@ -40,6 +42,7 @@
 # include "mini/processes/lexer.h"
 # include "mini/processes/expansion.h"
 # include "mini/processes/parser.h"
+# include "mini/processes/heredoc.h"
 # include "mini/processes/eval.h"
 # include "mini/contexts/shared.h"
 # include "mini/contexts/signals.h"
@@ -54,17 +57,21 @@
 
 # define MEMORY_ALLOCATION_ERROR 1
 # define MEMSTACK_OVERFLOW_ERROR 2
-# define LUA_ERROR 3
+# define HEREDOC_FILE_ERROR 3
+# define SIGNALS_ERROR 4
+# define LUA_ERROR 5
 
 typedef struct s_mini	*t_mini;
 
 struct s_mini {
 	t_config	config;
 	t_shared	shared;
+	t_signals	signals;
 	t_reader	reader;
 	t_lexer		lexer;
 	t_expansion	expansion;
 	t_parser	parser;
+	t_heredoc	heredoc;
 	t_eval		eval;
 };
 
