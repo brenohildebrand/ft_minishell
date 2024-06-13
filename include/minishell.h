@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/13 18:34:07 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/13 18:34:57 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,11 @@ t_none	mini_heredoc(t_mini mini);
 
 t_i32	ft_strlen(t_cstring str);
 t_cstring	ft_strdup(const t_cstring str);
+t_cstring	ft_strchr(t_cstring s, t_i32 c);
+t_cstring	ft_strnstr(const t_cstring big, const t_cstring little, size_t len);
+t_cstring	ft_substr(t_cstring s, t_u32 start, t_i32 len);
+t_i32	ft_isalnum(t_i32 c);
+t_i32	ft_isdigit(t_i32 c);
+t_none	ft_putstr(t_cstring str);
 
 #endif
