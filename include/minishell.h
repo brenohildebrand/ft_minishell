@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/13 18:34:57 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/13 20:03:52 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define ENABLE_DEBUGGER
 # define ENABLE_LUA
+# define FAILURE 1
+# define SUCCESS 0
+# define SYNTAX_ERROR 2
 
 # include <fcntl.h>
 # include <signal.h>
@@ -99,5 +102,6 @@ t_cstring	ft_substr(t_cstring s, t_u32 start, t_i32 len);
 t_i32	ft_isalnum(t_i32 c);
 t_i32	ft_isdigit(t_i32 c);
 t_none	ft_putstr(t_cstring str);
+t_i64	ft_strtol(t_cstring str, t_cstring_array endptr, t_i32 base)
 
 #endif
