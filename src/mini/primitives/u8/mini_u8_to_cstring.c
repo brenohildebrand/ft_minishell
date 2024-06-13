@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:55:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 15:02:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:28:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_cstring	mini_u8_to_cstring(t_mini mini, t_u8 value)
 	t_u8		value_copy;
 	t_cstring	cstring;
 
+	if (value == 0)
+		return (mini_cstring_copy(mini, "0"));
 	len = 0;
 	value_copy = value;
 	while (value_copy)

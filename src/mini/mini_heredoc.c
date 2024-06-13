@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:28:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 23:21:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:39:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 t_none	mini_heredoc(t_mini mini)
 {
-	t_mini_cmd_tree_list	command_list;
-	t_i32					i;
+	t_mini_pipe_sequence_tree	tree;
+	t_mini_cmd_tree_list		command_list;
+	t_mini_cmd_tree				command;
+	t_mini_list					node;
+	t_i32						i;
 	
 	if (!mini->shared->is_heredoc_complete)
 	{
-		printf("TODO: implement mini_heredoc. Aborting.\n");
-		mini_quit(mini, 0);
-		// percorre os redir de cada comando na orderm q aparece
-		// se for heredoc 
-		// 	le as linhas e vai salvando num buffer
-		//	ate achar delimiter\n
-		//	escreve o resultado num arquivo temporario
-		//  substitui o delimiter com o nome do arquivo temporario
-		// cabou
-		
 		command_list = mini->parser->tree->command_list;
 		i = 0;
 		while (i < command_list->length)
@@ -46,5 +39,33 @@ t_none	mini_heredoc(t_mini mini)
 			}
 			i++;
 		}
+	}
+	printf("\033[94m[%s:%d]\n(command)\033[0m ", __func__, __LINE__);
+	tree = mini->parser->tree;
+	command_list = tree->command_list;
+	i = 0;
+	while (i < command_list->length)
+	{
+		command = command_list->elements[i];
+		node = command->words;
+		while (node && node->token)
+		{
+			printf("%s ", node->token);
+			node = node->next;
+		}
+		node = command->redirs;
+		while (node && node->token)
+		{
+			if (node->next && node->token)
+				printf("%s ", node->token);
+			else
+				printf("%s", node->token);
+			node = node->next;
+		}
+		if (i + 1 < command_list->length)
+			printf("| ");
+		else
+			printf("\n");
+		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 23:36:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/12 13:21:37 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:44:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ t_none	mini_heredoc_update_tree(t_mini mini)
 	filename = mini_cstring_join(mini, mini_cstring_copy(mini, "mini.heredoc."), mini_u8_to_cstring(mini, mini->heredoc->counter - 1));
 	filepath = mini_cstring_join(mini, mini_cstring_copy(mini, "/tmp/"), filename);
 	mini->heredoc->redirs->next->token = filepath;
-	mini_free(mini, filepath);
 }
