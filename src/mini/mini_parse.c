@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:11:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 14:44:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:59:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 t_none	mini_parse(t_mini mini)
 {
+	t_mini_pipe_sequence_tree	tree;
+	t_mini_cmd_tree_list		command_list;
+	t_mini_cmd_tree				command;
+	t_mini_list					node;
+	t_i32						i;
+
 	mini_parser_reset(mini);
 	if (mini_parser_get_token(mini) == END)
 	{
@@ -30,10 +36,6 @@ t_none	mini_parse(t_mini mini)
 				{
 					mini->shared->is_heredoc_complete = FALSE;
 				}
-				else
-				{
-					return ;
-				}
 			}
 		}
 		else if (mini->parser->could_be_completed)
@@ -45,5 +47,33 @@ t_none	mini_parse(t_mini mini)
 			mini_parser_print_syntax_error(mini);
 			mini_reset(mini);
 		}
+	}
+	printf("\033[94m[%s:%d]\n(command)\033[0m ", __func__, __LINE__);
+	tree = mini->parser->tree;
+	command_list = tree->command_list;
+	i = 0;
+	while (i < command_list->length)
+	{
+		command = command_list->elements[i];
+		node = command->words;
+		while (node && node->token)
+		{
+			printf("%s ", node->token);
+			node = node->next;
+		}
+		node = command->redirs;
+		while (node && node->token)
+		{
+			if (node->next && node->token)
+				printf("%s ", node->token);
+			else
+				printf("%s", node->token);
+			node = node->next;
+		}
+		if (i + 1 < command_list->length)
+			printf("| ");
+		else
+			printf("\n");
+		i++;
 	}
 }

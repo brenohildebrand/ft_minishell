@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/12 13:56:33 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/12 13:56:33 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/12 20:58:34 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/12 20:58:34 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,10 @@ minishell_sources = 	src/main.c \
 		src/mini/contexts/config/mini_config_create_prompt.c \
 		src/mini/contexts/config/mini_config_destroy_lua_state.c \
 		src/mini/contexts/shared/mini_shared_create.c \
+		src/mini/contexts/signals/mini_signals_create.c \
+		src/mini/contexts/signals/mini_signals_handler.c \
+		src/mini/contexts/signals/mini_signals_sigint_handler.c \
+		src/mini/contexts/signals/mini_signals_sigquit_handler.c \
 		src/mini/primitives/cstring/cstring_compare.c \
 		src/mini/primitives/cstring/cstring_get_length.c \
 		src/mini/primitives/cstring/cstring_is_not_empty.c \
@@ -64,6 +68,7 @@ minishell_sources = 	src/main.c \
 		src/mini/primitives/i32/i32_to_cstring.c \
 		src/mini/primitives/i8/i8_is_whitespace.c \
 		src/mini/primitives/memory/mem_copy_from_to.c \
+		src/mini/primitives/memory/mem_set.c \
 		src/mini/primitives/memory/mini_mem_sub.c \
 		src/mini/primitives/u8/mini_u8_to_cstring.c \
 		src/mini/processes/eval/mini_eval_create.c \
@@ -158,6 +163,10 @@ minishell_objects = 	src/main.o \
 		src/mini/contexts/config/mini_config_create_prompt.o \
 		src/mini/contexts/config/mini_config_destroy_lua_state.o \
 		src/mini/contexts/shared/mini_shared_create.o \
+		src/mini/contexts/signals/mini_signals_create.o \
+		src/mini/contexts/signals/mini_signals_handler.o \
+		src/mini/contexts/signals/mini_signals_sigint_handler.o \
+		src/mini/contexts/signals/mini_signals_sigquit_handler.o \
 		src/mini/primitives/cstring/cstring_compare.o \
 		src/mini/primitives/cstring/cstring_get_length.o \
 		src/mini/primitives/cstring/cstring_is_not_empty.o \
@@ -172,6 +181,7 @@ minishell_objects = 	src/main.o \
 		src/mini/primitives/i32/i32_to_cstring.o \
 		src/mini/primitives/i8/i8_is_whitespace.o \
 		src/mini/primitives/memory/mem_copy_from_to.o \
+		src/mini/primitives/memory/mem_set.o \
 		src/mini/primitives/memory/mini_mem_sub.o \
 		src/mini/primitives/u8/mini_u8_to_cstring.o \
 		src/mini/processes/eval/mini_eval_create.o \
@@ -292,6 +302,10 @@ minishell_depends = 	src/main.d \
 		src/mini/contexts/config/mini_config_create_prompt.d \
 		src/mini/contexts/config/mini_config_destroy_lua_state.d \
 		src/mini/contexts/shared/mini_shared_create.d \
+		src/mini/contexts/signals/mini_signals_create.d \
+		src/mini/contexts/signals/mini_signals_handler.d \
+		src/mini/contexts/signals/mini_signals_sigint_handler.d \
+		src/mini/contexts/signals/mini_signals_sigquit_handler.d \
 		src/mini/primitives/cstring/cstring_compare.d \
 		src/mini/primitives/cstring/cstring_get_length.d \
 		src/mini/primitives/cstring/cstring_is_not_empty.d \
@@ -306,6 +320,7 @@ minishell_depends = 	src/main.d \
 		src/mini/primitives/i32/i32_to_cstring.d \
 		src/mini/primitives/i8/i8_is_whitespace.d \
 		src/mini/primitives/memory/mem_copy_from_to.d \
+		src/mini/primitives/memory/mem_set.d \
 		src/mini/primitives/memory/mini_mem_sub.d \
 		src/mini/primitives/u8/mini_u8_to_cstring.d \
 		src/mini/processes/eval/mini_eval_create.d \

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:23:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 14:32:10 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:54:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 
 t_none	mini_read(t_mini mini)
 {
-	if (mini->reader->line)
-	{
-		mini_free(mini, mini->reader->line);
-	}
 	if (mini->reader->statement == NULL)
 	{
 		mini->reader->line = readline(mini->reader->prompt);
@@ -35,8 +31,8 @@ t_none	mini_read(t_mini mini)
 	}
 	else
 	{
-		cstring_to_stdout("\033[33mAn empty line with only EOF was entered. I'm quitting.\033[0m\n");
-		mini_quit(mini, 42);
+		cstring_to_stdout("exit\n");
+		mini_quit(mini, mini->shared->exit_code);
 	}
 	mini->shared->is_statement_complete = TRUE;
 	printf("\033[94m[%s:%d]\n(statement)\033[0m %s\n", __func__, __LINE__, mini->reader->statement);

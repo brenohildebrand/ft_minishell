@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:39:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 22:39:49 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:58:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_mini_cmd_tree	mini_parse_command(t_mini mini)
 			mini_parser_next_token(mini);
 			if (mini_parser_is_word(mini))
 			{
-				mini_list_append(mini, &(tree->redirs), (mini->parser->cursor - 1)->token, (mini->parser->cursor - 1)->type);
-				mini_list_append(mini, &(tree->words), mini->parser->cursor->token, mini->parser->cursor->type);
+				mini_list_append(mini, &(tree->redirs), mini->parser->cursor->previous->token, mini->parser->cursor->previous->type);
+				mini_list_append(mini, &(tree->redirs), mini->parser->cursor->token, mini->parser->cursor->type);
 			}
 			else
 			{
