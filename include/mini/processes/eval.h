@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 16:33:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/13 21:29:02 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 18:12:41 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef t_eval_process			t_eval;
 struct							s_eval_process
 {
 	t_cstring_array				env;
+	t_mini_list					tokens;
 };
 
 t_none							mini_eval_create(t_mini mini);

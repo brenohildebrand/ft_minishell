@@ -6,13 +6,13 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:50:15 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 20:10:48 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 18:18:52 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_i64	convert_str_to_long(const char *str, int base, int sign)
+t_i64	convert_str_to_long(t_cstring str, t_i32 base, t_i32 sign)
 {
 	t_i64	result;
 	t_i64	digit;
@@ -59,6 +59,20 @@ t_i64	ft_strtol(t_cstring str, t_cstring_array endptr, t_i32 base)
 		result = 0;
 	}
 	if (endptr)
-		*endptr = (char *)str;
+		*endptr = (t_cstring)str;
 	return (result);
+}
+
+t_i32	ft_strcmp(const t_cstring s1, const t_cstring s2)
+{
+	t_i32 i;
+
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return ((t_u8)s1[i] - (t_u8)s2[i]);
+		i++;
+	}
+	return (0);
 }
