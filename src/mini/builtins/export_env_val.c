@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:51 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 20:21:32 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/13 21:17:26 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,12 @@ static t_i32	update_env_var(t_i8 **env, t_cstring variable_w_value,
 	return (0);
 }
 
-static t_i8	**appendNewEnvironmentVariable(t_i8 **old_env,
-		t_cstring *variable_w_value)
+static t_i8	**append_new_env_var(t_i8 **old_env, t_cstring *variable_w_value)
 {
-	t_i32 env_size;
-	t_i32 stringCounter;
-	t_i8 **newEnvironment;
-	t_cstring newVariableEntry;
+	t_i32		env_size;
+	t_i32		stringCounter;
+	t_i8		**newEnvironment;
+	t_cstring	newVariableEntry;
 
 	env_size = 0;
 	stringCounter = 0;
@@ -107,4 +106,33 @@ static t_i8	**appendNewEnvironmentVariable(t_i8 **old_env,
 	newEnvironment[stringCounter] = newVariableEntry;
 	free(old_env);
 	return (newEnvironment);
+}
+
+t_i32	restore_env_value(t_i8 ***env, t_cstring variable)
+{
+	t_cstring_array	new_env;
+	t_i32			old_env_size;
+	t_i32			variable_index;
+	t_i32	i;
+	
+	i = 0;
+	old_env_size = 0;
+	variable_index = env_get_value_index(*env, variable);
+	if (!(*env)[variable_index])
+		return (0);
+	while ((*env)[old_env_size])
+		old_env_size++;
+	new_env = mini_alloc(old_env_size, sizeof(*new_env));
+	if (!new_env)
+		return (2);
+	while (i < old_env_size)
+	{
+		if (i != variable_index)
+			new_env[i] = (*env)[i];
+		i++;
+	}
+	free((*env)[variable_index]);
+	free(*env);
+	*env = new_env;
+	return (0);
 }
