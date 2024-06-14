@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ultils_lib_ft_2.c                                  :+:      :+:    :+:   */
+/*   utils_lib_ft_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 17:51:08 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 18:04:56 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:13:52 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ t_cstring	ft_substr(t_cstring s, t_u32 start, t_i32 len)
 	j = 0;
 	if (!s)
 		return (NULL);
-	while (i < len && start < ft_strlen(s) && s[start + i])
+	while (i < len && ((t_i32) start < ft_strlen(s)) && s[start + i])
 		i++;
 	subs = malloc((i + 1) * sizeof(char));
 	if (!subs)
 		return (NULL);
-	while (j < i && start < ft_strlen(s))
+	while (j < i && ((t_i32) start < ft_strlen(s)))
 	{
 		subs[j] = s[start + j];
 		j++;
@@ -52,7 +52,7 @@ t_cstring	ft_substr(t_cstring s, t_u32 start, t_i32 len)
 	return (subs);
 }
 
-t_cstring	ft_strdup(const t_cstring s)
+t_cstring	ft_strdup(t_cstring s)
 {
 	t_i32 len;
 	t_i32 i = 0;
@@ -64,7 +64,7 @@ t_cstring	ft_strdup(const t_cstring s)
 	{
 		while (s[i])
 		{
-			copy[i] == s[i];
+			copy[i] = s[i];
 			i++;
 		}
 		copy[i] = '\0';

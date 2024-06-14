@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 21:32:26 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 18:12:10 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:15:58 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ t_i32	mini_execute_builtin(t_mini mini, t_i32 argc, t_i8 **argv)
 		return (mini_eval_pwd(mini, argc, argv));
 	if (!ft_strcmp(mini->eval->tokens->token, "unset"))
 		return (mini_eval_unset(mini, argc, argv));
-	return (write(2, "Error with builtins", 24));
+	return (write(2, "Error with builtins", 19));
 }

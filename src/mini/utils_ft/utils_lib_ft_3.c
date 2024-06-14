@@ -6,13 +6,13 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:50:15 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 18:18:52 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:09:04 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_i64	convert_str_to_long(t_cstring str, t_i32 base, t_i32 sign)
+t_i64	convert_str_to_long(t_cstring str, t_i32 sign)
 {
 	t_i64	result;
 	t_i64	digit;
@@ -52,7 +52,7 @@ t_i64	ft_strtol(t_cstring str, t_cstring_array endptr, t_i32 base)
 	else if (*str == '+')
 		str++;
 	if (base == 10 || base == 0)
-		result = convert_str_to_long(str, base, sign);
+		result = convert_str_to_long(str, sign);
 	else
 	{
 		errno = EINVAL;

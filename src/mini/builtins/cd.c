@@ -41,7 +41,7 @@ t_i32	mini_eval_cd(t_mini mini, t_i32 argc, t_i8 **argv)
 		path = get_env((mini)->eval->env, "HOME");
 		if (path == NULL)
 		{
-			write(1, "cd: HOME not set", 27);
+			write(1, "cd: HOME not set", 16);
 			return (1);
 		}
 	}

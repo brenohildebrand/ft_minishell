@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/13 22:06:59 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/13 22:06:59 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/14 19:53:24 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/14 19:53:24 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,6 @@ minishell_sources = 	src/main.c \
 		src/mini/contexts/signals/mini_signals_create.c \
 		src/mini/contexts/signals/mini_signals_sigquit_handler.c \
 		src/mini/contexts/shared/mini_shared_create.c \
-		src/mini/utils_ft.c/utils_lib_ft_3.c \
-		src/mini/utils_ft.c/utils_lib_ft_2.c \
-		src/mini/utils_ft.c/utils_lib_ft.c \
 		src/mini/systems/memstack/memstack_unload_i8.c \
 		src/mini/systems/memstack/memstack_load_any.c \
 		src/mini/systems/memstack/memstack_load.c \
@@ -81,6 +78,9 @@ minishell_sources = 	src/main.c \
 		src/mini/compounds/mini_list/mini_list_append.c \
 		src/mini/compounds/mini_list/mini_list_destroy.c \
 		src/mini/compounds/mini_list/mini_list_clear.c \
+		src/mini/utils_ft/utils_lib_ft_3.c \
+		src/mini/utils_ft/utils_lib_ft_2.c \
+		src/mini/utils_ft/utils_lib_ft.c \
 		src/mini/primitives/i32/i32_to_cstring.c \
 		src/mini/primitives/u8/mini_u8_to_cstring.c \
 		src/mini/primitives/cstring/cstring_get_length.c \
@@ -168,9 +168,6 @@ minishell_objects = 	src/main.o \
 		src/mini/contexts/signals/mini_signals_create.o \
 		src/mini/contexts/signals/mini_signals_sigquit_handler.o \
 		src/mini/contexts/shared/mini_shared_create.o \
-		src/mini/utils_ft.o/utils_lib_ft_3.o \
-		src/mini/utils_ft.o/utils_lib_ft_2.o \
-		src/mini/utils_ft.o/utils_lib_ft.o \
 		src/mini/systems/memstack/memstack_unload_i8.o \
 		src/mini/systems/memstack/memstack_load_any.o \
 		src/mini/systems/memstack/memstack_load.o \
@@ -206,6 +203,9 @@ minishell_objects = 	src/main.o \
 		src/mini/compounds/mini_list/mini_list_append.o \
 		src/mini/compounds/mini_list/mini_list_destroy.o \
 		src/mini/compounds/mini_list/mini_list_clear.o \
+		src/mini/utils_ft/utils_lib_ft_3.o \
+		src/mini/utils_ft/utils_lib_ft_2.o \
+		src/mini/utils_ft/utils_lib_ft.o \
 		src/mini/primitives/i32/i32_to_cstring.o \
 		src/mini/primitives/u8/mini_u8_to_cstring.o \
 		src/mini/primitives/cstring/cstring_get_length.o \
@@ -319,9 +319,6 @@ minishell_depends = 	src/main.d \
 		src/mini/contexts/signals/mini_signals_create.d \
 		src/mini/contexts/signals/mini_signals_sigquit_handler.d \
 		src/mini/contexts/shared/mini_shared_create.d \
-		src/mini/utils_ft.d/utils_lib_ft_3.d \
-		src/mini/utils_ft.d/utils_lib_ft_2.d \
-		src/mini/utils_ft.d/utils_lib_ft.d \
 		src/mini/systems/memstack/memstack_unload_i8.d \
 		src/mini/systems/memstack/memstack_load_any.d \
 		src/mini/systems/memstack/memstack_load.d \
@@ -357,6 +354,9 @@ minishell_depends = 	src/main.d \
 		src/mini/compounds/mini_list/mini_list_append.d \
 		src/mini/compounds/mini_list/mini_list_destroy.d \
 		src/mini/compounds/mini_list/mini_list_clear.d \
+		src/mini/utils_ft/utils_lib_ft_3.d \
+		src/mini/utils_ft/utils_lib_ft_2.d \
+		src/mini/utils_ft/utils_lib_ft.d \
 		src/mini/primitives/i32/i32_to_cstring.d \
 		src/mini/primitives/u8/mini_u8_to_cstring.d \
 		src/mini/primitives/cstring/cstring_get_length.d \

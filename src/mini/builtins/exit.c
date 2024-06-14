@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:59:37 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 18:21:48 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:48:39 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static t_i64	get_exit_status(t_cstring arg, t_i32 *error)
 		return (0);
 	}
 	status = ft_strtol(arg, &endptr, 10);
-	if (*endptr != '\0' || (status == LONG_MAX || status == LONG_MIN)
-		&& errno == ERANGE)
+	if (*endptr != '\0' || ((status == LONG_MAX || status == LONG_MIN)
+			&& errno == ERANGE))
 	{
 		*error = 1;
 		return (0);
@@ -51,8 +51,9 @@ static t_i64	get_exit_status(t_cstring arg, t_i32 *error)
 t_i32	mini_eval_exit(t_mini mini, t_i32 argc, t_i8 **argv)
 {
 	t_i64	status;
-	t_i32		error;
+	t_i32	error;
 
+	(void) mini;
 	status = 0;
 	error = 0;
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))

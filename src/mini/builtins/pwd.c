@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:24:24 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 21:20:22 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:43:18 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_i32	mini_eval_pwd(t_mini mini, t_i32 argc, t_i8 **argv)
 {
-	t_cstring buffer[100];
+	t_i8 buffer[100];
 
 	(void)mini;
 	(void)argc;

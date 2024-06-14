@@ -6,11 +6,11 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:05:19 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 18:10:27 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:16:54 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 t_i32	mini_eval_export(t_mini mini, t_i32 argc, t_i8 **argv)
 {

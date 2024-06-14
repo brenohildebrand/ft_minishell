@@ -6,11 +6,11 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:45:12 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 18:07:40 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:14:13 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 t_i32	ft_strlen(t_cstring str)
 {

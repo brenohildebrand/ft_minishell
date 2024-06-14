@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:55:05 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 18:21:23 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 19:16:37 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_i32	mini_eval_echo(t_mini mini, t_i8 **argv)
 	(void)mini;
 	i = 1;
 	n = 0;
-	if (argv[1] && check_n(argv))
+	if (argv[1] && check_n(argv[i]))
 	{
 		n = 1;
 		i++;
