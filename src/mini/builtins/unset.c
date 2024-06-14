@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:49:24 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 21:24:53 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 18:35:02 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_i32   mini_eval_unset(t_mini mini, t_i32 argc, t_i8 **argv)
     t_i32 i;
     t_i32 status;
     t_i32 unset_status;
-
+ 
     status = 0;
     if (argc < 2)
         return 1;
