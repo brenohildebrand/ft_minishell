@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:59:37 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 20:10:44 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 18:21:48 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static t_i64	get_exit_status(t_cstring arg, t_i32 *error)
 
 t_i32	mini_eval_exit(t_mini mini, t_i32 argc, t_i8 **argv)
 {
-	long	status;
-	int		error;
+	t_i64	status;
+	t_i32		error;
 
 	status = 0;
 	error = 0;

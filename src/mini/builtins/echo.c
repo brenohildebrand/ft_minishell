@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:55:05 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/13 21:27:12 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 18:21:23 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static t_i32	check_n(t_cstring argv)
 
 t_i32	mini_eval_echo(t_mini mini, t_i8 **argv)
 {
-	int i;
-	int n;
+	t_i32 i;
+	t_i32 n;
 
 	(void)mini;
 	i = 1;
