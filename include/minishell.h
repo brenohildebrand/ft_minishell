@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/12 14:26:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:17:56 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define ENABLE_DEBUGGER
 # define ENABLE_LUA
+# define FAILURE 1
+# define SUCCESS 0
+# define SYNTAX_ERROR 2
 
 # include <fcntl.h>
 # include <signal.h>
@@ -23,6 +26,7 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include  <errno.h>
 
 # include "mini/primitives/i8.h"
 # include "mini/primitives/u8.h"
@@ -89,5 +93,16 @@ t_none	mini_parse(t_mini mini);
 t_none	mini_eval(t_mini mini);
 t_none	mini_reset(t_mini mini);
 t_none	mini_heredoc(t_mini mini);
+
+t_i32	ft_strlen(t_cstring str);
+t_cstring	ft_strdup(const t_cstring str);
+t_cstring	ft_strchr(t_cstring s, t_i32 c);
+t_cstring	ft_strnstr(const t_cstring big, const t_cstring little, size_t len);
+t_cstring	ft_substr(t_cstring s, t_u32 start, t_i32 len);
+t_i32	ft_isalnum(t_i32 c);
+t_i32	ft_isdigit(t_i32 c);
+t_none	ft_putstr(t_cstring str);
+t_i64	ft_strtol(t_cstring str, t_cstring_array endptr, t_i32 base);
+t_i32	ft_strcmp(const t_cstring s1, const t_cstring s2);
 
 #endif
