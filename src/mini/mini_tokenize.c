@@ -6,13 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 14:30:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/14 23:52:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#ifdef ENABLE_DEBUGGER
 
 t_none	mini_tokenize(t_mini mini)
 {
@@ -30,7 +28,3 @@ t_none	mini_tokenize(t_mini mini)
 	}
 	printf("\n");
 }
-
-#else
-
-#endif

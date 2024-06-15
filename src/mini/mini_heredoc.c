@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:28:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/12 21:39:33 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/15 00:14:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,37 @@ t_none	mini_heredoc(t_mini mini)
 	}
 	printf("\033[94m[%s:%d]\n(command)\033[0m ", __func__, __LINE__);
 	tree = mini->parser->tree;
-	command_list = tree->command_list;
-	i = 0;
-	while (i < command_list->length)
+	if (tree)
 	{
-		command = command_list->elements[i];
-		node = command->words;
-		while (node && node->token)
+		command_list = tree->command_list;
+		i = 0;
+		while (i < command_list->length)
 		{
-			printf("%s ", node->token);
-			node = node->next;
-		}
-		node = command->redirs;
-		while (node && node->token)
-		{
-			if (node->next && node->token)
+			command = command_list->elements[i];
+			node = command->words;
+			while (node && node->token)
+			{
 				printf("%s ", node->token);
+				node = node->next;
+			}
+			node = command->redirs;
+			while (node && node->token)
+			{
+				if (node->next && node->token)
+					printf("%s ", node->token);
+				else
+					printf("%s", node->token);
+				node = node->next;
+			}
+			if (i + 1 < command_list->length)
+				printf("| ");
 			else
-				printf("%s", node->token);
-			node = node->next;
-		}
-		if (i + 1 < command_list->length)
-			printf("| ");
-		else
-			printf("\n");
-		i++;
+				printf("\n");
+			i++;
+		}	
+	}
+	else
+	{
+		printf("\n");
 	}
 }

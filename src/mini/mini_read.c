@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_read.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:23:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/14 22:05:55 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 23:51:57 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_none	mini_read(t_mini mini)
 	if (mini->reader->line)
 	{
 		memtree_insert(&(mini->shared->memtree), NULL, mini->reader->line);
+		if (mini->reader->statement)
+			mini->reader->statement = mini_cstring_join(mini, mini->reader->statement, mini_cstring_copy(mini, "\n"));
 		mini->reader->statement = mini_cstring_join(mini, mini->reader->statement, mini->reader->line);
 	}
 	else

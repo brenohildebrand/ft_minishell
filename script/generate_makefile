@@ -24,7 +24,7 @@ def print_in_green(text):
 Helper Functions
 """
 def get_minishell_root_dir():
-	if os.getcwd().endswith("minishell"):
+	if os.getcwd().endswith("minishell") or os.getcwd().endswith("minihell"):
 		return (os.getcwd())
 	elif os.getcwd().endswith("scripts"):
 		return (os.path.dirname(os.getcwd()))

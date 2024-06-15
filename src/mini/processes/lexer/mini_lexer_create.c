@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:20:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 00:49:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/14 23:59:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_none	next2(t_mini mini)
 	mini->lexer->table[6][4] = 105;
 	mini->lexer->table[6][5] = 105;
 	mini->lexer->table[6][6] = 105;
-	mini->lexer->table[6][7] = 200;
+	mini->lexer->table[6][7] = 105;
 }
 
 static t_none	next1(t_mini mini)

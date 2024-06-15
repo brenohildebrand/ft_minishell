@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:35:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/07 00:11:09 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/15 00:04:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ struct s_reader_process {
 };
 
 t_none	mini_reader_create(t_mini mini);
+t_none	mini_reader_reset(t_mini mini);
 t_none	mini_reader_create_prompt(t_mini mini);
 t_none	mini_reader_create_multiline_prompt(t_mini mini);
 

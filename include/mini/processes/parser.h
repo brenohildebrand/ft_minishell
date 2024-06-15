@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:51:54 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 22:34:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/15 00:04:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ struct s_parser_process {
 };
 
 t_none				mini_parser_create(t_mini mini);
+t_none				mini_parser_reset(t_mini mini);
 t_none				mini_parser_set_syntax_error(t_mini mini);
 t_none				mini_parser_print_syntax_error(t_mini mini);
 
