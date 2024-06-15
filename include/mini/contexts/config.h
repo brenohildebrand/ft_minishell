@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:58:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 21:59:15 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:09:30 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "minishell.h"
 
-# define ENABLE_LUA
-# ifdef ENABLE_LUA 
+// # define ENABLE_LUA
+// # ifdef ENABLE_LUA 
 
 #  include <lua5.4/lua.h>
 #  include <lua5.4/lauxlib.h>
@@ -41,4 +41,4 @@ t_none	mini_config_destroy_lua_state(t_mini mini);
 
 # endif
 
-#endif
+// #endif

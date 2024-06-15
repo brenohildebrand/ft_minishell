@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_eval_create.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:30:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 22:33:15 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:54:22 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 t_none	mini_eval_create(t_mini mini)
 {
 	mini->eval = mini_alloc(mini, sizeof(struct s_eval_process));
-	mini->eval->whatever = 0;
+	// mini->eval->whatever = 0;
 }

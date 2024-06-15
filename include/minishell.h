@@ -6,7 +6,7 @@
 /*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/14 18:17:56 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/14 21:09:58 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # define ENABLE_DEBUGGER
-# define ENABLE_LUA
+// # define ENABLE_LUA
 # define FAILURE 1
 # define SUCCESS 0
 # define SYNTAX_ERROR 2
@@ -26,6 +26,7 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/ioctl.h>
 #include  <errno.h>
 
 # include "mini/primitives/i8.h"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_signals_create.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:01:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/12 16:03:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/14 22:54:33 by eduardocoel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ t_none	mini_signals_create(t_mini mini)
 	mini->signals->sigaction->sa_flags = SA_SIGINFO;
 	mini_assert(mini, sigaction(SIGINT, mini->signals->sigaction, NULL) != -1, SIGNALS_ERROR);
 	mini_assert(mini, sigaction(SIGQUIT, mini->signals->sigaction, NULL) != -1, SIGNALS_ERROR);
+	signal(SIGQUIT, SIG_IGN);
 }
