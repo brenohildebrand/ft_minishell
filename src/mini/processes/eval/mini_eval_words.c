@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 14:01:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 14:03:39 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:26:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_cstring	get_executable_path(t_mini mini, t_cstring filename)
 static t_cstring	*get_executable_argv(t_mini mini, t_mini_cmd_tree command)
 {
 	t_cstring	*argv;
+	t_i32		i;
 	t_i32		len;
 	t_mini_list	node;
 
@@ -47,10 +48,12 @@ static t_cstring	*get_executable_argv(t_mini mini, t_mini_cmd_tree command)
 	}
 	argv = mini_alloc(mini, len + 1);
 	argv[len] = '\0';
+	i = 0;
+	node = command->words;
 	while (node)
 	{
-		len--;
-		argv[len] = mini_cstring_copy(mini, node->token);
+		argv[i] = mini_cstring_copy(mini, node->token);
+		i++;
 		node = node->next;
 	}
 	return (argv);
@@ -78,6 +81,17 @@ t_none	mini_eval_words(t_mini mini, t_mini_cmd_tree command, t_i32 i)
 	}
 	executable_argv = get_executable_argv(mini, command);
 	executable_envp = get_executable_envp(mini);
+	printf("\033[94m[%s:%d]\n(argv)\033[0m ", __func__, __LINE__);
+	t_i32	j = 0;
+	while (executable_argv[j])
+	{
+		if (executable_argv[j + 1])
+			printf("%s ", executable_argv[j]);
+		else
+			printf("%s", executable_argv[j]);
+		j++;
+	}
+	printf("\n");
 	execve(executable_path, executable_argv, executable_envp);
 	mini_free(mini, executable_path);
 	mini_free(mini, executable_argv);
