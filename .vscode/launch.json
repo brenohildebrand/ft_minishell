@@ -8,7 +8,7 @@
 			"program": "${workspaceFolder}/minishell",
 			"args": [],
 			"stopAtEntry": false,
-			"cwd": "${fileDirname}",
+			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "gdb",
@@ -22,6 +22,10 @@
 					"description": "Set Disassembly Flavor to Intel",
 					"text": "-gdb-set disassembly-flavor intel",
 					"ignoreFailures": true
+				},
+				{
+					"description": "Set follow-fork-mode to child",
+					"text": "set follow-fork-mode child"
 				}
 			],
 			"preLaunchTask": "build"

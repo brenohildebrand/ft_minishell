@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:32:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:06:56 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:55:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static t_bool	mini_lua_load_file(t_mini mini)
 t_none	mini_config_create_lua_state(t_mini mini)
 {
 	mini->config->lua_state = luaL_newstate();
-	mini_assert(mini, mini->config->lua_state != NULL, MEMORY_ALLOCATION_ERROR);
+	mini_assert(mini, mini->config->lua_state != NULL, MINI_ERROR);
 	luaL_openlibs(mini->config->lua_state);
 	if (mini_lua_load_file(mini))
 	{
 		lua_close(mini->config->lua_state);
-		mini_assert(mini, FALSE, LUA_ERROR);
+		mini_assert(mini, FALSE, MINI_ERROR);
 	}
 }

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_cstring_removec                               :+:      :+:    :+:   */
+/*   mini_cstring_remove.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:02:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 15:35:00 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/15 00:31:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_cstring_remove(
+t_cstring	mini_cstring_remove(
 	t_mini mini,
-	t_cstring *to_cstring,
+	t_cstring cstring,
 	t_i32 start,
 	t_i32 end
 ){
@@ -24,7 +24,7 @@ t_none	mini_cstring_remove(
 	t_i32			i;
 	t_i32			j;
 
-	cstring_len = cstring_get_length(*to_cstring);
+	cstring_len = cstring_get_length(cstring);
 	new_cstring_len = cstring_len - (end - start + 1);
 	new_cstring = mini_alloc(mini, new_cstring_len + 1);
 	new_cstring[new_cstring_len] = '\0';
@@ -34,11 +34,10 @@ t_none	mini_cstring_remove(
 	{
 		if (i < start || i > end)
 		{
-			new_cstring[j] = (*to_cstring)[i];
+			new_cstring[j] = (cstring)[i];
 			j++;
 		}
 		i++;
 	}
-	mini_free(mini, *to_cstring);
-	*to_cstring = new_cstring;
+	return (new_cstring);
 }

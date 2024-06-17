@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:15:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:27:07 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:52:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_i32	memstack_unload_i32(t_mini mini)
 	if (mini->shared->memstack->top < mini->shared->memstack->bottom)
 	{
 		write(STDERR_FILENO, "Memstack underflow!\n", 20);
-		mini_quit(mini, MEMSTACK_OVERFLOW_ERROR);
+		mini_quit(mini, MINI_ERROR);
 	}
 	value = *((t_i32 *)(mini->shared->memstack->top));
 	return (value);

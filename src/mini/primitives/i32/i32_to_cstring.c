@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:04:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:08:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:57:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cstring	i32_to_cstring(t_mini mini, t_i32 number)
+t_cstring	mini_i32_to_cstring(t_mini mini, t_i32 number)
 {
 	t_i64		number_copy;
 	t_i32		length;

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:26:38 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/14 23:55:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/16 22:34:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 t_none	mini_eval_reset(t_mini mini)
 {
-	(void)mini;
+	mini->eval->tokens = NULL;
 }

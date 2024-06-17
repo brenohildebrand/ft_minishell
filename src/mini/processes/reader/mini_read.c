@@ -6,36 +6,16 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:23:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/14 23:51:57 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:51:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#ifdef ENABLE_DEBUGGER
-
 t_none	mini_read(t_mini mini)
 {
-	if (mini->reader->statement == NULL)
-		mini->reader->line = readline(mini->reader->prompt);
-	else
-		mini->reader->line = readline(mini->reader->multiline_prompt);
-	if (mini->reader->line)
-	{
-		memtree_insert(&(mini->shared->memtree), NULL, mini->reader->line);
-		if (mini->reader->statement)
-			mini->reader->statement = mini_cstring_join(mini, mini->reader->statement, mini_cstring_copy(mini, "\n"));
-		mini->reader->statement = mini_cstring_join(mini, mini->reader->statement, mini->reader->line);
-	}
-	else
-	{
-		cstring_to_stdout("exit\n");
-		mini_quit(mini, mini->shared->exit_code);
-	}
-	mini->shared->is_statement_complete = TRUE;
+	mini_reader_readline(mini);
+	mini_reader_update_statement(mini);
+	mini_reader_assume_statement_is_complete(mini);
 	printf("\033[94m[%s:%d]\n(statement)\033[0m %s\n", __func__, __LINE__, mini->reader->statement);
 }
-
-#else
-
-#endif

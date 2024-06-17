@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:36:54 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 21:49:45 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:53:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ t_none					mini_cmd_tree_list_append(
 t_none					mini_cmd_tree_list_realloc(
 							t_mini mini,
 							t_mini_cmd_tree_list list);
+t_none					mini_pipe_tree_print(
+							t_mini mini,
+							t_mini_pipe_tree tree);
 
 #endif

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/15 00:15:28 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/15 00:15:28 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/17 14:03:40 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/17 14:03:40 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,13 @@ minishell_sources = 	src/main.c \
 		src/mini/mini_assert.c \
 		src/mini/mini_create.c \
 		src/mini/mini_eval.c \
-		src/mini/mini_expand.c \
 		src/mini/mini_free.c \
 		src/mini/mini_get_cwd.c \
-		src/mini/mini_heredoc.c \
 		src/mini/mini_is_complete.c \
 		src/mini/mini_is_statement_complete.c \
 		src/mini/mini_parse.c \
 		src/mini/mini_quit.c \
-		src/mini/mini_read.c \
 		src/mini/mini_reset.c \
-		src/mini/mini_tokenize.c \
 		src/mini/builtins/builtins.c \
 		src/mini/builtins/cd.c \
 		src/mini/builtins/echo.c \
@@ -44,6 +40,7 @@ minishell_sources = 	src/main.c \
 		src/mini/compounds/mini_list/mini_list_append.c \
 		src/mini/compounds/mini_list/mini_list_clear.c \
 		src/mini/compounds/mini_list/mini_list_destroy.c \
+		src/mini/compounds/mini_list/mini_list_print.c \
 		src/mini/compounds/mini_tree/mini_cmd_tree_create.c \
 		src/mini/compounds/mini_tree/mini_cmd_tree_destroy.c \
 		src/mini/compounds/mini_tree/mini_cmd_tree_list_append.c \
@@ -52,6 +49,7 @@ minishell_sources = 	src/main.c \
 		src/mini/compounds/mini_tree/mini_cmd_tree_list_realloc.c \
 		src/mini/compounds/mini_tree/mini_pipe_tree_create.c \
 		src/mini/compounds/mini_tree/mini_pipe_tree_destroy.c \
+		src/mini/compounds/mini_tree/mini_pipe_tree_print.c \
 		src/mini/contexts/config/mini_config_create.c \
 		src/mini/contexts/config/mini_config_create_lua_state.c \
 		src/mini/contexts/config/mini_config_create_multiline_prompt.c \
@@ -69,24 +67,39 @@ minishell_sources = 	src/main.c \
 		src/mini/primitives/cstring/cstring_to_stderr.c \
 		src/mini/primitives/cstring/cstring_to_stdout.c \
 		src/mini/primitives/cstring/mini_cstring_add.c \
+		src/mini/primitives/cstring/mini_cstring_array_copy.c \
 		src/mini/primitives/cstring/mini_cstring_copy.c \
 		src/mini/primitives/cstring/mini_cstring_dirname.c \
 		src/mini/primitives/cstring/mini_cstring_get_subcstring.c \
 		src/mini/primitives/cstring/mini_cstring_join.c \
 		src/mini/primitives/cstring/mini_cstring_remove.c \
+		src/mini/primitives/cstring/mini_cstring_split.c \
 		src/mini/primitives/i32/i32_to_cstring.c \
 		src/mini/primitives/i8/i8_is_whitespace.c \
 		src/mini/primitives/memory/mem_copy_from_to.c \
 		src/mini/primitives/memory/mem_set.c \
 		src/mini/primitives/memory/mini_mem_sub.c \
 		src/mini/primitives/u8/mini_u8_to_cstring.c \
+		src/mini/processes/eval/mini_eval_close_pipes.c \
+		src/mini/processes/eval/mini_eval_close_redirs.c \
+		src/mini/processes/eval/mini_eval_command.c \
+		src/mini/processes/eval/mini_eval_commands.c \
 		src/mini/processes/eval/mini_eval_create.c \
+		src/mini/processes/eval/mini_eval_create_pipes.c \
 		src/mini/processes/eval/mini_eval_pipe.c \
+		src/mini/processes/eval/mini_eval_redirs.c \
 		src/mini/processes/eval/mini_eval_reset.c \
+		src/mini/processes/eval/mini_eval_update_exit_code.c \
+		src/mini/processes/eval/mini_eval_update_path.c \
+		src/mini/processes/eval/mini_eval_words.c \
+		src/mini/processes/expansion/mini_expand.c \
 		src/mini/processes/expansion/mini_expansion_create.c \
+		src/mini/processes/expansion/mini_expansion_expand.c \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.c \
 		src/mini/processes/expansion/mini_expansion_expand_word.c \
+		src/mini/processes/expansion/mini_expansion_getenv.c \
 		src/mini/processes/expansion/mini_expansion_reset.c \
+		src/mini/processes/heredoc/mini_handle_heredoc.c \
 		src/mini/processes/heredoc/mini_heredoc_create.c \
 		src/mini/processes/heredoc/mini_heredoc_read.c \
 		src/mini/processes/heredoc/mini_heredoc_reset.c \
@@ -102,6 +115,7 @@ minishell_sources = 	src/main.c \
 		src/mini/processes/lexer/mini_lexer_automaton_typefy.c \
 		src/mini/processes/lexer/mini_lexer_create.c \
 		src/mini/processes/lexer/mini_lexer_reset.c \
+		src/mini/processes/lexer/mini_tokenize.c \
 		src/mini/processes/parser/mini_parser_create.c \
 		src/mini/processes/parser/mini_parser_get_token.c \
 		src/mini/processes/parser/mini_parser_is_end.c \
@@ -114,10 +128,14 @@ minishell_sources = 	src/main.c \
 		src/mini/processes/parser/mini_parser_set_syntax_error.c \
 		src/mini/processes/parser/mini_parse_command.c \
 		src/mini/processes/parser/mini_parse_pipe_sequence.c \
+		src/mini/processes/reader/mini_read.c \
+		src/mini/processes/reader/mini_reader_assume_statement_is_complete.c \
 		src/mini/processes/reader/mini_reader_create.c \
 		src/mini/processes/reader/mini_reader_create_multiline_prompt.c \
 		src/mini/processes/reader/mini_reader_create_prompt.c \
+		src/mini/processes/reader/mini_reader_readline.c \
 		src/mini/processes/reader/mini_reader_reset.c \
+		src/mini/processes/reader/mini_reader_update_statement.c \
 		src/mini/systems/memstack/memstack_create.c \
 		src/mini/systems/memstack/memstack_destroy.c \
 		src/mini/systems/memstack/memstack_load.c \
@@ -151,17 +169,13 @@ minishell_objects = 	src/main.o \
 		src/mini/mini_assert.o \
 		src/mini/mini_create.o \
 		src/mini/mini_eval.o \
-		src/mini/mini_expand.o \
 		src/mini/mini_free.o \
 		src/mini/mini_get_cwd.o \
-		src/mini/mini_heredoc.o \
 		src/mini/mini_is_complete.o \
 		src/mini/mini_is_statement_complete.o \
 		src/mini/mini_parse.o \
 		src/mini/mini_quit.o \
-		src/mini/mini_read.o \
 		src/mini/mini_reset.o \
-		src/mini/mini_tokenize.o \
 		src/mini/builtins/builtins.o \
 		src/mini/builtins/cd.o \
 		src/mini/builtins/echo.o \
@@ -174,6 +188,7 @@ minishell_objects = 	src/main.o \
 		src/mini/compounds/mini_list/mini_list_append.o \
 		src/mini/compounds/mini_list/mini_list_clear.o \
 		src/mini/compounds/mini_list/mini_list_destroy.o \
+		src/mini/compounds/mini_list/mini_list_print.o \
 		src/mini/compounds/mini_tree/mini_cmd_tree_create.o \
 		src/mini/compounds/mini_tree/mini_cmd_tree_destroy.o \
 		src/mini/compounds/mini_tree/mini_cmd_tree_list_append.o \
@@ -182,6 +197,7 @@ minishell_objects = 	src/main.o \
 		src/mini/compounds/mini_tree/mini_cmd_tree_list_realloc.o \
 		src/mini/compounds/mini_tree/mini_pipe_tree_create.o \
 		src/mini/compounds/mini_tree/mini_pipe_tree_destroy.o \
+		src/mini/compounds/mini_tree/mini_pipe_tree_print.o \
 		src/mini/contexts/config/mini_config_create.o \
 		src/mini/contexts/config/mini_config_create_lua_state.o \
 		src/mini/contexts/config/mini_config_create_multiline_prompt.o \
@@ -199,24 +215,39 @@ minishell_objects = 	src/main.o \
 		src/mini/primitives/cstring/cstring_to_stderr.o \
 		src/mini/primitives/cstring/cstring_to_stdout.o \
 		src/mini/primitives/cstring/mini_cstring_add.o \
+		src/mini/primitives/cstring/mini_cstring_array_copy.o \
 		src/mini/primitives/cstring/mini_cstring_copy.o \
 		src/mini/primitives/cstring/mini_cstring_dirname.o \
 		src/mini/primitives/cstring/mini_cstring_get_subcstring.o \
 		src/mini/primitives/cstring/mini_cstring_join.o \
 		src/mini/primitives/cstring/mini_cstring_remove.o \
+		src/mini/primitives/cstring/mini_cstring_split.o \
 		src/mini/primitives/i32/i32_to_cstring.o \
 		src/mini/primitives/i8/i8_is_whitespace.o \
 		src/mini/primitives/memory/mem_copy_from_to.o \
 		src/mini/primitives/memory/mem_set.o \
 		src/mini/primitives/memory/mini_mem_sub.o \
 		src/mini/primitives/u8/mini_u8_to_cstring.o \
+		src/mini/processes/eval/mini_eval_close_pipes.o \
+		src/mini/processes/eval/mini_eval_close_redirs.o \
+		src/mini/processes/eval/mini_eval_command.o \
+		src/mini/processes/eval/mini_eval_commands.o \
 		src/mini/processes/eval/mini_eval_create.o \
+		src/mini/processes/eval/mini_eval_create_pipes.o \
 		src/mini/processes/eval/mini_eval_pipe.o \
+		src/mini/processes/eval/mini_eval_redirs.o \
 		src/mini/processes/eval/mini_eval_reset.o \
+		src/mini/processes/eval/mini_eval_update_exit_code.o \
+		src/mini/processes/eval/mini_eval_update_path.o \
+		src/mini/processes/eval/mini_eval_words.o \
+		src/mini/processes/expansion/mini_expand.o \
 		src/mini/processes/expansion/mini_expansion_create.o \
+		src/mini/processes/expansion/mini_expansion_expand.o \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.o \
 		src/mini/processes/expansion/mini_expansion_expand_word.o \
+		src/mini/processes/expansion/mini_expansion_getenv.o \
 		src/mini/processes/expansion/mini_expansion_reset.o \
+		src/mini/processes/heredoc/mini_handle_heredoc.o \
 		src/mini/processes/heredoc/mini_heredoc_create.o \
 		src/mini/processes/heredoc/mini_heredoc_read.o \
 		src/mini/processes/heredoc/mini_heredoc_reset.o \
@@ -232,6 +263,7 @@ minishell_objects = 	src/main.o \
 		src/mini/processes/lexer/mini_lexer_automaton_typefy.o \
 		src/mini/processes/lexer/mini_lexer_create.o \
 		src/mini/processes/lexer/mini_lexer_reset.o \
+		src/mini/processes/lexer/mini_tokenize.o \
 		src/mini/processes/parser/mini_parser_create.o \
 		src/mini/processes/parser/mini_parser_get_token.o \
 		src/mini/processes/parser/mini_parser_is_end.o \
@@ -244,10 +276,14 @@ minishell_objects = 	src/main.o \
 		src/mini/processes/parser/mini_parser_set_syntax_error.o \
 		src/mini/processes/parser/mini_parse_command.o \
 		src/mini/processes/parser/mini_parse_pipe_sequence.o \
+		src/mini/processes/reader/mini_read.o \
+		src/mini/processes/reader/mini_reader_assume_statement_is_complete.o \
 		src/mini/processes/reader/mini_reader_create.o \
 		src/mini/processes/reader/mini_reader_create_multiline_prompt.o \
 		src/mini/processes/reader/mini_reader_create_prompt.o \
+		src/mini/processes/reader/mini_reader_readline.o \
 		src/mini/processes/reader/mini_reader_reset.o \
+		src/mini/processes/reader/mini_reader_update_statement.o \
 		src/mini/systems/memstack/memstack_create.o \
 		src/mini/systems/memstack/memstack_destroy.o \
 		src/mini/systems/memstack/memstack_load.o \
@@ -307,17 +343,13 @@ minishell_depends = 	src/main.d \
 		src/mini/mini_assert.d \
 		src/mini/mini_create.d \
 		src/mini/mini_eval.d \
-		src/mini/mini_expand.d \
 		src/mini/mini_free.d \
 		src/mini/mini_get_cwd.d \
-		src/mini/mini_heredoc.d \
 		src/mini/mini_is_complete.d \
 		src/mini/mini_is_statement_complete.d \
 		src/mini/mini_parse.d \
 		src/mini/mini_quit.d \
-		src/mini/mini_read.d \
 		src/mini/mini_reset.d \
-		src/mini/mini_tokenize.d \
 		src/mini/builtins/builtins.d \
 		src/mini/builtins/cd.d \
 		src/mini/builtins/echo.d \
@@ -330,6 +362,7 @@ minishell_depends = 	src/main.d \
 		src/mini/compounds/mini_list/mini_list_append.d \
 		src/mini/compounds/mini_list/mini_list_clear.d \
 		src/mini/compounds/mini_list/mini_list_destroy.d \
+		src/mini/compounds/mini_list/mini_list_print.d \
 		src/mini/compounds/mini_tree/mini_cmd_tree_create.d \
 		src/mini/compounds/mini_tree/mini_cmd_tree_destroy.d \
 		src/mini/compounds/mini_tree/mini_cmd_tree_list_append.d \
@@ -338,6 +371,7 @@ minishell_depends = 	src/main.d \
 		src/mini/compounds/mini_tree/mini_cmd_tree_list_realloc.d \
 		src/mini/compounds/mini_tree/mini_pipe_tree_create.d \
 		src/mini/compounds/mini_tree/mini_pipe_tree_destroy.d \
+		src/mini/compounds/mini_tree/mini_pipe_tree_print.d \
 		src/mini/contexts/config/mini_config_create.d \
 		src/mini/contexts/config/mini_config_create_lua_state.d \
 		src/mini/contexts/config/mini_config_create_multiline_prompt.d \
@@ -355,24 +389,39 @@ minishell_depends = 	src/main.d \
 		src/mini/primitives/cstring/cstring_to_stderr.d \
 		src/mini/primitives/cstring/cstring_to_stdout.d \
 		src/mini/primitives/cstring/mini_cstring_add.d \
+		src/mini/primitives/cstring/mini_cstring_array_copy.d \
 		src/mini/primitives/cstring/mini_cstring_copy.d \
 		src/mini/primitives/cstring/mini_cstring_dirname.d \
 		src/mini/primitives/cstring/mini_cstring_get_subcstring.d \
 		src/mini/primitives/cstring/mini_cstring_join.d \
 		src/mini/primitives/cstring/mini_cstring_remove.d \
+		src/mini/primitives/cstring/mini_cstring_split.d \
 		src/mini/primitives/i32/i32_to_cstring.d \
 		src/mini/primitives/i8/i8_is_whitespace.d \
 		src/mini/primitives/memory/mem_copy_from_to.d \
 		src/mini/primitives/memory/mem_set.d \
 		src/mini/primitives/memory/mini_mem_sub.d \
 		src/mini/primitives/u8/mini_u8_to_cstring.d \
+		src/mini/processes/eval/mini_eval_close_pipes.d \
+		src/mini/processes/eval/mini_eval_close_redirs.d \
+		src/mini/processes/eval/mini_eval_command.d \
+		src/mini/processes/eval/mini_eval_commands.d \
 		src/mini/processes/eval/mini_eval_create.d \
+		src/mini/processes/eval/mini_eval_create_pipes.d \
 		src/mini/processes/eval/mini_eval_pipe.d \
+		src/mini/processes/eval/mini_eval_redirs.d \
 		src/mini/processes/eval/mini_eval_reset.d \
+		src/mini/processes/eval/mini_eval_update_exit_code.d \
+		src/mini/processes/eval/mini_eval_update_path.d \
+		src/mini/processes/eval/mini_eval_words.d \
+		src/mini/processes/expansion/mini_expand.d \
 		src/mini/processes/expansion/mini_expansion_create.d \
+		src/mini/processes/expansion/mini_expansion_expand.d \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.d \
 		src/mini/processes/expansion/mini_expansion_expand_word.d \
+		src/mini/processes/expansion/mini_expansion_getenv.d \
 		src/mini/processes/expansion/mini_expansion_reset.d \
+		src/mini/processes/heredoc/mini_handle_heredoc.d \
 		src/mini/processes/heredoc/mini_heredoc_create.d \
 		src/mini/processes/heredoc/mini_heredoc_read.d \
 		src/mini/processes/heredoc/mini_heredoc_reset.d \
@@ -388,6 +437,7 @@ minishell_depends = 	src/main.d \
 		src/mini/processes/lexer/mini_lexer_automaton_typefy.d \
 		src/mini/processes/lexer/mini_lexer_create.d \
 		src/mini/processes/lexer/mini_lexer_reset.d \
+		src/mini/processes/lexer/mini_tokenize.d \
 		src/mini/processes/parser/mini_parser_create.d \
 		src/mini/processes/parser/mini_parser_get_token.d \
 		src/mini/processes/parser/mini_parser_is_end.d \
@@ -400,10 +450,14 @@ minishell_depends = 	src/main.d \
 		src/mini/processes/parser/mini_parser_set_syntax_error.d \
 		src/mini/processes/parser/mini_parse_command.d \
 		src/mini/processes/parser/mini_parse_pipe_sequence.d \
+		src/mini/processes/reader/mini_read.d \
+		src/mini/processes/reader/mini_reader_assume_statement_is_complete.d \
 		src/mini/processes/reader/mini_reader_create.d \
 		src/mini/processes/reader/mini_reader_create_multiline_prompt.d \
 		src/mini/processes/reader/mini_reader_create_prompt.d \
+		src/mini/processes/reader/mini_reader_readline.d \
 		src/mini/processes/reader/mini_reader_reset.d \
+		src/mini/processes/reader/mini_reader_update_statement.d \
 		src/mini/systems/memstack/memstack_create.d \
 		src/mini/systems/memstack/memstack_destroy.d \
 		src/mini/systems/memstack/memstack_load.d \

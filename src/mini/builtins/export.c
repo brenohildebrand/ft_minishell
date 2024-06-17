@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:05:19 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 19:16:54 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/17 13:54:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_i32	mini_eval_export(t_mini mini, t_i32 argc, t_i8 **argv)
 				ft_putstr(" not a valid identifier\n");
 				return (1);
 			}
-			add_env_variable(&(mini)->eval->env, argv[i]);
+			add_env_variable(&(mini)->shared->env, argv[i]);
 			i++;
 		}
 	}

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memstack_unload_u32.c                              :+:      :+:    :+:   */
+/*   mini_eval_update_exit_code.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 21:24:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:52:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/15 19:23:24 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/15 19:24:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_u32	memstack_unload_u32(t_mini mini)
+t_none	mini_eval_update_exit_code(t_mini mini, t_i32 status)
 {
-	t_u32	value;
+	t_i32	signal;
 
-	mini->shared->memstack->top -= sizeof(t_u32);
-	if (mini->shared->memstack->top < mini->shared->memstack->bottom)
+	if (WIFEXITED(status))
+		mini->shared->exit_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
 	{
-		write(STDERR_FILENO, "Memstack underflow!\n", 20);
-		mini_quit(mini, MINI_ERROR);
+		signal = WTERMSIG(status);
+		if (signal == SIGINT)
+			mini->shared->exit_code = 130;
 	}
-	value = *((t_u32 *)(mini->shared->memstack->top));
-	return (value);
 }

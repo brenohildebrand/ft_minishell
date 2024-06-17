@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memstack_unload_u32.c                              :+:      :+:    :+:   */
+/*   mini_eval_commands.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 21:24:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:52:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/14 20:19:05 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/16 22:35:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_u32	memstack_unload_u32(t_mini mini)
+t_none	mini_eval_commands(t_mini mini)
 {
-	t_u32	value;
+	t_mini_cmd_tree_list	cmd_list;
+	t_i32					i;
 
-	mini->shared->memstack->top -= sizeof(t_u32);
-	if (mini->shared->memstack->top < mini->shared->memstack->bottom)
+	mini_eval_create_pipes(mini);
+	cmd_list = mini->parser->tree->command_list;
+	i = 0;
+	while (i < cmd_list->length)
 	{
-		write(STDERR_FILENO, "Memstack underflow!\n", 20);
-		mini_quit(mini, MINI_ERROR);
+		mini_eval_command(mini, i);
+		i++;
 	}
-	value = *((t_u32 *)(mini->shared->memstack->top));
-	return (value);
+	mini_eval_close_pipes(mini);
 }

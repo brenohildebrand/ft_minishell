@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memstack_unload_u32.c                              :+:      :+:    :+:   */
+/*   mini_tokenize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 21:24:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:52:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/05/22 11:07:35 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/17 13:59:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_u32	memstack_unload_u32(t_mini mini)
+t_none	mini_tokenize(t_mini mini)
 {
-	t_u32	value;
-
-	mini->shared->memstack->top -= sizeof(t_u32);
-	if (mini->shared->memstack->top < mini->shared->memstack->bottom)
-	{
-		write(STDERR_FILENO, "Memstack underflow!\n", 20);
-		mini_quit(mini, MINI_ERROR);
-	}
-	value = *((t_u32 *)(mini->shared->memstack->top));
-	return (value);
+	mini_lexer_automaton(mini);
+	printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
+	mini_list_print(mini);
 }

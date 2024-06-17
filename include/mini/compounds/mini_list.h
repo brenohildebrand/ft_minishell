@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:00:54 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 22:43:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:57:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ t_none	mini_list_append(
 			t_cstring token,
 			t_i32 type);
 t_none	mini_list_clear(t_mini mini, t_mini_list *list);
+t_none	mini_list_print(t_mini mini);
 
 #endif

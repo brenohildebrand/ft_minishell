@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:01:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 22:32:50 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/16 19:20:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_quit(t_mini mini, t_u8 code)
+t_none	mini_quit(t_mini mini, t_i32 code)
 {
 	if (mini == NULL)
 	{

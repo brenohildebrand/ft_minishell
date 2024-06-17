@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memstack_unload_u32.c                              :+:      :+:    :+:   */
+/*   mini_list_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 21:24:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:52:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/16 18:02:42 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/16 18:03:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_u32	memstack_unload_u32(t_mini mini)
+t_none	mini_list_print(t_mini mini)
 {
-	t_u32	value;
+	t_mini_list	list;
 
-	mini->shared->memstack->top -= sizeof(t_u32);
-	if (mini->shared->memstack->top < mini->shared->memstack->bottom)
+	list = mini->lexer->tokens;
+	while (list)
 	{
-		write(STDERR_FILENO, "Memstack underflow!\n", 20);
-		mini_quit(mini, MINI_ERROR);
+		printf("%s", list->token);
+		if (list->next)
+			printf(", ");
+		list = list->next;
 	}
-	value = *((t_u32 *)(mini->shared->memstack->top));
-	return (value);
+	printf("\n");
 }

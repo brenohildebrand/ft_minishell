@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_join.c                                     :+:      :+:    :+:   */
+/*   mini_cstring_join.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:09:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/06 13:09:09 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/15 19:34:29 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,5 @@ t_cstring	mini_cstring_join(t_mini mini, t_cstring a, t_cstring b)
 		i++;
 	}
 	c[c_length] = '\0';
-	mini_free(mini, a);
-	mini_free(mini, b);
 	return (c);
 }

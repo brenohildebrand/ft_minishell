@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memstack_unload_u32.c                              :+:      :+:    :+:   */
+/*   mini_reader_readline.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 21:24:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:52:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/16 17:25:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/16 17:49:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_u32	memstack_unload_u32(t_mini mini)
+t_none	mini_reader_readline(t_mini mini)
 {
-	t_u32	value;
-
-	mini->shared->memstack->top -= sizeof(t_u32);
-	if (mini->shared->memstack->top < mini->shared->memstack->bottom)
+	if (mini->reader->statement == NULL)
+		mini->reader->line = readline(mini->reader->prompt);
+	else
+		mini->reader->line = readline(mini->reader->multiline_prompt);
+	if (mini->reader->line == NULL)
 	{
-		write(STDERR_FILENO, "Memstack underflow!\n", 20);
-		mini_quit(mini, MINI_ERROR);
+		cstring_to_stdout("exit\n");
+		mini_quit(mini, mini->shared->exit_code);
 	}
-	value = *((t_u32 *)(mini->shared->memstack->top));
-	return (value);
 }

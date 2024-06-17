@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:49:24 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 19:51:52 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/17 13:55:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_i32   mini_eval_unset(t_mini mini, t_i32 argc, t_i8 **argv)
     i = 1;
     while(i < argc) 
     {
-        unset_status = restore_env_value(&(mini->eval->env), argv[i]);
+        unset_status = restore_env_value(&(mini->shared->env), argv[i]);
         if (unset_status != 0)
             status = unset_status;
         i++;

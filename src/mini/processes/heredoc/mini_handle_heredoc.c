@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_parse.c                                       :+:      :+:    :+:   */
+/*   mini_handle_heredoc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 11:11:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 20:33:40 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/10 14:28:33 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/16 20:34:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_none	mini_parse(t_mini mini)
+t_none	mini_handle_heredoc(t_mini mini)
 {
-	mini_parser_reset(mini);
-	if (mini_parser_get_token(mini) == END)
-		mini->parser->tree = NULL;
-	else
+	t_mini_cmd_tree_list		command_list;
+	t_i32						i;
+
+	if (!mini->shared->is_heredoc_complete)
 	{
-		mini->parser->tree = mini_parse_pipe_sequence(mini);
-		if (mini->parser->tree)
+		command_list = mini->parser->tree->command_list;
+		i = 0;
+		while (i < command_list->length)
 		{
-			if (mini->parser->found_heredoc)
+			mini->heredoc->redirs = command_list->elements[i]->redirs;
+			while (mini->heredoc->redirs)
 			{
-				if (mini->shared->is_statement_complete == TRUE)
-					mini->shared->is_heredoc_complete = FALSE;
+				if (mini->heredoc->redirs->type == REDIR_HEREDOC)
+				{
+					mini_heredoc_read(mini);
+					mini_heredoc_write(mini);
+					mini_heredoc_update_tree(mini);
+				}
+				mini->heredoc->redirs = mini->heredoc->redirs->next;
 			}
-		}
-		else if (mini->parser->could_be_completed)
-			mini->shared->is_statement_complete = FALSE;
-		else
-		{
-			mini_parser_print_syntax_error(mini);
-			mini_reset(mini);
+			i++;
 		}
 	}
 	printf("\033[94m[%s:%d]\n(command)\033[0m ", __func__, __LINE__);
