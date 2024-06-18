@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:57:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 19:34:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:22:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_none	mini_expand(t_mini mini)
 		}
 		node = node->next;
 	}
+	mini_expansion_remove_quotes(mini);
 	printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
 	mini_list_print(mini);
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:24:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 22:36:48 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:30:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ t_none	mini_eval_command(t_mini mini, t_i32 i)
 		mini_eval_redirs(mini, command, i);
 		mini_eval_words(mini, command, i);
 		mini_eval_close_redirs(mini);
+		if (i != 0)
+			mini_assert(mini, close(pipes[2 * (i - 1)]), 0);
+		if (i != mini->parser->tree->command_list->length - 1)
+			mini_assert(mini, close(pipes[(i * 2) + 1]), 0);
 	}
 	else
 	{

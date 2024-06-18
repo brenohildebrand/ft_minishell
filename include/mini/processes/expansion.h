@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 16:31:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:58:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:46:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_i32		mini_expansion_expand(
 				t_i32 start,
 				t_i32 end);
 t_cstring	mini_expansion_getenv(t_mini mini, t_cstring key);
+t_none		mini_expansion_remove_quotes(t_mini mini);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 14:01:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 22:31:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:26:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ static t_none	redirect_output(t_mini mini, t_mini_list node, t_i32 i)
 	if (mini->eval->redirs[1])
 	{
 		mini_assert(mini, dup2(fd, mini->eval->redirs[1]), 0);
-		mini_assert(mini, close(mini->eval->redirs[1]) != -1, 0);
 	}
 	else
 	{
-		mini_assert(mini, dup2(fd, mini->eval->pipes[(i * 2) + 1]), 0);
-		mini_assert(mini, close(mini->eval->pipes[(i * 2) + 1]) != -1, 0);
+		if (i != mini->parser->tree->command_list->length - 1)
+			mini_assert(mini, dup2(fd, mini->eval->pipes[(i * 2) + 1]), 0);
+		else
+			mini_assert(mini, dup2(fd, STDOUT_FILENO), 0);
 	}
 }
 
@@ -74,12 +75,13 @@ static t_none	redirect_output_in_append_mode(t_mini mini, t_mini_list node, t_i3
 	if (mini->eval->redirs[1])
 	{
 		mini_assert(mini, dup2(fd, mini->eval->redirs[1]), 0);
-		mini_assert(mini, close(mini->eval->redirs[1]) != -1, 0);
 	}
 	else
 	{
-		mini_assert(mini, dup2(fd, mini->eval->pipes[(i * 2) + 1]), 0);
-		mini_assert(mini, close(mini->eval->pipes[(i * 2) + 1]) != -1, 0);
+		if (i != mini->parser->tree->command_list->length - 1)
+			mini_assert(mini, dup2(fd, mini->eval->pipes[(i * 2) + 1]), 0);
+		else
+			mini_assert(mini, dup2(fd, STDOUT_FILENO), 0);
 	}
 }
 
@@ -94,12 +96,13 @@ static t_none	redirect_input(t_mini mini, t_mini_list node, t_i32 i)
 	if (mini->eval->redirs[0])
 	{
 		mini_assert(mini, dup2(fd, mini->eval->redirs[0]), 0);
-		mini_assert(mini, close(mini->eval->redirs[0]) != -1, 0);;
 	}
 	else
 	{
-		mini_assert(mini, dup2(fd, mini->eval->pipes[2 * (i - 1)]), 0);
-		mini_assert(mini, close(mini->eval->pipes[2 * (i - 1)]) != -1, 0);
+		if (i != 0)
+			mini_assert(mini, dup2(fd, mini->eval->pipes[2 * (i - 1)]), 0);
+		else
+			mini_assert(mini, dup2(fd, STDIN_FILENO), 0);
 	}
 	mini->eval->redirs[0] = fd;
 }

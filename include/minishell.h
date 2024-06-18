@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:50:42 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:56:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-#include  <errno.h>
+# include <errno.h>
 
 # include "mini/primitives/i8.h"
 # include "mini/primitives/u8.h"

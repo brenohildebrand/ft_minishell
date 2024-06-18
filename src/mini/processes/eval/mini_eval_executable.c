@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_cstring_array_copy.c                          :+:      :+:    :+:   */
+/*   mini_eval_executable.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 19:33:32 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 19:42:11 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/06/17 14:34:27 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/06/17 20:38:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cstring	*mini_cstring_array_copy(t_mini mini, t_cstring *arr)
-{
-	t_i32		len;
-	t_cstring	*copy;
+t_none	mini_eval_executable(
+	t_mini mini,
+	t_cstring path,
+	t_cstring_array argv,
+	t_cstring_array envp
+){
+	t_i32	pid;
 
-	len = 0;
-	while (arr[len])
-		len++;
-	copy = mini_alloc(mini, (sizeof(t_cstring) * (len + 1)));
-	copy[len] = '\0';
-	while (len--)
+	pid = fork();
+	mini_assert(mini, pid != -1, MINI_ERROR);
+	if (pid == 0)
 	{
-		copy[len] = mini_cstring_copy(mini, arr[len]);
+		execve(path, argv, envp);
 	}
-	return (copy);
 }

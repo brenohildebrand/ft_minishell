@@ -1,54 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   mini_eval_echo.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:55:05 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 19:16:37 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/06/17 15:06:40 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_i32	check_n(t_cstring argv)
+t_i32	mini_eval_echo(t_mini mini, t_i32 argc, t_i8 **argv, t_i8 **envp)
 {
-	t_i32		i;
-	t_cstring	flag_n;
-	t_i32		nbr;
-
-	nbr = 2;
-	flag_n = "-n";
-	i = 0;
-	while ((argv[i] != '\0' || flag_n[i] != '\0') && nbr)
-	{
-		if (argv[i] != flag_n[i])
-			return ((t_i8)argv[i] - (t_i8)flag_n[i]);
-		nbr--;
-		i++;
-	}
-	return (0);
-}
-
-t_i32	mini_eval_echo(t_mini mini, t_i8 **argv)
-{
-	t_i32 i;
-	t_i32 n;
+	t_i32	i;
+	t_bool	n;
 
 	(void)mini;
+	(void)argc;
+	(void)envp;
 	i = 1;
-	n = 0;
-	if (argv[1] && check_n(argv[i]))
+	n = FALSE;
+	if (argv[1] && cstring_compare(argv[1], "-n") == 0)
 	{
-		n = 1;
-		i++;
+		n = TRUE;
+		i = 2;
 	}
 	while (argv[i])
 	{
-		write(1, argv[i], 1);
+		cstring_to_stdout(argv[i]);
 		if (argv[i + 1])
-			write(1, " ", 1);
+			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
 	if (!n)

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/17 14:26:38 by bhildebr          #+#    #+#              #
-#    Updated: 2024/06/17 14:26:38 by bhildebr         ###   ########.fr        #
+#    Created: 2024/06/17 22:35:48 by bhildebr          #+#    #+#              #
+#    Updated: 2024/06/17 22:35:48 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,7 @@ minishell_sources = 	src/main.c \
 		src/mini/mini_parse.c \
 		src/mini/mini_quit.c \
 		src/mini/mini_reset.c \
-		src/mini/builtins/builtins.c \
 		src/mini/builtins/cd.c \
-		src/mini/builtins/echo.c \
 		src/mini/builtins/env.c \
 		src/mini/builtins/exit.c \
 		src/mini/builtins/export.c \
@@ -80,12 +78,16 @@ minishell_sources = 	src/main.c \
 		src/mini/primitives/memory/mem_set.c \
 		src/mini/primitives/memory/mini_mem_sub.c \
 		src/mini/primitives/u8/mini_u8_to_cstring.c \
+		src/mini/processes/eval/mini_eval_builtin.c \
 		src/mini/processes/eval/mini_eval_close_pipes.c \
 		src/mini/processes/eval/mini_eval_close_redirs.c \
 		src/mini/processes/eval/mini_eval_command.c \
 		src/mini/processes/eval/mini_eval_commands.c \
 		src/mini/processes/eval/mini_eval_create.c \
 		src/mini/processes/eval/mini_eval_create_pipes.c \
+		src/mini/processes/eval/mini_eval_echo.c \
+		src/mini/processes/eval/mini_eval_executable.c \
+		src/mini/processes/eval/mini_eval_is_builtin.c \
 		src/mini/processes/eval/mini_eval_pipe.c \
 		src/mini/processes/eval/mini_eval_redirs.c \
 		src/mini/processes/eval/mini_eval_reset.c \
@@ -98,6 +100,7 @@ minishell_sources = 	src/main.c \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.c \
 		src/mini/processes/expansion/mini_expansion_expand_word.c \
 		src/mini/processes/expansion/mini_expansion_getenv.c \
+		src/mini/processes/expansion/mini_expansion_remove_quotes.c \
 		src/mini/processes/expansion/mini_expansion_reset.c \
 		src/mini/processes/heredoc/mini_handle_heredoc.c \
 		src/mini/processes/heredoc/mini_heredoc_create.c \
@@ -176,9 +179,7 @@ minishell_objects = 	src/main.o \
 		src/mini/mini_parse.o \
 		src/mini/mini_quit.o \
 		src/mini/mini_reset.o \
-		src/mini/builtins/builtins.o \
 		src/mini/builtins/cd.o \
-		src/mini/builtins/echo.o \
 		src/mini/builtins/env.o \
 		src/mini/builtins/exit.o \
 		src/mini/builtins/export.o \
@@ -228,12 +229,16 @@ minishell_objects = 	src/main.o \
 		src/mini/primitives/memory/mem_set.o \
 		src/mini/primitives/memory/mini_mem_sub.o \
 		src/mini/primitives/u8/mini_u8_to_cstring.o \
+		src/mini/processes/eval/mini_eval_builtin.o \
 		src/mini/processes/eval/mini_eval_close_pipes.o \
 		src/mini/processes/eval/mini_eval_close_redirs.o \
 		src/mini/processes/eval/mini_eval_command.o \
 		src/mini/processes/eval/mini_eval_commands.o \
 		src/mini/processes/eval/mini_eval_create.o \
 		src/mini/processes/eval/mini_eval_create_pipes.o \
+		src/mini/processes/eval/mini_eval_echo.o \
+		src/mini/processes/eval/mini_eval_executable.o \
+		src/mini/processes/eval/mini_eval_is_builtin.o \
 		src/mini/processes/eval/mini_eval_pipe.o \
 		src/mini/processes/eval/mini_eval_redirs.o \
 		src/mini/processes/eval/mini_eval_reset.o \
@@ -246,6 +251,7 @@ minishell_objects = 	src/main.o \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.o \
 		src/mini/processes/expansion/mini_expansion_expand_word.o \
 		src/mini/processes/expansion/mini_expansion_getenv.o \
+		src/mini/processes/expansion/mini_expansion_remove_quotes.o \
 		src/mini/processes/expansion/mini_expansion_reset.o \
 		src/mini/processes/heredoc/mini_handle_heredoc.o \
 		src/mini/processes/heredoc/mini_heredoc_create.o \
@@ -350,9 +356,7 @@ minishell_depends = 	src/main.d \
 		src/mini/mini_parse.d \
 		src/mini/mini_quit.d \
 		src/mini/mini_reset.d \
-		src/mini/builtins/builtins.d \
 		src/mini/builtins/cd.d \
-		src/mini/builtins/echo.d \
 		src/mini/builtins/env.d \
 		src/mini/builtins/exit.d \
 		src/mini/builtins/export.d \
@@ -402,12 +406,16 @@ minishell_depends = 	src/main.d \
 		src/mini/primitives/memory/mem_set.d \
 		src/mini/primitives/memory/mini_mem_sub.d \
 		src/mini/primitives/u8/mini_u8_to_cstring.d \
+		src/mini/processes/eval/mini_eval_builtin.d \
 		src/mini/processes/eval/mini_eval_close_pipes.d \
 		src/mini/processes/eval/mini_eval_close_redirs.d \
 		src/mini/processes/eval/mini_eval_command.d \
 		src/mini/processes/eval/mini_eval_commands.d \
 		src/mini/processes/eval/mini_eval_create.d \
 		src/mini/processes/eval/mini_eval_create_pipes.d \
+		src/mini/processes/eval/mini_eval_echo.d \
+		src/mini/processes/eval/mini_eval_executable.d \
+		src/mini/processes/eval/mini_eval_is_builtin.d \
 		src/mini/processes/eval/mini_eval_pipe.d \
 		src/mini/processes/eval/mini_eval_redirs.d \
 		src/mini/processes/eval/mini_eval_reset.d \
@@ -420,6 +428,7 @@ minishell_depends = 	src/main.d \
 		src/mini/processes/expansion/mini_expansion_expand_dquotes.d \
 		src/mini/processes/expansion/mini_expansion_expand_word.d \
 		src/mini/processes/expansion/mini_expansion_getenv.d \
+		src/mini/processes/expansion/mini_expansion_remove_quotes.d \
 		src/mini/processes/expansion/mini_expansion_reset.d \
 		src/mini/processes/heredoc/mini_handle_heredoc.d \
 		src/mini/processes/heredoc/mini_heredoc_create.d \

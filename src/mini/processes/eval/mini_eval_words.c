@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 14:01:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 14:26:35 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:48:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,14 @@ t_none	mini_eval_words(t_mini mini, t_mini_cmd_tree command, t_i32 i)
 
 	(void)i;
 	executable_name = command->words->token;
-	executable_path = get_executable_path(mini, executable_name);
-	if (executable_path == NULL)
-	{
-		printf("mini: %s: command not found.\n", executable_name);
-		mini_quit(mini, 127);
+	if (!mini_eval_is_builtin(mini, executable_name))	
+	{	
+		executable_path = get_executable_path(mini, executable_name);
+		if (executable_path == NULL)
+		{
+			printf("mini: %s: command not found.\n", executable_name);
+			mini_quit(mini, 127);
+		}
 	}
 	executable_argv = get_executable_argv(mini, command);
 	executable_envp = get_executable_envp(mini);
@@ -92,7 +95,10 @@ t_none	mini_eval_words(t_mini mini, t_mini_cmd_tree command, t_i32 i)
 		j++;
 	}
 	printf("\n");
-	execve(executable_path, executable_argv, executable_envp);
+	if (mini_eval_is_builtin(mini, executable_name))
+		mini_eval_builtin(mini, executable_name, executable_argv, executable_envp);
+	else
+		mini_eval_executable(mini, executable_path, executable_argv, executable_envp);
 	mini_free(mini, executable_path);
 	mini_free(mini, executable_argv);
 	mini_free(mini, executable_envp);
