@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:24:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 19:30:16 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/18 13:32:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ static t_none	close_and_free_whatever_is_needed(t_mini mini, t_i32 i)
 	while (j < 2 * (len - 1))
 	{
 		if (i != 0 && j == 2 * (i - 1))
+		{
+			j++;
 			continue ;
+		}
 		if (i != len - 1 && j == (i * 2) + 1)
+		{
+			j++;
 			continue ;
+		}
 		close(mini->eval->pipes[j]);
 		j++;
 	}

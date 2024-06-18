@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:34:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 20:38:15 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:36:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,24 @@ t_none	mini_eval_executable(
 	t_cstring_array envp
 ){
 	t_i32	pid;
+	t_i32	status;
+	t_i32	signal;
 
 	pid = fork();
 	mini_assert(mini, pid != -1, MINI_ERROR);
 	if (pid == 0)
 	{
 		execve(path, argv, envp);
+	}
+	else
+	{
+		wait(&status);
+		if (WIFEXITED(status))
+			mini_quit(mini, WEXITSTATUS(status));
+		else if (WIFSIGNALED(status))
+		{
+			signal = WTERMSIG(status);
+			mini_quit(mini, 128 + signal); 
+		}
 	}
 }
