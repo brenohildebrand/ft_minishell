@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 16:33:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 00:30:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:27:41 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_none	eval_commands(t_mini mini);
 t_none	eval_command(t_mini mini, t_i32 index);
 t_none	eval_close_pipes(t_mini mini);
 t_none	eval_close_redirs(t_mini mini);
-t_none	eval_words(t_mini mini, t_mini_cmd_tree command, t_i32 i);
+t_none	eval_words(t_mini mini, t_mini_cmd_tree command);
 t_none	eval_redirs(t_mini mini, t_mini_cmd_tree command, t_i32 i);
 t_none	eval_update_exit_code(t_mini mini, t_i32 status);
 t_none	eval_executable(

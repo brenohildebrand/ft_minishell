@@ -20,5 +20,6 @@
 		"memory_tree.h": "c",
 		"types.h": "c",
 		"linked_list.h": "c"
-	}
+	},
+	"codescene.enableCodeLenses": true
 }

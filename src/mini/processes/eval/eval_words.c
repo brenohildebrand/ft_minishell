@@ -6,11 +6,16 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 14:01:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/01 23:13:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:28:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_cstring	get_executable_name(t_mini_cmd_tree command)
+{
+	return (command->words->token);
+}
 
 static t_cstring	get_executable_path(t_mini mini, t_cstring filename)
 {
@@ -72,15 +77,14 @@ static t_cstring	*get_executable_envp(t_mini mini)
 	return (cstring_array_copy(mini, mini->shared->env));
 }
 
-t_none	eval_words(t_mini mini, t_mini_cmd_tree command, t_i32 i)
+t_none	eval_words(t_mini mini, t_mini_cmd_tree command)
 {
 	t_cstring	executable_name;
 	t_cstring	executable_path;
 	t_cstring	*executable_argv;
 	t_cstring	*executable_envp;
 
-	(void)i;
-	executable_name = command->words->token;
+	executable_name = get_executable_name(command);
 	if (!eval_is_builtin(mini, executable_name))	
 	{	
 		executable_path = get_executable_path(mini, executable_name);

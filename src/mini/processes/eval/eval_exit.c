@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 00:27:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 00:35:49 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/02 13:27:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_i32	eval_exit(t_mini mini, t_i32 argc, t_i8 **argv, t_i8 **envp)
 	}
 	if (argc > 2)
 	{
-		fprintf(stderr, "exit: too many arguments\n");
+		cstring_to_stdout("exit: too many arguments\n");
 		return (FAILURE);
 	}
 	else if (argc == 2)
@@ -72,7 +72,7 @@ t_i32	eval_exit(t_mini mini, t_i32 argc, t_i8 **argv, t_i8 **envp)
 		status = get_exit_status(argv[1], &error);
 		if (error)
 		{
-			fprintf(stderr, "exit: %s: numeric argument required\n", argv[1]);
+			cstring_to_stdout("exit: numeric argument required\n");
 			exit(SYNTAX_ERROR);
 		}
 	}
