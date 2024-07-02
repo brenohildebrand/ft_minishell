@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   eval_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 20:49:24 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/17 13:55:14 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/07/02 00:28:56 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/07/02 01:32:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ t_i32	restore_env_value(t_i8 ***env, t_cstring variable)
 	return (0);
 }
 
-t_i32   mini_eval_unset(t_mini mini, t_i32 argc, t_i8 **argv)
+t_i32	eval_unset(t_mini mini, t_i32 argc, t_i8 **argv, t_i8 **envp)
 {
-    t_i32 i;
+	t_i32 i;
     t_i32 status;
     t_i32 unset_status;
  
+	(void)envp;
     status = 0;
     if (argc < 2)
         return 1;
@@ -61,5 +62,3 @@ t_i32   mini_eval_unset(t_mini mini, t_i32 argc, t_i8 **argv)
 
     return status;
 }
-
-

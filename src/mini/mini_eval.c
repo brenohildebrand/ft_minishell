@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:50:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/30 20:53:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/02 01:23:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_none	mini_eval(t_mini mini)
 {
-	add_history(mini->reader->statement);
+	if (mini->reader->statement[0] != '\0')
+		add_history(mini->reader->statement);
 	if (mini->parser->tree)
 	{	
 		eval_pipe(mini);
