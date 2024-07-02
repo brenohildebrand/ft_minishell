@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 01:49:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 13:50:00 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/22 23:15:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,11 @@ int main()
 	// function itself
 	my_list->shared->append(my_list, i32(42));
 }
+
+// minishell?
+
+// recebe o comando
+// funcao que transforma string em arvore para ser executada
+// funcao que executa ast?
 
 #endif

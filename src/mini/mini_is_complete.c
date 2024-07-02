@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:27:51 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/10 12:07:55 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/24 07:30:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 t_bool	mini_is_complete(t_mini mini)
 {
-	const t_shared	shared = mini->shared;
-
-	return (!shared->is_statement_complete);
+	return (!mini->shared->is_statement_complete);
 }

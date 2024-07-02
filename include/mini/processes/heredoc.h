@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 21:38:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 01:06:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:49:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ struct s_heredoc_process {
 	t_i32					counter;
 };
 
-t_none	mini_heredoc_create(t_mini mini);
-t_none	mini_heredoc_reset(t_mini mini);
+t_none	heredoc_create(t_mini mini);
+t_none	heredoc_reset(t_mini mini);
 
 t_none	mini_handle_heredoc(t_mini mini);
-t_none	mini_heredoc_read(t_mini mini);
-t_none	mini_heredoc_write(t_mini mini);
-t_none	mini_heredoc_update_tree(t_mini mini);
+t_none	heredoc_read(t_mini mini);
+t_none	heredoc_write(t_mini mini);
+t_none	heredoc_update_tree(t_mini mini);
 
 #endif

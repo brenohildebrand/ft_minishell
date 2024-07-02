@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:11:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 20:33:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:48:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_none	mini_parse(t_mini mini)
 {
-	mini_parser_reset(mini);
-	if (mini_parser_get_token(mini) == END)
+	parser_reset(mini);
+	if (parser_get_token(mini) == END)
 		mini->parser->tree = NULL;
 	else
 	{
-		mini->parser->tree = mini_parse_pipe_sequence(mini);
+		mini->parser->tree = parse_pipe_sequence(mini);
 		if (mini->parser->tree)
 		{
 			if (mini->parser->found_heredoc)
@@ -32,7 +32,7 @@ t_none	mini_parse(t_mini mini)
 			mini->shared->is_statement_complete = FALSE;
 		else
 		{
-			mini_parser_print_syntax_error(mini);
+			parser_print_syntax_error(mini);
 			mini_reset(mini);
 		}
 	}

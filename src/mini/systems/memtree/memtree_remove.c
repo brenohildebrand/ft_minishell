@@ -10,46 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini/systems/memtree.h"
-
-static t_type	yet_another_helper(t_memtree *memtree)
-{
-	t_memtree	min_root;
-	t_type			min_type;
-
-	if ((*memtree)->ltree == NULL)
-	{
-		min_root = *memtree;
-		min_type = min_root->type;
-		*memtree = min_root->rtree;
-		free(min_root);
-	}
-	else
-	{
-		min_type = yet_another_helper(&((*memtree)->ltree));
-	}
-	memtree_rebalance(memtree);
-	return (min_type);
-}
+#include "minishell.h"
 
 static void	*another_helper(t_memtree *memtree)
 {
 	t_memtree	min_root;
-	void			*min_address;
+	void		*min_address;
 
 	if ((*memtree)->ltree == NULL)
 	{
 		min_root = *memtree;
 		min_address = min_root->address;
+		*memtree = min_root->rtree;
+		free(min_root);
 	}
 	else
 	{
 		min_address = another_helper(&((*memtree)->ltree));
 	}
+	memtree_rebalance(memtree);
 	return (min_address);
 }
 
-void	memtree_remove(t_memtree *memtree, void *address)
+static void	memtree_remove_recursively(t_memtree *memtree, t_any address)
 {
 	t_memtree	old_root;
 
@@ -60,7 +43,6 @@ void	memtree_remove(t_memtree *memtree, void *address)
 		if ((*memtree)->rtree != NULL)
 		{
 			(*memtree)->address = another_helper(&((*memtree)->rtree));
-			(*memtree)->type = yet_another_helper(&((*memtree)->rtree));
 			free(address);
 		}
 		else
@@ -72,8 +54,16 @@ void	memtree_remove(t_memtree *memtree, void *address)
 		}
 	}
 	else if (address < (*memtree)->address)
-		memtree_remove(&((*memtree)->ltree), address);
+		memtree_remove_recursively(&((*memtree)->ltree), address);
 	else if (address > (*memtree)->address)
-		memtree_remove(&((*memtree)->rtree), address);
+		memtree_remove_recursively(&((*memtree)->rtree), address);
 	memtree_rebalance(memtree);
+}
+
+void	memtree_remove(t_mini mini, t_any address)
+{
+	t_memtree	*memtree;
+
+	memtree = &(mini->shared->memtree);
+	memtree_remove_recursively(memtree, address);
 }

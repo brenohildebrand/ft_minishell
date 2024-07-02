@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini/systems/memtree.h"
+#include "minishell.h"
 
 static void	left_rotate(t_memtree *memtree)
 {

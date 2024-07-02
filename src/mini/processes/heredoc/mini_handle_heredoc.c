@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:28:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 20:34:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:50:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_none	mini_handle_heredoc(t_mini mini)
 			{
 				if (mini->heredoc->redirs->type == REDIR_HEREDOC)
 				{
-					mini_heredoc_read(mini);
-					mini_heredoc_write(mini);
-					mini_heredoc_update_tree(mini);
+					heredoc_read(mini);
+					heredoc_write(mini);
+					heredoc_update_tree(mini);
 				}
 				mini->heredoc->redirs = mini->heredoc->redirs->next;
 			}

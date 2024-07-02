@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:43:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/11 14:56:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:31:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ typedef struct s_string		*t_string;
 struct						s_string;
 
 
-t_cstring	mini_u8_to_cstring(t_mini mini, t_u8 value);
+t_cstring	u8_to_cstring(t_mini mini, t_u8 value);
 
 #endif

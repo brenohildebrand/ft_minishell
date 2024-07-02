@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:42:20 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/14 23:55:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:55:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_none	mini_reset(t_mini mini)
 {
-	mini_reader_reset(mini);
-	mini_lexer_reset(mini);
-	mini_expansion_reset(mini);
-	mini_parser_reset(mini);
-	mini_heredoc_reset(mini);
-	mini_eval_reset(mini);
+	reader_reset(mini);
+	lexer_reset(mini);
+	expansion_reset(mini);
+	parser_reset(mini);
+	heredoc_reset(mini);
+	eval_reset(mini);
 	mini->shared->is_statement_complete = FALSE;
 }

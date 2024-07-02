@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:53:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/17 15:56:20 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/30 21:13:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # define ENABLE_DEBUGGER
-// # define ENABLE_LUA
 # define FAILURE 1
 # define SUCCESS 0
 # define SYNTAX_ERROR 2
@@ -44,6 +43,7 @@
 # include "mini/compounds/mini_list.h"
 # include "mini/compounds/mini_tree.h"
 # include "mini/systems/memtree.h"
+# include "mini/systems/fdtree.h"
 # include "mini/systems/memstack.h"
 # include "mini/processes/reader.h"
 # include "mini/processes/lexer.h"
@@ -53,7 +53,6 @@
 # include "mini/processes/eval.h"
 # include "mini/contexts/shared.h"
 # include "mini/contexts/signals.h"
-# include "mini/contexts/config.h"
 
 # ifdef ENABLE_DEBUGGER
 #  include <stdio.h>
@@ -68,7 +67,6 @@
 typedef struct s_mini	*t_mini;
 
 struct s_mini {
-	t_config	config;
 	t_shared	shared;
 	t_signals	signals;
 	t_reader	reader;

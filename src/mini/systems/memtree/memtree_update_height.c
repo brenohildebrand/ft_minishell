@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini/systems/memtree.h"
+#include "minishell.h"
 
 void	memtree_update_height(t_memtree memtree)
 {

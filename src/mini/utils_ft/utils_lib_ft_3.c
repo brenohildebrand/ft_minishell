@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lib_ft_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduardocoelho <eduardocoelho@student.42    +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:50:15 by eduardocoel       #+#    #+#             */
-/*   Updated: 2024/06/14 19:09:04 by eduardocoel      ###   ########.fr       */
+/*   Updated: 2024/07/01 10:33:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <limits.h>
 
 t_i64	convert_str_to_long(t_cstring str, t_i32 sign)
 {

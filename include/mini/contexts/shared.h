@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:05:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/16 19:20:29 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/06/30 21:00:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ struct s_shared_context {
 	t_i8		**envp;
 	t_i8		**env;
 	t_memtree	memtree;
+	t_fdtree	fdtree;
 	t_memstack	memstack;
 	t_i32		exit_code;
 	t_bool		is_statement_complete;
@@ -31,6 +32,6 @@ struct s_shared_context {
 	t_bool		is_heredoc_complete;
 };
 
-t_none	mini_shared_create(t_mini mini, t_i32 argc, t_i8 **argv, t_i8 **envp);
+t_none	shared_create(t_mini mini, t_i32 argc, t_i8 **argv, t_i8 **envp);
 
 #endif

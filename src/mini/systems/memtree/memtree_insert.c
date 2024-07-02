@@ -10,16 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini/systems/memtree.h"
+#include "minishell.h"
 
-static int	helper(
-	t_memtree *memtree,
-	t_type type,
-	void *address
-){
+static int	memtree_insert_recursively(t_memtree *memtree, void *address)
+{
 	if (*memtree == NULL)
 	{
-		*memtree = memtree_create(type, address);
+		*memtree = memtree_create(address);
 		if (*memtree == NULL)
 			return (1);
 	}
@@ -29,12 +26,12 @@ static int	helper(
 	{
 		if (address < (*memtree)->address)
 		{
-			if (helper(&((*memtree)->ltree), type, address) == 1)
+			if (memtree_insert_recursively(&((*memtree)->ltree), address) == 1)
 				return (1);
 		}
 		else
 		{
-			if (helper(&((*memtree)->rtree), type, address) == 1)
+			if (memtree_insert_recursively(&((*memtree)->rtree), address) == 1)
 				return (1);
 		}
 		memtree_rebalance(memtree);
@@ -42,13 +39,14 @@ static int	helper(
 	return (0);
 }
 
-void	memtree_insert(
-	t_memtree *memtree,
-	t_type type,
-	void *address
-){
-	if (helper(memtree, type, address) == 1)
+void	memtree_insert(t_mini mini, t_any address)
+{
+	t_memtree	*memtree;
+
+	memtree = &mini->shared->memtree;
+	if (memtree_insert_recursively(memtree, address) == 1)
 	{
-		memtree_destroy(*memtree);
+		printf("Memtree is calling mini_quit!\n");
+		mini_quit(mini, MINI_ERROR);
 	}
 }

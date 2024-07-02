@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini/systems/memtree.h"
+#include "minishell.h"
 
-t_memtree	memtree_create(t_type type, void *address)
+t_memtree	memtree_create(t_any address)
 {
 	t_memtree	memtree;
 
@@ -25,6 +25,5 @@ t_memtree	memtree_create(t_type type, void *address)
 	memtree->ltree = NULL;
 	memtree->rtree = NULL;
 	memtree->address = address;
-	memtree->type = type;
 	return (memtree);
 }

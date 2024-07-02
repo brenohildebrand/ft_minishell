@@ -10,14 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini/systems/memtree.h"
+#include "minishell.h"
 
-void	memtree_destroy(t_memtree memtree)
+static void	memtree_destroy_recursively(t_memtree memtree)
 {
 	if (memtree == NULL)
-		return ;
-	memtree_destroy(memtree->ltree);
-	memtree_destroy(memtree->rtree);
+			return ;
+	memtree_destroy_recursively(memtree->ltree);
+	memtree_destroy_recursively(memtree->rtree);
 	free(memtree->address);
 	free(memtree);
+}
+
+void	memtree_destroy(t_mini mini)
+{
+	t_memtree	memtree;
+
+	memtree = mini->shared->memtree;
+	memtree_destroy_recursively(memtree);
 }
