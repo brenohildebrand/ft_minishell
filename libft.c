@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/03 11:16:00 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:05:29 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,555 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, s, 1);
 		s++;
 	}
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	char	digit;
+
+	if (fd < 0)
+	{
+		return ;
+	}
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n *= -1;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+	}
+	digit = (n % 10) + '0';
+	write(fd, &digit, 1);
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	if (s == 0 || fd < 0)
+		return ;
+	while (*s)
+	{
+		write(fd, s, 1);
+		s++;
+	}
+	write(fd, "\n", 1);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (*(s + len))
+		len++;
+	return (len);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	size_t	index;
+
+	index = 0;
+	while (s[index])
+	{
+		if (s[index] == (unsigned char)c)
+			return ((char *)(s + index));
+		index++;
+	}
+	if (s[index] == (unsigned char)c)
+		return ((char *)(s + index));
+	return (0);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		index;
+	char	*ptr;
+
+	ptr = ft_malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (ptr == ((void *)0))
+		return (0);
+	index = 0;
+	while (s[index])
+	{
+		ptr[index] = s[index];
+		index++;
+	}
+	ptr[index] = 0;
+	return (ptr);
+}
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	int	i;
+
+	if (s == 0)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+}
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t	index;
+
+	index = 0;
+	if (dest == (void *)0 && src == (void *)0)
+		return ((void *)0);
+	while (index < n)
+	{
+		((unsigned char *)dest)[index] = ((unsigned char *)src)[index];
+		index++;
+	}
+	return (dest);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	s1_len;
+	size_t	s2_len;
+
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str = (char *)ft_malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (str == NULL)
+		return (0);
+	ft_memcpy(str, s1, s1_len);
+	ft_memcpy(str + s1_len, s2, s2_len);
+	str[s1_len + s2_len] = '\0';
+	return (str);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	index;
+	size_t	dst_len;
+
+	if (dst == 0 && src == 0)
+		return (0);
+	index = 0;
+	dst_len = ft_strlen(dst);
+	if (size <= dst_len)
+		return (size + ft_strlen(src));
+	while (src[index] && index < (size - dst_len - 1))
+	{
+		dst[index + dst_len] = src[index];
+		index++;
+	}
+	dst[index + dst_len] = 0;
+	return (dst_len + ft_strlen(src));
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	index;
+
+	if (size > 0)
+	{
+		index = 0;
+		while (index < size - 1 && src[index])
+		{
+			dst[index] = src[index];
+			index++;
+		}
+		dst[index] = 0;
+	}
+	return (ft_strlen(src));
+}
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	str = ft_malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (str == NULL)
+		return (0);
+	while (s[i])
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	index;
+
+	index = 0;
+	if (s1 == 0 && s2 == 0)
+		return (0);
+	while (index < n)
+	{
+		if ((unsigned char)(s1[index]) != (unsigned char)(s2[index]))
+		{
+			if ((unsigned char)(s1[index]) > (unsigned char)(s2[index]))
+				return (1);
+			else
+				return (-1);
+		}
+		else
+		{
+			if ((unsigned char)(s1[index]) == 0 && \
+				(unsigned char)(s2[index]) == 0)
+				return (0);
+			index++;
+		}
+	}
+	return (0);
+}
+
+char	*ft_strnstr(const char *big, const char *little, size_t len)
+{
+	size_t	big_index;
+	size_t	little_index;
+
+	if (little[0] == '\0')
+		return ((char *)big);
+	if (len > ft_strlen(big))
+		len = ft_strlen(big);
+	big_index = 0;
+	little_index = 0;
+	while (big_index < len)
+	{
+		if (big[big_index + little_index] == little[little_index])
+		{
+			while (big_index + little_index < len && little[little_index] != 0 \
+					&& big[big_index + little_index] == little[little_index])
+				little_index++;
+			if (little[little_index] == 0)
+				return ((char *)&big[big_index]);
+			else
+				little_index = 0;
+		}
+		big_index++;
+	}
+	return (0);
+}
+
+char	*ft_strrchr(const char *s, int c)
+{
+	int		index;
+
+	index = ft_strlen(s);
+	while (index >= 0)
+	{
+		if (s[index] == (unsigned char)(c))
+			return ((char *)(s + index));
+		index--;
+	}
+	return ((void *)0);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	size_t	i;
+	size_t	s_len;
+
+	i = 0;
+	s_len = ft_strlen(s);
+	if (start > s_len)
+		return (ft_strdup(""));
+	if (start + len > s_len)
+		len = s_len - start;
+	substr = (char *)ft_malloc((len + 1) * sizeof(char));
+	if (substr == ((void *)0))
+		return ((void *)0);
+	while (i < len)
+	{
+		substr[i] = s[start + i];
+		i++;
+	}
+	substr[len] = '\0';
+	return (substr);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	s_len;
+
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	s_len = ft_strlen(s1);
+	while ((s_len - 1) && ft_strchr(set, s1[s_len - 1]))
+		s_len--;
+	return (ft_substr(s1, 0, s_len));
+}
+
+int	ft_tolower(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + 'a' - 'A');
+	return (c);
+}
+
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c + 'A' - 'a');
+	return (c);
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}
+
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_isascii(int c)
+{
+	return (c >= 0 && c <= 127);
+}
+
+int	ft_islower(int c)
+{
+	return (c >= 'a' && c <= 'z');
+}
+
+int	ft_isupper(int c)
+{
+	return (c >= 'A' && c <= 'Z');
+}
+
+int	ft_isalpha(int c)
+{
+	return (ft_islower(c) || ft_isupper(c));
+}
+
+int	ft_isalnum(int c)
+{
+	return (ft_isalpha(c) || ft_isdigit(c));
+}
+
+int	ft_isspace(char c)
+{
+	if ((c >= '\t' && c <= '\r'))
+		return (1);
+	else if (c == ' ')
+		return (1);
+	return (0);
+}
+
+char	*_ft_itoa_get_digits(int n, int number_of_characters)
+{
+	int		i;
+	char	*s;
+	int		number_of_digits;
+
+	s = ft_calloc(number_of_characters + 1, sizeof(char));
+	if (s == NULL)
+		return (NULL);
+	s[number_of_characters] = '\0';
+	if (n >= 0)
+		number_of_digits = number_of_characters;
+	else
+	{
+		s[0] = '-';
+		n *= -1;
+		number_of_digits = number_of_characters - 1;
+	}
+	i = 0;
+	while (i < number_of_digits)
+	{
+		s[number_of_characters - i - 1] = (n % 10) + '0';
+		n /= 10;
+		i++;
+	}
+	return (s);
+}
+
+int	_ft_itoa_get_number_of_characters(int n)
+{
+	int	number_of_characters;
+
+	number_of_characters = 1;
+	if (n < 0)
+	{
+		number_of_characters++;
+		n *= -1;
+	}
+	while (n >= 10)
+	{
+		n /= 10;
+		number_of_characters++;
+	}
+	return (number_of_characters);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*s;
+	int		number_of_characters;
+
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	number_of_characters = _ft_itoa_get_number_of_characters(n);
+	s = _ft_itoa_get_digits(n, number_of_characters);
+	return (s);
+}
+
+static char	*_ft_itoa_base_handle_zero(char *base)
+{
+	char	*string;
+
+	string = ft_calloc(1 + 1, sizeof(char));
+	if (string == NULL)
+		return (NULL);
+	string[0] = base[0];
+	string[1] = '\0';
+	return (string);
+}
+
+static size_t	_ft_itoa_base_get_string_len(int value, char *base)
+{
+	long long int	llvalue;
+	size_t			base_len;
+	size_t			string_len;
+
+	base_len = ft_strlen(base);
+	string_len = 0;
+	llvalue = value;
+	while (llvalue > 0)
+	{
+		llvalue /= base_len;
+		string_len++;
+	}
+	return (string_len);
+}
+
+char	*ft_itoa_base(int value, char *base)
+{
+	long long int	llvalue;
+	char			*string;
+	size_t			string_len;
+	size_t			base_len;
+
+	if (value == 0)
+		return (_ft_itoa_base_handle_zero(base));
+	base_len = ft_strlen(base);
+	string_len = _ft_itoa_base_get_string_len(value, base);
+	string = ft_calloc(string_len + 1, sizeof(char));
+	if (string == NULL)
+		return (NULL);
+	string[string_len] = '\0';
+	llvalue = value; 
+	while (string_len--)
+	{
+		string[string_len] = base[llvalue % base_len];
+		llvalue /= base_len;
+	}
+	return (string);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	index;
+	int	signal;
+	int	nb;
+
+	index = 0;
+	while (ft_isspace(nptr[index]))
+		index++;
+	signal = 1;
+	if (nptr[index] == '-')
+		signal = -1;
+	if (nptr[index] == '-' || nptr[index] == '+')
+		index++;
+	nb = 0;
+	while (ft_isdigit(nptr[index]))
+	{
+		nb *= 10;
+		nb += nptr[index] - '0';
+		index++;
+	}
+	return (nb * signal);
+}
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t			index;
+	unsigned char	*src;
+	size_t			character;
+
+	index = 0;
+	src = (unsigned char *)(s);
+	character = (unsigned char)(c);
+	while (index < n)
+	{
+		if (src[index] == character)
+			return (&src[index]);
+		index++;
+	}
+	return ((void *)0);
+}
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t			index;
+	unsigned char	*str1;
+	unsigned char	*str2;
+
+	index = 0;
+	str1 = (unsigned char *)(s1);
+	str2 = (unsigned char *)(s2);
+	while (index < n)
+	{
+		if (str1[index] != str2[index])
+		{
+			return ((int)(str1[index] - str2[index]));
+		}
+		index++;
+	}
+	return (0);
+}
+
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	size_t	index;
+
+	if (dest == ((void *)0) && src == ((void *)0))
+		return ((void *)0);
+	index = 0;
+	if (dest < src)
+	{
+		while (index < n)
+		{
+			((unsigned char *)dest)[index] = ((unsigned char *)src)[index];
+			index++;
+		}
+	}
+	else
+	{
+		while (n--)
+		{
+			((unsigned char *)dest)[n] = ((unsigned char *)src)[n];
+		}
+	}
+	return (dest);
 }
 
 void	*ft_memset(void *s, int c, size_t n)
@@ -39,6 +588,76 @@ void	*ft_memset(void *s, int c, size_t n)
 void	ft_bzero(void *s, size_t n)
 {
 	ft_memset(s, 0, n);
+}
+
+int	_ft_split_get_number_of_words(char const *s, char c)
+{
+	int	i;
+	int	number_of_words;
+
+	i = 0;
+	number_of_words = 0;
+	while (1)
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] == '\0')
+			break ;
+		number_of_words++;
+		while (s[i] && s[i] != c)
+			i++;
+		if (s[i] == '\0')
+			break ;
+	}
+	return (number_of_words);
+}
+
+void	_ft_split_get_words_logic(char const *s, char c, char ***words)
+{
+	size_t	i;
+	size_t	start;
+	size_t	end;
+	size_t	index_of_current_word;
+
+	i = 0;
+	index_of_current_word = 0;
+	while (1)
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] == '\0')
+			break ;
+		start = i;
+		while (s[i] && s[i] != c)
+			i++;
+		end = i - 1;
+		(*words)[index_of_current_word] = ft_substr(s, start, end - start + 1);
+		index_of_current_word = index_of_current_word + 1;
+		if (s[i] == '\0')
+			break ;
+	}
+	(*words)[index_of_current_word] = 0;
+}
+
+char	**_ft_split_get_words(char const *s, char c, int number_of_words)
+{
+	char	**words;
+
+	words = ft_calloc(number_of_words + 1, sizeof(char *));
+	if (words == 0)
+		return (0);
+	_ft_split_get_words_logic(s, c, &words);
+	return (words);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**words;
+	int		number_of_words;
+
+	number_of_words = _ft_split_get_number_of_words(s, c);
+	words = _ft_split_get_words(s, c, number_of_words);
+	return (words);
 }
 
 t_fdtree	**_ft_fdtree(void)
@@ -545,6 +1164,149 @@ void	_ft_memtree_destroy(void)
 	_ft_memtree_destroy_recursively(*memtree);
 }
 
+t_memstack	*_ft_memstack(void)
+{
+	static t_memstack	memstack = {
+		.top = memstack.buffer,
+	};
+		
+	return (&memstack);
+}
+
+void	ft_load_unsigned_char(unsigned char c)
+{
+	t_memstack	*memstack;
+
+	memstack = _ft_memstack();
+	if (memstack->top + sizeof(unsigned char) > \
+		memstack->buffer + FT_MEMSTACK_SIZE)
+	{
+		ft_putstr_fd("ft: error: ft_memstack overflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_OVERFLOW_ERROR);
+	}
+	memstack->top[0] = c;
+	memstack->top += sizeof(unsigned char);
+}
+
+void	ft_load_char(char c)
+{
+	t_memstack	*memstack;
+
+	memstack = _ft_memstack();
+	if (memstack->top + sizeof(char) > \
+		memstack->buffer + FT_MEMSTACK_SIZE)
+	{
+		ft_putstr_fd("ft: error: ft_memstack overflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_OVERFLOW_ERROR);
+	}
+	((char *)(memstack->top))[0] = c;
+	memstack->top += sizeof(char);
+}
+
+void	ft_load_str(char *str)
+{
+	ft_load_ptr(str);
+}
+
+void	ft_load_int(int i)
+{
+	t_memstack	*memstack;
+
+	memstack = _ft_memstack();
+	if (memstack->top + sizeof(int) > \
+		memstack->buffer + FT_MEMSTACK_SIZE)
+	{
+		ft_putstr_fd("ft: error: ft_memstack overflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_OVERFLOW_ERROR);
+	}
+	((int *)(memstack->top))[0] = i;
+	memstack->top += sizeof(int);
+}
+
+void	ft_load_ptr(void *ptr)
+{
+	t_memstack	*memstack;
+
+	memstack = _ft_memstack();
+	if (memstack->top + sizeof(void *) > \
+		memstack->buffer + FT_MEMSTACK_SIZE)
+	{
+		ft_putstr_fd("ft: error: ft_memstack overflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_OVERFLOW_ERROR);
+	}
+	((void **)(memstack->top))[0] = ptr;
+	memstack->top += sizeof(void *);
+}
+
+unsigned char	ft_unload_unsigned_char(void)
+{
+	t_memstack		*memstack;
+	unsigned char	c;
+
+	memstack = _ft_memstack();
+	if (memstack->top - sizeof(unsigned char) < memstack->buffer)
+	{
+		ft_putstr_fd("ft: error: ft_memstack underflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_UNDERFLOW_ERROR);
+	}
+	memstack->top -= sizeof(unsigned char);
+	c = memstack->top[0];
+	return (c);
+}
+
+char	ft_unload_char(void)
+{
+	t_memstack	*memstack;
+	char		c;
+
+	memstack = _ft_memstack();
+	if (memstack->top - sizeof(char) < memstack->buffer)
+	{
+		ft_putstr_fd("ft: error: ft_memstack underflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_UNDERFLOW_ERROR);
+	}
+	memstack->top -= sizeof(char);
+	c = ((char *)(memstack->top))[0];
+	return (c);
+}
+
+char	*ft_unload_str(void)
+{
+	return ((char *)(ft_unload_ptr()));
+}
+
+int	ft_unload_int(void)
+{
+	t_memstack	*memstack;
+	int			i;
+
+	memstack = _ft_memstack();
+	if (memstack->top - sizeof(int) < memstack->buffer)
+	{
+		ft_putstr_fd("ft: error: ft_memstack underflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_UNDERFLOW_ERROR);
+	}
+	memstack->top -= sizeof(int);
+	i = ((int *)(memstack->top))[0];
+	return (i);
+}
+
+void	*ft_unload_ptr(void)
+{
+	t_memstack	*memstack;
+	void		*ptr;
+
+	memstack = _ft_memstack();
+	if (memstack->top - sizeof(void *) < memstack->buffer)
+	{
+		ft_putstr_fd("ft: error: ft_memstack underflow\n", STDERR_FILENO);
+		ft_exit(FT_MEMSTACK_UNDERFLOW_ERROR);
+	}
+	memstack->top -= sizeof(void *);
+	ptr = ((void **)(memstack->top))[0];
+	return (ptr);
+}
+
 void	*ft_malloc(ssize_t size)
 {
 	void	*ptr;
@@ -573,7 +1335,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	}
 	else
 	{
-		ptr = malloc(nmemb * size);
+		ptr = ft_malloc(nmemb * size);
 		if (ptr == NULL)
 		{
 			ft_putstr_fd("ft: error: ft_calloc failed\n", STDERR_FILENO);
