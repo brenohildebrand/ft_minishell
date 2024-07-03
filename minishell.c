@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 21:01:12 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:16:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,11 @@ t_any	mini_alloc(t_mini mini, t_i32 size)
 	return (ptr);
 }
 
+t_none	cstring_to_stdout(t_cstring cstr)
+{
+	write(STDOUT_FILENO, cstr, ft_strlen(cstr));
+}
+
 t_i32	cstring_get_length(t_cstring message)
 {
 	t_i32	length;
@@ -345,6 +350,31 @@ t_i32	cstring_get_length(t_cstring message)
 		length += 1;
 	}
 	return (length);
+}
+
+t_cstring	cstring_join(t_mini mini, t_cstring a, t_cstring b)
+{
+	const t_u32	a_length = cstring_get_length(a);
+	const t_u32	b_length = cstring_get_length(b);
+	const t_u32	c_length = a_length + b_length;
+	t_cstring	c;
+	t_u32		i;
+
+	c = mini_alloc(mini, c_length + 1);
+	i = 0;
+	while (i < a_length)
+	{
+		c[i] = a[i];
+		i++;
+	}
+	i = 0;
+	while (i < b_length)
+	{
+		c[a_length + i] = b[i];
+		i++;
+	}
+	c[c_length] = '\0';
+	return (c);
 }
 
 t_cstring	cstring_copy(t_mini mini, t_cstring original)
@@ -469,24 +499,83 @@ t_mini	mini_create(t_i32 argc, t_i8 **argv, t_i8 **envp)
 	return (mini);
 }
 
+t_none	mini_handle_eof(t_mini mini)
+{
+	if (mini->reader->line == NULL)
+	{
+		cstring_to_stdout("exit\n");
+		mini_quit(mini, mini->shared->exit_code);
+	}
+}
+
+t_none	reader_update_statement(t_mini mini)
+{
+	t_reader	reader;
+
+	reader = mini->reader;
+
+	if (mini->reader->line)
+	{
+		if (reader->statement)
+			reader->statement = cstring_join(mini, reader->statement, "\n");
+		reader->statement = cstring_join(mini, reader->statement, reader->line);	
+	}
+}
+
+t_none	mini_readline(t_mini mini)
+{
+	if (mini->reader->statement == NULL)
+	{
+		mini->reader->line = readline(mini->reader->prompt);
+	}
+	else
+	{
+		mini->reader->line = readline(mini->reader->multiline_prompt);
+	}
+}
+
+t_bool	mini_is_complete(t_mini mini)
+{
+	return (!mini->shared->is_statement_complete);
+}
+
+t_none	reader_assume_statement_is_complete(t_mini mini)
+{
+	mini->shared->is_statement_complete = TRUE;
+}
+
+t_none	reader_debug(t_mini mini)
+{
+	printf("\033[94m[%s:%d]\n(statement)\033[0m %s\n", \
+	__func__, __LINE__, mini->reader->statement);
+}
+
+t_none	mini_read(t_mini mini)
+{
+	mini_readline(mini);
+	mini_handle_eof(mini);
+	reader_update_statement(mini);
+	reader_assume_statement_is_complete(mini);
+	reader_debug(mini);
+}
+
 t_i32	main(t_i32 argc, t_i8 **argv, t_i8 **envp)
 {
 	t_mini	mini;
 
 	printf("This is MINI! I'm going to finish this!\n");
 	mini = mini_create(argc, argv, envp);
-	mini_quit(mini, 0);
-	// while (42)
-	// {
-	// 	while (mini_is_complete(mini))
-	// 	{
-	// 		mini_read(mini);
-	// 		mini_tokenize(mini);
-	// 		mini_expand(mini);
-	// 		mini_parse(mini);
-	// 	}
-	// 	mini_handle_heredoc(mini);
-	// 	mini_eval(mini);
-	// 	mini_reset(mini);
-	// }
+	while (42)
+	{
+		while (mini_is_complete(mini))
+		{
+			mini_read(mini);
+			// mini_tokenize(mini);
+			// mini_expand(mini);
+			// mini_parse(mini);
+		}
+		// mini_handle_heredoc(mini);
+		// mini_eval(mini);
+		// mini_reset(mini);
+	}
 }

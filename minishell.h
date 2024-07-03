@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 19:47:16 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:03:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ typedef struct s_reader			*t_reader;
 typedef struct s_lexer			*t_lexer;
 typedef struct s_expansion		*t_expansion;
 typedef struct s_parser			*t_parser;
-typedef struct s_heredoc			*t_heredoc;
+typedef struct s_heredoc		*t_heredoc;
 typedef struct s_eval			*t_eval;
 
 typedef struct s_mini			*t_mini;
+
+typedef struct s_mini_list		*t_mini_list;
 
 typedef t_none					(*t_fn)(t_mini);
 
@@ -104,7 +106,14 @@ struct s_reader {
 	t_cstring	multiline_prompt;
 };
 
-struct s_lexer {};
+struct s_lexer {
+	t_mini_list	tokens;
+	t_cstring	cursor;
+	t_i32		start;
+	t_i32		end;
+	t_i32		state;
+	t_i32		table[7][8];
+};
 
 struct s_expansion {};
 
@@ -123,6 +132,25 @@ struct s_mini {
 	t_parser	parser;
 	t_heredoc	heredoc;
 	t_eval		eval;
+};
+
+struct s_mini_list {
+	t_mini_list	next;
+	t_mini_list	previous;
+	t_cstring	token;
+	t_i32		type;
+};
+
+enum e_mini_list_type {
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_HEREDOC,
+	REDIR_APPEND,
+	DOUBLE_QUOTES,
+	SINGLE_QUOTES,
+	WORD,
+	END
 };
 
 #endif
