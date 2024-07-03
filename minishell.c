@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 21:16:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/03 00:42:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,6 +317,13 @@ t_none	memtree_insert(t_mini mini, t_any address)
 	memtree_insert_recursively(mini, memtree_ptr, address);
 }
 
+t_none	mini_free(t_mini mini, t_any address)
+{
+	if (address == NULL)
+		return ;
+	memtree_remove(mini, address);
+}
+
 t_any	mini_alloc(t_mini mini, t_i32 size)
 {
 	t_any	ptr;
@@ -329,6 +336,54 @@ t_any	mini_alloc(t_mini mini, t_i32 size)
 	}
 	memtree_insert(mini, ptr);
 	return (ptr);
+}
+
+t_cstring	i32_to_cstring(t_mini mini, t_i32 number)
+{
+	t_i64		number_copy;
+	t_i32		length;
+	t_cstring	cstring;
+
+	number_copy = (t_i64)number;
+	length = 0;
+	while (number_copy)
+	{
+		number_copy /= 10;
+		length++;
+	}
+	cstring = mini_alloc(mini, length + 1);
+	cstring[length] = '\0';
+	length--;
+	number_copy = (t_i64)number;
+	while (number_copy)
+	{
+		cstring[length] = (number_copy % 10) + '0';
+		number_copy /= 10;
+		length--;
+	}
+	return (cstring);
+}
+
+t_cstring	cstring_get_subcstring(
+	t_mini mini,
+	t_cstring cstring,
+	t_i32 start,
+	t_i32 end
+){
+	t_cstring	subcstring;
+	t_i32		length;
+	t_i32		i;
+
+	length = end - start + 1;
+	subcstring = mini_alloc(mini, length + 1);
+	subcstring[length] = '\0';
+	i = 0;
+	while (i < length)
+	{
+		subcstring[i] = cstring[start + i];
+		i++;
+	}
+	return (subcstring);
 }
 
 t_none	cstring_to_stdout(t_cstring cstr)
@@ -350,6 +405,40 @@ t_i32	cstring_get_length(t_cstring message)
 		length += 1;
 	}
 	return (length);
+}
+
+t_cstring	cstring_add(
+	t_mini mini,
+	t_cstring cstring,
+	t_i32 start,
+	t_cstring value
+){
+	t_cstring	new_cstring;
+	t_i32		new_cstring_len;
+	t_i32		value_len;
+	t_i32		i;
+	t_i32		j;
+
+	value_len = cstring_get_length(value);
+	new_cstring_len = cstring_get_length(cstring) + value_len;
+	new_cstring = mini_alloc(mini, new_cstring_len + 1);
+	new_cstring[new_cstring_len] = '\0';
+	i = 0;
+	j = 0;
+	while (i < new_cstring_len)
+	{
+		if (i >= start && j < value_len)
+		{
+			new_cstring[i] = value[j];
+			j++;	
+		}
+		else
+		{
+			new_cstring[i] = (cstring)[i - j];
+		}
+		i++;
+	}
+	return (new_cstring);
 }
 
 t_cstring	cstring_join(t_mini mini, t_cstring a, t_cstring b)
@@ -375,6 +464,46 @@ t_cstring	cstring_join(t_mini mini, t_cstring a, t_cstring b)
 	}
 	c[c_length] = '\0';
 	return (c);
+}
+
+t_cstring	cstring_remove(
+	t_mini mini,
+	t_cstring cstring,
+	t_i32 start,
+	t_i32 end
+){
+	t_i32			cstring_len;
+	t_cstring		new_cstring;
+	t_i32			new_cstring_len;
+	t_i32			i;
+	t_i32			j;
+
+	cstring_len = cstring_get_length(cstring);
+	new_cstring_len = cstring_len - (end - start + 1);
+	new_cstring = mini_alloc(mini, new_cstring_len + 1);
+	new_cstring[new_cstring_len] = '\0';
+	i = 0;
+	j = 0;
+	while (i < cstring_len)
+	{
+		if (i < start || i > end)
+		{
+			new_cstring[j] = (cstring)[i];
+			j++;
+		}
+		i++;
+	}
+	return (new_cstring);
+}
+
+t_i32	cstring_compare(t_cstring a, t_cstring b)
+{
+	t_i32	i;
+
+	i = 0;
+	while (a[i] == b[i] && a[i] != '\0')
+		i++;
+	return (((t_u8)a[i]) - ((t_u8)b[i]));
 }
 
 t_cstring	cstring_copy(t_mini mini, t_cstring original)
@@ -425,14 +554,93 @@ t_none	reader_create(t_mini mini)
 	mini->reader->multiline_prompt = MULTILINE_PROMPT;
 }
 
+t_none	automaton_table_create2(t_mini mini)
+{
+	mini->lexer->table[6][0] = 105;
+	mini->lexer->table[6][1] = 105;
+	mini->lexer->table[6][2] = 105;
+	mini->lexer->table[6][3] = 105;
+	mini->lexer->table[6][4] = 105;
+	mini->lexer->table[6][5] = 105;
+	mini->lexer->table[6][6] = 105;
+	mini->lexer->table[6][7] = 105;
+}
+
+t_none	automaton_table_create1(t_mini mini)
+{
+	mini->lexer->table[3][0] = 103;
+	mini->lexer->table[3][1] = 103;
+	mini->lexer->table[3][2] = 104;
+	mini->lexer->table[3][3] = 103;
+	mini->lexer->table[3][4] = 103;
+	mini->lexer->table[3][5] = 103;
+	mini->lexer->table[3][6] = 103;
+	mini->lexer->table[3][7] = 103;
+	mini->lexer->table[4][0] = 4;
+	mini->lexer->table[4][1] = 4;
+	mini->lexer->table[4][2] = 4;
+	mini->lexer->table[4][3] = 1;
+	mini->lexer->table[4][4] = 4;
+	mini->lexer->table[4][5] = 4;
+	mini->lexer->table[4][6] = 4;
+	mini->lexer->table[4][7] = 200;
+	mini->lexer->table[5][0] = 5;
+	mini->lexer->table[5][1] = 5;
+	mini->lexer->table[5][2] = 5;
+	mini->lexer->table[5][3] = 5;
+	mini->lexer->table[5][4] = 1;
+	mini->lexer->table[5][5] = 5;
+	mini->lexer->table[5][6] = 5;
+	mini->lexer->table[5][7] = 200;
+	automaton_table_create2(mini);
+}
+
+t_none	automaton_table_create0(t_mini mini)
+{
+	mini->lexer->table[0][0] = 1;
+	mini->lexer->table[0][1] = 2;
+	mini->lexer->table[0][2] = 3;
+	mini->lexer->table[0][3] = 4;
+	mini->lexer->table[0][4] = 5;
+	mini->lexer->table[0][5] = 6;
+	mini->lexer->table[0][6] = 0;
+	mini->lexer->table[0][7] = 108;
+	mini->lexer->table[1][0] = 1;
+	mini->lexer->table[1][1] = 100;
+	mini->lexer->table[1][2] = 100;
+	mini->lexer->table[1][3] = 4;
+	mini->lexer->table[1][4] = 5;
+	mini->lexer->table[1][5] = 100;
+	mini->lexer->table[1][6] = 100;
+	mini->lexer->table[1][7] = 100;
+	mini->lexer->table[2][0] = 101;
+	mini->lexer->table[2][1] = 102;
+	mini->lexer->table[2][2] = 101;
+	mini->lexer->table[2][3] = 101;
+	mini->lexer->table[2][4] = 101;
+	mini->lexer->table[2][5] = 101;
+	mini->lexer->table[2][6] = 101;
+	mini->lexer->table[2][7] = 101;
+	automaton_table_create1(mini);
+}
+
 t_none	lexer_create(t_mini mini)
 {
-	
+	mini->lexer = mini_alloc(mini, sizeof(struct s_lexer));
+	mini->lexer->tokens = NULL;
+	mini->lexer->cursor = NULL;
+	mini->lexer->start = 0;
+	mini->lexer->end = 0;
+	mini->lexer->state = 0;
+	automaton_table_create0(mini);
 }
 
 t_none	expansion_create(t_mini mini)
 {
-	
+	mini->expansion = mini_alloc(mini, sizeof(struct s_expansion));
+	mini->expansion->tokens = NULL;
+	mini->expansion->is_in_single_quotes = FALSE;
+	mini->expansion->is_in_double_quotes = FALSE;
 }
 
 t_none	parser_create(t_mini mini)
@@ -559,6 +767,511 @@ t_none	mini_read(t_mini mini)
 	reader_debug(mini);
 }
 
+t_none	mini_list_append(
+	t_mini mini,
+	t_mini_list *list,
+	t_cstring token,
+	t_i32 type
+){
+	t_mini_list	node;
+
+	if (*list == NULL)
+	{
+		(*list) = mini_alloc(mini, sizeof(struct s_mini_list));
+		(*list)->previous = NULL;
+		(*list)->next = NULL;
+		(*list)->token = token;
+		(*list)->type = type;
+	}
+	else
+	{
+		node = (*list);
+		while (node->next)
+		{
+			node = node->next;			
+		}
+		node->next = mini_alloc(mini, sizeof(struct s_mini_list));
+		node->next->previous = node;
+		node->next->next = NULL;
+		node->next->token = token;
+		node->next->type = type;
+	}
+}
+
+t_i32	automaton_typefy(t_mini mini)
+{
+	if (mini->lexer->state == 100)
+		return (WORD);
+	else if (mini->lexer->state == 101)
+		return (REDIR_OUT);
+	else if (mini->lexer->state == 102)
+		return (REDIR_APPEND);
+	else if (mini->lexer->state == 103)
+		return (REDIR_IN);
+	else if (mini->lexer->state == 104)
+		return (REDIR_HEREDOC);
+	else if (mini->lexer->state == 105)
+		return (PIPE);
+	else if (mini->lexer->state == 106)
+		return (DOUBLE_QUOTES);
+	else if (mini->lexer->state == 107)
+		return (SINGLE_QUOTES);
+	else
+	{
+		write(STDERR_FILENO, "What the heck?!\n", 17);
+		mini_quit(mini, 42);
+	}
+	return (0);
+}
+
+t_bool	should_consider_the_last_character(t_mini mini)
+{
+	if (mini->lexer->state == 102)
+		return (TRUE);
+	else if (mini->lexer->state == 104)
+		return (TRUE);
+	else if (mini->lexer->state == 106)
+		return (TRUE);
+	else if (mini->lexer->state == 107)
+		return (TRUE);
+	return (FALSE);
+}
+
+t_none	automaton_delimit_with_last_character(t_mini mini)
+{
+	t_cstring		token;
+	t_i32			type;
+	t_i32			len;
+	t_i32			i;
+
+	len = mini->lexer->end - mini->lexer->start + 1;
+	token = mini_alloc(mini, len + 1);
+	token[len] = '\0';
+	i = 0;
+	while (i < len)
+	{
+		token[i] = mini->lexer->cursor[mini->lexer->start + i];
+		i++;
+	}
+	mini->lexer->end += 1;
+	mini->lexer->start = mini->lexer->end;
+	type = automaton_typefy(mini);
+	mini_list_append(mini, &(mini->lexer->tokens), token, type);
+	mini->lexer->state = 0;
+}
+
+t_none	automaton_regular_delimit(t_mini mini)
+{
+	t_cstring		token;
+	t_i32			type;
+	t_i32			len;
+	t_i32			i;
+
+	len = mini->lexer->end - mini->lexer->start;
+	token = mini_alloc(mini, len + 1);
+	token[len] = '\0';
+	i = 0;
+	while (i < len)
+	{
+		token[i] = mini->lexer->cursor[mini->lexer->start + i];
+		i++;
+	}
+	mini->lexer->start = mini->lexer->end;
+	type = automaton_typefy(mini);
+	mini_list_append(mini, &(mini->lexer->tokens), token, type);
+	mini->lexer->state = 0;
+}
+
+t_none	automaton_delimit(t_mini mini)
+{
+	if (mini->lexer->state == 108)
+	{
+		return ;
+	}
+	else if (mini->lexer->state == 200)
+	{
+		mini->shared->is_statement_complete = FALSE;
+		return ;
+	}
+	else if (should_consider_the_last_character(mini))
+	{
+		automaton_delimit_with_last_character(mini);
+	}
+	else
+	{
+		automaton_regular_delimit(mini);
+	}
+}
+
+t_bool	automaton_is_whitespace(t_mini mini)
+{
+	if (mini->lexer->state == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool	automaton_is_end_of_statement(t_mini mini)
+{
+	if (mini->lexer->cursor[mini->lexer->start] == '\0')
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool	automaton_is_final_state(t_mini mini)
+{
+	if (mini->lexer->state >= 100)
+		return (TRUE);
+	return (FALSE);
+}
+
+t_none	automaton_next_state(t_mini mini)
+{
+	const t_lexer	lexer = mini->lexer;
+	t_i8			character;
+
+	character = lexer->cursor[lexer->end];
+	if (character == '>')
+		lexer->state = lexer->table[lexer->state][1];
+	else if (character == '<')
+		lexer->state = lexer->table[lexer->state][2];
+	else if (character == '"')
+		lexer->state = lexer->table[lexer->state][3];
+	else if (character == '\'')
+		lexer->state = lexer->table[lexer->state][4];
+	else if (character == '|')
+		lexer->state = lexer->table[lexer->state][5];
+	else if (character == ' ' || (character >= '\t' && character <= '\r'))
+		lexer->state = lexer->table[lexer->state][6];
+	else if (character == '\0')
+		lexer->state = lexer->table[lexer->state][7];
+	else
+		lexer->state = lexer->table[lexer->state][0];
+}
+
+t_none	lexer_reset(t_mini mini)
+{
+	mini->lexer->cursor = NULL;
+	mini->lexer->end = 0;
+	mini->lexer->start = 0;
+	mini->lexer->state = 0;
+	if (mini->lexer->tokens)
+		mini_list_clear(mini, &mini->lexer->tokens);
+	mini->lexer->tokens = NULL;
+}
+
+t_none	mini_automaton(t_mini mini)
+{
+	lexer_reset(mini);
+	mini->lexer->cursor = mini->reader->statement;
+	while (42)
+	{
+		automaton_next_state(mini);
+		if (automaton_is_final_state(mini))
+		{
+			automaton_delimit(mini);
+			if (automaton_is_end_of_statement(mini))
+				break ;	
+		}
+		else
+		{
+			mini->lexer->end++;
+			if (automaton_is_whitespace(mini))
+				mini->lexer->start++;
+		}
+	}
+}
+
+t_none	mini_list_print(t_mini mini)
+{
+	t_mini_list	list;
+
+	list = mini->lexer->tokens;
+	while (list)
+	{
+		printf("%s", list->token);
+		if (list->next)
+			printf(", ");
+		list = list->next;
+	}
+	printf("\n");
+}
+
+t_none	lexer_debug(t_mini mini)
+{
+	printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
+	mini_list_print(mini);
+}
+
+t_none	mini_tokenize(t_mini mini)
+{
+	mini_automaton(mini);
+	lexer_debug(mini);
+}
+
+t_none	expansion_remove_quotes2(t_mini mini, t_mini_list node, t_i32 i)
+{
+	t_bool		is_in_double_quotes;
+	t_cstring	dup;
+	
+	is_in_double_quotes = mini->expansion->is_in_double_quotes;
+	if (!mini->expansion->is_in_single_quotes ||
+		mini->expansion->is_in_double_quotes)
+	{
+		mini->expansion->is_in_double_quotes = !is_in_double_quotes;
+		dup = node->token;
+		node->token = cstring_remove(mini, node->token, i, i);
+		mini_free(mini, dup);
+	}
+}
+
+t_none	expansion_remove_quotes1(t_mini mini, t_mini_list node, t_i32 i)
+{
+	t_bool		is_in_single_quotes;
+	t_cstring	dup;
+	
+	is_in_single_quotes = mini->expansion->is_in_single_quotes;
+	if (mini->expansion->is_in_single_quotes ||
+		!mini->expansion->is_in_double_quotes)
+	{
+		mini->expansion->is_in_single_quotes = !is_in_single_quotes;
+		dup = node->token;
+		node->token = cstring_remove(mini, node->token, i, i);
+		mini_free(mini, dup);
+	}
+}
+
+t_none	expansion_remove_quotes(t_mini mini)
+{
+	t_mini_list	node;
+	t_i32		i;
+
+	node = mini->lexer->tokens;
+	while (node)
+	{
+		if (node->type == WORD)
+		{
+			i = 0;
+			while (node->token[i])
+			{
+				if (node->token[i] == '\'')
+				{
+					expansion_remove_quotes1(mini, node, i);
+				}
+				if (node->token[i] == '"')
+				{
+					expansion_remove_quotes2(mini, node, i);
+				}
+				i++;
+			}
+		}
+		node = node->next;
+	}
+}
+
+t_cstring	get_env_key(t_mini mini, t_cstring env)
+{
+	t_i32	i;
+
+	i = 0;
+	while (env[i] != '=')
+		i++;
+	return (cstring_get_subcstring(mini, env, 0, i - 1));
+}
+
+t_cstring	get_env_value(t_mini mini, t_cstring env)
+{
+	t_i32	i;
+	t_i32	j;
+
+	i = 0;
+	while (env[i] != '=')
+		i++;
+	j = i + 1;
+	while (env[j])
+		j++;
+	return (cstring_get_subcstring(mini, env, i + 1, j - 1));
+}
+
+t_cstring	expansion_getenv(t_mini mini, t_cstring key)
+{
+	t_cstring	current_key;
+	t_cstring	value;
+	t_i32		i;
+
+	i = 0;
+	value = NULL;
+	while (mini->shared->env[i])
+	{
+		current_key = get_env_key(mini, mini->shared->env[i]);
+		if (cstring_compare(key, current_key) == 0)
+			value = get_env_value(mini, mini->shared->env[i]);
+		mini_free(mini, current_key);
+		i++;
+	}
+	return (value);
+}
+
+t_i32	expansion_expand(t_mini mini, t_mini_list node, t_i32 start, t_i32 end)
+{
+	t_cstring	key;
+	t_cstring	value;
+	t_i32		value_length;
+	t_cstring	new_token;
+
+	if (start == end)
+		return (start);
+	else if (start == end - 1 && node->token[end] == '?')
+		value = i32_to_cstring(mini, mini->shared->exit_code);
+	else
+	{
+		key = cstring_get_subcstring(mini, node->token, start + 1, end);
+		value = cstring_copy(mini, expansion_getenv(mini, key));
+	}
+	value_length = cstring_get_length(value);
+	new_token = cstring_remove(mini, node->token, start, end);
+	new_token = cstring_add(mini, new_token, start, value);
+	mini_free(mini, node->token);
+	node->token = new_token;
+	mini_free(mini, key);
+	mini_free(mini, value);
+	return (start + value_length);
+}
+
+t_i32	expansion_find_end(t_cstring token, t_i32 start)
+{
+	t_i32	i;
+
+	i = start;
+	while (token[i])
+	{
+		if (token[i] == '>')
+			return (i - 1);
+		else if (token[i] == '<')
+			return (i - 1);
+		else if (token[i] == '"')
+			return (i - 1);
+		else if (token[i] == '\'')
+			return (i - 1);
+		else if (token[i] == '|')
+			return (i - 1);
+		else if (token[i] == ' ' || (token[i] >= '\t' && token[i] <= '\r'))
+			return (i - 1);
+		else if (token[i] == '\0')
+			return (i - 1);
+		else
+			i++;
+	}
+	return (i - 1);
+}
+
+t_none	expand_debug(t_mini mini)
+{
+	printf("\033[94m[%s:%d]\n(tokens)\033[0m ", __func__, __LINE__);
+	mini_list_print(mini);
+}
+
+t_none	mini_expand(t_mini mini)
+{
+	t_mini_list	node;
+	t_i32		start;
+	t_i32		end;
+	
+	node = mini->lexer->tokens;
+	while (node)
+	{
+		if (node->type == WORD)
+		{
+			start = 0;
+			while (node->token[start])
+			{
+				if (node->token[start] == '$')
+				{
+					end = expansion_find_end(node->token, start);
+					start = expansion_expand(mini, node, start, end);
+				}
+				start++;
+			}
+		}
+		node = node->next;
+	}
+	expansion_remove_quotes(mini);
+	expand_debug(mini);
+}
+
+t_none	parser_print_syntax_error(t_mini mini)
+{
+	cstring_to_stderr("mini: syntax error near unexpected token '");
+	cstring_to_stderr(mini->parser->unexpected_token);
+	cstring_to_stderr("'\n");
+}
+
+t_i32	parser_get_token(t_mini mini)
+{
+	if (mini->parser->cursor)
+		return (mini->parser->cursor->type);
+	return (END);
+}
+
+t_none	parser_reset(t_mini mini)
+{
+	if (mini->parser->tree)
+	{
+		mini_pipe_tree_destroy(mini, mini->parser->tree);
+	}
+	mini->parser->tree = NULL;
+	mini->parser->cursor = mini->lexer->tokens;
+	mini->parser->found_heredoc = FALSE;
+	mini->parser->could_be_completed = FALSE;
+	if (mini->lexer->tokens)
+		mini->parser->unexpected_token = mini->lexer->tokens->token;
+	else
+		mini->parser->unexpected_token = NULL;
+}
+
+t_none	mini_reset(t_mini mini)
+{
+	reader_reset(mini);
+	lexer_reset(mini);
+	expansion_reset(mini);
+	parser_reset(mini);
+	heredoc_reset(mini);
+	eval_reset(mini);
+	mini->shared->is_statement_complete = FALSE;
+}
+
+t_none	parser_debug(t_mini mini)
+{
+	printf("\033[94m[%s:%d]\n(command)\033[0m ", __func__, __LINE__);
+	mini_pipe_tree_print(mini, mini->parser->tree);
+}
+
+t_none	mini_parse(t_mini mini)
+{
+	parser_reset(mini);
+	if (parser_get_token(mini) == END)
+		mini->parser->tree = NULL;
+	else
+	{
+		mini->parser->tree = parse_pipe_sequence(mini);
+		if (mini->parser->tree)
+		{
+			if (mini->parser->found_heredoc)
+			{
+				if (mini->shared->is_statement_complete == TRUE)
+					mini->shared->is_heredoc_complete = FALSE;
+			}
+		}
+		else if (mini->parser->could_be_completed)
+			mini->shared->is_statement_complete = FALSE;
+		else
+		{
+			parser_print_syntax_error(mini);
+			mini_reset(mini);
+		}
+	}
+	parser_debug(mini);
+}
+
 t_i32	main(t_i32 argc, t_i8 **argv, t_i8 **envp)
 {
 	t_mini	mini;
@@ -570,9 +1283,9 @@ t_i32	main(t_i32 argc, t_i8 **argv, t_i8 **envp)
 		while (mini_is_complete(mini))
 		{
 			mini_read(mini);
-			// mini_tokenize(mini);
-			// mini_expand(mini);
-			// mini_parse(mini);
+			mini_tokenize(mini);
+			mini_expand(mini);
+			mini_parse(mini);
 		}
 		// mini_handle_heredoc(mini);
 		// mini_eval(mini);

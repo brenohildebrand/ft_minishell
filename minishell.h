@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 21:03:39 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/03 00:54:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,39 +36,42 @@
 
 # define MINI_ERROR 1
 
-typedef char					t_i8;
-typedef unsigned char			t_u8;
-typedef int						t_i32;
-typedef unsigned int			t_u32;
-typedef long long int			t_i64;
-typedef unsigned long long int	t_u64;
+typedef char						t_i8;
+typedef unsigned char				t_u8;
+typedef int							t_i32;
+typedef unsigned int				t_u32;
+typedef long long int				t_i64;
+typedef unsigned long long int		t_u64;
 
-typedef t_i32					t_bool;
-typedef void					t_none;
-typedef void					*t_any;
+typedef t_i32						t_bool;
+typedef void						t_none;
+typedef void						*t_any;
 
-typedef char					*t_cstring;
-typedef char					**t_cstring_array;
+typedef char						*t_cstring;
+typedef char						**t_cstring_array;
 
-typedef struct s_memtree		*t_memtree;
-typedef t_memtree				*t_memtree_ptr;
+typedef struct s_memtree			*t_memtree;
+typedef t_memtree					*t_memtree_ptr;
 
-typedef struct s_fdtree			*t_fdtree;
+typedef struct s_fdtree				*t_fdtree;
 
-typedef struct s_signals		*t_signals;
-typedef struct s_shared			*t_shared;
-typedef struct s_reader			*t_reader;
-typedef struct s_lexer			*t_lexer;
-typedef struct s_expansion		*t_expansion;
-typedef struct s_parser			*t_parser;
-typedef struct s_heredoc		*t_heredoc;
-typedef struct s_eval			*t_eval;
+typedef struct s_signals			*t_signals;
+typedef struct s_shared				*t_shared;
+typedef struct s_reader				*t_reader;
+typedef struct s_lexer				*t_lexer;
+typedef struct s_expansion			*t_expansion;
+typedef struct s_parser				*t_parser;
+typedef struct s_heredoc			*t_heredoc;
+typedef struct s_eval				*t_eval;
 
-typedef struct s_mini			*t_mini;
+typedef struct s_mini				*t_mini;
 
-typedef struct s_mini_list		*t_mini_list;
+typedef t_none						(*t_fn)(t_mini);
 
-typedef t_none					(*t_fn)(t_mini);
+typedef struct s_mini_list			*t_mini_list;
+typedef struct s_mini_command		*t_mini_command;
+typedef t_mini_command				*t_mini_command_array;
+
 
 struct s_memtree {
 	t_memtree	ltree;
@@ -115,7 +118,11 @@ struct s_lexer {
 	t_i32		table[7][8];
 };
 
-struct s_expansion {};
+struct s_expansion {
+	t_mini_list	tokens;
+	t_bool		is_in_single_quotes;
+	t_bool		is_in_double_quotes;
+};
 
 struct s_parser {};
 
@@ -141,7 +148,7 @@ struct s_mini_list {
 	t_i32		type;
 };
 
-enum e_mini_list_type {
+enum e_token_type {
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
@@ -151,6 +158,11 @@ enum e_mini_list_type {
 	SINGLE_QUOTES,
 	WORD,
 	END
+};
+
+struct s_mini_command {
+	t_mini_list	words;
+	t_mini_list	redirs;
 };
 
 #endif
