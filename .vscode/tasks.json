@@ -10,6 +10,16 @@
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		{
+			"label": "mini-build",
+			"type": "shell",
+			"command": "gcc -g minishell.c minishell.h -o mini -l readline",
+			"args": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }

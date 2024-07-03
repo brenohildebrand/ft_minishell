@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/02 13:52:59 by bhildebr          #+#    #+#              #
-#    Updated: 2024/07/02 13:52:59 by bhildebr         ###   ########.fr        #
+#    Created: 2024/07/02 20:18:31 by bhildebr          #+#    #+#              #
+#    Updated: 2024/07/02 20:18:31 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ minishell_sources = 	src/main.c \
 		src/mini/processes/eval/eval_exit.c \
 		src/mini/processes/eval/eval_export.c \
 		src/mini/processes/eval/eval_is_builtin.c \
+		src/mini/processes/eval/eval_is_corner_case.c \
 		src/mini/processes/eval/eval_pipe.c \
 		src/mini/processes/eval/eval_pwd.c \
 		src/mini/processes/eval/eval_redirs.c \
@@ -237,6 +238,7 @@ minishell_objects = 	src/main.o \
 		src/mini/processes/eval/eval_exit.o \
 		src/mini/processes/eval/eval_export.o \
 		src/mini/processes/eval/eval_is_builtin.o \
+		src/mini/processes/eval/eval_is_corner_case.o \
 		src/mini/processes/eval/eval_pipe.o \
 		src/mini/processes/eval/eval_pwd.o \
 		src/mini/processes/eval/eval_redirs.o \
@@ -419,6 +421,7 @@ minishell_depends = 	src/main.d \
 		src/mini/processes/eval/eval_exit.d \
 		src/mini/processes/eval/eval_export.d \
 		src/mini/processes/eval/eval_is_builtin.d \
+		src/mini/processes/eval/eval_is_corner_case.d \
 		src/mini/processes/eval/eval_pipe.d \
 		src/mini/processes/eval/eval_pwd.d \
 		src/mini/processes/eval/eval_redirs.d \

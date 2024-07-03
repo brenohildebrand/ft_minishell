@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 20:03:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:01:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ t_bool	memtree_is_empty(t_memtree_ptr memtree_ptr)
 
 }
 
+t_any	memtree_get_address(t_memtree_ptr memtree_ptr)
+{
+	return ((*memtree_ptr)->address);
+}
+
 t_memtree	memtree_get_ltree(t_memtree_ptr memtree_ptr)
 {
 	return ((*memtree_ptr)->ltree);
@@ -45,87 +50,15 @@ t_memtree	memtree_get_rtree(t_memtree_ptr memtree_ptr)
 	return ((*memtree_ptr)->rtree);
 }
 
-t_none	memtree_remove_recursively(t_memtree_ptr memtree_ptr, t_any address)
-{
-	t_memtree	old_root;
-
-	if (memtree_is_empty(memtree_ptr))
-		return ;
-	else if (address == memtree_get_address(memtree_ptr))
-	{
-		if (memtree_get_rtree(memtree_ptr) != NULL)
-		{
-			// (*memtree_ptr)->address = memtree_remove_update(&())
-			free(address);
-		}
-		else
-		{
-			old_root = *memtree_ptr;
-			*memtree_ptr = (*memtree_ptr)->ltree;
-			free(old_root->address);
-			free(old_root);
-		}
-	}
-	else if (address < memtree_get_address(memtree_ptr))
-	{
-		memtree_remove_recursively(&((*memtree_ptr)->ltree), address);
-	}
-	else if (address > memtree_get_address(memtree_ptr))
-	{
-		memtree_remove_recursively(&((*memtree_ptr)->rtree), address);
-	}
-	memtree_rebalance(memtree_ptr);
-
-}
-
-t_none	memtree_remove(t_mini mini, t_any address)
-{
-	memtree_remove_recursively(&(mini->shared->memtree), address);
-}
-
-t_any	memtree_get_address(t_memtree_ptr memtree_ptr)
-{
-	return ((*memtree_ptr)->address);
-}
-
-t_none	memtree_destroy_recursively(t_memtree memtree)
+t_i32	memtree_get_height(t_memtree memtree)
 {
 	if (memtree == NULL)
-			return ;
-	memtree_destroy_recursively(memtree->ltree);
-	memtree_destroy_recursively(memtree->rtree);
-	free(memtree->address);
-	free(memtree);
-}
-
-t_none	memtree_destroy(t_mini mini)
-{
-	t_memtree	memtree;
-	
-	memtree = mini->shared->memtree;
-	memtree_destroy_recursively(memtree);
-}
-
-t_none	mini_quit(t_mini mini, t_i32 exit_code)
-{
-	if (mini == NULL)
 	{
-		exit(exit_code);
+		return (0);
 	}
 	else
 	{
-		if (mini->shared == NULL)
-		{
-			free(mini);
-			exit(exit_code);
-		}
-		else
-		{
-			memtree_destroy(mini);
-			free(mini->shared);
-			free(mini);
-			exit(exit_code);
-		}
+		return (memtree->height);
 	}
 }
 
@@ -233,10 +166,115 @@ t_none	memtree_rebalance(t_memtree_ptr memtree_ptr)
 	{
 		memtree_rebalance_right(memtree_ptr);
 	}
-	memtree_update_height(memtree_ptr);
+	memtree_update_height(*memtree_ptr);
 }
 
-t_none	memtree_create(t_mini mini, t_memtree_ptr memtree_ptr)
+t_any	memtree_switch(t_memtree_ptr memtree_ptr)
+{
+	t_memtree	min_root;
+	t_any		min_address;
+
+	if ((*memtree_ptr)->ltree == NULL)
+	{
+		min_root = *memtree_ptr;
+		min_address = min_root->address;
+		*memtree_ptr = min_root->rtree;
+		free(min_root);
+	}
+	else
+	{
+		min_address = memtree_switch(&((*memtree_ptr)->ltree));
+	}
+	memtree_rebalance(memtree_ptr);
+	return (min_address);
+}
+
+t_none	memtree_remove_current(t_memtree_ptr memtree_ptr, t_any address)
+{
+	t_memtree	old_root;
+
+	if ((*memtree_ptr)->rtree == NULL)
+	{
+		old_root = *memtree_ptr;
+		*memtree_ptr = (*memtree_ptr)->ltree;
+		free(old_root->address);
+		free(old_root);
+	}
+	else
+	{
+		(*memtree_ptr)->address = memtree_switch(&((*memtree_ptr)->rtree));
+		free(address);
+	}
+}	
+
+t_none	memtree_remove_recursively(t_memtree_ptr memtree_ptr, t_any address)
+{
+	if (memtree_is_empty(memtree_ptr))
+	{
+		return ;
+	}
+	else if (address == memtree_get_address(memtree_ptr))
+	{
+		memtree_remove_current(memtree_ptr, address);
+	}
+	else if (address < memtree_get_address(memtree_ptr))
+	{
+		memtree_remove_recursively(&((*memtree_ptr)->ltree), address);
+	}
+	else if (address > memtree_get_address(memtree_ptr))
+	{
+		memtree_remove_recursively(&((*memtree_ptr)->rtree), address);
+	}
+	memtree_rebalance(memtree_ptr);
+}
+
+t_none	memtree_remove(t_mini mini, t_any address)
+{
+	memtree_remove_recursively(&(mini->shared->memtree), address);
+}
+
+t_none	memtree_destroy_recursively(t_memtree memtree)
+{
+	if (memtree == NULL)
+			return ;
+	memtree_destroy_recursively(memtree->ltree);
+	memtree_destroy_recursively(memtree->rtree);
+	free(memtree->address);
+	free(memtree);
+}
+
+t_none	memtree_destroy(t_mini mini)
+{
+	t_memtree	memtree;
+	
+	memtree = mini->shared->memtree;
+	memtree_destroy_recursively(memtree);
+}
+
+t_none	mini_quit(t_mini mini, t_i32 exit_code)
+{
+	if (mini == NULL)
+	{
+		exit(exit_code);
+	}
+	else
+	{
+		if (mini->shared == NULL)
+		{
+			free(mini);
+			exit(exit_code);
+		}
+		else
+		{
+			memtree_destroy(mini);
+			free(mini->shared);
+			free(mini);
+			exit(exit_code);
+		}
+	}
+}
+
+t_none	memtree_create(t_mini mini, t_memtree_ptr memtree_ptr, t_any address)
 {
 	*memtree_ptr = malloc(sizeof(struct s_memtree));
 	if (*memtree_ptr == NULL)
@@ -246,7 +284,7 @@ t_none	memtree_create(t_mini mini, t_memtree_ptr memtree_ptr)
 	}
 	(*memtree_ptr)->ltree = NULL;
 	(*memtree_ptr)->rtree = NULL;
-	(*memtree_ptr)->address = NULL;
+	(*memtree_ptr)->address = address;
 	(*memtree_ptr)->height = 1;
 }
 
@@ -257,16 +295,16 @@ t_none	memtree_insert_recursively(
 ){
 	if (memtree_is_empty(memtree_ptr))
 	{
-		memtree_create(mini, memtree_ptr);
+		memtree_create(mini, memtree_ptr, address);
 	}
 	else if (address < memtree_get_address(memtree_ptr))
 	{
-		memtree_insert_recursively(memtree_get_ltree(memtree_ptr), address);
+		memtree_insert_recursively(mini, &((*memtree_ptr)->ltree), address);
 		memtree_rebalance(memtree_ptr);
 	}
 	else if (address > memtree_get_address(memtree_ptr))
 	{
-		memtree_insert_recursively(memtree_get_rtree(memtree_ptr), address);
+		memtree_insert_recursively(mini, &((*memtree_ptr)->rtree), address);
 		memtree_rebalance(memtree_ptr);
 	}
 }
@@ -291,6 +329,56 @@ t_any	mini_alloc(t_mini mini, t_i32 size)
 	}
 	memtree_insert(mini, ptr);
 	return (ptr);
+}
+
+t_i32	cstring_get_length(t_cstring message)
+{
+	t_i32	length;
+
+	if (message == NULL)
+	{
+		return (0);
+	}
+	length = 0;
+	while (message[length])
+	{
+		length += 1;
+	}
+	return (length);
+}
+
+t_cstring	cstring_copy(t_mini mini, t_cstring original)
+{
+	const t_u32	original_length = cstring_get_length(original);
+	t_u32		i;
+	t_cstring	copy;
+
+	copy = mini_alloc(mini, original_length + 1);
+	i = 0;
+	while (i < original_length)
+	{
+		copy[i] = original[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
+}
+
+t_cstring	*cstring_array_copy(t_mini mini, t_cstring *arr)
+{
+	t_i32		len;
+	t_cstring	*copy;
+
+	len = 0;
+	while (arr[len])
+		len++;
+	copy = mini_alloc(mini, (sizeof(t_cstring) * (len + 1)));
+	copy[len] = '\0';
+	while (len--)
+	{
+		copy[len] = cstring_copy(mini, arr[len]);
+	}
+	return (copy);
 }
 
 t_none	signals_create(t_mini mini)
@@ -357,7 +445,7 @@ t_none	create_internal_structures(
 	t_i8 **argv, 
 	t_i8 **envp
 ){
-	shared_create(mini);
+	shared_create(mini, argc, argv, envp);
 	signals_create(mini);
 	reader_create(mini);
 	lexer_create(mini);
@@ -387,6 +475,7 @@ t_i32	main(t_i32 argc, t_i8 **argv, t_i8 **envp)
 
 	printf("This is MINI! I'm going to finish this!\n");
 	mini = mini_create(argc, argv, envp);
+	mini_quit(mini, 0);
 	// while (42)
 	// {
 	// 	while (mini_is_complete(mini))
