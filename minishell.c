@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 02:00:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:36:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1356,16 +1356,122 @@ void	update_statement(t_reader *reader)
 	reader->statement = tmp;
 }
 
+int	automaton_is_final_state(t_automaton *automaton)
+{
+	return (automaton->state >= 100);
+}
+
+void	delimit_with_last_character(t_automaton *automaton)
+{
+	ssize_t	len;
+	char	*str;
+
+	len = automaton->end - automaton->start + 1;
+	str = ft_strndup(automaton->cursor + automaton->start, len);
+	automaton->end += 1;
+	automaton->start = automaton->end;
+	automaton->state = 0;
+}
+
+int	automaton_should_consider_last_character(t_automaton *automaton)
+{
+	if (automaton->state == REDIR_APPEND_FS)
+		return (TRUE);
+	else if (automaton->state == REDIR_HEREDOC_FS)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	automaton_delimit_with_last_char(t_automaton *automaton)
+{
+	ssize_t	len;
+	char	*str;
+	int		type;
+
+	len = automaton->end - automaton->start + 1;
+	str = ft_strndup(automaton->cursor + automaton->start, len);
+	type = automaton_typefy(automaton);
+	ft_lstadd_back(&automaton->list, ft_lstnew(token_create(str, type)));
+	automaton->end += 1;
+	automaton->start = automaton->end;
+	automaton->state = 0;
+}
+
+void	automaton_delimit_without_last_char(t_automaton *automaton)
+{
+	ssize_t	len;
+	char	*str;
+	int		type;
+
+	len = automaton->end - automaton->start;
+	str = ft_strndup(automaton->cursor + automaton->start, len);
+	type = automaton_typefy(automaton);
+	ft_lstadd_back(&automaton->list, ft_lstnew(token_create(str, type)));
+	automaton->start = automaton->end;
+	automaton->state = 0;
+}
+
+void	automaton_delimit(t_automaton *automaton)
+{
+	if (automaton->state == EMPTY_FS)
+		return ;
+	if (automaton_should_consider_last_character(automaton))
+		automaton_delimit_with_last_char(automaton);
+	else
+		automaton_delimit_without_last_char(automaton);
+}
+
+void	automaton_exit(t_automaton *automaton)
+{
+	while (*automaton->cursor != '\0')
+		automaton->cursor++;
+}
+
+void	automaton_eval_final_state(t_automaton *automaton)
+{
+	if (automaton->state == INCOMPLETE_FS)
+	{
+		automaton->status = FAILURE;
+		automaton_exit(automaton);
+	}
+	else
+	{
+		automaton_delimit(automaton);
+	}
+}
+
 void	automaton_eval_state(t_automaton *automaton)
 {
 	if (automaton_is_final_state(automaton))
-		automaton_delimit(automaton);
+		automaton_eval_final_state(automaton);
 	else
 	{
-		automaton_advance_end(automaton);
 		if (automaton->state == WHITESPACE_S)
-			automaton_advance_start(automaton);
+			automaton->start += 1;
+		automaton->end += 1;
 	}
+}
+
+void	automaton_next_state(t_automaton *automaton)
+{
+	const char	c = automaton->cursor[automaton->end];
+
+	if (c == '>')
+		automaton->state = automaton->table[automaton->state][1];
+	else if (c == '<')
+		automaton->state = automaton->table[automaton->state][2];
+	else if (c == '"')
+		automaton->state = automaton->table[automaton->state][3];
+	else if (c == '\'')
+		automaton->state = automaton->table[automaton->state][4];
+	else if (c == '|')
+		automaton->state = automaton->table[automaton->state][5];
+	else if (c == ' ' || (c >= '\t' && c <= '\r'))
+		automaton->state = automaton->table[automaton->state][6];
+	else if (c == '\0')
+		automaton->state = automaton->table[automaton->state][7];
+	else
+		automaton->state = automaton->table[automaton->state][0];
 }
 
 void	automaton_subprocess(t_automaton *automaton)
@@ -1381,12 +1487,14 @@ void	automaton_subprocess(t_automaton *automaton)
 void	lexer_process(t_mini *mini)
 {
 	automaton_subprocess(mini->lexer->automaton);
-	// mini->shared->is_statement_complete = FALSE;
+	if (mini->lexer->automaton->status == FAILURE)
+		mini->shared->is_statement_complete = FALSE;
 }
 
 void	expansion_process(t_mini *mini)
 {
-	(void)mini;
+	ft_lstiter(mini->lexer->automaton->list, expansion_env);
+	ft_lstiter(mini->lexer->automaton->list, expansion_remove_quotes);
 }
 
 void	parser_process(t_mini *mini)

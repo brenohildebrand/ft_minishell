@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 01:47:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:53:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 
 # define WORD_FS 100
 # define REDIR_OUT_FS 101
-# define REDIR_APPEND_FD 102
+# define REDIR_APPEND_FS 102
 # define REDIR_IN_FS 103
 # define REDIR_HEREDOC_FS 104
 # define PIPE_FS 105
@@ -74,8 +74,8 @@ struct s_shared {
 	int		argc;
 	char	**argv;
 	char	**envp;
-	int		is_statement_complete;
 	int		status;
+	int		is_statement_complete;
 };
 
 struct s_reader {
@@ -89,11 +89,13 @@ struct s_lexer {
 };
 
 struct s_automaton {
+	int		end;
 	t_list	*list;
-	char	*cursor;
 	int		state;
 	int		start;
-	int		end;
+	int		status;
+	char	*cursor;
+	int		table[7][8];
 };
 
 struct s_mini {
