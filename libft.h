@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/03 12:05:00 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:21:40 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ typedef struct s_fdtree		t_fdtree;
 
 typedef struct s_memstack	t_memstack;
 
+typedef struct s_list		t_list;
+
+typedef struct s_table			t_table;
+typedef struct s_table_entry	t_table_entry;
+
 struct s_memtree {
 	t_memtree	*ltree;
 	t_memtree	*rtree;
@@ -47,23 +52,22 @@ struct s_memstack {
 	unsigned char	*top;
 };
 
-// errors
-
-// string
-
-struct s_string {
-	char	*buffer;
-	int		length;
-	ssize_t	size;
+struct s_list {
+	void	*content;
+	t_list	*next;
 };
 
-// linked list
+struct s_table {
+	t_table_entry	*entries;
+	int				length;
+	int				size;
+};
 
-// table (of anything)
+struct s_table_entry {
+	void	*content;
+	char	*key;
+};
 
-// agents
-
-/* libft.c */
 /* libft.c */
 void ft_putstr_fd(char *s, int fd);
 void ft_putnbr_fd(int n, int fd);

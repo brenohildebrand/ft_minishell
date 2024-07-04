@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/03 14:53:51 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 01:47:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1305,92 +1305,137 @@ t_shared	*shared_create(int argc, char **argv, char **envp)
 	return (shared);
 }
 
+t_reader	*reader_create(void)
+{
+	t_reader	*reader;
+
+	reader = ft_malloc(sizeof(struct s_reader));
+	reader->line = NULL;
+	reader->statement = NULL;
+	return (reader);
+}
+
 t_mini	*mini_create(int argc, char **argv, char **envp)
 {
 	t_mini	*mini;
 
 	mini = ft_malloc(sizeof(struct s_mini));
 	mini->shared = shared_create(argc, argv, envp);
+	mini->reader = reader_create();
 }
 
-int		statement_is_not_complete(t_mini *mini)
+char	*get_prompt(t_mini *mini)
 {
-	return (!mini->shared->is_statement_complete);
+	if (mini->reader->statement == NULL)
+		return (PROMPT);
+	else
+		return (MULTILINE_PROMPT);
 }
 
 void	read_line(t_mini *mini)
 {
-	mini->reader->line = readline(mini->reader->prompt);
+	mini->reader->line = readline(get_prompt(mini));
 }
 
-void	choose_prompt(t_mini *mini)
+int	is_eof(t_reader *reader)
 {
-	if (statement_is_empty(mini))
-		mini->reader->prompt = PROMPT;
-	else
-		mini->reader->prompt = MULTILINE_PROMPT;
+	if (reader->line == NULL)
+		return (TRUE);
+	return (FALSE);
 }
 
-void	exit_if_eof(t_mini *mini)
-{
-	if (mini->reader->line == NULL)
-	{
-		ft_putstr_fd("exit\n", STDOUT_FILENO);
-		ft_exit(mini->shared->exit_code);
-	}
-}
-
-void	update_statement(t_mini *mini)
+void	update_statement(t_reader *reader)
 {
 	char	*tmp;
 
-	if (mini->reader->statement)
-		tmp = ft_strjoin(mini->reader->statement, "\n");
+	if (reader->statement)
+		tmp = ft_strjoin(reader->statement, "\n");
 	else
-		tmp = ft_strjoin(mini->reader->statement, mini->reader->line);
-	ft_free(mini->reader->statement);
-	mini->reader->statement = tmp;
+		tmp = ft_strjoin(reader->statement, reader->line);
+	ft_free(reader->statement);
+	reader->statement = tmp;
 }
 
-void	assume_statement_is_complete(t_mini *mini)
+int	automaton_subprocess(t_automaton *automaton)
 {
-	mini->shared->is_statement_complete = TRUE;
+	automaton_reset(automaton);
+	while (42)
+	{
+		automaton_next_state(automaton);
+		if (automaton_is_final_state(automaton))
+		{
+			if (automaton->state == INCOMPLETE_FS)
+				return (FAILURE);
+			automaton_delimit(automaton);
+			if (automaton_is_end_of_statement(automaton))
+				break ;
+		}
+		else
+		{
+			// automaton->end++;
+			automaton_advance_character(automaton);
+			if (automaton_is_whitespace_state(automaton))
+				mini->lexer->automaton->start++;
+		}
+	}
 }
 
-void	tokenize_statement(t_mini *mini)
+void	lexer_process(t_mini *mini)
+{
+	if (automaton_subprocess(mini->lexer->automaton) == SUCCESS)
+	{
+		return ;
+	}
+	else
+	{
+		mini->shared->is_statement_complete = FALSE;
+	}
+}
+
+void	expansion_process(t_mini *mini)
 {
 	(void)mini;
 }
 
-void	expand_statement(t_mini *mini)
+void	parser_process(t_mini *mini)
 {
 	(void)mini;
 }
 
-void	parse_statement(t_mini *mini)
+void	reader_process(t_mini *mini)
 {
-	(void)mini;
+	read_line(mini->reader);
+	if (is_eof(mini->reader))
+	{
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
+		ft_exit(mini->shared->status);
+	}
+	update_statement(mini->reader);
 }
 
 void	read_statement(t_mini *mini)
 {
-	while (statement_is_not_complete(mini))
+	while (42)
 	{
-		choose_prompt(mini);
-		read_line(mini);
-		exit_if_eof(mini);
-		update_statement(mini);
-		assume_statement_is_complete(mini);
-		tokenize_statement(mini);
-		expand_statement(mini);
-		parse_statement(mini);
+		mini->shared->is_statement_complete = TRUE;
+		if (mini->shared->is_statement_complete)
+			reader_process(mini);
+		if (mini->shared->is_statement_complete)
+			lexer_process(mini);
+		if (mini->shared->is_statement_complete)
+			expansion_process(mini);
+		if (mini->shared->is_statement_complete)
+			parser_process(mini);
+		if (mini->shared->is_statement_complete)
+			break	;
 	}
 }
 
-
 void	eval_statement(t_mini *mini)
 {
-	(void)mini;
+	// heredoc_process(mini);
+	// redirect_process(mini);
+	// evaluation_process(mini);
 }
 
 void	shared_reset(t_shared *shared)

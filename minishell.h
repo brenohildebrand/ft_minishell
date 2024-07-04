@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/03 14:55:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 01:47:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,70 @@
 # define SUCCESS 0
 # define FAILURE 1
 
-typedef struct s_shared	t_shared;
+# define WHITESPACE_S 0
+# define WORD_S 1
+# define REDIR_OUT_S 2
+# define REDIR_IN_S 3
+# define DOUBLE_QUOTES_S 4
+# define SINGLE_QUOTES_S 5
+# define PIPE_S 6
 
-typedef struct s_reader	t_reader;
+# define WORD_FS 100
+# define REDIR_OUT_FS 101
+# define REDIR_APPEND_FD 102
+# define REDIR_IN_FS 103
+# define REDIR_HEREDOC_FS 104
+# define PIPE_FS 105
+# define EMPTY_FS 108
+# define INCOMPLETE_FS 200
 
-typedef struct s_mini	t_mini;
+# define WORD 1
+# define REDIR_APPEND 2
+# define REDIR_HEREDOC 3
+# define REDIR_IN 4
+# define REDIR_OUT 5
+# define DOUBLE_QUOTES 6
+# define SINGLE_QUOTES 7
+
+typedef struct s_shared		t_shared;
+
+typedef struct s_reader		t_reader;
+
+typedef struct s_lexer		t_lexer;
+typedef struct s_automaton	t_automaton;
+
+typedef struct s_mini		t_mini;
 
 struct s_shared {
 	int		argc;
 	char	**argv;
 	char	**envp;
 	int		is_statement_complete;
+	int		status;
+};
+
+struct s_reader {
+	char	*line;
+	char	*statement;
+};
+
+struct s_lexer {
+	t_list		*list;
+	t_automaton	*automaton;
+};
+
+struct s_automaton {
+	t_list	*list;
+	char	*cursor;
+	int		state;
+	int		start;
+	int		end;
 };
 
 struct s_mini {
 	t_shared	*shared;
 	t_reader	*reader;
+	t_lexer		*lexer;
 };
 
 // typedef struct s_signals			*t_signals;

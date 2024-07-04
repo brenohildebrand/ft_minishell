@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/03 12:05:29 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:21:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1357,3 +1357,31 @@ void	ft_exit(int status)
 	_ft_memtree_destroy();
 	exit(status % 256);
 }
+
+// t_table	*ft_tblnew(void)
+// {
+// 	t_table	*table;
+
+// 	table = ft_malloc(sizeof(t_table));
+// }
+
+// void	ft_tbladd(t_table *table, char *key, void *value)
+// {
+// 	int	hash;
+
+// 	hash = _ft_tblhash(key);
+// 	_ft_table_insert(table, hash, value);
+// }
+
+// void	ft_tblrm(t_table *table, char *key)
+// {
+// 	int	hash;
+
+// 	hash = _ft_tblhash(key);
+// 	_ft_table_remove(table, hash);
+// }
+
+// void	ft_tbldel()
+// {
+	
+// }
