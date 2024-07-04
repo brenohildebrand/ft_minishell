@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 00:21:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 11:57:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ struct s_table {
 };
 
 struct s_table_entry {
-	void	*content;
+	void	*value;
 	char	*key;
 };
 
@@ -160,5 +160,21 @@ void *ft_malloc(ssize_t size);
 void *ft_calloc(size_t nmemb, size_t size);
 void ft_free(void *ptr);
 void ft_exit(int status);
+void ft_lstadd_back(t_list **lst, t_list *new);
+void ft_lstadd_front(t_list **lst, t_list *new);
+void ft_lstclear(t_list **lst, void (*del)(void *));
+void ft_lstdelone(t_list *lst, void (*del)(void *));
+void ft_lstiter(t_list *lst, void (*f)(void *));
+t_list *ft_lstlast(t_list *lst);
+t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list *ft_lstnew(void *content);
+int ft_lstsize(t_list *lst);
+t_table *ft_tblnew(void);
+int _ft_tblhash(char *key);
+void _ft_tblgrow(t_table *table);
+void _ft_tblshrink(t_table *table);
+void ft_tblset(t_table *table, char *key, void *value);
+void *ft_tblget(t_table *table, char *key);
+void ft_tbldel(t_table *table);
 
 #endif
