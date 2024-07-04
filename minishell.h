@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 14:53:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:12:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define REDIR_OUT 5
 # define DOUBLE_QUOTES 6
 # define SINGLE_QUOTES 7
+# define PIPE 8
 
 typedef struct s_shared		t_shared;
 
@@ -67,6 +68,7 @@ typedef struct s_reader		t_reader;
 
 typedef struct s_lexer		t_lexer;
 typedef struct s_automaton	t_automaton;
+typedef struct s_token		t_token;
 
 typedef struct s_mini		t_mini;
 
@@ -84,7 +86,6 @@ struct s_reader {
 };
 
 struct s_lexer {
-	t_list		*list;
 	t_automaton	*automaton;
 };
 
@@ -98,113 +99,52 @@ struct s_automaton {
 	int		table[7][8];
 };
 
+struct s_token {
+	char	*token;
+	int		type;
+};
+
 struct s_mini {
 	t_shared	*shared;
 	t_reader	*reader;
 	t_lexer		*lexer;
 };
 
-// typedef struct s_signals			*t_signals;
-// typedef struct s_shared				*t_shared;
-// typedef struct s_reader				*t_reader;
-// typedef struct s_lexer				*t_lexer;
-// typedef struct s_expansion			*t_expansion;
-// typedef struct s_parser				*t_parser;
-// typedef struct s_heredoc			*t_heredoc;
-// typedef struct s_eval				*t_eval;
-
-// typedef struct s_mini				*t_mini;
-
-// struct s_memtree {
-// 	t_memtree	ltree;
-// 	t_memtree	rtree;
-// 	t_any		address;
-// 	t_i32		height;
-// };
-
-// struct s_fdtree {
-// 	t_fdtree	ltree;
-// 	t_fdtree	rtree;
-// 	t_i32		fd;
-// 	t_i32		height;
-// };
-
-// struct s_signals {};
-
-// struct s_shared {
-// 	t_i32		argc;
-// 	t_i8		**argv;
-// 	t_i8		**envp;
-// 	t_i8		**env;
-// 	t_memtree	memtree;
-// 	t_fdtree	fdtree;
-// 	t_i32		exit_code;
-// 	t_bool		is_statement_complete;
-// 	t_bool		is_grammar_wrong;
-// 	t_bool		is_heredoc_complete;
-// };
-
-// struct s_reader {
-// 	t_cstring	line;
-// 	t_cstring	statement;
-// 	t_cstring	prompt;
-// 	t_cstring	multiline_prompt;
-// };
-
-// struct s_lexer {
-// 	t_mini_list	tokens;
-// 	t_cstring	cursor;
-// 	t_i32		start;
-// 	t_i32		end;
-// 	t_i32		state;
-// 	t_i32		table[7][8];
-// };
-
-// struct s_expansion {
-// 	t_mini_list	tokens;
-// 	t_bool		is_in_single_quotes;
-// 	t_bool		is_in_double_quotes;
-// };
-
-// struct s_parser {};
-
-// struct s_heredoc {};
-
-// struct s_eval {};
-
-// struct s_mini {
-// 	t_shared	shared;
-// 	t_signals	signals;
-// 	t_reader	reader;
-// 	t_lexer		lexer;
-// 	t_expansion	expansion;
-// 	t_parser	parser;
-// 	t_heredoc	heredoc;
-// 	t_eval		eval;
-// };
-
-// struct s_mini_list {
-// 	t_mini_list	next;
-// 	t_mini_list	previous;
-// 	t_cstring	token;
-// 	t_i32		type;
-// };
-
-// enum e_token_type {
-// 	PIPE,
-// 	REDIR_IN,
-// 	REDIR_OUT,
-// 	REDIR_HEREDOC,
-// 	REDIR_APPEND,
-// 	DOUBLE_QUOTES,
-// 	SINGLE_QUOTES,
-// 	WORD,
-// 	END
-// };
-
-// struct s_mini_command {
-// 	t_mini_list	words;
-// 	t_mini_list	redirs;
-// };
+/* minishell.c */
+t_shared *shared_create(int argc, char **argv, char **envp);
+t_reader *reader_create(void);
+void automaton_create_table_2(t_automaton *automaton);
+void automaton_create_table_1(t_automaton *automaton);
+void automaton_create_table_0(t_automaton *automaton);
+t_automaton *automaton_create(void);
+t_lexer *lexer_create(void);
+t_mini *mini_create(int argc, char **argv, char **envp);
+char *get_prompt(t_reader *reader);
+void read_line(t_reader *reader);
+int is_eof(t_reader *reader);
+void update_statement(t_reader *reader);
+int automaton_is_final_state(t_automaton *automaton);
+int automaton_should_consider_last_character(t_automaton *automaton);
+int automaton_typefy(t_automaton *automaton);
+t_token *token_new(char *str, int type);
+void token_del(void *content);
+void automaton_reset(t_automaton *automaton, char *statement);
+void automaton_delimit_with_last_char(t_automaton *automaton);
+void automaton_delimit_without_last_char(t_automaton *automaton);
+void automaton_delimit(t_automaton *automaton);
+void automaton_exit(t_automaton *automaton);
+void automaton_eval_final_state(t_automaton *automaton);
+void automaton_eval_state(t_automaton *automaton);
+void automaton_next_state(t_automaton *automaton);
+void automaton_subprocess(t_automaton *automaton, char *statement);
+void lexer_process(t_mini *mini);
+void expansion_process(t_mini *mini);
+void parser_process(t_mini *mini);
+void reader_process(t_mini *mini);
+void read_statement(t_mini *mini);
+void eval_statement(t_mini *mini);
+void shared_reset(t_shared *shared);
+void mini_reset(t_mini *mini);
+int main(int argc, char **argv, char **envp);
 
 #endif

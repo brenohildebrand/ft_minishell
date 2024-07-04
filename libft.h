@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 11:57:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:12:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ struct s_table_entry {
 };
 
 /* libft.c */
+int *ft_intdup(int *src);
+char *ft_strndup(const char *s, size_t n);
 void ft_putstr_fd(char *s, int fd);
 void ft_putnbr_fd(int n, int fd);
 void ft_putendl_fd(char *s, int fd);
@@ -173,6 +175,9 @@ t_table *ft_tblnew(void);
 int _ft_tblhash(char *key);
 void _ft_tblgrow(t_table *table);
 void _ft_tblshrink(t_table *table);
+int ft_strcmp(const char *s1, const char *s2);
+void _ft_tblset_new_entry(t_table *table, int hash, char *key, void *value);
+void _ft_tblset_existing_entry(t_table *table, int hash, char *key, void *value);
 void ft_tblset(t_table *table, char *key, void *value);
 void *ft_tblget(t_table *table, char *key);
 void ft_tbldel(t_table *table);

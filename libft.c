@@ -6,11 +6,36 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 12:28:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:07:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	*ft_intdup(int *src)
+{
+	int	*dest;
+
+	dest = ft_calloc(1, sizeof(int));
+	*dest = *src;
+	return (dest);
+}
+
+char	*ft_strndup(const char *s, size_t n)
+{
+	char	*ptr;
+	size_t	i;
+
+	ptr = ft_calloc(n + 1, sizeof(char));
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = s[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -1389,7 +1414,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		{
 			temp = (*lst)->next;
 			del((*lst)->content);
-			free(*lst);
+			 ft_free(*lst);
 			*lst = temp;
 		}
 		*lst = 0;
@@ -1399,7 +1424,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	del(lst->content);
-	free(lst);
+	 ft_free(lst);
 }
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
@@ -1459,7 +1484,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*new_ls;
 
-	new_ls = malloc(1 * sizeof(t_list));
+	new_ls = ft_malloc(1 * sizeof(t_list));
 	if (!new_ls)
 	{
 		return (NULL);
