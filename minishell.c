@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 01:47:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 02:00:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1356,40 +1356,32 @@ void	update_statement(t_reader *reader)
 	reader->statement = tmp;
 }
 
-int	automaton_subprocess(t_automaton *automaton)
+void	automaton_eval_state(t_automaton *automaton)
+{
+	if (automaton_is_final_state(automaton))
+		automaton_delimit(automaton);
+	else
+	{
+		automaton_advance_end(automaton);
+		if (automaton->state == WHITESPACE_S)
+			automaton_advance_start(automaton);
+	}
+}
+
+void	automaton_subprocess(t_automaton *automaton)
 {
 	automaton_reset(automaton);
-	while (42)
+	while (*automaton->cursor != '\0' && automaton->state != INCOMPLETE_FS)
 	{
 		automaton_next_state(automaton);
-		if (automaton_is_final_state(automaton))
-		{
-			if (automaton->state == INCOMPLETE_FS)
-				return (FAILURE);
-			automaton_delimit(automaton);
-			if (automaton_is_end_of_statement(automaton))
-				break ;
-		}
-		else
-		{
-			// automaton->end++;
-			automaton_advance_character(automaton);
-			if (automaton_is_whitespace_state(automaton))
-				mini->lexer->automaton->start++;
-		}
+		automaton_eval_state(automaton);
 	}
 }
 
 void	lexer_process(t_mini *mini)
 {
-	if (automaton_subprocess(mini->lexer->automaton) == SUCCESS)
-	{
-		return ;
-	}
-	else
-	{
-		mini->shared->is_statement_complete = FALSE;
-	}
+	automaton_subprocess(mini->lexer->automaton);
+	// mini->shared->is_statement_complete = FALSE;
 }
 
 void	expansion_process(t_mini *mini)
