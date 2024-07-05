@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 18:12:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 21:26:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void ft_lstadd_back(t_list **lst, t_list *new);
 void ft_lstadd_front(t_list **lst, t_list *new);
 void ft_lstclear(t_list **lst, void (*del)(void *));
 void ft_lstdelone(t_list *lst, void (*del)(void *));
+void ft_lstdel(t_list **lst, void (*del)(void *));
 void ft_lstiter(t_list *lst, void (*f)(void *));
 t_list *ft_lstlast(t_list *lst);
 t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
@@ -175,11 +176,15 @@ t_table *ft_tblnew(void);
 int _ft_tblhash(char *key);
 void _ft_tblgrow(t_table *table);
 void _ft_tblshrink(t_table *table);
+char *ft_strrep(char *str, char *substr, int start, int end);
 int ft_strcmp(const char *s1, const char *s2);
 void _ft_tblset_new_entry(t_table *table, int hash, char *key, void *value);
 void _ft_tblset_existing_entry(t_table *table, int hash, char *key, void *value);
 void ft_tblset(t_table *table, char *key, void *value);
 void *ft_tblget(t_table *table, char *key);
-void ft_tbldel(t_table *table);
+void ft_tbldelone(t_table *tbl, char *key, void (*del)(void *));
+void ft_tbldel(t_table *tbl, void (*del)(void *));
+void ft_noop(void);
+char *ft_strpbrk(char *s, char *accept);
 
 #endif

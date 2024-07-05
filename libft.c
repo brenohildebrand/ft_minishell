@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 18:07:07 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 21:26:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,26 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		}
 	}
 	return (0);
+}
+
+char	*ft_strpbrk(char *s, char *accept)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (s[i])
+	{
+		j = 0;
+		while (accept[j])
+		{
+			if (s[i] == accept[j])
+				return (&s[i]);
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
 }
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
@@ -1424,7 +1444,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	del(lst->content);
-	 ft_free(lst);
+	ft_free(lst);
+}
+
+void	ft_lstdel(t_list **lst, void (*del)(void *))
+{
+	ft_lstclear(lst, del);
 }
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
@@ -1580,6 +1605,30 @@ void	_ft_tblshrink(t_table *table)
 	ft_free(new_table);
 }
 
+char	*ft_strrep(char *str, char *substr, int start, int end)
+{
+	char	*new_str;
+	int		new_len;
+	int		i;
+	int		j;
+
+	new_len = ft_strlen(str) - (end - start) + ft_strlen(substr);
+	new_str = ft_calloc(new_len + 1, sizeof(char));
+	i = 0;
+	while (i < start)
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	j = 0;
+	while (substr[j])
+		new_str[i++] = substr[j++];
+	j = end;
+	while (str[j])
+		new_str[i++] = str[j++];
+	return (new_str);
+}
+
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
@@ -1641,17 +1690,40 @@ void	*ft_tblget(t_table *table, char *key)
 	return (table->entries[hash].value);
 }
 
-void	ft_tbldel(t_table *table)
+void	ft_tbldelone(t_table *tbl, char *key, void (*del)(void *))
+{
+	int	hash;
+
+	hash = _ft_tblhash(key) % tbl->size;
+	while (ft_strcmp(tbl->entries[hash].key, key) != 0)
+		hash = (hash + 1) % tbl->size;
+	ft_free(tbl->entries[hash].key);
+	del(tbl->entries[hash].value);
+	tbl->entries[hash].key = NULL;
+	tbl->entries[hash].value = NULL;
+	tbl->length--;
+	if (tbl->length <= tbl->size / 4)
+		_ft_tblshrink(tbl);
+}
+
+void	ft_tbldel(t_table *tbl, void (*del)(void *))
 {
 	int	i;
 
 	i = 0;
-	while (i < table->size)
+	while (i < tbl->size)
 	{
-		if (table->entries[i].key != NULL)
-			ft_free(table->entries[i].key);
+		if (tbl->entries[i].key != NULL)
+		{
+			ft_free(tbl->entries[i].key);
+			del(tbl->entries[i].value);
+		}
 		i++;
 	}
-	ft_free(table->entries);
-	ft_free(table);
+	ft_free(tbl->entries);
+	ft_free(tbl);
+}
+
+void	ft_noop(void)
+{
 }

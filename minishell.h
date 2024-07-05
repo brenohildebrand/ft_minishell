@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 18:12:26 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 21:21:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ struct s_automaton {
 };
 
 struct s_token {
-	char	*token;
+	char	*str;
 	int		type;
 };
 
@@ -138,6 +138,8 @@ void automaton_eval_state(t_automaton *automaton);
 void automaton_next_state(t_automaton *automaton);
 void automaton_subprocess(t_automaton *automaton, char *statement);
 void lexer_process(t_mini *mini);
+void expansion_substitute_env(t_mini mini, t_token *token);
+void expansion_rm_quotes(t_token *token);
 void expansion_process(t_mini *mini);
 void parser_process(t_mini *mini);
 void reader_process(t_mini *mini);

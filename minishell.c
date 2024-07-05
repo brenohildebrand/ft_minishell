@@ -6,11 +6,29 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 18:12:00 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/04 21:43:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_table	*shared_create_env(char **envp)
+{
+	t_table	*env;
+	char	**split;
+	int		i;
+
+	env = ft_tblnew();
+	i = 0;
+	while (envp[i])
+	{
+		split = ft_split(envp[i], '=');
+		ft_tblset(env, split[0], split[1]);
+		ft_free(split);
+		i++;
+	}
+	return (env);
+}
 
 t_shared	*shared_create(int argc, char **argv, char **envp)
 {
@@ -20,6 +38,7 @@ t_shared	*shared_create(int argc, char **argv, char **envp)
 	shared->argc = argc;
 	shared->argv = argv;
 	shared->envp = envp;
+	shared->env = shared_create_env(envp);
 	shared->is_statement_complete = FALSE;
 	return (shared);
 }
@@ -208,7 +227,7 @@ t_token	*token_new(char *str, int type)
 	t_token	*token;
 
 	token = ft_malloc(sizeof(struct s_token));
-	token->token = str;
+	token->str = str;
 	token->type = type;
 	return (token);
 }
@@ -218,7 +237,7 @@ void	token_del(void *content)
 	t_token	*token;
 
 	token = (t_token *)content;
-	ft_free(token->token);
+	ft_free(token->str);
 	ft_free(token);
 }
 
@@ -341,10 +360,91 @@ void	lexer_process(t_mini *mini)
 		mini->shared->is_statement_complete = FALSE;
 }
 
+int	expansion_substitute_env_get_end(t_token *token, int i)
+{
+	int	end;
+	
+	end = (ft_strpbrk(token->str + i, "><\"'| \t\n\v\f\r\0") - token->str) - 1;
+	return (end);
+}
+
+char	*mini_getenv(t_mini mini, char *key)
+{
+	if (ft_strcmp(key, "?") == 0)
+		return (ft_itoa(mini->shared->status));
+	return (ft_strdup(ft_tblget(mini->shared->env, key)));
+}
+
+char	*expansion_substitute_env_get_env(
+	t_mini mini,
+	t_token *token,
+	int start,
+	int end
+){
+	char	*tmp;
+	char	*env;
+
+	tmp = ft_strndup(token->str + start + 1, end - start);
+	env = mini_getenv(mini, tmp);
+	ft_free(tmp);
+	return (env);
+}
+{
+	char	*key;
+	char	*value;
+
+	key = ft_strndup(token->str + start + 1, end - start);
+	value = mini_getenv(mini, key);
+	ft_free(key);	
+}
+
+void	expansion_substitute_env(t_mini mini, t_token *token)
+{
+	int			start;
+	int			end;
+	char		*env;
+	char		*new_str;
+	int			i;
+
+	i = 0;
+	while (token->str[i])
+	{
+		if (token->str[i] == '$')
+		{
+			start = i;
+			end = expansion_substitute_env_get_end(token, i);
+			env = expansion_substitute_env_get_env(mini, token, start, end);
+			new_str = ft_strrep(token->str, env, start, end);
+			token->str = new_str;
+			ft_free(new_str);
+			i = start + ft_strlen(env);
+			ft_free(env);
+		}
+		i++;
+	}
+}
+
+void	expansion_rm_quotes(t_token *token)
+{
+	(void)token;
+}
+
 void	expansion_process(t_mini *mini)
 {
-	// ft_lstiter(mini->lexer->tokens, expansion_env);
-	// ft_lstiter(mini->lexer->tokens, expansion_rm_quotes);
+	t_list	*node;
+	t_token	*token;
+
+	node = mini->lexer->automaton->list;
+	while (node)
+	{
+		token = (t_token *)node->content;
+		if (token->type == WORD)
+		{
+			expansion_sub_env(mini, token);
+			expansion_rm_quotes(token);		
+		}
+		node = node->next;
+	}
 }
 
 void	parser_process(t_mini *mini)
