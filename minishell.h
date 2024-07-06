@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 21:21:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:07:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,22 @@ typedef struct s_lexer		t_lexer;
 typedef struct s_automaton	t_automaton;
 typedef struct s_token		t_token;
 
+typedef struct s_parser		t_parser;
+typedef struct s_command	t_command;
+typedef struct s_redirect	t_redirect;
+
 typedef struct s_mini		t_mini;
 
 struct s_shared {
 	int		argc;
 	char	**argv;
 	char	**envp;
-	int		status;
 	int		is_statement_complete;
+	int		does_statement_contain_heredoc;
+	t_list	*tokens;
+	t_list	*commands;
+	t_table	*env;
+	int		status;
 };
 
 struct s_reader {
@@ -90,11 +98,11 @@ struct s_lexer {
 };
 
 struct s_automaton {
-	int		end;
-	t_list	*list;
-	int		state;
 	int		start;
+	int		end;
+	int		state;
 	int		status;
+	t_list	*tokens;
 	char	*cursor;
 	int		table[7][8];
 };
@@ -104,10 +112,25 @@ struct s_token {
 	int		type;
 };
 
+struct s_parser {
+	t_list	*cmds;
+};
+
+struct s_command {
+	t_list	*rdrcts;
+	char	**argv;
+};
+
+struct s_redirect {
+	int		type;
+	char	*file;
+};
+
 struct s_mini {
 	t_shared	*shared;
 	t_reader	*reader;
 	t_lexer		*lexer;
+	t_parser	*parser;
 };
 
 /* minishell.c */

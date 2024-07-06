@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 21:43:55 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/05 23:19:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,9 +424,50 @@ void	expansion_substitute_env(t_mini mini, t_token *token)
 	}
 }
 
+void	expansion_rm_sq(t_token *token, int i, int *is_in_sq, int *is_in_dq)
+{
+	char	*new_str;
+
+	if ((*is_in_sq) || !(*is_in_dq))
+	{
+		*is_in_sq = !(*is_in_sq);
+		new_str = ft_strrep(token->str, "", i, i);
+		ft_free(token->str);
+		token->str = new_str;
+	}
+}
+
+void	expansion_rm_dq(t_token *token, int i, int *is_in_sq, int *is_in_dq)
+{
+	char	*new_str;
+
+	if ((*is_in_dq) || !(*is_in_sq))
+	{
+		*is_in_dq = !(*is_in_dq);
+		new_str = ft_strrep(token->str, "", i, i);
+		ft_free(token->str);
+		token->str = new_str;
+	}
+}
+
 void	expansion_rm_quotes(t_token *token)
 {
-	(void)token;
+	int		is_in_sq;
+	int		is_in_dq;
+	int		i;
+	char	*new_str;
+
+	is_in_sq = FALSE;
+	is_in_dq = FALSE;
+	i = 0;
+	while (token->str[i])
+	{
+		if (token->str[i] == '\'')
+			expansion_rm_sq(token, i, &is_in_sq, &is_in_dq);
+		if (token->str[i] == '"')
+			expansion_rm_dq(token, i, &is_in_sq, &is_in_dq);
+		i++;
+	}
 }
 
 void	expansion_process(t_mini *mini)
@@ -447,7 +488,33 @@ void	expansion_process(t_mini *mini)
 	}
 }
 
+void	rdp_pipe_sequence()
+{
+	
+}
+
+void	rdp_subprocess(t_mini *mini)
+{
+	// validate syntax
+	rdp_reset(mini->parser->rdp);
+	if (mini->parser->rdp->token == NULL)
+		mini->parser->rdp->tree = NULL;
+	
+}
+
+void	cmds_subprocess()
+{
+	// while not pipe
+	//  build command
+}
+
 void	parser_process(t_mini *mini)
+{
+	rdp_subprocess(mini);
+	cmds_subprocess(mini);
+}
+
+void	heredoc_process(t_mini *mini)
 {
 	(void)mini;
 }
@@ -477,13 +544,16 @@ void	read_statement(t_mini *mini)
 		if (mini->shared->is_statement_complete)
 			parser_process(mini);
 		if (mini->shared->is_statement_complete)
-			break	;
+		{
+			if(mini->shared->does_statement_contain_heredoc)
+				heredoc_process(mini);
+			break ;
+		}
 	}
 }
 
 void	eval_statement(t_mini *mini)
 {
-	// heredoc_process(mini);
 	// redirect_process(mini);
 	// evaluation_process(mini);
 }
