@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/05 23:19:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/07 00:27:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -488,30 +488,59 @@ void	expansion_process(t_mini *mini)
 	}
 }
 
-void	rdp_pipe_sequence()
+int	rdp_pipe_sequence(t_mini *mini, t_rdp *rdp)
 {
-	
+	(void)mini;
+	(void)rdp;
 }
 
 void	rdp_subprocess(t_mini *mini)
 {
-	// validate syntax
-	rdp_reset(mini->parser->rdp);
-	if (mini->parser->rdp->token == NULL)
-		mini->parser->rdp->tree = NULL;
-	
+	const t_rdp	*rdp = mini->parser->rdp;
+
+	rdp_reset(rdp);
+	if (rdp_pipe_sequence(mini, rdp) == SUCCESS)
+		return ;
+	else
+	{
+		if (rdp->status == INCOMPLETE)
+		{
+			mini->shared->is_statement_complete = FALSE;
+		}
+		if (rdp->status == FAILURE)
+		{
+			rdp_print_syntax_error(rdp);
+			mini_reset(mini);
+		}
+	}
 }
 
-void	cmds_subprocess()
+void	cmds_build_command(t_mini *mini, char **statement)
 {
-	// while not pipe
-	//  build command
+	(void)mini;
+	(void)statement;
 }
 
+void	cmds_subprocess(t_mini *mini)
+{
+	char	*statement;
+
+	statement = mini->reader->statement;
+	while (*statement)
+	{
+		cmds_build_command(mini, &statement);
+	}
+}
+
+/**
+ * @brief Applies a recursive descent parser (rdp) algorithm to validate the
+ * syntax. If it is successful, it will break the statement into commands.
+ */
 void	parser_process(t_mini *mini)
 {
 	rdp_subprocess(mini);
-	cmds_subprocess(mini);
+	if (mini->parser->rdp->status == SUCCESS)
+		cmds_subprocess(mini);
 }
 
 void	heredoc_process(t_mini *mini)

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/05 20:07:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/07 00:18:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 # define SUCCESS 0
 # define FAILURE 1
+# define INCOMPLETE 2
 
 # define WHITESPACE_S 0
 # define WORD_S 1
@@ -71,6 +72,7 @@ typedef struct s_automaton	t_automaton;
 typedef struct s_token		t_token;
 
 typedef struct s_parser		t_parser;
+typedef struct s_rdp		t_rdp;
 typedef struct s_command	t_command;
 typedef struct s_redirect	t_redirect;
 
@@ -114,6 +116,14 @@ struct s_token {
 
 struct s_parser {
 	t_list	*cmds;
+	t_rdp	*rdp;
+};
+
+struct s_rdp {
+	char	*unexpected_token;
+	t_list	*current_node;
+	char	*token;
+	int		status;
 };
 
 struct s_command {
