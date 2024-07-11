@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/11 03:26:39 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/11 03:33:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,38 @@ t_lexer	*lexer_create(void)
 
 }
 
+t_rdp	*rdp_create(void)
+{
+	t_rdp	*rdp;
+
+	rdp = ft_malloc(sizeof(struct s_rdp));
+	rdp->node = NULL;
+	rdp->token = NULL;
+	rdp->status = SUCCESS;
+	return (rdp);
+}
+
+t_parser	*parser_create(void)
+{
+	t_parser	*parser;
+
+	parser = ft_malloc(sizeof(struct s_parser));
+	parser->cmds = NULL;
+	parser->rdp = rdp_create();
+	return (parser);
+}
+
+t_heredoc	*heredoc_create(void)
+{
+	t_heredoc	*heredoc;
+
+	heredoc = ft_malloc(sizeof(struct s_heredoc));
+	heredoc->delimiter = NULL;
+	heredoc->heredoc = NULL;
+	heredoc->counter = 0;
+	return (heredoc);
+}
+
 t_mini	*mini_create(int argc, char **argv, char **envp)
 {
 	t_mini	*mini;
@@ -155,6 +187,8 @@ t_mini	*mini_create(int argc, char **argv, char **envp)
 	mini->shared = shared_create(argc, argv, envp);
 	mini->reader = reader_create();
 	mini->lexer = lexer_create();
+	mini->parser = parser_create();
+	mini->heredoc = heredoc_create();
 }
 
 char	*get_prompt(t_reader *reader)
@@ -662,6 +696,14 @@ void	eval_statement(t_mini *mini)
 {
 	// redirect_process(mini);
 	// evaluation_process(mini);
+
+	// for each command in sequence
+	//   if (should be solved in current process)
+	//     solve it in current process
+	//   else
+	//     create a new process
+	//   go through all of the redirects and solve them
+	//   finally execute the command
 }
 
 void	shared_reset(t_shared *shared)
