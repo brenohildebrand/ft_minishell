@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/07 00:27:07 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/11 03:26:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -488,47 +488,88 @@ void	expansion_process(t_mini *mini)
 	}
 }
 
+int	rdp_command(t_mini *mini, t_rdp *rdp)
+{
+	while (rdp_is_word(rdp) || rdp_is_redir(rdp))
+		rdp_next_token(rdp);
+	return (SUCCESS);
+}
+
 int	rdp_pipe_sequence(t_mini *mini, t_rdp *rdp)
 {
-	(void)mini;
-	(void)rdp;
+	if (rdp_command(mini, rdp) == SUCCESS)
+	{
+		while(rdp_is_pipe(rdp))
+		{
+			rdp_next_token(rdp);
+			if (rdp->token == NULL)
+				return (INCOMPLETE);
+			if (rdp_command(mini, rdp) == FAILURE)
+				return (FAILURE);
+		}
+		if (rdp->token == NULL)
+			return (SUCCESS);
+		else
+			return (FAILURE);
+	}
+	else
+		return (FAILURE);
 }
 
 void	rdp_subprocess(t_mini *mini)
 {
-	const t_rdp	*rdp = mini->parser->rdp;
+	t_rdp *const	rdp = mini->parser->rdp;
 
 	rdp_reset(rdp);
-	if (rdp_pipe_sequence(mini, rdp) == SUCCESS)
+	rdp->status = rdp_pipe_sequence(mini, rdp);
+	if (rdp->status == SUCCESS)
 		return ;
-	else
+	else if (rdp->status == INCOMPLETE)
 	{
-		if (rdp->status == INCOMPLETE)
-		{
-			mini->shared->is_statement_complete = FALSE;
-		}
-		if (rdp->status == FAILURE)
-		{
-			rdp_print_syntax_error(rdp);
-			mini_reset(mini);
-		}
+		mini->shared->is_statement_complete = FALSE;
+	}
+	else if (rdp->status == FAILURE)
+	{
+		rdp_print_syntax_error(rdp);
+		mini_reset(mini);
 	}
 }
 
-void	cmds_build_command(t_mini *mini, char **statement)
+void	cmds_build_command(t_mini *mini, t_list **node)
 {
-	(void)mini;
-	(void)statement;
+	t_command	*cmd;
+	t_token		*token;
+	t_redirect	*rdrct;
+
+	token = (t_token *)((*node)->content);
+	while (token->type >= WORD && token->type <= REDIR_OUT)
+	{
+		if (token->type == WORD)
+			ft_lstadd_back(&cmd->argv, ft_lstnew(ft_strdup(token->str)));
+		else
+		{
+			rdrct = ft_malloc(sizeof(struct s_redirect));
+			rdrct->type = token->type;
+			*node = (*node)->next;
+			token = (t_token *)((*node)->content);
+			rdrct->file = ft_strdup(token->str);
+			ft_lstadd_back(&cmd->rdrcts, ft_lstnew(rdrct));
+		}
+		*node = (*node)->next;
+		token = (t_token *)((*node)->content);
+	}
+	ft_lstadd_back(&mini->parser->cmds, ft_lstnew(cmd));
 }
 
 void	cmds_subprocess(t_mini *mini)
 {
-	char	*statement;
+	t_list	*node;
 
-	statement = mini->reader->statement;
-	while (*statement)
+	node = mini->lexer->automaton->tokens;
+	while (node)
 	{
-		cmds_build_command(mini, &statement);
+		cmds_build_command(mini, &node);
+		node = node->next;
 	}
 }
 
@@ -543,9 +584,45 @@ void	parser_process(t_mini *mini)
 		cmds_subprocess(mini);
 }
 
+void	heredoc_write(t_mini *mini, t_redirect *redir)
+{
+	int		fd;
+
+	fd = ft_open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	write(fd, mini->heredoc->heredoc, ft_strlen(mini->heredoc->heredoc));
+	ft_close(fd);
+}
+
+void	heredoc_read(t_mini *mini, t_redirect *redir)
+{
+	char	*line;
+	char	*delimiter;
+
+	delimiter = redir->file;
+	while (42)
+	{
+		line = readline(MULTILINE_PROMPT);
+		mini->heredoc->heredoc = ft_strjoin(mini->heredoc->heredoc, line);
+		if (ft_strcmp(line, delimiter) == 0)
+			break ;
+	}
+	ft_free(redir->file);
+	redir->file = ft_strjoin("/tmp/.mini.", ft_itoa(mini->heredoc->counter++));
+}
+
 void	heredoc_process(t_mini *mini)
 {
-	(void)mini;
+	t_list		*node;
+	t_redirect	*redir;
+
+	node->next = mini->parser->cmds;
+	while (node)
+	{
+		redir = (t_redirect *)node->content;
+		heredoc_read(mini, redir);
+		heredoc_write(mini, redir);
+		node = node->next;
+	}
 }
 
 void	reader_process(t_mini *mini)

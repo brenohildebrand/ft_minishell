@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/07 00:18:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/11 03:18:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_rdp		t_rdp;
 typedef struct s_command	t_command;
 typedef struct s_redirect	t_redirect;
 
+typedef struct s_heredoc	t_heredoc;
+
 typedef struct s_mini		t_mini;
 
 struct s_shared {
@@ -120,8 +122,7 @@ struct s_parser {
 };
 
 struct s_rdp {
-	char	*unexpected_token;
-	t_list	*current_node;
+	t_list	*node;
 	char	*token;
 	int		status;
 };
@@ -136,11 +137,18 @@ struct s_redirect {
 	char	*file;
 };
 
+struct s_heredoc {
+	char	*delimiter;
+	char	*heredoc;
+	int		counter;
+};
+
 struct s_mini {
 	t_shared	*shared;
 	t_reader	*reader;
 	t_lexer		*lexer;
 	t_parser	*parser;
+	t_heredoc	*heredoc;
 };
 
 /* minishell.c */
