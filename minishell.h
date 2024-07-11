@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/11 03:18:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/11 03:48:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ struct s_mini {
 };
 
 /* minishell.c */
+t_table *shared_create_env(char **envp);
 t_shared *shared_create(int argc, char **argv, char **envp);
 t_reader *reader_create(void);
 void automaton_create_table_2(t_automaton *automaton);
@@ -159,6 +160,9 @@ void automaton_create_table_1(t_automaton *automaton);
 void automaton_create_table_0(t_automaton *automaton);
 t_automaton *automaton_create(void);
 t_lexer *lexer_create(void);
+t_rdp *rdp_create(void);
+t_parser *parser_create(void);
+t_heredoc *heredoc_create(void);
 t_mini *mini_create(int argc, char **argv, char **envp);
 char *get_prompt(t_reader *reader);
 void read_line(t_reader *reader);
@@ -179,10 +183,23 @@ void automaton_eval_state(t_automaton *automaton);
 void automaton_next_state(t_automaton *automaton);
 void automaton_subprocess(t_automaton *automaton, char *statement);
 void lexer_process(t_mini *mini);
-void expansion_substitute_env(t_mini mini, t_token *token);
+int expansion_sub_env_get_end(t_token *token, int i);
+char *mini_getenv(t_mini *mini, char *key);
+char *expansion_sub_env_get_env(t_mini *mini, t_token *token, int start, int end);
+void expansion_sub_env(t_mini mini, t_token *token);
+void expansion_rm_sq(t_token *token, int i, int *is_in_sq, int *is_in_dq);
+void expansion_rm_dq(t_token *token, int i, int *is_in_sq, int *is_in_dq);
 void expansion_rm_quotes(t_token *token);
 void expansion_process(t_mini *mini);
+int rdp_command(t_mini *mini, t_rdp *rdp);
+int rdp_pipe_sequence(t_mini *mini, t_rdp *rdp);
+void rdp_subprocess(t_mini *mini);
+void cmds_build_command(t_mini *mini, t_list **node);
+void cmds_subprocess(t_mini *mini);
 void parser_process(t_mini *mini);
+void heredoc_write(t_mini *mini, t_redirect *redir);
+void heredoc_read(t_mini *mini, t_redirect *redir);
+void heredoc_process(t_mini *mini);
 void reader_process(t_mini *mini);
 void read_statement(t_mini *mini);
 void eval_statement(t_mini *mini);

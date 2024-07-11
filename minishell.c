@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/11 03:33:37 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/11 03:48:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_automaton	*automaton_create(void)
 
 	automaton = ft_malloc(sizeof(struct s_automaton));
 	automaton->end = 0;
-	automaton->list = NULL;
+	automaton->tokens = NULL;
 	automaton->state = 0;
 	automaton->start = 0;
 	automaton->status = SUCCESS;
@@ -282,7 +282,7 @@ void	automaton_reset(t_automaton *automaton, char *statement)
 	automaton->start = 0;
 	automaton->status = SUCCESS;
 	automaton->cursor = statement;
-	ft_lstclear(&automaton->list, token_del);
+	ft_lstclear(&automaton->tokens, token_del);
 }
 
 void	automaton_delimit_with_last_char(t_automaton *automaton)
@@ -294,7 +294,7 @@ void	automaton_delimit_with_last_char(t_automaton *automaton)
 	len = automaton->end - automaton->start + 1;
 	str = ft_strndup(automaton->cursor + automaton->start, len);
 	type = automaton_typefy(automaton);
-	ft_lstadd_back(&automaton->list, ft_lstnew(token_new(str, type)));
+	ft_lstadd_back(&automaton->tokens, ft_lstnew(token_new(str, type)));
 	automaton->end += 1;
 	automaton->start = automaton->end;
 	automaton->state = 0;
@@ -309,7 +309,7 @@ void	automaton_delimit_without_last_char(t_automaton *automaton)
 	len = automaton->end - automaton->start;
 	str = ft_strndup(automaton->cursor + automaton->start, len);
 	type = automaton_typefy(automaton);
-	ft_lstadd_back(&automaton->list, ft_lstnew(token_new(str, type)));
+	ft_lstadd_back(&automaton->tokens, ft_lstnew(token_new(str, type)));
 	automaton->start = automaton->end;
 	automaton->state = 0;
 }
@@ -394,7 +394,7 @@ void	lexer_process(t_mini *mini)
 		mini->shared->is_statement_complete = FALSE;
 }
 
-int	expansion_substitute_env_get_end(t_token *token, int i)
+int	expansion_sub_env_get_end(t_token *token, int i)
 {
 	int	end;
 	
@@ -402,15 +402,15 @@ int	expansion_substitute_env_get_end(t_token *token, int i)
 	return (end);
 }
 
-char	*mini_getenv(t_mini mini, char *key)
+char	*mini_getenv(t_mini *mini, char *key)
 {
 	if (ft_strcmp(key, "?") == 0)
 		return (ft_itoa(mini->shared->status));
 	return (ft_strdup(ft_tblget(mini->shared->env, key)));
 }
 
-char	*expansion_substitute_env_get_env(
-	t_mini mini,
+char	*expansion_sub_env_get_env(
+	t_mini *mini,
 	t_token *token,
 	int start,
 	int end
@@ -423,16 +423,8 @@ char	*expansion_substitute_env_get_env(
 	ft_free(tmp);
 	return (env);
 }
-{
-	char	*key;
-	char	*value;
 
-	key = ft_strndup(token->str + start + 1, end - start);
-	value = mini_getenv(mini, key);
-	ft_free(key);	
-}
-
-void	expansion_substitute_env(t_mini mini, t_token *token)
+void	expansion_sub_env(t_mini mini, t_token *token)
 {
 	int			start;
 	int			end;
@@ -446,8 +438,8 @@ void	expansion_substitute_env(t_mini mini, t_token *token)
 		if (token->str[i] == '$')
 		{
 			start = i;
-			end = expansion_substitute_env_get_end(token, i);
-			env = expansion_substitute_env_get_env(mini, token, start, end);
+			end = expansion_sub_env_get_end(token, i);
+			env = expansion_sub_env_get_env(mini, token, start, end);
 			new_str = ft_strrep(token->str, env, start, end);
 			token->str = new_str;
 			ft_free(new_str);
@@ -509,7 +501,7 @@ void	expansion_process(t_mini *mini)
 	t_list	*node;
 	t_token	*token;
 
-	node = mini->lexer->automaton->list;
+	node = mini->lexer->automaton->tokens;
 	while (node)
 	{
 		token = (t_token *)node->content;
@@ -694,6 +686,7 @@ void	read_statement(t_mini *mini)
 
 void	eval_statement(t_mini *mini)
 {
+	printf("TODO: eval\n");
 	// redirect_process(mini);
 	// evaluation_process(mini);
 
