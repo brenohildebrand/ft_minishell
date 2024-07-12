@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:24:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/02 18:17:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:11:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_none	eval_command(t_mini mini)
 {
 	if (is_builtin(mini))
 	{
-		eval_builtin();			
+		eval_builtin();
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/11 03:48:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:35:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -684,19 +684,210 @@ void	read_statement(t_mini *mini)
 	}
 }
 
+int	eval_is_special_builtin(t_command *cmd)
+{
+	if (ft_strcmp(cmd->argv[0], "cd") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd->argv[0], "export") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd->argv[0], "unset") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd->argv[0], "exit") == 0)
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+void	eval_special_builtin(t_mini *mini, int argc, char **argv, char **envp)
+{
+	if (ft_strcmp(argv[0], "cd") == 0)
+		eval_cd(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "export") == 0)
+		eval_export(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "unset") == 0)
+		eval_unset(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "exit") == 0)
+		eval_exit(mini, argc, argv, envp);
+}
+
+void	eval_builtin(t_mini *mini, int argc, char **argv, char **envp)
+{
+	if (ft_strcmp(argv[0], "cd") == 0)
+		eval_cd(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "echo") == 0)
+		eval_echo(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "env") == 0)
+		eval_env(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "exit") == 0)
+		eval_exit(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "export") == 0)
+		eval_export(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "pwd") == 0)
+		eval_pwd(mini, argc, argv, envp);
+	else if (ft_strcmp(argv[0], "unset") == 0)
+		eval_unset(mini, argc, argv, envp);
+}
+
+void	eval_executable(t_mini *mini, int argc, char **argv, char **envp)
+{
+	int		status;
+
+	status = execve(argv[0], argv, envp);
+	if (status == -1)
+	{
+		ft_putstr_fd("mini: command not found: ", STDERR_FILENO);
+		ft_putstr_fd(argv[0], STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
+}
+
+void	eval_in_current_process(t_mini *mini, t_command *cmd)
+{
+	eval_special_builtin_redirects(mini, cmd);
+	eval_special_builtin(mini, cmd);
+	// if (ft_strcmp(cmd->argv[0], "cd") == 0)
+	// 	eval_cd(mini, cmd);
+	// else if (ft_strcmp(cmd->argv[0], "export") == 0)
+	// 	eval_export(mini, cmd);
+	// else if (ft_strcmp(cmd->argv[0], "unset") == 0)
+	// 	eval_unset(mini, cmd);
+	// else if (ft_strcmp(cmd->argv[0], "exit") == 0)
+	// 	eval_exit(mini, cmd);
+}
+
+int	eval_get_argc(t_command *cmd)
+{
+	int	argc;
+
+	argc = 0;
+	while (cmd->argv[argc])
+		argc++;
+	return (argc);
+}
+
+char	**eval_get_argv(t_command *cmd)
+{
+	return (cmd->argv);
+}
+
+char	**eval_get_envp(t_mini *mini)
+{
+	char	**envp;
+	char	*tmp;
+	int		len;
+	int		i;
+
+	len = mini->shared->env->length;
+	envp = ft_calloc(len, sizeof(char *));
+	i = 0;
+	while (i < len)
+	{
+		tmp = ft_strjoin(mini->shared->env->entries[i].key, "=");
+		envp[i] = ft_strjoin(tmp, mini->shared->env->entries[i].value);		
+		ft_free(tmp);
+		i++;
+	}
+	return (envp);
+}
+
+void	eval_in_new_process(t_mini *mini, t_command *cmd)
+{
+	int 	pid;
+	int		argc;
+	char	**argv;
+	char	**envp;
+
+	pid = ft_fork();
+	if (pid == 0)
+	{
+		eval_redirects(mini, cmd);
+		argc = eval_get_argc(cmd);
+		argv = eval_get_argv(cmd);
+		envp = eval_get_envp(mini);
+		if (eval_is_builtin(mini, cmd))
+			eval_builtin(mini, argc, argv, envp);
+		else
+			eval_executable(mini, argc, argv, envp);
+		ft_free(envp);
+	}
+	else
+	{
+		wait(&mini->shared->status);
+	}
+}
+
+void	eval_create_pipes(t_mini *mini)
+{
+	int	i;
+	int	len;
+
+	len = ft_lstsize(mini->parser->cmds);
+	mini->eval->pipes = ft_calloc(len - 1, sizeof(int));
+	i = 0;
+	while (i < len - 1)
+	{
+		ft_pipe(mini->eval->pipes + (2 * i));
+		i++;
+	}
+}
+
+void	eval_close_pipes(t_mini *mini)
+{
+	int	i;
+	int	len;
+
+	len = ft_lstsize(mini->parser->cmds);
+	i = 0;
+	while (i < len -1)
+	{
+		ft_close(mini->eval->pipes[i * 2]);
+		ft_close(mini->eval->pipes[(i * 2) + 1]);
+		i++;
+	}
+}
+
 void	eval_statement(t_mini *mini)
 {
-	printf("TODO: eval\n");
-	// redirect_process(mini);
-	// evaluation_process(mini);
+	t_list		*node;
+	t_command	*cmd;
+	
+	eval_create_pipes(mini);
+	node = mini->parser->cmds;
+	while (node)
+	{
+		cmd = (t_command *)node->content;
+		if (eval_is_special_builtin(cmd))
+			eval_in_current_process(mini, cmd);
+		else
+			eval_in_new_process(mini, cmd);
+		node = node->next;
+	}
+	eval_close_pipes(mini);
+}
 
-	// for each command in sequence
-	//   if (should be solved in current process)
-	//     solve it in current process
-	//   else
-	//     create a new process
-	//   go through all of the redirects and solve them
-	//   finally execute the command
+void	eval_reset(t_eval *eval)
+{
+	(void)eval;
+}
+
+void	heredoc_reset(t_heredoc *heredoc)
+{
+	(void)heredoc;
+}
+
+void	parser_reset(t_parser *parser)
+{
+	(void)parser;
+}
+
+void	lexer_reset(t_lexer *lexer)
+{
+	(void)lexer;
+}
+
+void	reader_reset(t_reader *reader)
+{
+	(void)reader;
 }
 
 void	shared_reset(t_shared *shared)
@@ -707,6 +898,11 @@ void	shared_reset(t_shared *shared)
 void	mini_reset(t_mini *mini)
 {
 	shared_reset(mini->shared);
+	reader_reset(mini->reader);
+	lexer_reset(mini->lexer);
+	parser_reset(mini->parser);
+	heredoc_reset(mini->heredoc);
+	eval_reset(mini->eval);
 }
 
 int	main(int argc, char **argv, char **envp)

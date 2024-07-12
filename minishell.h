@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/11 03:48:49 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:17:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_redirect	t_redirect;
 
 typedef struct s_heredoc	t_heredoc;
 
+typedef struct s_eval		t_eval;
+
 typedef struct s_mini		t_mini;
 
 struct s_shared {
@@ -143,12 +145,20 @@ struct s_heredoc {
 	int		counter;
 };
 
+struct s_eval {
+	int		pipe_fd[2];
+	char	**paths;
+	int		*pipes;
+	int		redirs[2];
+};
+
 struct s_mini {
 	t_shared	*shared;
 	t_reader	*reader;
 	t_lexer		*lexer;
 	t_parser	*parser;
 	t_heredoc	*heredoc;
+	t_eval		*eval;
 };
 
 /* minishell.c */
