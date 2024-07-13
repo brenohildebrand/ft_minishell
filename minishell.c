@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/12 21:14:56 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:15:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ t_mini	*mini_create(int argc, char **argv, char **envp)
 	mini->lexer = lexer_create();
 	mini->parser = parser_create();
 	mini->heredoc = heredoc_create();
+	return (mini);
 }
 
 char	*get_prompt(t_reader *reader)

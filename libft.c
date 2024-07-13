@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/12 21:22:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:17:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
+	if (s == NULL)
+		return (0);
 	len = 0;
 	while (*(s + len))
 		len++;
@@ -1587,16 +1589,16 @@ t_table	*ft_tblnew(void)
 	table->length = 0;
 }
 
-int	_ft_tblhash(char *key)
+unsigned int	_ft_tblhash(char *key)
 {
-	int	hash;
-	int	i;
+	unsigned int	hash;
+	int				i;
 
-	hash = 0;
+	hash = 5381;
 	i = 0;
 	while (key[i])
 	{
-		hash = (hash * 31) + key[i];
+		hash = ((hash << 5) + hash) + key[i];
 		i++;
 	}
 	return (hash);
@@ -1708,7 +1710,7 @@ void	_ft_tblset_existing_entry(t_table *table, int hash, char *key, void *value)
 
 void	ft_tblset(t_table *table, char *key, void *value)
 {
-	int	hash;
+	unsigned int	hash;
 
 	hash = _ft_tblhash(key) % table->size;
 	while (42)
@@ -1727,7 +1729,7 @@ void	ft_tblset(t_table *table, char *key, void *value)
 
 void	*ft_tblget(t_table *table, char *key)
 {
-	int	hash;
+	unsigned int	hash;
 
 	hash = _ft_tblhash(key) % table->size;
 	while (ft_strcmp(table->entries[hash].key, key) != 0)
@@ -1737,7 +1739,7 @@ void	*ft_tblget(t_table *table, char *key)
 
 void	ft_tbldelone(t_table *tbl, char *key, void (*del)(void *))
 {
-	int	hash;
+	unsigned int	hash;
 
 	hash = _ft_tblhash(key) % tbl->size;
 	while (ft_strcmp(tbl->entries[hash].key, key) != 0)

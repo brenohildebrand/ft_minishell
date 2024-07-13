@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/12 22:27:39 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:11:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list *ft_lstnew(void *content);
 int ft_lstsize(t_list *lst);
 t_table *ft_tblnew(void);
-int _ft_tblhash(char *key);
+unsigned int _ft_tblhash(char *key);
 void _ft_tblgrow(t_table *table);
 void _ft_tblshrink(t_table *table);
 char *ft_strrep(char *str, char *substr, int start, int end);

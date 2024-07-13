@@ -14,7 +14,7 @@
 		{
 			"label": "mini-build",
 			"type": "shell",
-			"command": "gcc -g minishell.c minishell.h -o mini -l readline",
+			"command": "gcc -g minishell.c minishell.h libft.c libft.h -o mini -l readline",
 			"args": [],
 			"group": {
 				"kind": "build",
