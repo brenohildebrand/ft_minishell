@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:22:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/11 15:17:28 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:03:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ struct s_rdp {
 
 struct s_command {
 	t_list	*rdrcts;
-	char	**argv;
+	t_list	*argv;
 };
 
 struct s_redirect {
@@ -196,7 +196,7 @@ void lexer_process(t_mini *mini);
 int expansion_sub_env_get_end(t_token *token, int i);
 char *mini_getenv(t_mini *mini, char *key);
 char *expansion_sub_env_get_env(t_mini *mini, t_token *token, int start, int end);
-void expansion_sub_env(t_mini mini, t_token *token);
+void expansion_sub_env(t_mini *mini, t_token *token);
 void expansion_rm_sq(t_token *token, int i, int *is_in_sq, int *is_in_dq);
 void expansion_rm_dq(t_token *token, int i, int *is_in_sq, int *is_in_dq);
 void expansion_rm_quotes(t_token *token);
@@ -212,9 +212,33 @@ void heredoc_read(t_mini *mini, t_redirect *redir);
 void heredoc_process(t_mini *mini);
 void reader_process(t_mini *mini);
 void read_statement(t_mini *mini);
+int eval_is_special_builtin(t_command *cmd);
+void eval_special_builtin(t_mini *mini, int argc, char **argv, char **envp);
+void eval_builtin(t_mini *mini, int argc, char **argv, char **envp);
+void eval_executable(t_mini *mini, int argc, char **argv, char **envp);
+int eval_get_argc(t_command *cmd);
+char **eval_get_argv(t_command *cmd);
+char **eval_get_envp(t_mini *mini);
+void eval_special_builtin_redirects(t_mini *mini, t_command *cmd);
+void eval_redirects(t_mini *mini, t_command *cmd);
+void eval_in_current_process(t_mini *mini, t_command *cmd);
+void eval_in_new_process(t_mini *mini, t_command *cmd);
+void eval_create_pipes(t_mini *mini);
+void eval_close_pipes(t_mini *mini);
 void eval_statement(t_mini *mini);
+void eval_reset(t_eval *eval);
+void heredoc_reset(t_heredoc *heredoc);
+void parser_reset(t_parser *parser);
+void lexer_reset(t_lexer *lexer);
+void reader_reset(t_reader *reader);
 void shared_reset(t_shared *shared);
 void mini_reset(t_mini *mini);
 int main(int argc, char **argv, char **envp);
+int	rdp_is_word(t_rdp *rdp);
+int	rdp_is_redir(t_rdp *rdp);
+int	rdp_is_pipe(t_rdp *rdp);
+void rdp_next_token(t_rdp *rdp);
+void	rdp_reset(t_rdp *rdp);
+void	rdp_print_syntax_error(t_rdp *rdp);
 
 #endif

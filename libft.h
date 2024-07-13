@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/11 03:41:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:27:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 
 # define FT_MALLOC_ERROR 1
 # define FT_MEMSTACK_OVERFLOW_ERROR 2
@@ -159,6 +161,10 @@ char ft_unload_char(void);
 char *ft_unload_str(void);
 int ft_unload_int(void);
 void *ft_unload_ptr(void);
+int ft_open(const char *pathname, int flags, mode_t mode);
+void ft_close(int fd);
+int ft_fork(void);
+int ft_pipe(int pipefd[2]);
 void *ft_malloc(ssize_t size);
 void *ft_calloc(size_t nmemb, size_t size);
 void ft_free(void *ptr);

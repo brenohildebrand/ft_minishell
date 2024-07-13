@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 08:37:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/04 21:26:02 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:22:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1350,6 +1350,51 @@ void	*ft_unload_ptr(void)
 	memstack->top -= sizeof(void *);
 	ptr = ((void **)(memstack->top))[0];
 	return (ptr);
+}
+
+int	ft_open(const char *pathname, int flags, mode_t mode)
+{
+	int	fd;
+
+	fd = open(pathname, flags, mode);
+	if (fd == -1)
+	{
+		ft_putstr_fd("ft: error: ft_open failed\n", STDERR_FILENO);
+		ft_exit(1);
+	}
+	_ft_fdtree_insert(fd);
+	return (fd);
+}
+
+void	ft_close(int fd)
+{
+	_ft_fdtree_remove(fd);
+}
+
+int	ft_fork(void)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		ft_putstr_fd("ft: error: ft_fork failed\n", STDERR_FILENO);
+		ft_exit(1);
+	}
+	return (pid);
+}
+
+int	ft_pipe(int pipefd[2])
+{
+	int	ret;
+
+	ret = pipe(pipefd);
+	if (ret == -1)
+	{
+		ft_putstr_fd("ft: error: ft_pipe failed\n", STDERR_FILENO);
+		ft_exit(1);
+	}
+	return (ret);
 }
 
 void	*ft_malloc(ssize_t size)

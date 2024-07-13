@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/12 16:35:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:14:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,7 +424,7 @@ char	*expansion_sub_env_get_env(
 	return (env);
 }
 
-void	expansion_sub_env(t_mini mini, t_token *token)
+void	expansion_sub_env(t_mini *mini, t_token *token)
 {
 	int			start;
 	int			end;
@@ -514,6 +514,51 @@ void	expansion_process(t_mini *mini)
 	}
 }
 
+int	rdp_is_word(t_rdp *rdp)
+{
+	t_token	*token;
+
+	token = (t_token *)rdp->node->content;
+	if (token->type == WORD)
+		return (TRUE);
+	else if (token->type == DOUBLE_QUOTES)
+		return (TRUE);
+	else if (token->type == SINGLE_QUOTES)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	rdp_is_redir(t_rdp *rdp)
+{
+	t_token	*token;
+
+	token = (t_token *)rdp->node->content;
+	if (token->type == REDIR_OUT)
+		return (TRUE);
+	else if (token->type == REDIR_APPEND)
+		return (TRUE);
+	else if (token->type == REDIR_IN)
+		return (TRUE);
+	else if (token->type == REDIR_HEREDOC)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	rdp_is_pipe(t_rdp *rdp)
+{
+	t_token	*token;
+
+	token = (t_token *)rdp->node->content;
+	if (token->type == PIPE)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	rdp_next_token(t_rdp *rdp)
+{
+	rdp->node = rdp->node->next;
+}
+
 int	rdp_command(t_mini *mini, t_rdp *rdp)
 {
 	while (rdp_is_word(rdp) || rdp_is_redir(rdp))
@@ -540,6 +585,16 @@ int	rdp_pipe_sequence(t_mini *mini, t_rdp *rdp)
 	}
 	else
 		return (FAILURE);
+}
+
+void	rdp_reset(t_rdp *rdp)
+{
+	(void)rdp;
+}
+
+void	rdp_print_syntax_error(t_rdp *rdp)
+{
+	(void)rdp;
 }
 
 void	rdp_subprocess(t_mini *mini)
@@ -684,18 +739,80 @@ void	read_statement(t_mini *mini)
 	}
 }
 
+int	eval_cd(t_mini *mini, int argc, char **argv, char **envp)
+{
+
+}
+
+int	eval_echo(t_mini *mini, int argc, char **argv, char **envp)
+{
+
+}
+
+int	eval_env(t_mini *mini, int argc, char **argv, char **envp)
+{
+
+}
+
+int	eval_exit(t_mini *mini, int argc, char **argv, char **envp)
+{
+
+}
+
+int	eval_export(t_mini *mini, int argc, char **argv, char **envp)
+{
+
+}
+
+int	eval_pwd(t_mini *mini, int argc, char **argv, char **envp)
+{
+
+}
+
+int	eval_unset(t_mini *mini, int argc, char **argv, char **envp)
+{
+
+}
+
 int	eval_is_special_builtin(t_command *cmd)
 {
-	if (ft_strcmp(cmd->argv[0], "cd") == 0)
+	char	*cmd_name;
+
+	cmd_name = cmd->argv->content;
+	if (ft_strcmp(cmd_name, "cd") == 0)
 		return (TRUE);
-	else if (ft_strcmp(cmd->argv[0], "export") == 0)
+	else if (ft_strcmp(cmd_name, "export") == 0)
 		return (TRUE);
-	else if (ft_strcmp(cmd->argv[0], "unset") == 0)
+	else if (ft_strcmp(cmd_name, "unset") == 0)
 		return (TRUE);
-	else if (ft_strcmp(cmd->argv[0], "exit") == 0)
+	else if (ft_strcmp(cmd_name, "exit") == 0)
 		return (TRUE);
 	else
 		return (FALSE);
+}
+
+int	eval_is_builtin(t_command *cmd)
+{
+	char	*cmd_name;
+
+	cmd_name = cmd->argv->content;
+	if (ft_strcmp(cmd_name, "cd") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd_name, "echo") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd_name, "env") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd_name, "exit") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd_name, "export") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd_name, "pwd") == 0)
+		return (TRUE);
+	else if (ft_strcmp(cmd_name, "unset") == 0)
+		return (TRUE);
+	else
+		return (FALSE);
+
 }
 
 void	eval_special_builtin(t_mini *mini, int argc, char **argv, char **envp)
@@ -741,33 +858,26 @@ void	eval_executable(t_mini *mini, int argc, char **argv, char **envp)
 	}
 }
 
-void	eval_in_current_process(t_mini *mini, t_command *cmd)
-{
-	eval_special_builtin_redirects(mini, cmd);
-	eval_special_builtin(mini, cmd);
-	// if (ft_strcmp(cmd->argv[0], "cd") == 0)
-	// 	eval_cd(mini, cmd);
-	// else if (ft_strcmp(cmd->argv[0], "export") == 0)
-	// 	eval_export(mini, cmd);
-	// else if (ft_strcmp(cmd->argv[0], "unset") == 0)
-	// 	eval_unset(mini, cmd);
-	// else if (ft_strcmp(cmd->argv[0], "exit") == 0)
-	// 	eval_exit(mini, cmd);
-}
-
 int	eval_get_argc(t_command *cmd)
 {
-	int	argc;
-
-	argc = 0;
-	while (cmd->argv[argc])
-		argc++;
-	return (argc);
+	return (ft_lstsize(cmd->argv));
 }
 
 char	**eval_get_argv(t_command *cmd)
 {
-	return (cmd->argv);
+	char	**argv;
+	int		len;
+	int		i;
+
+	len = ft_lstsize(cmd->argv);
+	argv = ft_calloc(len + 1, sizeof(char *));
+	i = 0;
+	while (i < len)
+	{
+		argv[i] = cmd->argv->content;
+		i++;
+	}
+	return (argv);
 }
 
 char	**eval_get_envp(t_mini *mini)
@@ -790,6 +900,33 @@ char	**eval_get_envp(t_mini *mini)
 	return (envp);
 }
 
+void	eval_special_builtin_redirects(t_mini *mini, t_command *cmd)
+{
+	(void)mini;
+	(void)cmd;
+	printf("TODO: eval_special_builtin_redirects\n");
+}
+
+void	eval_redirects(t_mini *mini, t_command *cmd)
+{
+	(void)mini;
+	(void)cmd;
+	printf("TODO: eval_redirects\n");
+}
+
+void	eval_in_current_process(t_mini *mini, t_command *cmd)
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
+
+	eval_special_builtin_redirects(mini, cmd);
+	argc = eval_get_argc(cmd);
+	argv = eval_get_argv(cmd);
+	envp = eval_get_envp(mini);
+	eval_special_builtin(mini, argc, argv, envp);
+}
+
 void	eval_in_new_process(t_mini *mini, t_command *cmd)
 {
 	int 	pid;
@@ -804,10 +941,11 @@ void	eval_in_new_process(t_mini *mini, t_command *cmd)
 		argc = eval_get_argc(cmd);
 		argv = eval_get_argv(cmd);
 		envp = eval_get_envp(mini);
-		if (eval_is_builtin(mini, cmd))
+		if (eval_is_builtin(cmd))
 			eval_builtin(mini, argc, argv, envp);
 		else
 			eval_executable(mini, argc, argv, envp);
+		ft_free(argv);
 		ft_free(envp);
 	}
 	else
