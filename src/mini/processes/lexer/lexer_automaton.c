@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:30:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/06/30 20:42:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:56:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_none	lexer_automaton(t_mini mini)
 			if (lexer_automaton_is_end_of_statement(mini))
 				break ;
 		}
-		else
+	else
 		{
 			mini->lexer->end++;
 			if (lexer_automaton_is_whitespace(mini))

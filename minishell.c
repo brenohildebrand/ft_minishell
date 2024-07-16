@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:18:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/13 00:15:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:24:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,8 +327,8 @@ void	automaton_delimit(t_automaton *automaton)
 
 void	automaton_exit(t_automaton *automaton)
 {
-	while (*automaton->cursor != '\0')
-		automaton->cursor++;
+	while (automaton->cursor[automaton->end] != '\0')
+		automaton->end++;
 }
 
 void	automaton_eval_final_state(t_automaton *automaton)
@@ -378,10 +378,19 @@ void	automaton_next_state(t_automaton *automaton)
 		automaton->state = automaton->table[automaton->state][0];
 }
 
+int	automaton_is_end_of_statement(t_automaton *automaton)
+{
+	if (automaton->cursor[automaton->end] == '\0')
+		return (TRUE);
+	if (automaton->state == INCOMPLETE_FS)
+		return (TRUE);
+	return (FALSE);
+}
+
 void	automaton_subprocess(t_automaton *automaton, char *statement)
 {
 	automaton_reset(automaton, statement);
-	while (*automaton->cursor != '\0' && automaton->state != INCOMPLETE_FS)
+	while (!automaton_is_end_of_statement(automaton))
 	{
 		automaton_next_state(automaton);
 		automaton_eval_state(automaton);

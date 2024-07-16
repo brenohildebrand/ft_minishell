@@ -6,22 +6,35 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 10:58:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/07/12 23:55:35 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:10:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
+// pure functions
+
+// perfect function
+int	sum(int a, int b)
+{
+	return (a + b);
+}
+
+// read user byte
+int	read_byte(void)
+{
+	unsigned char	byte;
+	
+	read(0, &byte, 1);
+	return (byte);
+}
+
 int	main(void)
 {	
-	t_table	*table;
-	char	*str;
+	unsigned char	byte;
 
-	table = ft_tblnew();
-	ft_tblset(table, "key1", "hello table");
-	str = ft_strdup("key1");
-	printf("key1: %s\n", (char *)ft_tblget(table, str));
-	ft_tbldel(table);
+	byte = read_byte();
+	printf("%u\n", byte);
 	return (0);	
 }
